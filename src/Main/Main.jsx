@@ -38,6 +38,10 @@ class Main extends React.Component {
                     type="listbox"
                     name="name"
                     label="Time:"
+                    items={[
+                        {id: 1, name: "First"},
+                        {id: 2, name: "Second"}
+                    ]}
                     onChange={this.handleChange} />
             </div>
         );

@@ -14,14 +14,16 @@ import Date from './Date';
 import Time from './Time';
 import Checkbox from './Checkbox';
 import Test from './Test';
+import List from './List';
+import Icon from '../Icon';
 
 class Input extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {list: null}
+        this.state = {showList: false}
         this.handleChange = this.handleChange.bind(this);
-        this.handlePopup = this.handlePopup.bind(this);
+        this.handleDropDown = this.handleDropDown.bind(this);
     }
 
     handleChange(event, value) {
@@ -32,31 +34,12 @@ class Input extends React.Component {
         });
     }
 
-    handlePopup(event) {
-        let rect = event.currentTarget.getBoundingClientRect();
-        let style = {
-            position: "fixed",
-            top: rect.bottom,
+    handleDropDown(rect) {
+        this.listPlace = {
             left: rect.left,
-            border: "1px solid yellow",
-            overlay: "0",
-            backgroundColor: "#ffffff",
-            margin: "0",
-            padding: "0",
-            fontSize: "18px",
-            listStyle: "none"
+            top: rect.bottom
         }
-        let st = {
-            margin: "0",
-            padding: "0",
-            fontSize: "18px"
-        }
-        this.setState({
-            list: (<ol style={style}>
-                                <li style={st}>First</li>
-                                <li style={st}>Second</li>
-                            </ol>)
-        });
+        this.setState({showList: true});
     }
 
     render () {
@@ -64,6 +47,7 @@ class Input extends React.Component {
         let style = mergeStyles(styles, this.props.style);
 
         let content = null;
+        let button = null;
 
         switch (this.props.type) {
 
@@ -103,10 +87,13 @@ class Input extends React.Component {
                         style={style.edit}
                         value={this.props.value}
                         placeholder={this.props.placeholder}
-                        list={this.props.list}
+                        items={this.props.items}
                         empty={this.props.empty}
                         onChange={this.handleChange}
-                        onPopup={this.handlePopup} />
+                        onDropDown={this.handleDropDown} />
+                );
+                button = (
+                    <Icon name="up" />
                 );
             break;
 
@@ -167,11 +154,23 @@ class Input extends React.Component {
             label = (<div style={style.label}>{this.props.label}</div>);
         }
 
+        let list = null;
+        if (this.state.showList) {
+            list = (
+                <List
+                    items={this.props.items}
+                    empty={this.props.empty}
+                    place={this.listPlace}
+                />
+            );
+        }
+
         return (
             <div style={style.container}>
                 {label}
                 {content}
-                {this.state.list}
+                {button}
+                {list}
             </div>
         );
 

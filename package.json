@@ -1,7 +1,7 @@
 {
-  "name": "web",
+  "name": "slInput",
   "version": "1.0.0",
-  "description": "DMC project",
+  "description": "SL Input project",
   "main": "index.js",
   "repository": {
     "private": "true"
@@ -17,21 +17,12 @@
   "license": "ISC",
   "dependencies": {
     "cleave.js": "^1.4.10",
-    "cookies": "^0.7.2",
-    "file-saver": "^2.0.1",
     "math": "0.0.3",
     "moment": "^2.24.0",
     "path": "^0.12.7",
     "prop-types": "^15.6.0",
-    "query-string": "^6.2.0",
     "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-modal": "^3.8.1",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.2.0",
-    "save-file": "^2.3.1",
-    "universal-cookie": "^3.0.7"
+    "react-dom": "^16.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
