@@ -1,40 +1,65 @@
-export const DEBUG = {
-    border: "1px solid red"
-}
+import {COLOR, SIZE, DEBUG, FONT} from './consts.js';
 
-export const COLOR = {
-    BORDER: "#6ca7b0",
-    WINDOW: "#ffffff",
-    PANEL: "#d1d6dc",
-    MENU: "#c0c5cb",
-    TEXT: "#000000"
-}
+export const INPUT = {
 
-export const SIZE = {
-    EDIT_HEIGHT: "34px"
-}
-
-export const FONT = {
-    EDIT: {
-        FAMILY: "Arial",
-        SIZE: "20px"
+    CONTAINER: {
+        ...DEBUG,
+        display: "flex",
+        justifyContent: "flex-start",
+        borderBottom: "2px solid " + COLOR.BORDER,
+        height: SIZE.EDIT_HEIGHT,
+        backgroundColor: "transparent"
     },
+
     LABEL: {
-        FAMILY: "Arial",
-        SIZE: "20px"
-    }
-}
-
-export const TABLE = {
-
-    CELL: {
-        padding: "4px 8px 4px 8px",
-        border: "2px solid " + COLOR.BORDER
+        ...DEBUG,
+        fontWeight: "normal",
+        fontFamily: FONT.LABEL.FAMILY,
+        fontSize: FONT.LABEL.SIZE,
+        alignSelf: "flex-end",
+        padding: "0",
+        margin: "0 4px 0 0",
+        flexGrow: 0,
+        flexShrink: 0,
+        color: COLOR.BORDER
     },
 
-    CLEAR: {
-        padding: "4px 8px 4px 8px",
-        border: "none"
+    EDIT: {
+        ...DEBUG,
+        fontWeight: "normal",
+        fontFamily: FONT.EDIT.FAMILY,
+        fontSize: FONT.EDIT.SIZE,
+        alignSelf: "flex-end",
+        padding: "0",
+        margin: "0 0 0 0",
+        width: "100%",
+        color: COLOR.TEXT,
+        outline: "none",
+        border: "none",
+        backgroundColor: "transparent"
+    },
+
+    LIST: {
+        ...DEBUG,
+        display: "flex",
+        flexDirection: "column",
+        position: "fixed",
+        overlay: "0",
+        backgroundColor: "#ffffff",
+        margin: "0",
+        padding: "0",
+        border: "1px solid " + COLOR.BORDER
+    },
+
+    ITEM: {
+        ...DEBUG,
+//        fontWeight: "normal",
+        fontFamily: FONT.EDIT.FAMILY,
+        fontSize: FONT.EDIT.SIZE,
+        margin: "0",
+        color: COLOR.TEXT,
+        padding: "4px",
+        cursor: "pointer"
     }
 
 }

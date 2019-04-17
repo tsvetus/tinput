@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge} from '../../util';
+import {mergeStyles} from '../../util';
 
 import styles from './styles.js';
 
@@ -16,12 +16,14 @@ class List extends React.Component {
     handleClick(event) {
         let value = event.target.value;
         this.setState({value: value});
-        this.props.onChange(event, value);
+        this.props.onSelect({value: value});
     }
 
     render () {
 
-        let style = merge(styles, this.props.style, this.props.place);
+        let style = mergeStyles(styles, this.props.style, this.props.place);
+
+        console.log(JSON.stringify(style));
 
         let items = [];
         if (this.props.items) {
@@ -34,17 +36,21 @@ class List extends React.Component {
             }
             this.props.items.forEach((v, i) => {
                 items.push(
-                    <li key={i} value={v.id}>
+                    <div
+                        style={style.item}
+                        key={i}
+                        value={v.id}
+                        onClick={this.handleClick}>
                         {v.name}
-                    </li>
+                    </div>
                 );
             });
         }
 
         return (
-            <ol style={style}>
+            <div style={style.container}>
                 {items}
-            </ol>
+            </div>
         );
 
     }

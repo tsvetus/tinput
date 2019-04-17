@@ -1,0 +1,10 @@
+.list-item:hover {
+    background-color: #efefef;
+}
+
+.list-item:focus {
+    background-color: #efefef;
+    border: none;
+    padding-left: 4px;
+    font-weight: bold;
+}

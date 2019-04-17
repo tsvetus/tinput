@@ -7,13 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   shape-rendering="crispEdges"
-   height="20"
-   width="20"
-   id="svg6"
-   enable-background="new 0 0 129 129"
-   viewBox="0 0 20 20"
    version="1.1"
+   viewBox="0 0 20 20"
+   enable-background="new 0 0 129 129"
+   id="svg6"
+   width="20"
+   height="20"
+   shape-rendering="crispEdges"
    sodipodi:docname="up-arrow.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
   <sodipodi:namedview
@@ -25,13 +25,14 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1366"
-     inkscape:window-height="715"
-     id="namedview46"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     id="namedview7"
      showgrid="false"
-     inkscape:zoom="11.8"
-     inkscape:cx="10"
-     inkscape:cy="10"
+     inkscape:showpageshadow="false"
+     inkscape:zoom="33.37544"
+     inkscape:cx="11.194182"
+     inkscape:cy="8.3757185"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -50,12 +51,9 @@
   </metadata>
   <defs
      id="defs10" />
-  <g
-     transform="matrix(0.17234759,0,0,0.18183578,-1.092113,-1.4691115)"
-     id="g4">
-    <path
-       id="path2"
-       d="m 121.3,34.6 c -1.6,-1.6 -4.2,-1.6 -5.8,0 L 64.5,85.7 13.4,34.6 C 11.8,33 9.2,33 7.6,34.6 6,36.2 6,38.8 7.6,40.4 l 53.9,53.9 c 0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1,-0.4 2.9,-1.2 l 53.9,-53.9 c 1.7,-1.6 1.7,-4.2 0.1,-5.8 z"
-       inkscape:connector-curvature="0" />
-  </g>
+  <path
+     inkscape:connector-curvature="0"
+     id="path2"
+     d="m 15.866464,14.256559 c -0.172693,0.211709 -0.453321,0.211709 -0.626015,0 L 9.7358359,7.4950939 4.2204292,14.256559 c -0.1726935,0.211709 -0.4533209,0.211709 -0.6260148,0 -0.1726936,-0.21171 -0.1726936,-0.555737 0,-0.767446 l 5.817621,-7.1319561 c 0.086347,-0.105855 0.1942805,-0.158782 0.313008,-0.158782 0.1079333,0 0.2266599,0.05292 0.3130076,0.158782 l 5.81762,7.1319561 c 0.183487,0.211709 0.183487,0.555736 0.01079,0.767446 z"
+     style="stroke-width:0.11950561" />
 </svg>

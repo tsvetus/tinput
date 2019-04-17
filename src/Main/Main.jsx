@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Input from 'Input';
+import ListBox from '../ListBox';
 
 
 class Main extends React.Component {
@@ -13,7 +13,7 @@ class Main extends React.Component {
     }
 
     handleChange(event) {
-
+        console.log(JSON.stringify(event));
     }
 
     render() {
@@ -33,15 +33,17 @@ class Main extends React.Component {
         return (
             <div>
 
-                <Input
+                <ListBox
                     style={style}
-                    type="listbox"
                     name="name"
                     label="Time:"
+                    value={1}
+                    placeholder="Enter time"
                     items={[
-                        {id: 1, name: "First"},
+                        {id: 1, name: "First item in the wide list"},
                         {id: 2, name: "Second"}
                     ]}
+                    empty={{id: 0, name: "-"}}
                     onChange={this.handleChange} />
             </div>
         );

@@ -23,23 +23,28 @@ class Input extends React.Component {
         super(props, context);
         this.state = {showList: false}
         this.handleChange = this.handleChange.bind(this);
-        this.handleDropDown = this.handleDropDown.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.input = React.createRef();
     }
 
-    handleChange(event, value) {
+    handleChange(event) {
         this.props.onChange({
-            value: value,
+            value: event.value,
             name: this.props.name,
             data: this.props.data
         });
+        this.setState({showList: false});
     }
 
-    handleDropDown(rect) {
+    handleButtonClick() {
+        let rect = this.input.current.getBoundingClientRect();
+        console.log(JSON.stringify(rect));
         this.listPlace = {
-            left: rect.left,
-            top: rect.bottom
+            top: rect.bottom + 4 + 'px',
+            left: rect.left + 'px',
+            width: rect.width + 'px'
         }
-        this.setState({showList: true});
+        this.setState({showList: !this.state.showList});
     }
 
     render () {
@@ -89,11 +94,14 @@ class Input extends React.Component {
                         placeholder={this.props.placeholder}
                         items={this.props.items}
                         empty={this.props.empty}
-                        onChange={this.handleChange}
-                        onDropDown={this.handleDropDown} />
+                        inputRef={this.input}
+                        onChange={this.handleChange} />
                 );
                 button = (
-                    <Icon name="up" />
+                    <Icon
+                        name={this.state.showList ? "up" : "down"}
+                        onClick={this.handleButtonClick}
+                         />
                 );
             break;
 

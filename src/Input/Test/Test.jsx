@@ -12,10 +12,7 @@ class Test extends React.Component {
     }
 
     handleChange(event) {
-        let value = event.target.value;
-        this.setState({value: value});
-        this.props.onChange(event, value);
-        this.props.onDropDown(event.currentTarget.getBoundingClientRect());
+//        this.props.onChange({value: value});
     }
 
     render () {
@@ -30,8 +27,8 @@ class Test extends React.Component {
                 value={this.props.value}
                 placeholder={this.props.placeholder}
                 style={style}
-                onChange={this.handleChange}>
-            </input>
+                onChange={this.handleChange}
+                ref={this.props.inputRef} />
         );
 
     }
@@ -40,7 +37,7 @@ class Test extends React.Component {
 
 Test.propTypes = {
     onChange: PropTypes.func.isRequired,
-    onDropDown: PropTypes.func.isRequired,
+    inputRef: PropTypes.object.isRequired,
     list: PropTypes.array,
     empty: PropTypes.object
 }
