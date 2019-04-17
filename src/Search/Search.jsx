@@ -8,18 +8,21 @@ import styles from './styles.js';
 import List from '../List';
 import Icon from '../Icon';
 
-class ListBox extends React.Component {
+class Search extends React.Component {
 
     constructor(props, context) {
         super(props, context);
         this.state = {
             value: this.props.value,
             inputValue: '',
-            showList: false
+            showList: false,
+            items: [],
+            autoFocus: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleKey = this.handleKey.bind(this);
         this.inputRef = React.createRef();
     }
 
@@ -30,6 +33,30 @@ class ListBox extends React.Component {
     }
 
     handleInputChange(event) {
+        let v = event.currentTarget.value;
+        let items = [];
+        if (v && v.length > 2) {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                items = this.props.onSearch({
+                    id: null,
+                    name: v
+                });
+                if (!items || !Array.isArray(items)) {
+                    items = [];
+                }
+                this.updateRect();
+                this.setState({
+                    inputValue: v ? v : '',
+                    items: items,
+                    showList: items.length > 0,
+                    autoFocus: false
+                });
+            }, 1500);
+        }
+        this.setState({
+            inputValue: v ? v : ''
+        });
     }
 
     handleChange(event) {
@@ -54,13 +81,23 @@ class ListBox extends React.Component {
     }
 
     handleButtonClick() {
+        this.updateRect();
+        this.setState({showList: !this.state.showList});
+    }
+
+    handleKey(event) {
+        if (event.keyCode == 40) {
+            this.setState({autoFocus: true});
+        }
+    }
+
+    updateRect() {
         let rect = this.inputRef.current.getBoundingClientRect();
         this.listPlace = {
             top: rect.bottom + 4 + 'px',
             left: rect.left + 'px',
             width: rect.width + 'px'
         }
-        this.setState({showList: !this.state.showList});
     }
 
     render () {
@@ -78,8 +115,8 @@ class ListBox extends React.Component {
                 placeholder={this.props.placeholder}
                 style={style.edit}
                 ref={this.inputRef}
-                onClick={this.handleButtonClick}
-                readOnly />
+                onChange={this.handleInputChange}
+                onKeyDown={this.handleKey} />
         );
 
         let button = (
@@ -89,16 +126,15 @@ class ListBox extends React.Component {
         );
 
         let list = null;
-        if (this.state.showList) {
+        if (this.state.showList && this.state.items.length > 0) {
             list = (
                 <List
                     value={this.state.value}
                     style={{container: style.list, item: style.item}}
-                    items={this.props.items}
-                    empty={this.props.empty}
+                    items={this.state.items}
                     place={this.listPlace}
                     onSelect={this.handleChange}
-                    autoFocus={true}
+                    autoFocus={this.state.autoFocus}
                 />
             );
         }
@@ -116,12 +152,13 @@ class ListBox extends React.Component {
 
 }
 
-ListBox.propTypes = {
+Search.propTypes = {
     name: PropTypes.string.isRequired,
     empty: PropTypes.object,
     list: PropTypes.array,
     placeholder: PropTypes.string,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    onSearch: PropTypes.func.isRequired
 }
 
-export default ListBox;
+export default Search;

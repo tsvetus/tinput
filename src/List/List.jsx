@@ -14,6 +14,7 @@ class List extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleRef = this.handleRef.bind(this);
         this.handleKey = this.handleKey.bind(this);
+        this.updateFocus = this.updateFocus.bind(this);
         this.ref = [];
     }
 
@@ -57,14 +58,29 @@ class List extends React.Component {
     }
 
     componentDidMount() {
-        this.focused = this.ref.findIndex((v, i) => {
-            return v.getAttribute("value") == this.props.value;
-        });
-        if (this.focused < 0 && this.props.list && this.props.list.length > 0) {
-            this.focused = 0;
+        this.updateFocus();
+    }
+
+    componentDidUpdate(old) {
+        if (
+            old.autoFocus !== this.props.autoFocus ||
+            old.value !== this.props.value
+        ) {
+            this.updateFocus();
         }
-        if (this.focused >= 0 && this.ref[this.focused]) {
-            this.ref[this.focused].focus();
+    }
+
+    updateFocus() {
+        if (this.props.autoFocus) {
+            this.focused = this.ref.findIndex((v, i) => {
+                return v.getAttribute("value") == this.props.value;
+            });
+            if (this.focused < 0 && this.props.items && this.props.items.length > 0) {
+                this.focused = 0;
+            }
+            if (this.focused >= 0 && this.ref[this.focused]) {
+                this.ref[this.focused].focus();
+            }
         }
     }
 
@@ -120,7 +136,8 @@ List.propTypes = {
     onSelect: PropTypes.func.isRequired,
     items: PropTypes.array,
     empty: PropTypes.object,
-    place: PropTypes.object
+    place: PropTypes.object,
+    autoFocus: PropTypes.bool
 }
 
 export default List;

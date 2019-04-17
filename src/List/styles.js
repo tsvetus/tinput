@@ -3,7 +3,8 @@ import {INPUT} from '../styles';
 export default {
 
     container: {
-        ...INPUT.LIST
+        ...INPUT.LIST,
+        tabIndex: "0"
     },
 
     item: {

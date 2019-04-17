@@ -1,7 +1,9 @@
 import React from 'react';
 
 import ListBox from '../ListBox';
-
+import Text from '../Text';
+import Search from '../Search';
+import Time from '../Time';
 
 class Main extends React.Component {
 
@@ -10,10 +12,20 @@ class Main extends React.Component {
         this.state = {
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     handleChange(event) {
         console.log(JSON.stringify(event));
+    }
+
+    handleSearch(query) {
+        return [
+            {id: 1, name: "first"},
+            {id: 2, name: "first second"},
+            {id: 3, name: "another"},
+            {id: 4, name: "And another"}
+        ];
     }
 
     render() {
@@ -45,6 +57,23 @@ class Main extends React.Component {
                     ]}
                     empty={{id: 0, name: "-"}}
                     onChange={this.handleChange} />
+
+                <Time
+                    style={style}
+                    name="name"
+                    label="Text:"
+                    value="My text"
+                    placeholder="Enter text"
+                    onChange={this.handleChange} />
+
+                <Search
+                    style={style}
+                    name="name"
+                    label="Time:"
+                    placeholder="Enter time"
+                    onSearch={this.handleSearch}
+                    onChange={this.handleChange} />
+
             </div>
         );
 
