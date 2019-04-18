@@ -5,6 +5,10 @@ import styles from './styles.js';
 
 import icons from './icons.js';
 
+/**
+ * Component representing icons.
+ * @extends React
+ */
 class Icon extends React.Component {
 
     constructor(props, context) {
@@ -34,6 +38,11 @@ class Icon extends React.Component {
 
 }
 
+/**
+ * @name Icon propTypes
+ * @property {string} name provides icon name
+ * @property {function} onClick provides on click event
+ */
 Icon.propTypes = {
     name: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired
