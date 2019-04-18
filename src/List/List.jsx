@@ -73,7 +73,7 @@ class List extends React.Component {
     updateFocus() {
         if (this.props.autoFocus) {
             this.focused = this.ref.findIndex((v, i) => {
-                return v.getAttribute("value") == this.props.value;
+                return (v && v.getAttribute("value") == this.props.value);
             });
             if (this.focused < 0 && this.props.items && this.props.items.length > 0) {
                 this.focused = 0;

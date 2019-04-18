@@ -1,12 +1,6 @@
 .*/
 .*
-*.md
 *-lock.json
 !.gitignore
 !.babelrc
-build/
-bin/
 node_modules/
-
-**/dist/js/
-**/static/js/

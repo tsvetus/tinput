@@ -2,17 +2,17 @@ const util = require('util');
 const path = require('path');
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     entry: {
-        index: [
-            path.resolve(__dirname, './src/index.js')
+        test: [
+            'webpack-dev-server/client?http://localhost:9000',
+            path.resolve(__dirname, 'test/test.jsx')
         ]
     },
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: '/',
-        filename: '[name].js',
-        libraryTarget: 'commonjs2'
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -31,7 +31,10 @@ module.exports = {
             use: ['style-loader', 'css-loader', 'less-loader']
         }]
     },
-    externals: {
-        'react': 'commonjs react'
+    devServer: {
+        contentBase: path.resolve(__dirname, 'build'),
+        publicPath: '/',
+        port: 9000,
+        host: '0.0.0.0'
     }
 }

@@ -44,8 +44,7 @@ class Text extends React.Component {
                 value={this.state.inputValue}
                 placeholder={this.props.placeholder}
                 style={style.edit}
-                onChange={this.handleChange}
-                password={this.props.password} />
+                onChange={this.handleChange} />
         );
 
         return (
@@ -62,8 +61,7 @@ class Text extends React.Component {
 Text.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    password: PropTypes.bool
+    onChange: PropTypes.func.isRequired
 }
 
 export default Text;

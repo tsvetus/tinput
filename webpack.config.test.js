@@ -4,15 +4,15 @@ const path = require('path');
 module.exports = {
     mode: 'production',
     entry: {
-        index: [
-            path.resolve(__dirname, './src/index.js')
+        
+        test: [
+            path.resolve(__dirname, './test/test.jsx')
         ]
     },
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: '/',
-        filename: '[name].js',
-        libraryTarget: 'commonjs2'
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -30,8 +30,5 @@ module.exports = {
             test: /\.css|\.less$$/,
             use: ['style-loader', 'css-loader', 'less-loader']
         }]
-    },
-    externals: {
-        'react': 'commonjs react'
     }
 }
