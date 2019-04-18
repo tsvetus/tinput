@@ -6,26 +6,32 @@ import Icon from './Icon';
 import Text from './Text';
 import ListBox from './ListBox';
 import Search from './Search';
+import Year from './Year';
 
 export {
     /**
-     * Provides icons for components.
+     * Provides icons for components
      * /
     Icon,
 
     /**
-     * Text input component.
+     * Text input component
      */
     Text,
 
     /**
-     * Listbox component.
+     * Listbox component
      */
     ListBox,
 
     /**
-     * Listbox with search.
+     * Listbox with search
      */
-    Search
-    
+    Search,
+
+    /**
+     * Year component
+     */
+    Year
+
 }

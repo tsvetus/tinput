@@ -3,7 +3,8 @@ import React from 'react';
 import {
     ListBox,
     Text,
-    Search
+    Search,
+    Year
 } from '../../src';
 
 import {
@@ -109,6 +110,14 @@ class Main extends React.Component {
                     placeholder="Enter text 'item'"
                     onSearch={this.handleSearch}
                     onChange={this.handleChange} />
+
+                <Year
+                    style={inputStyle}
+                    name="year"
+                    label="Year:"
+                    placeholder="Enter year"
+                    onChange={this.handleChange}
+                    />
 
                 <div style={{
                         color: COLOR.BORDER,
