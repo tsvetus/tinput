@@ -1,1 +1,1 @@
-module.exports = require('./biold/index.js');
+module.exports = require('./build/index.js');
