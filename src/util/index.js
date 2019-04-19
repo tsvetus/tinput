@@ -8,12 +8,16 @@ import {
     strDate
 } from './date.js';
 
+import TMask from './mask.js';
+
 export {
 
     merge,
     mergeStyles,
 
     sqlDate,
-    strDate
+    strDate,
+
+    TMask
 
 }

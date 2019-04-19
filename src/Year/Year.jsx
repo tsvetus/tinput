@@ -1,24 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {mergeStyles} from '../util';
+import {mergeStyles, TMask} from '../util';
 
 import styles from './styles.js';
+
+const mask = new TMask({
+    mask: "YYYY",
+    empty: " "
+});
 
 class Year extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            value: this.props.value,
-        }
+        this.mask = mask.parse({value: props.value});
+        this.state = {value: this.mask.value}
         this.handleChange = this.handleChange.bind(this);
         this.handleKey = this.handleKey.bind(this);
+        this.ref = React.createRef();
     }
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value) {
-            this.setState({value: this.props.value});
+            this.mask = mask.parse({value: this.props.value});
+            this.setState({value: this.mask.value});
         }
     }
 
@@ -31,13 +37,11 @@ class Year extends React.Component {
     }
 
     handleKey(event) {
-        if (event.key == 'Backspace') {
-
-        } else if (event.key == 'Delete') {
-
-        } else if (event.key.length == 1) {
-            console.log(event.keyCode + '=' + event.key + ' ' + event.target.selectionStart);
-        }
+        this.mask = mask.parse({
+            key: event.key,
+            caret: this.ref.current.selectionStart
+        });
+        this.setState({value: this.mask.value});
     }
 
     render () {
@@ -51,8 +55,9 @@ class Year extends React.Component {
 
         let content = (
             <input
+                ref={this.ref}
                 type="text"
-                value={this.state.inputValue}
+                value={this.state.value}
                 placeholder={this.props.placeholder}
                 style={style.edit}
                 onChange={this.handleChange}
