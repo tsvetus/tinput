@@ -14,8 +14,6 @@ const masks = {
  */
 function checkKey(key, caret, mask) {
 
-console.log(key + caret + mask);
-
     if (caret < 0 || caret >= mask.lengh) {
         return false;
     }
