@@ -113,8 +113,6 @@ class TMask {
 
         this.set(event);
 
-        console.log('EVENT=' + JSON.stringify(event) + ' MASK=' + this.mask);
-
         if (event.value) {
             for (let i=0; i<this.mask.length; i++) {
                 let k = event.value[i];
