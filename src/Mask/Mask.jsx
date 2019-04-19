@@ -24,12 +24,15 @@ class Mask extends React.Component {
             this.mask = MASK.parse({value: this.props.value});
             this.setState({value: this.mask.value});
         }
-        console.log('UPDATE: ' + this.mask.caret);
-        this.ref.current.selectionStart = this.mask.caret;
-        this.ref.current.selectionEnd = this.mask.caret;
     }
 
     handleChange(event) {
+        this.setState({
+                value: this.mask.value
+            }, () => {
+                this.ref.current.selectionStart = this.mask.caret;
+                this.ref.current.selectionEnd = this.mask.caret;
+        });
         if (MASK.checkComplete()) {
             this.props.onChange({
                 value: this.mask.value,
@@ -44,7 +47,12 @@ class Mask extends React.Component {
             key: event.key,
             caret: this.ref.current.selectionStart
         });
-        this.setState({value: this.mask.value});
+        this.setState({
+                value: this.mask.value
+            }, () => {
+                this.ref.current.selectionStart = this.mask.caret;
+                this.ref.current.selectionEnd = this.mask.caret;
+        });
     }
 
     render () {
@@ -60,10 +68,11 @@ class Mask extends React.Component {
             <input
                 ref={this.ref}
                 type="text"
-                defaultValue={this.state.value}
+                value={this.state.value}
                 placeholder={this.props.placeholder}
                 style={style.edit}
-                onKeyDown={this.handleKey} />
+                onKeyDown={this.handleKey}
+                onChange={this.handleChange} />
         );
 
         return (
