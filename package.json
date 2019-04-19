@@ -1,13 +1,14 @@
 {
   "name": "tinput",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Set of most common visual ReactJS components",
   "main": "./index.js",
   "scripts": {
+    "dev": "webpack-dev-server --color --hot --inline --watch --config webpack.config.dev.js",
     "test": "webpack --display-error-details --config webpack.config.test.js",
     "prod": "webpack --display-error-details --config webpack.config.prod.js",
-    "dev": "webpack-dev-server --color --hot --inline --watch --config webpack.config.dev.js",
-    "doc": "jsdoc src/index.js --destination doc"
+    "doc": "jsdoc src/index.js --destination doc",
+    "build": "webpack --display-error-details --config webpack.config.test.js && webpack --display-error-details --config webpack.config.prod.js && jsdoc src/index.js --destination doc"
   },
   "repository": {
     "type": "git",
