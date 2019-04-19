@@ -4,7 +4,7 @@ import {
     ListBox,
     Text,
     Search,
-    Year
+    Mask
 } from '../../src';
 
 import {
@@ -51,7 +51,6 @@ class Main extends React.Component {
     }
 
     handleChange(event) {
-        console.log(JSON.stringify(event));
         let e = this.state.events.slice();
         e.unshift(event);
         this.setState({events: e});
@@ -111,10 +110,12 @@ class Main extends React.Component {
                     onSearch={this.handleSearch}
                     onChange={this.handleChange} />
 
-                <Year
+                <Mask
                     style={inputStyle}
                     name="year"
                     label="Year:"
+                    value="2019"
+                    mask={{mask: "YYYY", empty: "-"}}
                     placeholder="Enter year"
                     onChange={this.handleChange}
                     />

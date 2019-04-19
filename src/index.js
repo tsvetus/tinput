@@ -6,7 +6,7 @@ import Icon from './Icon';
 import Text from './Text';
 import ListBox from './ListBox';
 import Search from './Search';
-import Year from './Year';
+import Mask from './Mask';
 
 export {
     /**
@@ -30,8 +30,8 @@ export {
     Search,
 
     /**
-     * Year component
+     * Mask component
      */
-    Year
+    Mask
 
 }

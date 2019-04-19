@@ -35,8 +35,8 @@ class Search extends React.Component {
     handleInputChange(event) {
         let v = event.currentTarget.value;
         let items = [];
+        clearTimeout(this.timer);
         if (v && v.length > 2) {
-            clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 items = this.props.onSearch({
                     id: null,
@@ -52,7 +52,7 @@ class Search extends React.Component {
                     showList: items.length > 0,
                     autoFocus: false
                 });
-            }, 1500);
+            }, 1000);
         }
         this.setState({
             inputValue: v ? v : ''
