@@ -181,14 +181,11 @@ import {
     ListBox,
     Text,
     Search,
-    Mask
-} from '../../src';
-
-import {
+    Mask,
     COLOR,
-    FONT,
-    TABLE
-} from '../../src/styles';
+    TABLE,
+    FONT
+} from 'tinput';
 
 const list = [
     {id: 1, name: "First item"},

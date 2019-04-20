@@ -2,11 +2,18 @@
  * TInput  module
  * @module tinput
  */
-import Icon from './Icon';
 import Text from './Text';
 import ListBox from './ListBox';
 import Search from './Search';
 import Mask from './Mask';
+import Date from './Date';
+
+import {
+    COLOR,
+    SIZE,
+    TABLE,
+    FONT,
+} from './styles';
 
 export {
     /**
@@ -32,6 +39,14 @@ export {
     /**
      * Mask component
      */
-    Mask
+    Mask,
+
+    Date,
+
+
+    COLOR,
+    SIZE,
+    TABLE,
+    FONT
 
 }

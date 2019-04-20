@@ -39,3 +39,27 @@ export function strDate(source) {
     return '';
 
 }
+
+export function toLocal(source, mask) {
+
+    if (source instanceof Date) {
+
+    } else if (mask) {
+
+    } else {
+        return null;
+    }
+
+}
+
+export function toSql(source, mask) {
+
+    if (source instanceof Date) {
+
+    } else if (mask) {
+
+    } else {
+        return null;
+    }
+
+}

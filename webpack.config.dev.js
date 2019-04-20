@@ -19,7 +19,10 @@ module.exports = {
         modules: [
         	path.resolve(__dirname, 'src'),
         	path.resolve(__dirname, 'node_modules')
-        ]
+        ],
+        alias: {
+            tinput: path.resolve(__dirname, 'src')
+        }
     },
     module: {
         rules: [{

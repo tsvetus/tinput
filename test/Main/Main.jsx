@@ -1,17 +1,18 @@
 import React from 'react';
 
 import {
+
     ListBox,
     Text,
     Search,
-    Mask
-} from '../../src';
+    Mask,
+    Date,
 
-import {
     COLOR,
-    FONT,
-    TABLE
-} from '../../src/styles';
+    TABLE,
+    FONT
+
+} from 'tinput';
 
 const list = [
     {id: 1, name: "First item"},
@@ -113,13 +114,21 @@ class Main extends React.Component {
 
                 <Mask
                     style={inputStyle}
-                    name="year"
-                    label="Year:"
+                    name="dateMask"
+                    label="Date:"
                     value="22.04.2019"
                     mask={{mask: "NN.NN.NNNN", empty: "-"}}
-                    placeholder="Enter year"
                     onChange={this.handleChange}
                     />
+
+                <Date
+                    style={inputStyle}
+                    name="date"
+                    label="Date:"
+                    value="22.04.2019"
+                    format={{mask: "DD.MM.YYYY", empty: "-"}}
+                    onChange={this.handleChange}
+                />
 
                 <div style={{
                         color: COLOR.BORDER,
