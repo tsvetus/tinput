@@ -66,10 +66,10 @@ function replace(source, char, index) {
 /**
  * Generates masked string
  */
-class TMask {
+class Mask {
 
     /**
-     * Sets initial parameters for TMask object
+     * Sets initial parameters for Mask object
      * @param {object} params - Input parameters
      * @param {object} params.mask - Input mask
      * @param {object} params.empty - Empty sympol
@@ -88,7 +88,7 @@ class TMask {
     }
 
     /**
-     * Sets initial parameters for TMask object
+     * Sets initial parameters for Mask object
      * @param {object} params - Input parameters
      * @param {object} params.mask - Input mask
      * @param {object} params.empty - Empty sympol
@@ -105,7 +105,6 @@ class TMask {
                 if (positionType(i, this.mask) == 'none') {
                     let m = this.mask[i];
                     this.value = replace(this.value, m, i);
-                    console.log('TYPE: ' + positionType(i, this.mask) + ' ' + this.mask + ' ' + this.mask[i]);
                 } else {
                     let k = v[i];
                     if (checkKey(k, i, this.mask)) {
@@ -141,18 +140,6 @@ class TMask {
         }
 
         this.set(event);
-
-        // if (event.value) {
-        //     for (let i=0; i<this.mask.length; i++) {
-        //         let k = event.value[i];
-        //         if (checkKey(k, i, this.mask)) {
-        //             this.value = replace(this.value, k, i);
-        //         } else {
-        //             this.value = replace(this.value, this.empty, i);
-        //         }
-        //     }
-        //     this.caret = 0;
-        // }
 
         if (event.key && event.key.length == 1) {
             if (checkKey(event.key, event.caret, this.mask)) {
@@ -197,4 +184,4 @@ class TMask {
 
 }
 
-export default TMask;
+export default Mask;

@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {mergeStyles, TMask} from '../util';
+import {mergeStyles, Mask} from '../util';
 
 import styles from './styles.js';
 
-const MASK = new TMask();
+const MASK = new Mask();
 
 /**
  * Represents mask editor
- *
- *
  */
-class Mask extends React.Component {
+class TMask extends React.Component {
 
     constructor(props, context) {
         super(props, context);
@@ -91,7 +89,7 @@ class Mask extends React.Component {
 
 }
 
-Mask.propTypes = {
+TMask.propTypes = {
 
     /**
      * Component name
@@ -99,7 +97,7 @@ Mask.propTypes = {
     name: PropTypes.string.isRequired,
 
     /**
-     * Text mask. For example mask={{mask: "NN.NN.NNNN", empty: "-"}} where:
+     * TText mask. For example mask={{mask: "NN.NN.NNNN", empty: "-"}} where:
      * mask - text mask and N means - number. For today N is an only option available;
      * empty - empty character;
      */
@@ -113,4 +111,4 @@ Mask.propTypes = {
 
 }
 
-export default Mask;
+export default TMask;

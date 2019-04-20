@@ -5,7 +5,7 @@ import {mergeStyles} from '../util';
 
 import styles from './styles.js';
 
-class Text extends React.Component {
+class TText extends React.Component {
 
     constructor(props, context) {
         super(props, context);
@@ -58,10 +58,10 @@ class Text extends React.Component {
 
 }
 
-Text.propTypes = {
+TText.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired
 }
 
-export default Text;
+export default TText;

@@ -2,11 +2,11 @@
  * TInput  module
  * @module tinput
  */
-import Text from './Text';
-import ListBox from './ListBox';
-import Search from './Search';
-import Mask from './Mask';
-import Date from './Date';
+import TText from './TText';
+import TListBox from './TListBox';
+import TSearch from './TSearch';
+import TMask from './TMask';
+import TDate from './TDate';
 
 import {
     COLOR,
@@ -24,24 +24,24 @@ export {
     /**
      * Text input component
      */
-    Text,
+    TText,
 
     /**
      * Listbox component
      */
-    ListBox,
+    TListBox,
 
     /**
      * Listbox with search
      */
-    Search,
+    TSearch,
 
     /**
      * Mask component
      */
-    Mask,
+    TMask,
 
-    Date,
+    TDate,
 
 
     COLOR,

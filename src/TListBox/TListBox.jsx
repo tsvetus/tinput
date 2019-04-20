@@ -8,21 +8,18 @@ import styles from './styles.js';
 import List from '../List';
 import Icon from '../Icon';
 
-class Search extends React.Component {
+class TListBox extends React.Component {
 
     constructor(props, context) {
         super(props, context);
         this.state = {
             value: this.props.value,
             inputValue: '',
-            showList: false,
-            items: [],
-            autoFocus: false
+            showList: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
-        this.handleKey = this.handleKey.bind(this);
         this.inputRef = React.createRef();
     }
 
@@ -33,30 +30,6 @@ class Search extends React.Component {
     }
 
     handleInputChange(event) {
-        let v = event.currentTarget.value;
-        let items = [];
-        clearTimeout(this.timer);
-        if (v && v.length > 2) {
-            this.timer = setTimeout(() => {
-                items = this.props.onSearch({
-                    id: null,
-                    name: v
-                });
-                if (!items || !Array.isArray(items)) {
-                    items = [];
-                }
-                this.updateRect();
-                this.setState({
-                    inputValue: v ? v : '',
-                    items: items,
-                    showList: items.length > 0,
-                    autoFocus: false
-                });
-            }, 1000);
-        }
-        this.setState({
-            inputValue: v ? v : ''
-        });
     }
 
     handleChange(event) {
@@ -81,23 +54,13 @@ class Search extends React.Component {
     }
 
     handleButtonClick() {
-        this.updateRect();
-        this.setState({showList: !this.state.showList});
-    }
-
-    handleKey(event) {
-        if (event.keyCode == 40) {
-            this.setState({autoFocus: true});
-        }
-    }
-
-    updateRect() {
         let rect = this.inputRef.current.getBoundingClientRect();
         this.listPlace = {
             top: rect.bottom + 4 + 'px',
             left: rect.left + 'px',
             width: rect.width + 'px'
         }
+        this.setState({showList: !this.state.showList});
     }
 
     render () {
@@ -115,8 +78,8 @@ class Search extends React.Component {
                 placeholder={this.props.placeholder}
                 style={style.edit}
                 ref={this.inputRef}
-                onChange={this.handleInputChange}
-                onKeyDown={this.handleKey} />
+                onClick={this.handleButtonClick}
+                readOnly />
         );
 
         let button = (
@@ -126,15 +89,16 @@ class Search extends React.Component {
         );
 
         let list = null;
-        if (this.state.showList && this.state.items.length > 0) {
+        if (this.state.showList) {
             list = (
                 <List
                     value={this.state.value}
                     style={{container: style.list, item: style.item}}
-                    items={this.state.items}
+                    items={this.props.items}
+                    empty={this.props.empty}
                     place={this.listPlace}
                     onSelect={this.handleChange}
-                    autoFocus={this.state.autoFocus}
+                    autoFocus={true}
                 />
             );
         }
@@ -152,13 +116,12 @@ class Search extends React.Component {
 
 }
 
-Search.propTypes = {
+TListBox.propTypes = {
     name: PropTypes.string.isRequired,
     empty: PropTypes.object,
     list: PropTypes.array,
     placeholder: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    onSearch: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired
 }
 
-export default Search;
+export default TListBox;

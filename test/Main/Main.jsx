@@ -2,11 +2,11 @@ import React from 'react';
 
 import {
 
-    ListBox,
-    Text,
-    Search,
-    Mask,
-    Date,
+    TListBox,
+    TText,
+    TSearch,
+    TMask,
+    TDate,
 
     COLOR,
     TABLE,
@@ -76,14 +76,14 @@ class Main extends React.Component {
 
             <div style={{width: "320px"}}>
 
-                <Text
+                <TText
                     style={inputStyle}
                     name="text"
                     label="Text:"
                     placeholder="Enter text"
                     onChange={this.handleChange} />
 
-                <Text
+                <TText
                     style={inputStyle}
                     name="password"
                     label="Password:"
@@ -91,7 +91,7 @@ class Main extends React.Component {
                     onChange={this.handleChange}
                     password={true} />
 
-                <ListBox
+                <TListBox
                     style={inputStyle}
                     name="listbox"
                     label="Item:"
@@ -104,7 +104,7 @@ class Main extends React.Component {
                     empty={{id: 0, name: "-"}}
                     onChange={this.handleChange} />
 
-                <Search
+                <TSearch
                     style={inputStyle}
                     name="search"
                     label="Search:"
@@ -112,23 +112,21 @@ class Main extends React.Component {
                     onSearch={this.handleSearch}
                     onChange={this.handleChange} />
 
-                <Mask
+                <TMask
                     style={inputStyle}
                     name="dateMask"
-                    label="Date:"
+                    label="Masked date:"
                     value="22.04.2019"
                     mask={{mask: "NN.NN.NNNN", empty: "-"}}
-                    onChange={this.handleChange}
-                    />
+                    onChange={this.handleChange} />
 
-                <Date
+                <TDate
                     style={inputStyle}
                     name="date"
                     label="Date:"
-                    value="22.04.2019"
+                    value={new Date()}
                     format={{mask: "DD.MM.YYYY", empty: "-"}}
-                    onChange={this.handleChange}
-                />
+                    onChange={this.handleChange} />
 
                 <div style={{
                         color: COLOR.BORDER,

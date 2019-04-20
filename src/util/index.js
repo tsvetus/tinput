@@ -4,20 +4,22 @@ import {
 } from './misc.js';
 
 import {
-    sqlDate,
-    strDate
+    isoDate,
+    strDate,
+    dateMask
 } from './date.js';
 
-import TMask from './mask.js';
+import Mask from './mask.js';
 
 export {
 
     merge,
     mergeStyles,
 
-    sqlDate,
+    isoDate,
     strDate,
+    dateMask,
 
-    TMask
+    Mask
 
 }

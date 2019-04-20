@@ -1,8 +1,8 @@
 # tinput
 Set of most common visual React components
 
-`tinput` provides 4 visual components constructed on `<input>` html tag: `Text`, `ListBox`, 
-`Search`, `Mask`.
+`tinput` provides 5 visual components constructed on `<input>` html tag: `TText`, `TListBox`, 
+`TSearch`, `TMask`, `TDate`.
 
 ## Stylization
 
@@ -14,7 +14,7 @@ Style structure for custom stylization contains sections for all `tinput` compon
 
 `edit` - Style for edit
 
-Specific for `ListBox` and `Search` components:
+Specific for `TListBox` and `TSearch` components:
 
 `list` - Style for drop down itemslist
 
@@ -50,9 +50,22 @@ const customStyle = {
 }
 ``` 
 
-## `Text`
+## Events
 
-Component `Text` represents text input element and contains properties:
+`onChange = function(event)` where `event` contains:
+
+`event.value` - Component value.
+
+`event.name` - Value of `name` property. Type `String`. 
+
+`event.data` - Value of `data`property. Type `Object`.
+
+`event.caption` - Value of item name for components with dropdown list. Type `String`.
+
+
+## `TText`
+
+Component `TText` represents text input element and contains properties:
 
 `style` - Style for custom stylization
 
@@ -64,29 +77,29 @@ Component `Text` represents text input element and contains properties:
          
 `label` - Name for label. If not specified - no label will be displayed
 
-`placeholder` - Text for empty input
+`placeholder` - TText for empty input
 
 `password` - Optional. If specified - entered text appears as dots    
 
 `value` - Default display text
 
-`onChange` - On change event.
+`onChange` - On change event. `event.value` contains last changed text.
 
 ```javascript
-<Text
+<TText
     style={{container: {border: "1px solid red"}}}
     name="MyTextInput"
     data={{id: 123}}
-    label="Text:"
+    label="TText:"
     placeholder="Enter your text"
     onChange={this.handleChange} />
 ```   
 
-## `ListBox`
+## `TListBox`
 
-Component `ListBox` represents input with dropdown list of items:
+Component `TListBox` represents input with dropdown list of items:
 
-`style`, `name`, `data`, `label`, `placeholder` - Same as in <Text> component.
+`style`, `name`, `data`, `label`, `placeholder` - Same as in <TText> component.
 
 `list` - Array of items in dropdown list. Example: `list={[{id: 1, name: "first item"}, {id: 2, name: "second item"}]}`.
         Format of single item is: `{id: 1, name: "first item"}` where `id` is used for value field in `onChange` event and
@@ -106,7 +119,7 @@ Component `ListBox` represents input with dropdown list of items:
 ### Example
   
 ```javascript
-<ListBox
+<TListBox
     style={{container: {border: "1px solid red"}}}
     name="MyListbox"
     label="Item:"
@@ -120,11 +133,11 @@ Component `ListBox` represents input with dropdown list of items:
     onChange={this.handleChange} />
 ```   
 
-## `Search`
+## `TSearch`
 
-Component `Search` similar to `ListBox` but dropdown list appears automatically while user enters a text:
+Component `TSearch` similar to `TListBox` but dropdown list appears automatically while user enters a text:
 
-`style`, `name`, `data`, `label`, `placeholder` - Same as in <Text> component.
+`style`, `name`, `data`, `label`, `placeholder` - Same as in <TText> component.
         
 `value` - Value of default `id` displayed after component did mount.        
 
@@ -140,29 +153,29 @@ Component `Search` similar to `ListBox` but dropdown list appears automatically 
 ### Example
   
 ```javascript
-<Search
+<TSearch
     style={{container: {border: "1px solid red"}}}
     name="MySearch"
-    label="Search:"
+    label="TSearch:"
     placeholder="Enter text 'item'"
     onSearch={this.handleSearch}
     onChange={this.handleChange} />
 ```   
 
-## `Mask`
+## `TMask`
 
-Component `Mask` represents input with dropdown list of items:
+Component `TMask` represents input with dropdown list of items:
 
-`style`, `name`, `data`, `label` - Same as in <Text> component.
+`style`, `name`, `data`, `label` - Same as in <TText> component.
 
-`mask` - Object contains mask paremeters. Example: `mask={mask: "NN.NN.NNNN", empty: "-"}`. `N` - means any number.  
+`mask` - Object contains mask parameters. Example: `mask={mask: "NN.NN.NNNN", empty: "-"}`. `N` - means any number.  
         
 `onChange` - On change event. Fires only if value does not contains an empty chars.    
 
 ### Example
   
 ```javascript
-<Mask
+<TMask
     style={{container: {border: "1px solid red"}}}
     name="MyDate"
     label="Date:"
@@ -171,17 +184,43 @@ Component `Mask` represents input with dropdown list of items:
     onChange={this.handleChange}
 ```   
 
-#Usage
+## `TDate`
 
+Component `TDate` represents input with dropdown list of items:
+
+`style`, `name`, `data`, `label` - Same as in <TText> component.
+
+`format` - Object contains date format. Example: `format={mask: "DD.MM.YYYY", empty: "-"}`.
+
+`value` - Contains default date value. Value can be `Date` type or date string in `ISO` format `YYYY-MM-DD`.   
+        
+`onChange` - On change event. Fires only if value does not contains an empty chars. 
+             Parameter `event.value` contains date string in `ISO` format   
+
+### Example
+  
 ```javascript
+<TDate
+    style={{container: {border: "1px solid red"}}}
+    name="MyDate"
+    label="Date:"
+    value={new Date()}
+    format={{mask: "DD.MM.YYYY", empty: "-"}}
+    onChange={this.handleChange}
+```   
+
+## Usage
+
+``javascript
 
 import React from 'react';
 
 import {
-    ListBox,
-    Text,
-    Search,
-    Mask,
+    TListBox,
+    TText,
+    TSearch,
+    TMask,
+    TDate,
     COLOR,
     TABLE,
     FONT
@@ -225,8 +264,7 @@ class Main extends React.Component {
     }
 
     handleChange(event) {
-        let e = this.state.events.slice();
-        e.unshift(event);
+        let e = this.state.events.slice().unshift(event);
         this.setState({events: e});
     }
 
@@ -249,14 +287,14 @@ class Main extends React.Component {
             
             <div style={{width: "320px"}}>
 
-                <Text
+                <TText
                     style={inputStyle}
                     name="text"
-                    label="Text:"
+                    label="TText:"
                     placeholder="Enter text"
                     onChange={this.handleChange} />
 
-                <Text
+                <TText
                     style={inputStyle}
                     name="password"
                     label="Password:"
@@ -264,7 +302,7 @@ class Main extends React.Component {
                     onChange={this.handleChange}
                     password={true} />
 
-                <ListBox
+                <TListBox
                     style={inputStyle}
                     name="listbox"
                     label="Item:"
@@ -277,22 +315,29 @@ class Main extends React.Component {
                     empty={{id: 0, name: "-"}}
                     onChange={this.handleChange} />
 
-                <Search
+                <TSearch
                     style={inputStyle}
                     name="search"
-                    label="Search:"
+                    label="TSearch:"
                     placeholder="Enter text 'item'"
                     onSearch={this.handleSearch}
                     onChange={this.handleChange} />
 
-                <Mask
+                <TMask
                     style={inputStyle}
-                    name="date"
+                    name="mask"
                     label="Date:"
                     value="22.04.2019"
                     mask={{mask: "NN.NN.NNNN", empty: "-"}}
-                    onChange={this.handleChange}
-                    />
+                    onChange={this.handleChange} />
+                    
+                <TDate
+                    style={inputStyle}
+                    name="date"
+                    label="Date:"
+                    value={new Date()}
+                    format={{mask: "DD.MM.YYYY", empty: "-"}}
+                    onChange={this.handleChange} />
 
                 <div style={{
                         color: COLOR.BORDER,
