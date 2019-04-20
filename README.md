@@ -211,7 +211,7 @@ Component `TDate` represents input with dropdown list of items:
 
 ## Usage
 
-``javascript
+```javascript
 
 import React from 'react';
 

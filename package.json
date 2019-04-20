@@ -1,7 +1,7 @@
 {
   "name": "tinput",
   "version": "1.0.6",
-  "description": "Set of most common visual ReactJS components",
+  "description": "Set of most common visual React components",
   "main": "./index.js",
   "scripts": {
     "dev": "webpack-dev-server --color --hot --inline --watch --config webpack.config.dev.js",
