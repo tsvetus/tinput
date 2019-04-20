@@ -7,6 +7,11 @@ import styles from './styles.js';
 
 const MASK = new TMask();
 
+/**
+ * Represents mask editor
+ *
+ *
+ */
 class Mask extends React.Component {
 
     constructor(props, context) {
@@ -87,10 +92,25 @@ class Mask extends React.Component {
 }
 
 Mask.propTypes = {
+
+    /**
+     * Component name
+     */
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    mask: PropTypes.object.isRequired
+
+    /**
+     * Text mask. For example mask={{mask: "NN.NN.NNNN", empty: "-"}} where:
+     * mask - text mask and N means - number. For today N is an only option available;
+     * empty - empty character;
+     */
+    mask: PropTypes.object.isRequired,
+
+    /**
+     * On component text change event. Fires only if result text contains no <empty> symbols.
+     * @returns {value: <masked text>, name: <value of name property>, data: <value of data property>}
+     */
+    onChange: PropTypes.func.isRequired
+
 }
 
 export default Mask;

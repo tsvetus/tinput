@@ -1,8 +1,34 @@
+/**
+ * Contains available masks
+ * @type {{numbers: {value: string, mask: string}}}
+ */
 const masks = {
     numbers: {
-        mask: 'DMYNmhs',
+        mask: 'N',
         value: '1234567890'
     }
+}
+
+/**
+ * Determines type of character at <caret> position
+ * @param {number} caret - Caret position
+ * @param {string} mask - Mask
+ * @returns {string|*} Returns position type
+ */
+function positionType(caret, mask) {
+    let k = mask[caret];
+    if (k === undefined) {
+        return 'undefined';
+    }
+    for (let [key, val] of Object.entries(masks)) {
+        console.log('KEY: ' + key);
+        if (val instanceof Object) {
+            if (val.mask.indexOf(k) >= 0) {
+                return key;
+            }
+        }
+    }
+    return 'none';
 }
 
 /**
@@ -77,11 +103,17 @@ class TMask {
         if (params.value) {
             let v = params.value;
             for (let i=0; i<this.mask.length; i++) {
-                let k = v[i];
-                if (checkKey(k, i, this.mask)) {
-                    this.value = replace(this.value, k, i);
+                if (positionType(i, this.mask) == 'none') {
+                    let m = this.mask[i];
+                    this.value = replace(this.value, m, i);
+                    console.log('TYPE: ' + positionType(i, this.mask) + ' ' + this.mask + ' ' + this.mask[i]);
                 } else {
-                    this.value = replace(this.value, this.empty, i);
+                    let k = v[i];
+                    if (checkKey(k, i, this.mask)) {
+                        this.value = replace(this.value, k, i);
+                    } else {
+                        this.value = replace(this.value, this.empty, i);
+                    }
                 }
             }
             this.caret = 0;
@@ -111,31 +143,40 @@ class TMask {
 
         this.set(event);
 
-        if (event.value) {
-            for (let i=0; i<this.mask.length; i++) {
-                let k = event.value[i];
-                if (checkKey(k, i, this.mask)) {
-                    this.value = replace(this.value, k, i);
-                } else {
-                    this.value = replace(this.value, this.empty, i);
-                }
-            }
-            this.caret = 0;
-        }
+        // if (event.value) {
+        //     for (let i=0; i<this.mask.length; i++) {
+        //         let k = event.value[i];
+        //         if (checkKey(k, i, this.mask)) {
+        //             this.value = replace(this.value, k, i);
+        //         } else {
+        //             this.value = replace(this.value, this.empty, i);
+        //         }
+        //     }
+        //     this.caret = 0;
+        // }
 
         if (event.key && event.key.length == 1) {
             if (checkKey(event.key, event.caret, this.mask)) {
-                this.value = replace(this.value, event.key, event.caret);
-                this.caret = event.caret + 1;
+                if (positionType(this.caret, this.mask) !== 'none') {
+                    this.value = replace(this.value, event.key, event.caret);
+                    this.caret = event.caret + 1;
+                }
+                while (positionType(this.caret, this.mask) === 'none') {
+                    this.caret += 1;
+                }
             }
         } else if (event.key === 'Backspace') {
             if (this.caret > 0) {
-                this.value = replace(this.value, this.empty, event.caret - 1);
+                if (positionType(this.caret - 1, this.mask) !== 'none') {
+                    this.value = replace(this.value, this.empty, event.caret - 1);
+                }
                 this.caret = event.caret - 1;
             }
         } else if (event.key === 'Delete') {
             if (this.caret < this.mask.length) {
-                this.value = replace(this.value, this.empty, event.caret);
+                if (positionType(this.caret, this.mask) !== 'none') {
+                    this.value = replace(this.value, this.empty, event.caret);
+                }
                 this.caret = event.caret + 1;
             }
         }
@@ -147,6 +188,10 @@ class TMask {
 
     }
 
+    /**
+     * Checks if value contains no <empty> symbols
+     * @returns {boolean}
+     */
     checkComplete() {
         return this.value.indexOf(this.empty) < 0;
     }

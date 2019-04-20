@@ -72,6 +72,7 @@ class Main extends React.Component {
         });
 
         return (
+
             <div style={{width: "320px"}}>
 
                 <Text
@@ -114,8 +115,8 @@ class Main extends React.Component {
                     style={inputStyle}
                     name="year"
                     label="Year:"
-                    value="2019"
-                    mask={{mask: "YYYY", empty: "-"}}
+                    value="22.04.2019"
+                    mask={{mask: "NN.NN.NNNN", empty: "-"}}
                     placeholder="Enter year"
                     onChange={this.handleChange}
                     />
