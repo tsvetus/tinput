@@ -21,7 +21,6 @@ function positionType(caret, mask) {
         return 'undefined';
     }
     for (let [key, val] of Object.entries(masks)) {
-        console.log('KEY: ' + key);
         if (val instanceof Object) {
             if (val.mask.indexOf(k) >= 0) {
                 return key;
