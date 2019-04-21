@@ -1,12 +1,13 @@
 # tinput
 Set of most common visual React components designed for constructing web application interfaces. 
 
-`tinput` provides 5 visual components constructed on `<input>` html tag:
+`tinput` provides set of visual components constructed on `<input>` html tag:
 * `TText`
 * `TListBox` 
 * `TSearch`
 * `TMask`
 * `TDate`
+* `TTime`
 
 ## Stylization
 
@@ -185,7 +186,7 @@ Component `TMask` represents input with dropdown list of items:
     label="Date:"
     value="22.04.2019"
     mask={{mask: "NN.NN.NNNN", empty: "-"}}
-    onChange={this.handleChange}
+    onChange={this.handleChange} />
 ```   
 
 ## `TDate`
@@ -209,9 +210,33 @@ Component `TDate` represents input with dropdown list of items:
     name="MyDate"
     label="Date:"
     value={new Date()}
-    format={{mask: "DD.MM.YYYY", empty: "-"}}
-    onChange={this.handleChange}
+    format={{mask: "DD.MM.YYYY", empty: "-"}} />
 ```   
+
+## `TTime`
+
+Component `TTime` represents input with dropdown list of items:
+
+* `style`, `name`, `data`, `label` - Same as in <TText> component.
+
+* `format` - Object contains time format. Example: `format={mask: "hh:mm:ss", empty: "-"}`.
+
+* `value` - Contains default time value. Value can be `Date` type or time string in `ISO` format `hh:mm:ss`.   
+        
+* `onChange` - On change event. Fires only if value does not contains an empty chars. 
+             Parameter `event.value` contains time string in `ISO` format   
+
+### Example
+  
+```javascript
+<TTime
+    style={{container: {border: "1px solid red"}}}
+    name="MyTime"
+    label="Time:"
+    value={new Date()}
+    format={{mask: "hh:mm", empty: "-"}}
+    onChange={this.handleChange} />
+```  
 
 ## Usage
 
@@ -225,6 +250,7 @@ import {
     TSearch,
     TMask,
     TDate,
+    TTime,
     COLOR,
     TABLE,
     FONT
@@ -342,6 +368,14 @@ class Main extends React.Component {
                     value={new Date()}
                     format={{mask: "DD.MM.YYYY", empty: "-"}}
                     onChange={this.handleChange} />
+                    
+                <TTime
+                    style={inputStyle}
+                    name="MyTime"
+                    label="Time:"
+                    value={new Date()}
+                    format={{mask: "hh:mm", empty: "-"}}
+                    onChange={this.handleChange} />    
 
                 <div style={{
                         color: COLOR.BORDER,
