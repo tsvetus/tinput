@@ -5,8 +5,6 @@ import {mergeStyles, Mask} from '../util';
 
 import styles from './styles.js';
 
-let MASK = new Mask();
-
 /**
  * Represents mask editor
  */
@@ -14,8 +12,9 @@ class TMask extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        MASK.set(props.mask);
-        this.mask = MASK.parse({value: props.value});
+        this.MASK = new Mask();
+        this.MASK.set(props.mask);
+        this.mask = this.MASK.parse({value: props.value});
         this.state = {value: this.mask.value}
         this.handleChange = this.handleChange.bind(this);
         this.handleKey = this.handleKey.bind(this);
@@ -24,7 +23,7 @@ class TMask extends React.Component {
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value) {
-            this.mask = MASK.parse({value: this.props.value});
+            this.mask = this.MASK.parse({value: this.props.value});
             this.setState({value: this.mask.value});
         }
     }
@@ -36,7 +35,7 @@ class TMask extends React.Component {
                 this.ref.current.selectionStart = this.mask.caret;
                 this.ref.current.selectionEnd = this.mask.caret;
         });
-        if (MASK.checkComplete()) {
+        if (this.MASK.checkComplete()) {
             this.props.onChange({
                 value: this.mask.value,
                 name: this.props.name,
@@ -46,7 +45,7 @@ class TMask extends React.Component {
     }
 
     handleKey(event) {
-        this.mask = MASK.parse({
+        this.mask = this.MASK.parse({
             key: event.key,
             caret: this.ref.current.selectionStart
         });
