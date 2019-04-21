@@ -7,6 +7,7 @@ import {
     TSearch,
     TMask,
     TDate,
+    TTime,
 
     COLOR,
     TABLE,
@@ -126,6 +127,14 @@ class Main extends React.Component {
                     label="Date:"
                     value={new Date()}
                     format={{mask: "DD.MM.YYYY", empty: "-"}}
+                    onChange={this.handleChange} />
+
+                <TTime
+                    style={inputStyle}
+                    name="time"
+                    label="Time:"
+                    value={new Date()}
+                    format={{mask: "hh:mm", empty: "-"}}
                     onChange={this.handleChange} />
 
                 <div style={{

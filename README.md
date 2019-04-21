@@ -1,24 +1,28 @@
 # tinput
-Set of most common visual React components
+Set of most common visual React components designed for constructing web application interfaces. 
 
-`tinput` provides 5 visual components constructed on `<input>` html tag: `TText`, `TListBox`, 
-`TSearch`, `TMask`, `TDate`.
+`tinput` provides 5 visual components constructed on `<input>` html tag:
+* `TText`
+* `TListBox` 
+* `TSearch`
+* `TMask`
+* `TDate`
 
 ## Stylization
 
 Style structure for custom stylization contains sections for all `tinput` components:
 
-`container` - Style for outer box
+* `container` - Style for outer box
 
-`label` - Style for label
+* `label` - Style for label
 
-`edit` - Style for edit
+* `edit` - Style for edit
 
 Specific for `TListBox` and `TSearch` components:
 
-`list` - Style for drop down itemslist
+* `list` - Style for drop down itemslist
 
-`item` - Style for item in drop down list 
+* `item` - Style for item in drop down list 
 
 ### Example
 
@@ -54,36 +58,36 @@ const customStyle = {
 
 `onChange = function(event)` where `event` contains:
 
-`event.value` - Component value.
+* `event.value` - Component value.
 
-`event.name` - Value of `name` property. Type `String`. 
+* `event.name` - Value of `name` property. Type `String`. 
 
-`event.data` - Value of `data`property. Type `Object`.
+* `event.data` - Value of `data`property. Type `Object`.
 
-`event.caption` - Value of item name for components with dropdown list. Type `String`.
+* `event.caption` - Value of item name for components with dropdown list. Type `String`.
 
 
 ## `TText`
 
 Component `TText` represents text input element and contains properties:
 
-`style` - Style for custom stylization
+* `style` - Style for custom stylization
 
-`name` - Any usable name for component. It will be returned back to parent component 
+* `name` - Any usable name for component. It will be returned back to parent component 
          with `onChange` event
 
-`data` - Any usable object containing data that will be returned back to parent component 
+* `data` - Any usable object containing data that will be returned back to parent component 
          with `onChange` event
          
-`label` - Name for label. If not specified - no label will be displayed
+* `label` - Name for label. If not specified - no label will be displayed
 
-`placeholder` - TText for empty input
+* `placeholder` - TText for empty input
 
-`password` - Optional. If specified - entered text appears as dots    
+* `password` - Optional. If specified - entered text appears as dots    
 
-`value` - Default display text
+* `value` - Default display text
 
-`onChange` - On change event. `event.value` contains last changed text.
+* `onChange` - On change event. `event.value` contains last changed text.
 
 ```javascript
 <TText
@@ -99,19 +103,19 @@ Component `TText` represents text input element and contains properties:
 
 Component `TListBox` represents input with dropdown list of items:
 
-`style`, `name`, `data`, `label`, `placeholder` - Same as in <TText> component.
+* `style`, `name`, `data`, `label`, `placeholder` - Same as in <TText> component.
 
-`list` - Array of items in dropdown list. Example: `list={[{id: 1, name: "first item"}, {id: 2, name: "second item"}]}`.
+* `list` - Array of items in dropdown list. Example: `list={[{id: 1, name: "first item"}, {id: 2, name: "second item"}]}`.
         Format of single item is: `{id: 1, name: "first item"}` where `id` is used for value field in `onChange` event and
         `name` - text displayed in input field and dropdown list items.  
         
-`empty` - Optional. Defines an empty list item. Example: `empty={{id: 0, name: "-"}}`. If specified this item appears 
+* `empty` - Optional. Defines an empty list item. Example: `empty={{id: 0, name: "-"}}`. If specified this item appears 
         at first position in dropdown list. If chosen - `onChange` event returns value specified in `id` 
         field of `empty` object.         
         
-`value` - Value of default `id` displayed after component did mount.        
+* `value` - Value of default `id` displayed after component did mount.        
 
-`onChange` - On change event. Fires only if dropdown list item clicked. Returns object: 
+* `onChange` - On change event. Fires only if dropdown list item clicked. Returns object: 
         `{value: 1, caption: "Item name", name: "MyListBox", data: {}}` where `value` - `id` of chosen item, 
         `caption` - it's `name`, `name` - component name and `data` - component data property.    
 
@@ -137,17 +141,17 @@ Component `TListBox` represents input with dropdown list of items:
 
 Component `TSearch` similar to `TListBox` but dropdown list appears automatically while user enters a text:
 
-`style`, `name`, `data`, `label`, `placeholder` - Same as in <TText> component.
+* `style`, `name`, `data`, `label`, `placeholder` - Same as in <TText> component.
         
-`value` - Value of default `id` displayed after component did mount.        
+* `value` - Value of default `id` displayed after component did mount.        
 
-`onChange` - On change event. Fires only if dropdown list item clicked. Returns object: 
+* `onChange` - On change event. Fires only if dropdown list item clicked. Returns object: 
         `{value: 1, caption: "Item name", name: "MyListBox", data: {}}` where `value` - `id` of chosen item, 
         `caption` - it's `name`, `name` - component name and `data` - component data property.
         
-`onSearch` - When component dropdown list needs to be updated it calls `onSearch` with object parameter: 
-        `{id: 2}` or `{name: "tex"}`. Parent component performs search using values from `id` or `name` field 
-        trying to find suitable items (from external database for instance) and returns them as array of items object:
+* `onSearch` - When component dropdown list needs to be updated it calls `onSearch` with object parameter: 
+        `{id: <any id>}` or `{name: <any substring>}`. Parent component performs search using values from `id` or `name` field 
+        trying to find suitable items (from external database for instance) and returns them as array of items like:
         {[{id: 1, name: "first item"}, {id: 2, name: "second item"}]}                 
 
 ### Example
@@ -166,11 +170,11 @@ Component `TSearch` similar to `TListBox` but dropdown list appears automaticall
 
 Component `TMask` represents input with dropdown list of items:
 
-`style`, `name`, `data`, `label` - Same as in <TText> component.
+* `style`, `name`, `data`, `label` - Same as in <TText> component.
 
-`mask` - Object contains mask parameters. Example: `mask={mask: "NN.NN.NNNN", empty: "-"}`. `N` - means any number.  
+* `mask` - Object contains mask parameters. Example: `mask={mask: "NN.NN.NNNN", empty: "-"}`. `N` - means any number.  
         
-`onChange` - On change event. Fires only if value does not contains an empty chars.    
+* `onChange` - On change event. Fires only if value does not contains an empty chars.    
 
 ### Example
   
@@ -188,13 +192,13 @@ Component `TMask` represents input with dropdown list of items:
 
 Component `TDate` represents input with dropdown list of items:
 
-`style`, `name`, `data`, `label` - Same as in <TText> component.
+* `style`, `name`, `data`, `label` - Same as in <TText> component.
 
-`format` - Object contains date format. Example: `format={mask: "DD.MM.YYYY", empty: "-"}`.
+* `format` - Object contains date format. Example: `format={mask: "DD.MM.YYYY", empty: "-"}`.
 
-`value` - Contains default date value. Value can be `Date` type or date string in `ISO` format `YYYY-MM-DD`.   
+* `value` - Contains default date value. Value can be `Date` type or date string in `ISO` format `YYYY-MM-DD`.   
         
-`onChange` - On change event. Fires only if value does not contains an empty chars. 
+* `onChange` - On change event. Fires only if value does not contains an empty chars. 
              Parameter `event.value` contains date string in `ISO` format   
 
 ### Example

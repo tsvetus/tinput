@@ -7,6 +7,7 @@ import TListBox from './TListBox';
 import TSearch from './TSearch';
 import TMask from './TMask';
 import TDate from './TDate';
+import TTime from './TTime';
 
 import {
     COLOR,
@@ -22,27 +23,34 @@ export {
     Icon,
 
     /**
-     * Text input component
+     * TText input component
      */
     TText,
 
     /**
-     * Listbox component
+     * TListbox component
      */
     TListBox,
 
     /**
-     * Listbox with search
+     * TListbox with search
      */
     TSearch,
 
     /**
-     * Mask component
+     * TMask component
      */
     TMask,
 
+    /**
+     * TDate component
+     */
     TDate,
 
+    /**
+     * TTime component
+     */
+    TTime,
 
     COLOR,
     SIZE,

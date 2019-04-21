@@ -6,7 +6,10 @@ import {
 import {
     isoDate,
     strDate,
-    dateMask
+    dateMask,
+    isoTime,
+    strTime,
+    timeMask
 } from './date.js';
 
 import Mask from './mask.js';
@@ -19,7 +22,9 @@ export {
     isoDate,
     strDate,
     dateMask,
-
+    isoTime,
+    strTime,
+    timeMask,
     Mask
 
 }

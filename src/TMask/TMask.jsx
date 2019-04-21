@@ -5,7 +5,7 @@ import {mergeStyles, Mask} from '../util';
 
 import styles from './styles.js';
 
-const MASK = new Mask();
+let MASK = new Mask();
 
 /**
  * Represents mask editor
