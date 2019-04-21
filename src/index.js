@@ -8,6 +8,8 @@ import TSearch from './TSearch';
 import TMask from './TMask';
 import TDate from './TDate';
 import TTime from './TTime';
+import TMail from './TMail';
+import TMemo from './TMemo';
 
 import {
     COLOR,
@@ -17,6 +19,7 @@ import {
 } from './styles';
 
 export {
+
     /**
      * Provides icons for components
      * /
@@ -51,6 +54,16 @@ export {
      * TTime component
      */
     TTime,
+
+    /**
+     * TMail component
+     */
+    TMail,
+
+    /**
+     * TMemo component
+     */
+    TMemo,
 
     COLOR,
     SIZE,

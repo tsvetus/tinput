@@ -24,6 +24,16 @@ export const INPUT = {
         color: COLOR.BORDER
     },
 
+    TEXTLABEL: {
+        ...DEBUG,
+        fontWeight: "normal",
+        fontFamily: FONT.LABEL.FAMILY,
+        fontSize: FONT.LABEL.SIZE,
+        padding: "0",
+        margin: "0",
+        color: COLOR.BORDER
+    },
+
     EDIT: {
         ...DEBUG,
         fontWeight: "normal",

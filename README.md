@@ -169,7 +169,7 @@ Component `TSearch` similar to `TListBox` but dropdown list appears automaticall
 
 ## `TMask`
 
-Component `TMask` represents input with dropdown list of items:
+Component `TMask` represents component with masked text input:
 
 * `style`, `name`, `data`, `label` - Same as in <TText> component.
 

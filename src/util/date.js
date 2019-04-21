@@ -7,7 +7,7 @@
 export function isoDate(source, mask) {
     if (source instanceof Date) {
         return source.toISOString().substr(0, 10);
-    } else if (mask) {
+    } else if (source && mask) {
         let d = mask.indexOf('DD') >= 0 ? source.substr(mask.indexOf('DD'), 2) : '01';
         let m = mask.indexOf('MM') >= 0 ? source.substr(mask.indexOf('MM'), 2) : '01';
         let y = mask.indexOf('YYYY') >= 0 ? source.substr(mask.indexOf('YYYY'), 4) : '1970';
@@ -65,7 +65,7 @@ export function dateMask(format) {
 export function isoTime(source, mask) {
     if (source instanceof Date) {
         return source.toISOString().substr(11, 8);
-    } else if (mask) {
+    } else if (source && mask) {
         let h = mask.indexOf('hh') >= 0 ? source.substr(mask.indexOf('hh'), 2) : '00';
         let m = mask.indexOf('mm') >= 0 ? source.substr(mask.indexOf('mm'), 2) : '00';
         let s = mask.indexOf('ss') >= 0 ? source.substr(mask.indexOf('ss'), 2) : '00';

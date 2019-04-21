@@ -22,6 +22,10 @@ export const FONT = {
     LABEL: {
         FAMILY: "Arial",
         SIZE: "20px"
+    },
+    TEXT: {
+        FAMILY: "Arial",
+        SIZE: "18px"
     }
 }
 

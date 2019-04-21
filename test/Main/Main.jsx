@@ -8,6 +8,8 @@ import {
     TMask,
     TDate,
     TTime,
+    TMail,
+    TMemo,
 
     COLOR,
     TABLE,
@@ -135,6 +137,20 @@ class Main extends React.Component {
                     label="Time:"
                     value={new Date()}
                     format={{mask: "hh:mm", empty: "-"}}
+                    onChange={this.handleChange} />
+
+                <TMail
+                    style={inputStyle}
+                    name="email"
+                    label="EMail:"
+                    value="google@google.com"
+                    onChange={this.handleChange} />
+
+                <TMemo
+                    style={{margin: "16px 0 0 0", height: "100px"}}
+                    name="memo"
+                    label="Textarea:"
+                    value="Text"
                     onChange={this.handleChange} />
 
                 <div style={{

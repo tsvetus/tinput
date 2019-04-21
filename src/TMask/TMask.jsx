@@ -36,8 +36,16 @@ class TMask extends React.Component {
                 this.ref.current.selectionEnd = this.mask.caret;
         });
         if (this.MASK.checkComplete()) {
+            this.lastValue = this.mask.value;
             this.props.onChange({
                 value: this.mask.value,
+                name: this.props.name,
+                data: this.props.data
+            });
+        } else if (this.lastValue !== null) {
+            this.lastValue = null;
+            this.props.onChange({
+                value: null,
                 name: this.props.name,
                 data: this.props.data
             });

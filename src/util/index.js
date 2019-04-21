@@ -1,6 +1,7 @@
 import {
     merge,
-    mergeStyles
+    mergeStyles,
+    checkEmail
 } from './misc.js';
 
 import {
@@ -18,6 +19,7 @@ export {
 
     merge,
     mergeStyles,
+    checkEmail,
 
     isoDate,
     strDate,
