@@ -191,7 +191,7 @@ Component `TMask` represents input with dropdown list of items:
 
 ## `TDate`
 
-Component `TDate` represents input with dropdown list of items:
+Component `TDate` represents date input:
 
 * `style`, `name`, `data`, `label` - Same as in <TText> component.
 
@@ -215,7 +215,7 @@ Component `TDate` represents input with dropdown list of items:
 
 ## `TTime`
 
-Component `TTime` represents input with dropdown list of items:
+Component `TTime` represents time input:
 
 * `style`, `name`, `data`, `label` - Same as in <TText> component.
 
