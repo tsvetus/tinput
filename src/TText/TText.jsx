@@ -9,15 +9,13 @@ class TText extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            value: this.props.value,
-        }
+        this.state = {value: this.props.value ? this.props.value : ''}
         this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value) {
-            this.setState({value: this.props.value});
+            this.setState({value: this.props.value ? this.props.value : ''});
         }
     }
 
@@ -41,7 +39,7 @@ class TText extends React.Component {
         let content = (
             <input
                 type={this.props.password ? "password" : "text"}
-                value={this.state.inputValue}
+                value={this.state.value}
                 placeholder={this.props.placeholder}
                 style={style.edit}
                 onChange={this.handleChange} />

@@ -33,6 +33,7 @@ class TTime extends React.Component {
         return (
             <TMask style={style.container}
                    value={strTime(this.props.value, this.props.format.mask)}
+                   valueNull={this.props.valueNull}
                    name={this.props.name}
                    label={this.props.label}
                    data={this.props.data}

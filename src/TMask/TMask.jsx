@@ -42,7 +42,7 @@ class TMask extends React.Component {
                 name: this.props.name,
                 data: this.props.data
             });
-        } else if (this.lastValue !== null) {
+        } else if (this.props.valueNull && this.lastValue !== null) {
             this.lastValue = null;
             this.props.onChange({
                 value: null,

@@ -1,44 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-    mergeStyles,
-    checkEmail
-} from '../util';
+import {mergeStyles} from '../util';
 
 import styles from './styles.js';
 
-class TMail extends React.Component {
+class TCheck extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {value: this.props.value ? this.props.value : ''}
+        this.state = {value: this.props.value}
         this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value) {
-            this.setState({value: this.props.value ? this.props.value : ''});
+            this.setState({value: this.props.value});
         }
     }
 
     handleChange(event) {
-        let v = event.currentTarget.value;
-        if (checkEmail(v)) {
-            this.lastValue = v;
-            this.props.onChange({
-                value: v,
-                name: this.props.name,
-                data: this.props.data
-            });
-        } else if (this.lastValue !== null) {
-            this.lastValue = null;
-            this.props.onChange({
-                value: null,
-                name: this.props.name,
-                data: this.props.data
-            });
+        let v = event.currentTarget.checked;
+        if (this.props.valueInt) {
+            v = v ? 1 : 0
         }
+        this.props.onChange({
+            value: v,
+            name: this.props.name,
+            data: this.props.data
+        });
     }
 
     render () {
@@ -52,9 +42,8 @@ class TMail extends React.Component {
 
         let content = (
             <input
-                type={"text"}
-                value={this.state.value}
-                placeholder={this.props.placeholder}
+                type="checkbox"
+                value={this.state.inputValue}
                 style={style.edit}
                 onChange={this.handleChange} />
         );
@@ -70,10 +59,9 @@ class TMail extends React.Component {
 
 }
 
-TMail.propTypes = {
+TCheck.propTypes = {
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired
 }
 
-export default TMail;
+export default TCheck;

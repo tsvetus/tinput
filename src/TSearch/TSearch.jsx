@@ -6,7 +6,7 @@ import {mergeStyles} from '../util';
 import styles from './styles.js';
 
 import List from '../List';
-import Icon from '../Icon';
+import TIcon from '../TIcon';
 
 class TSearch extends React.Component {
 
@@ -34,24 +34,24 @@ class TSearch extends React.Component {
 
     handleInputChange(event) {
         let v = event.currentTarget.value;
-        let items = [];
         clearTimeout(this.timer);
         if (v && v.length > 2) {
             this.timer = setTimeout(() => {
-                items = this.props.onSearch({
+                this.props.onSearch({
                     id: null,
                     name: v
-                });
-                if (!items || !Array.isArray(items)) {
-                    items = [];
-                }
-                this.updateRect();
-                this.setState({
-                    inputValue: v ? v : '',
-                    items: items,
-                    showList: items.length > 0,
-                    autoFocus: false
-                });
+                }, (items) => {
+                    if (!items || !Array.isArray(items)) {
+                        items = [];
+                    }
+                    this.updateRect();
+                    this.setState({
+                        inputValue: v ? v : '',
+                        items: items,
+                        showList: items.length > 0,
+                        autoFocus: false
+                    });
+                });    
             }, 1000);
         }
         this.setState({
@@ -120,7 +120,7 @@ class TSearch extends React.Component {
         );
 
         let button = (
-            <Icon
+            <TIcon
                 name={this.state.showList ? "up" : "down"}
                 onClick={this.handleButtonClick} />
         );

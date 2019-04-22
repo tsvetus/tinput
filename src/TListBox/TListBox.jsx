@@ -6,7 +6,7 @@ import {mergeStyles} from '../util';
 import styles from './styles.js';
 
 import List from '../List';
-import Icon from '../Icon';
+import TIcon from '../TIcon';
 
 class TListBox extends React.Component {
 
@@ -83,7 +83,7 @@ class TListBox extends React.Component {
         );
 
         let button = (
-            <Icon
+            <TIcon
                 name={this.state.showList ? "up" : "down"}
                 onClick={this.handleButtonClick} />
         );

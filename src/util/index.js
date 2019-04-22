@@ -10,7 +10,8 @@ import {
     dateMask,
     isoTime,
     strTime,
-    timeMask
+    timeMask,
+    seconds
 } from './date.js';
 
 import Mask from './mask.js';
@@ -27,6 +28,8 @@ export {
     isoTime,
     strTime,
     timeMask,
+    seconds,
+
     Mask
 
 }

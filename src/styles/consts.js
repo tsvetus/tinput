@@ -17,15 +17,23 @@ export const SIZE = {
 export const FONT = {
     EDIT: {
         FAMILY: "Arial",
-        SIZE: "20px"
+        SIZE: "20px",
+        WEIGHT: "normal"
     },
     LABEL: {
         FAMILY: "Arial",
-        SIZE: "20px"
+        SIZE: "20px",
+        WEIGHT: "normal"
     },
     TEXT: {
         FAMILY: "Arial",
-        SIZE: "18px"
+        SIZE: "18px",
+        WEIGHT: "normal"
+    },
+    BUTTON: {
+        FAMILY: "Arial",
+        SIZE: "22px",
+        WEIGHT: "bold"
     }
 }
 

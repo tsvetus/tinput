@@ -4,11 +4,12 @@
   "description": "Set of most common visual React components",
   "main": "./index.js",
   "scripts": {
+    "watch": "webpack --watch --config webpack.config.watch.js",
     "dev": "webpack-dev-server --color --hot --inline --watch --config webpack.config.dev.js",
     "test": "webpack --display-error-details --config webpack.config.test.js",
     "prod": "webpack --display-error-details --config webpack.config.prod.js",
     "doc": "jsdoc src/index.js --destination doc",
-    "build": "webpack --display-error-details --config webpack.config.test.js && webpack --display-error-details --config webpack.config.prod.js && jsdoc src/index.js --destination doc"
+    "build": "webpack --config webpack.config.test.js && webpack --config webpack.config.prod.js && jsdoc src/index.js --destination doc"
   },
   "repository": {
     "type": "git",

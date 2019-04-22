@@ -10,6 +10,7 @@ import {
     TTime,
     TMail,
     TMemo,
+    TCheck,
 
     COLOR,
     TABLE,
@@ -60,12 +61,13 @@ class Main extends React.Component {
         this.setState({events: e});
     }
 
-    handleSearch(query) {
-        return list.filter((v, i) => {
+    handleSearch(query, callback) {
+        let items = list.filter((v, i) => {
             return ((query.id && query.id == v.id) ||
                 (query.name && v.name.toLowerCase()
                     .indexOf(query.name.toLowerCase()) >= 0));
         });
+        callback(items);
     }
 
     render() {
@@ -144,6 +146,12 @@ class Main extends React.Component {
                     name="email"
                     label="EMail:"
                     value="google@google.com"
+                    onChange={this.handleChange} />
+
+                <TCheck
+                    style={inputStyle}
+                    name="checkbox"
+                    label="Check me:"
                     onChange={this.handleChange} />
 
                 <TMemo

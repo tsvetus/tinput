@@ -61,7 +61,7 @@ const customStyle = {
 
 ## Events
 
-`onChange = function(event)` where `event` contains:
+`onChange = function(event)` - On change event where `event` contains:
 
 * `event.value` - Component value.
 
@@ -69,8 +69,16 @@ const customStyle = {
 
 * `event.data` - Value of `data`property. Type `Object`.
 
-* `event.caption` - Value of item name for components with dropdown list. Type `String`.
+* `event.caption` - Value of item name for components with dropdown list.
+    Type `String`.
 
+`onSearch = function(query, callback = function(items))` - When component dropdown
+    list needs to be updated it calls `onSearch` to find suitable items (in
+    external database for instance) with parameters:
+*   `query.id` - Find using `id` value
+*   `query.name` - Find using `name` value          
+*   `callback` - Function accepts array of found `items` of form:
+    `[{id: <id value>, name: <name value>}, ...]`  
 
 ## `TText`
 
@@ -154,10 +162,10 @@ Component `TSearch` similar to `TListBox` but dropdown list appears automaticall
         `{value: 1, caption: "Item name", name: "MyListBox", data: {}}` where `value` - `id` of chosen item,
         `caption` - it's `name`, `name` - component name and `data` - component data property.
 
-* `onSearch` - When component dropdown list needs to be updated it calls `onSearch` with object parameter:
-        `{id: <any id>}` or `{name: <any substring>}`. Parent component performs search using values from `id` or `name` field
-        trying to find suitable items (from external database for instance) and returns them as array of items like:
-        {[{id: 1, name: "first item"}, {id: 2, name: "second item"}]}                 
+* `onSearch` - When component dropdown list needs to be updated it calls `onSearch` with object parameters:
+    *    `{id: <any id>}` or `{name: <any substring>}` - Search parameters. Parent component performs search using values from `id` or `name` field
+        trying to find suitable items (from external database for instance)           
+    *   `function()` - Callback function returning array of items like: `[{id: 1, name: "first item"}, {id: 2, name: "second item"}]`          
 
 ### Example
 
@@ -347,19 +355,27 @@ class Main extends React.Component {
         this.setState({events: e});
     }
 
-    handleSearch(query) {
-        return list.filter((v, i) => {
-            return ((query.id && query.id == v.id) ||
-                (query.name && v.name.toLowerCase()
-                    .indexOf(query.name.toLowerCase()) >= 0));
-        });
+    handleSearch(query, callback) {
+        callback(
+            list.filter((v, i) => {
+                return ((query.id && query.id == v.id) ||
+                    (query.name && v.name.toLowerCase()
+                        .indexOf(query.name.toLowerCase()) >= 0));
+            });
+        );    
     }
 
     render() {
 
         let events = [];
         this.state.events.forEach((v, i) => {
-            events.push(<div key={i} style={{margin: "8px 0 0 0"}}>{JSON.stringify(v)}</div>);
+            events.push(
+                <div
+                    key={i}
+                    style={{margin: "8px 0 0 0"}}>
+                    {JSON.stringify(v)}
+                </div>
+            );
         });
 
         return (

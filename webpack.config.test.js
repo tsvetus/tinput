@@ -4,7 +4,6 @@ const path = require('path');
 module.exports = {
     mode: 'production',
     entry: {
-        
         test: [
             path.resolve(__dirname, './test/test.jsx')
         ]

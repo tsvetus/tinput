@@ -113,3 +113,7 @@ export function timeMask(format) {
         empty: format.empty
     };
 }
+
+export function seconds(source) {
+    return Date.parse('1970 ' + source + ' GMT')/1000;
+}
