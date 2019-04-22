@@ -9,14 +9,14 @@ export default {
     },
 
     box: {
-        height: "100%"
+        display: "flex",
+        flex: "1"
     },
 
     edit: {
+        flex: "1",
         border: "2px solid " + COLOR.BORDER,
         margin: "0",
-        width: "calc(100% - 4px)",
-        height: "100% !important",
         resize: "none",
         ...FONT.TEXT
     },

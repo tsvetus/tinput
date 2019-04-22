@@ -1,13 +1,15 @@
 # tinput
-Set of most common visual React components designed for constructing web application interfaces. 
+Set of most common visual React components designed for constructing web application interfaces.
 
 `tinput` provides set of visual components constructed on `<input>` html tag:
 * `TText`
-* `TListBox` 
+* `TListBox`
 * `TSearch`
 * `TMask`
 * `TDate`
 * `TTime`
+* `TMail`
+* `TMemo`
 
 ## Stylization
 
@@ -23,7 +25,9 @@ Specific for `TListBox` and `TSearch` components:
 
 * `list` - Style for drop down itemslist
 
-* `item` - Style for item in drop down list 
+* `item` - Style for item in drop down list
+
+All root style properties will be copied to `container` property automatically.
 
 ### Example
 
@@ -53,7 +57,7 @@ const customStyle = {
     }
 
 }
-``` 
+```
 
 ## Events
 
@@ -61,7 +65,7 @@ const customStyle = {
 
 * `event.value` - Component value.
 
-* `event.name` - Value of `name` property. Type `String`. 
+* `event.name` - Value of `name` property. Type `String`.
 
 * `event.data` - Value of `data`property. Type `Object`.
 
@@ -74,12 +78,12 @@ Component `TText` represents text input element and contains properties:
 
 * `style` - Style for custom stylization
 
-* `name` - Any usable name for component. It will be returned back to parent component 
+* `name` - Any usable name for component. It will be returned back to parent component
          with `onChange` event
 
-* `data` - Any usable object containing data that will be returned back to parent component 
+* `data` - Any usable object containing data that will be returned back to parent component
          with `onChange` event
-         
+
 * `label` - Name for label. If not specified - no label will be displayed
 
 * `placeholder` - TText for empty input
@@ -109,20 +113,20 @@ Component `TListBox` represents input with dropdown list of items:
 * `list` - Array of items in dropdown list. Example: `list={[{id: 1, name: "first item"}, {id: 2, name: "second item"}]}`.
         Format of single item is: `{id: 1, name: "first item"}` where `id` is used for value field in `onChange` event and
         `name` - text displayed in input field and dropdown list items.  
-        
-* `empty` - Optional. Defines an empty list item. Example: `empty={{id: 0, name: "-"}}`. If specified this item appears 
-        at first position in dropdown list. If chosen - `onChange` event returns value specified in `id` 
+
+* `empty` - Optional. Defines an empty list item. Example: `empty={{id: 0, name: "-"}}`. If specified this item appears
+        at first position in dropdown list. If chosen - `onChange` event returns value specified in `id`
         field of `empty` object.         
-        
+
 * `value` - Value of default `id` displayed after component did mount.        
 
-* `onChange` - On change event. Fires only if dropdown list item clicked. Returns object: 
-        `{value: 1, caption: "Item name", name: "MyListBox", data: {}}` where `value` - `id` of chosen item, 
+* `onChange` - On change event. Fires only if dropdown list item clicked. Returns object:
+        `{value: 1, caption: "Item name", name: "MyListBox", data: {}}` where `value` - `id` of chosen item,
         `caption` - it's `name`, `name` - component name and `data` - component data property.    
 
 
 ### Example
-  
+
 ```javascript
 <TListBox
     style={{container: {border: "1px solid red"}}}
@@ -143,20 +147,20 @@ Component `TListBox` represents input with dropdown list of items:
 Component `TSearch` similar to `TListBox` but dropdown list appears automatically while user enters a text:
 
 * `style`, `name`, `data`, `label`, `placeholder` - Same as in <TText> component.
-        
+
 * `value` - Value of default `id` displayed after component did mount.        
 
-* `onChange` - On change event. Fires only if dropdown list item clicked. Returns object: 
-        `{value: 1, caption: "Item name", name: "MyListBox", data: {}}` where `value` - `id` of chosen item, 
+* `onChange` - On change event. Fires only if dropdown list item clicked. Returns object:
+        `{value: 1, caption: "Item name", name: "MyListBox", data: {}}` where `value` - `id` of chosen item,
         `caption` - it's `name`, `name` - component name and `data` - component data property.
-        
-* `onSearch` - When component dropdown list needs to be updated it calls `onSearch` with object parameter: 
-        `{id: <any id>}` or `{name: <any substring>}`. Parent component performs search using values from `id` or `name` field 
+
+* `onSearch` - When component dropdown list needs to be updated it calls `onSearch` with object parameter:
+        `{id: <any id>}` or `{name: <any substring>}`. Parent component performs search using values from `id` or `name` field
         trying to find suitable items (from external database for instance) and returns them as array of items like:
         {[{id: 1, name: "first item"}, {id: 2, name: "second item"}]}                 
 
 ### Example
-  
+
 ```javascript
 <TSearch
     style={{container: {border: "1px solid red"}}}
@@ -174,11 +178,11 @@ Component `TMask` represents component with masked text input:
 * `style`, `name`, `data`, `label` - Same as in <TText> component.
 
 * `mask` - Object contains mask parameters. Example: `mask={mask: "NN.NN.NNNN", empty: "-"}`. `N` - means any number.  
-        
+
 * `onChange` - On change event. Fires only if value does not contains an empty chars.    
 
 ### Example
-  
+
 ```javascript
 <TMask
     style={{container: {border: "1px solid red"}}}
@@ -198,12 +202,12 @@ Component `TDate` represents date input:
 * `format` - Object contains date format. Example: `format={mask: "DD.MM.YYYY", empty: "-"}`.
 
 * `value` - Contains default date value. Value can be `Date` type or date string in `ISO` format `YYYY-MM-DD`.   
-        
-* `onChange` - On change event. Fires only if value does not contains an empty chars. 
+
+* `onChange` - On change event. Fires only if value does not contains an empty chars.
              Parameter `event.value` contains date string in `ISO` format   
 
 ### Example
-  
+
 ```javascript
 <TDate
     style={{container: {border: "1px solid red"}}}
@@ -222,12 +226,12 @@ Component `TTime` represents time input:
 * `format` - Object contains time format. Example: `format={mask: "hh:mm:ss", empty: "-"}`.
 
 * `value` - Contains default time value. Value can be `Date` type or time string in `ISO` format `hh:mm:ss`.   
-        
-* `onChange` - On change event. Fires only if value does not contains an empty chars. 
+
+* `onChange` - On change event. Fires only if value does not contains an empty chars.
              Parameter `event.value` contains time string in `ISO` format   
 
 ### Example
-  
+
 ```javascript
 <TTime
     style={{container: {border: "1px solid red"}}}
@@ -238,6 +242,46 @@ Component `TTime` represents time input:
     onChange={this.handleChange} />
 ```  
 
+## `TMail`
+
+Component `TMail` represents input for email:
+
+* `style`, `name`, `data`, `label` - Same as in <TText> component.
+
+* `value` - Contains default email value.   
+
+* `onChange` - On change event. Fires only if value matches email format.
+
+### Example
+
+```javascript
+<TMail
+    style={{container: {border: "1px solid red"}}}
+    name="MyMail"
+    label="Email:"
+    placeholder="Enter email"
+    onChange={this.handleChange} />
+```  
+## `TMemo`
+
+Component `TMemo` extends html <textarea> tag:
+
+* `style`, `name`, `data`, `label` - Same as in <TText> component.
+
+* `value` - Contains default text.   
+
+* `onChange` - On change event..
+
+### Example
+
+```javascript
+<TMemo
+    style={{container: {border: "1px solid red"}}}
+    name="MyMemo"
+    label="Textarea:"
+    onChange={this.handleChange} />
+```  
+
 ## Usage
 
 ```javascript
@@ -245,15 +289,20 @@ Component `TTime` represents time input:
 import React from 'react';
 
 import {
+
     TListBox,
     TText,
     TSearch,
     TMask,
     TDate,
     TTime,
+    TMail,
+    TMemo,
+
     COLOR,
     TABLE,
     FONT
+
 } from 'tinput';
 
 const list = [
@@ -314,7 +363,7 @@ class Main extends React.Component {
         });
 
         return (
-            
+
             <div style={{width: "320px"}}>
 
                 <TText
@@ -360,7 +409,7 @@ class Main extends React.Component {
                     value="22.04.2019"
                     mask={{mask: "NN.NN.NNNN", empty: "-"}}
                     onChange={this.handleChange} />
-                    
+
                 <TDate
                     style={inputStyle}
                     name="date"
@@ -368,7 +417,7 @@ class Main extends React.Component {
                     value={new Date()}
                     format={{mask: "DD.MM.YYYY", empty: "-"}}
                     onChange={this.handleChange} />
-                    
+
                 <TTime
                     style={inputStyle}
                     name="MyTime"
@@ -376,6 +425,20 @@ class Main extends React.Component {
                     value={new Date()}
                     format={{mask: "hh:mm", empty: "-"}}
                     onChange={this.handleChange} />    
+
+                <TMail
+                    style={inputStyle}
+                    name="email"
+                    label="EMail:"
+                    value="google@google.com"
+                    onChange={this.handleChange} />
+
+                <TMemo
+                    style={{margin: "16px 0 0 0", height: "100px"}}
+                    name="memo"
+                    label="Textarea:"
+                    value="Text"
+                    onChange={this.handleChange} />
 
                 <div style={{
                         color: COLOR.BORDER,
