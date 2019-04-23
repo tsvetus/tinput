@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import {
     mergeStyles,
-    checkEmail
+    checkEmail,
+    TIMEOUT
 } from '../util';
 
 import styles from './styles.js';
@@ -24,21 +25,28 @@ class TMail extends React.Component {
 
     handleChange(event) {
         let v = event.currentTarget.value;
-        if (checkEmail(v)) {
-            this.lastValue = v;
-            this.props.onChange({
-                value: v,
-                name: this.props.name,
-                data: this.props.data
-            });
-        } else if (this.lastValue !== null) {
-            this.lastValue = null;
-            this.props.onChange({
-                value: null,
-                name: this.props.name,
-                data: this.props.data
-            });
-        }
+        this.setState({value: v});
+        clearTimeout(this.timer);
+        this.timer = setTimeout(
+            () => {
+                if (checkEmail(v)) {
+                    this.lastValue = v;
+                    this.props.onChange({
+                        value: v,
+                        name: this.props.name,
+                        data: this.props.data
+                    });
+                } else if (this.lastValue !== null) {
+                    this.lastValue = null;
+                    this.props.onChange({
+                        value: null,
+                        name: this.props.name,
+                        data: this.props.data
+                    });
+                }
+            },
+            TIMEOUT
+        );
     }
 
     render () {

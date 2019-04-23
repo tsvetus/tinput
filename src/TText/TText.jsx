@@ -23,11 +23,13 @@ class TText extends React.Component {
     }
 
     handleChange(event) {
+        let v = event.currentTarget.value;
+        this.setState({value: v});
         clearTimeout(this.timer);
         this.timer = setTimeout(
             () => {
                 this.props.onChange({
-                    value: event.currentTarget.value,
+                    value: v,
                     name: this.props.name,
                     data: this.props.data
                 });
