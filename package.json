@@ -1,7 +1,7 @@
 {
   "name": "tinput",
-  "version": "1.0.10",
-  "description": "Set of most common visual React components",
+  "version": "1.1.1",
+  "description": "Set of visual React components",
   "main": "./index.js",
   "scripts": {
     "watch": "webpack --watch --config webpack.config.watch.js",

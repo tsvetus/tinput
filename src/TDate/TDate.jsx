@@ -7,7 +7,8 @@ import {
     mergeStyles,
     isoDate,
     strDate,
-    dateMask
+    dateMask,
+    TIMEOUT
 } from '../util';
 
 import styles from './styles.js';
@@ -16,14 +17,27 @@ class TDate extends React.Component {
 
     constructor(props, context) {
         super(props, context);
+        this.state = {value: strDate(props.value, props.format)}
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
-        this.props.onChange({
-            ...event,
-            value: isoDate(event.value, this.props.format.mask)
-        });
+        clearTimeout(this.timer);
+        this.timer = setTimeout(
+            () => {
+                this.props.onChange({
+                    ...event,
+                    value: isoDate(event.value, this.props.format.mask)
+                });
+            },
+            TIMEOUT
+        );
+    }
+
+    componentDidUpdate(old) {
+        if (old.value !== this.props.value) {
+            this.setState({value: strDate(this.props.value, this.props.format)});
+        }
     }
 
     render () {
@@ -32,7 +46,7 @@ class TDate extends React.Component {
 
         return (
             <TMask style={style.container}
-                   value={strDate(this.props.value, this.props.format.mask)}
+                   value={this.state.value}
                    valueNull={this.props.valueNull}
                    name={this.props.name}
                    label={this.props.label}

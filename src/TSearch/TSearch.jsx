@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {mergeStyles} from '../util';
+import {mergeStyles, TIMEOUT} from '../util';
 
 import styles from './styles.js';
 
@@ -29,6 +29,25 @@ class TSearch extends React.Component {
     componentDidUpdate(old) {
         if (old.value !== this.props.value) {
             this.setState({value: this.props.value});
+            this.findName(this.props.value);
+        }
+    }
+
+    componentDidMount() {
+        this.findName(this.props.value);
+    }
+
+    findName(id) {
+        if (id) {
+            console.log('Try to find!');
+            this.props.onSearch({
+                    id: id,
+                    name: null
+                },
+                (items) => {
+                    this.setState({inputValue: items ? items[0].name : ''});
+                }
+            );
         }
     }
 
@@ -51,8 +70,8 @@ class TSearch extends React.Component {
                         showList: items.length > 0,
                         autoFocus: false
                     });
-                });    
-            }, 1000);
+                });
+            }, TIMEOUT);
         }
         this.setState({
             inputValue: v ? v : ''

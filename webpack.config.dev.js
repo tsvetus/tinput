@@ -5,7 +5,7 @@ module.exports = {
     mode: 'development',
     entry: {
         test: [
-            'webpack-dev-server/client?http://localhost:9000',
+//            'webpack-dev-server/client?http://localhost:9090',
             path.resolve(__dirname, './test/test.jsx')
         ]
     },
@@ -37,7 +37,7 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
         publicPath: '/',
-        port: 9000,
+        port: 9090,
         host: '0.0.0.0'
     }
 }

@@ -13,8 +13,8 @@ class TListBox extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            value: this.props.value,
-            inputValue: '',
+            value: props.value,
+            inputValue: this.findName(props.value, props.items),
             showList: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,8 +25,18 @@ class TListBox extends React.Component {
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value) {
-            this.setState({value: this.props.value});
+            this.setState({
+                value: this.props.value,
+                inputValue: this.findName(this.props.value, this.props.items)
+            });
         }
+    }
+
+    findName(id, items) {
+        let item = items.find((v) => {
+            return v.id === id;
+        });
+        return item ? item.name : '';
     }
 
     handleInputChange(event) {

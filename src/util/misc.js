@@ -1,3 +1,5 @@
+export const TIMEOUT = 500;
+
 export function merge(...sources) {
     let res = {}
     for (const source of sources) {

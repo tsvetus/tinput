@@ -10,6 +10,7 @@ Set of most common visual React components designed for constructing web applica
 * `TTime`
 * `TMail`
 * `TMemo`
+* `TCheck`
 
 ## Stylization
 
@@ -290,6 +291,30 @@ Component `TMemo` extends html <textarea> tag:
     onChange={this.handleChange} />
 ```  
 
+## `TCheck`
+
+Component `TMemo` extends html <textarea> tag:
+
+* `style`, `name`, `data`, `label` - Same as in <TText> component.
+
+* `value` - Contains default state `true`, `false`, `0` or `1`.   
+
+* `valueInt` - If `true` then return value is `0` or `1`.
+
+* `onChange` - On change event.
+
+### Example
+
+```javascript
+<TCheck
+    style={{container: {border: "1px solid red"}}}
+    name="MyCheck"
+    label="Check me"
+    value={1}
+    nalueint={true}
+    onChange={this.handleChange} />
+```  
+
 ## Usage
 
 ```javascript
@@ -306,6 +331,7 @@ import {
     TTime,
     TMail,
     TMemo,
+    TCheck,
 
     COLOR,
     TABLE,
@@ -351,18 +377,18 @@ class Main extends React.Component {
     }
 
     handleChange(event) {
-        let e = this.state.events.slice().unshift(event);
+        let e = this.state.events.slice();
+        e.unshift(event);
         this.setState({events: e});
     }
 
     handleSearch(query, callback) {
-        callback(
-            list.filter((v, i) => {
-                return ((query.id && query.id == v.id) ||
-                    (query.name && v.name.toLowerCase()
-                        .indexOf(query.name.toLowerCase()) >= 0));
-            });
-        );    
+        let items = list.filter((v, i) => {
+            return ((query.id && query.id == v.id) ||
+                (query.name && v.name.toLowerCase()
+                    .indexOf(query.name.toLowerCase()) >= 0));
+        });
+        callback(items);
     }
 
     render() {
@@ -370,9 +396,7 @@ class Main extends React.Component {
         let events = [];
         this.state.events.forEach((v, i) => {
             events.push(
-                <div
-                    key={i}
-                    style={{margin: "8px 0 0 0"}}>
+                <div key={i} style={{margin: "8px 0 0 0"}}>
                     {JSON.stringify(v)}
                 </div>
             );
@@ -385,8 +409,9 @@ class Main extends React.Component {
                 <TText
                     style={inputStyle}
                     name="text"
-                    label="TText:"
+                    label="Text:"
                     placeholder="Enter text"
+                    value="default text"
                     onChange={this.handleChange} />
 
                 <TText
@@ -413,15 +438,16 @@ class Main extends React.Component {
                 <TSearch
                     style={inputStyle}
                     name="search"
-                    label="TSearch:"
+                    label="Search:"
                     placeholder="Enter text 'item'"
+                    value={1}
                     onSearch={this.handleSearch}
                     onChange={this.handleChange} />
 
                 <TMask
                     style={inputStyle}
-                    name="mask"
-                    label="Date:"
+                    name="dateMask"
+                    label="Masked date:"
                     value="22.04.2019"
                     mask={{mask: "NN.NN.NNNN", empty: "-"}}
                     onChange={this.handleChange} />
@@ -436,17 +462,25 @@ class Main extends React.Component {
 
                 <TTime
                     style={inputStyle}
-                    name="MyTime"
+                    name="time"
                     label="Time:"
                     value={new Date()}
                     format={{mask: "hh:mm", empty: "-"}}
-                    onChange={this.handleChange} />    
+                    onChange={this.handleChange} />
 
                 <TMail
                     style={inputStyle}
                     name="email"
                     label="EMail:"
                     value="google@google.com"
+                    onChange={this.handleChange} />
+
+                <TCheck
+                    style={inputStyle}
+                    name="checkbox"
+                    label="Check me:"
+                    value={1}
+                    valueInt={true}
                     onChange={this.handleChange} />
 
                 <TMemo
@@ -480,5 +514,6 @@ class Main extends React.Component {
 }
 
 export default Main;
+
 
 ```

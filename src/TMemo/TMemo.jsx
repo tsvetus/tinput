@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {mergeStyles} from '../util';
+import {mergeStyles, TIMEOUT} from '../util';
 
 import styles from './styles.js';
 import './styles.css';
@@ -25,11 +25,17 @@ class TMemo extends React.Component {
     handleChange(event) {
         let v = event.currentTarget.value;
         this.setState({value: v});
-        this.props.onChange({
-            value: v,
-            name: this.props.name,
-            data: this.props.data
-        });
+        clearTimeout(this.timer);        
+        this.timer = setTimeout(
+            () => {
+                this.props.onChange({
+                    value: v,
+                    name: this.props.name,
+                    data: this.props.data
+                });
+            },
+            TIMEOUT
+        );
     }
 
     render () {

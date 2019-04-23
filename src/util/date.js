@@ -1,3 +1,25 @@
+import {maskedValue} from './mask.js';
+
+/**
+ * Returns date mask based on date format
+ * @param format
+ * @returns {{mask: string, empty: *}}
+ */
+export function dateMask(format) {
+    return {
+        mask: format.mask
+            .replace(/D/g, 'N')
+            .replace(/M/g, 'N')
+            .replace(/Y/g, 'N'),
+        empty: format.empty
+    };
+}
+
+export function dateValue(value, format) {
+    let mask = dateMask(format);
+    return maskedValue(value, format.mask, format.empty);
+}
+
 /**
  * Converts Date or masked string to ISO date
  * @param source - source Date or masked string date
@@ -22,38 +44,41 @@ export function isoDate(source, mask) {
  * @param mask - Mask for conversion
  * @returns {string|null} - Masked string date
  */
-export function strDate(source, mask) {
+export function strDate(source, format) {
 
     let str = null;
     if (source instanceof Date) {
         str = source.toISOString().substr(0, 10);
-    } else if (source) {
-        str = source;
     } else {
-        return null;
+        str = dateValue(source, format);
     }
 
     let d = str.substr(8, 2);
     let m = str.substr(5, 2);
     let y = str.substr(0, 4);
 
-    return mask.replace('DD', d).replace('MM', m).replace('YYYY', y);
+    return format.mask.replace('DD', d).replace('MM', m).replace('YYYY', y);
 
 }
 
 /**
- * Returns date mask based on date format
+ * Returns time mask based on time format
  * @param format
  * @returns {{mask: string, empty: *}}
  */
-export function dateMask(format) {
-     return {
-         mask: format.mask
-             .replace(/D/g, 'N')
-             .replace(/M/g, 'N')
-             .replace(/Y/g, 'N'),
-         empty: format.empty
-     };
+export function timeMask(format) {
+    return {
+        mask: format.mask
+            .replace(/h/g, 'N')
+            .replace(/m/g, 'N')
+            .replace(/s/g, 'N'),
+        empty: format.empty
+    };
+}
+
+export function timeValue(value, format) {
+    let mask = timeMask(format);
+    return maskedValue(value, format.mask, format.empty);
 }
 
 /**
@@ -80,38 +105,21 @@ export function isoTime(source, mask) {
  * @param mask - Mask for conversion
  * @returns {string|null} - Masked string time
  */
-export function strTime(source, mask) {
+export function strTime(source, format) {
 
     let str = null;
     if (source instanceof Date) {
         str = source.toISOString().substr(11, 8);
-    } else if (source) {
-        str = source;
     } else {
-        return null;
+        str = timeValue(source, format);
     }
 
     let h = str.substr(0, 2);
     let m = str.substr(3, 2);
     let s = str.substr(6, 2);
 
-    return mask.replace('hh', h).replace('mm', m).replace('ss', s);
+    return format.mask.replace('hh', h).replace('mm', m).replace('ss', s);
 
-}
-
-/**
- * Returns time mask based on time format
- * @param format
- * @returns {{mask: string, empty: *}}
- */
-export function timeMask(format) {
-    return {
-        mask: format.mask
-            .replace(/h/g, 'N')
-            .replace(/m/g, 'N')
-            .replace(/s/g, 'N'),
-        empty: format.empty
-    };
 }
 
 export function seconds(source) {

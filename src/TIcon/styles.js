@@ -9,7 +9,13 @@ export default {
     },
 
     path: {
-        fill: COLOR.BORDER
+//        fill: COLOR.BORDER,
+        fill: "none",
+        stroke: "#000000",
+        strokeWidth: "1px",
+        strokeLinecap: "round",
+        strokeLineJoin: "round",
+        strokeOpacity: "1"
     }
 
 }

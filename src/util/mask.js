@@ -9,6 +9,34 @@ const masks = {
     }
 }
 
+export function maskedValue(value, mask, empty) {
+    let v = '';
+    for (let i=0; i<mask.length; i++) {
+        if (value) {
+            if (value[i]) {
+                if (mask[i] == 'N') {
+                    v += value[i];
+                } else {
+                    v += mask[i];
+                }
+            } else {
+                if (mask[i] == 'N') {
+                    v += empty;
+                } else {
+                    v += mask[i];
+                }
+            }
+        } else {
+            if (mask[i] == 'N') {
+                v += empty;
+            } else {
+                v += mask[i];
+            }
+        }
+    }
+    return v;
+}
+
 /**
  * Determines type of character at <caret> position
  * @param {number} caret - Caret position

@@ -27,10 +27,15 @@ class TIcon extends React.Component {
 
         let icon = icons[this.props.name];
 
+        let style = {
+            ...styles.swg,
+            ...this.props.style
+        }
+
         return (
-            <svg style={styles.svg} viewBox={icon.w}
+            <svg style={style} viewBox={icon.w}
                 onClick={this.handleClick}>
-                <path style={styles.path} d={icon.d}></path>
+                <path style={icon.s} d={icon.d}></path>
             </svg>
         );
 

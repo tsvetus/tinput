@@ -86,6 +86,7 @@ class Main extends React.Component {
                     name="text"
                     label="Text:"
                     placeholder="Enter text"
+                    value="default text"
                     onChange={this.handleChange} />
 
                 <TText
@@ -114,6 +115,7 @@ class Main extends React.Component {
                     name="search"
                     label="Search:"
                     placeholder="Enter text 'item'"
+                    value={1}
                     onSearch={this.handleSearch}
                     onChange={this.handleChange} />
 
@@ -129,7 +131,6 @@ class Main extends React.Component {
                     style={inputStyle}
                     name="date"
                     label="Date:"
-                    value={new Date()}
                     format={{mask: "DD.MM.YYYY", empty: "-"}}
                     onChange={this.handleChange} />
 
@@ -137,7 +138,6 @@ class Main extends React.Component {
                     style={inputStyle}
                     name="time"
                     label="Time:"
-                    value={new Date()}
                     format={{mask: "hh:mm", empty: "-"}}
                     onChange={this.handleChange} />
 
@@ -152,6 +152,8 @@ class Main extends React.Component {
                     style={inputStyle}
                     name="checkbox"
                     label="Check me:"
+                    value={true}
+                    valueInt={true}
                     onChange={this.handleChange} />
 
                 <TMemo

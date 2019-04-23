@@ -1,7 +1,8 @@
 import {
     merge,
     mergeStyles,
-    checkEmail
+    checkEmail,
+    TIMEOUT
 } from './misc.js';
 
 import {
@@ -30,6 +31,8 @@ export {
     timeMask,
     seconds,
 
-    Mask
+    Mask,
+
+    TIMEOUT
 
 }
