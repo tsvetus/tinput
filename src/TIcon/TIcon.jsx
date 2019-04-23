@@ -28,7 +28,7 @@ class TIcon extends React.Component {
         let icon = icons[this.props.name];
 
         let style = {
-            ...styles.swg,
+            ...styles.svg,
             ...this.props.style
         }
 
