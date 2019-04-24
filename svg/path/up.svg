@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="unchecked.svg">
+   sodipodi:docname="up.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.346202"
-     inkscape:cx="53.337553"
+     inkscape:cx="-33.514186"
      inkscape:cy="170.01617"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
@@ -59,32 +59,8 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <rect
+  <path
+     id="rect3121-4"
      style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2527"
-     width="384"
-     height="24"
-     x="0"
-     y="0" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2529"
-     width="24"
-     height="384"
-     x="360"
-     y="0" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2531"
-     width="24"
-     height="384"
-     x="0"
-     y="0" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2533"
-     width="384"
-     height="24"
-     x="0"
-     y="360" />
+     d="M 361.70562,259.88224 C 305.13707,203.3137 248.56853,146.74516 191.99999,90.176613 c -11.31371,11.313707 -22.62742,22.627417 -33.94113,33.941127 56.56855,56.56854 113.13709,113.13708 169.70563,169.70563 11.31371,-11.31371 22.62742,-22.62742 33.94113,-33.94113 z M 191.99999,90.176613 C 135.43145,146.74516 78.862905,203.3137 22.294363,259.88224 33.608071,271.19595 44.92178,282.50966 56.235488,293.82337 112.80403,237.25482 169.37257,180.68628 225.94112,124.11774 214.62741,112.80403 203.3137,101.49032 191.99999,90.176613 Z" />
 </svg>

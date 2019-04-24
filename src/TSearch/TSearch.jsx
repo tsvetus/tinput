@@ -140,6 +140,7 @@ class TSearch extends React.Component {
 
         let button = (
             <TIcon
+                style={{width: "16px"}}
                 name={this.state.showList ? "up" : "down"}
                 onClick={this.handleButtonClick} />
         );

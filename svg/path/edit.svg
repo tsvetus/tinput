@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="unchecked.svg">
+   sodipodi:docname="edit.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.346202"
-     inkscape:cx="53.337553"
-     inkscape:cy="170.01617"
+     inkscape:zoom="2.0000001"
+     inkscape:cx="110.45782"
+     inkscape:cy="190.61233"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
      showgrid="true"
@@ -59,32 +59,8 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2527"
-     width="384"
-     height="24"
-     x="0"
-     y="0" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2529"
-     width="24"
-     height="384"
-     x="360"
-     y="0" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2531"
-     width="24"
-     height="384"
-     x="0"
-     y="0" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2533"
-     width="384"
-     height="24"
-     x="0"
-     y="360" />
+  <path
+     id="path3731"
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.33968711;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 146.35331,203.64678 -50.911703,84.85281 84.852823,-50.91168 -8.48528,-8.48528 -42.4264,25.45584 25.45583,-42.42641 z M 383.94113,33.941118 180.29438,237.58787 146.35325,203.64675 350,-7.0710678e-6 Z M 0,288 h 96 v 24 H 0 Z m 288,72 h 96 v 24 h -96 z m -144,0 h 120 v 24 H 144 Z M 0,360 h 120 v 24 H 0 Z" />
 </svg>

@@ -12,7 +12,6 @@ export default {
     },
 
     edit: {
-        transform: "scale(1.5)",
         alignSelf: "center"
     }
 

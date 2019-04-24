@@ -3,8 +3,8 @@ import {COLOR} from '../styles';
 export default {
 
     svg: {
-        width: "37px",
-        height: "37px",
+        width: "32px",
+        height: "32px",
         cursor: "pointer"
     },
 

@@ -27,15 +27,22 @@ class TIcon extends React.Component {
 
         let icon = icons[this.props.name];
 
-        let style = {
+        let svgStyle = {
             ...styles.svg,
             ...this.props.style
         }
 
+        let pathStyle = {
+            ...icon.s
+        }
+        if (svgStyle.color) {
+            pathStyle.fill = svgStyle.color;
+        }
+
         return (
-            <svg style={style} viewBox={icon.w}
+            <svg style={svgStyle} viewBox={icon.w}
                 onClick={this.handleClick}>
-                <path style={icon.s} d={icon.d}></path>
+                <path style={pathStyle} d={icon.d}></path>
             </svg>
         );
 
@@ -50,7 +57,7 @@ class TIcon extends React.Component {
  */
 TIcon.propTypes = {
     name: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func
 }
 
 export default TIcon;

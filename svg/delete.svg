@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="unchecked.svg">
+   sodipodi:docname="delete.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.346202"
-     inkscape:cx="53.337553"
-     inkscape:cy="170.01617"
+     inkscape:zoom="1.9038171"
+     inkscape:cx="101.63672"
+     inkscape:cy="171.58778"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
      showgrid="true"
@@ -59,32 +59,8 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <rect
+  <path
+     id="rect2543"
      style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2527"
-     width="384"
-     height="24"
-     x="0"
-     y="0" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2529"
-     width="24"
-     height="384"
-     x="360"
-     y="0" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2531"
-     width="24"
-     height="384"
-     x="0"
-     y="0" />
-  <rect
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.66666675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect2533"
-     width="384"
-     height="24"
-     x="0"
-     y="360" />
+     d="m 84,168 c 72,0 144,0 216,0 0,16 0,32 0,48 -72,0 -144,0 -216,0 0,-16 0,-32 0,-48 z m 97.1701,215.6909 C 102.37044,380.28541 29.720953,322.92939 8.0174375,247.08235 -14.410351,175.50717 10.46888,92.467032 68.41857,44.909602 c 61.64281,-53.6257288 158.31832,-59.860074 226.6104,-15.222505 60.87431,38.2429 96.9495,112.269713 87.84268,183.843883 -7.7126,78.20612 -68.78415,147.31162 -145.32033,164.9477 -18.39812,4.51122 -37.46685,6.29987 -56.38122,5.21222 z m 30.62452,-24.47762 C 282.61802,351.83842 344.63168,294.74366 357.28555,224.54719 372.46818,153.63553 335.38185,75.696214 270.60343,42.971089 205.9305,7.2741465 118.58175,21.826901 69.228901,76.853871 16.255552,130.76896 8.6075082,221.643 51.014338,284.07273 c 34.098878,52.72826 98.324032,83.13412 160.780282,75.14055 z" />
 </svg>

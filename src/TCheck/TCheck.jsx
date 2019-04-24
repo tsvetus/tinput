@@ -57,13 +57,13 @@ class TCheck extends React.Component {
 
         let content = (
             <TIcon
-                style={{width: "20px"}}
+                style={{width: "16px"}}
                 name={name}
                 onClick={this.handleClick} />
         );
 
         return (
-            <div style={style.container}>
+            <div style={style.container} onClick={this.handleClick}>
                 {label}
                 {content}
             </div>

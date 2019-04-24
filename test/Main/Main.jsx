@@ -2,6 +2,8 @@ import React from 'react';
 
 import {
 
+    TIcon,
+
     TListBox,
     TText,
     TSearch,
@@ -80,6 +82,15 @@ class Main extends React.Component {
         return (
 
             <div style={{width: "320px"}}>
+
+                <TIcon style={{margin: "2px"}} name="edit" />
+                <TIcon style={{margin: "2px"}} name="save" />
+                <TIcon style={{margin: "2px", color: "green"}} name="add" />
+                <TIcon style={{margin: "2px", color: "red"}} name="delete" />
+                <TIcon style={{margin: "2px"}} name="up" />
+                <TIcon style={{margin: "2px"}} name="down" />
+                <TIcon style={{margin: "2px"}} name="checked" />
+                <TIcon style={{margin: "2px"}} name="unchecked" />
 
                 <TText
                     style={inputStyle}

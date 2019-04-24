@@ -93,7 +93,7 @@ class TListBox extends React.Component {
         );
 
         let button = (
-            <TIcon
+            <TIcon style={{width: "16px"}}
                 name={this.state.showList ? "up" : "down"}
                 onClick={this.handleButtonClick} />
         );
