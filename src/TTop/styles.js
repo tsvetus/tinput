@@ -11,9 +11,10 @@ export default {
     },
 
     button: {
-        fontSize: "37px",
+        width: "32px",
         cursor: "pointer",
-        margin: "0 0 8px 8px"
+        margin: "8px",
+        color: COLOR.CONTROL
     },
 
     caption: {

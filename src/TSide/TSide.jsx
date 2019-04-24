@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import TIcon from '../TIcon';
+
 import {mergeStyles} from '../util';
 
 import styles from './styles.js';
@@ -13,7 +15,12 @@ class TSide extends React.Component {
 
     constructor(props, context) {
         super(props, context);
+        this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClose(event) {
+        this.props.onClick(event);
     }
 
     handleClick(event) {
@@ -35,16 +42,15 @@ class TSide extends React.Component {
         let items = [];
         if (this.props.items) {
             this.props.items.forEach((v, i) => {
-                let itemStyle = {
-                    ...style.item,
-                    ...v.style
-                }
                 items.push(
                     <div
-                    key={i}
-                    style={itemStyle}
-                    onClick={this.handleClick}
-                    name={v.name}>
+                        key={i}
+                        style={{
+                            ...style.item,
+                            ...v.style
+                        }}
+                        onClick={this.handleClick}
+                        name={v.name}>
                         {v.caption}
                     </div>
                 );
@@ -53,14 +59,13 @@ class TSide extends React.Component {
 
         return (
             <div style={style.container}>
-                <div
-                style={style.close}
-                onClick={this.handleClick}
-                name={"close"}>
-                    &times;
-                </div>
+                <TIcon
+                    name="close"
+                    style={style.close}
+                    onClick={this.handleClose} />
                 {items}
                 {this.props.children}
+                <div style={style.touch}></div>
             </div>
         );
 

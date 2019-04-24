@@ -7,7 +7,10 @@ export const COLOR = {
     WINDOW: "#ffffff",
     PANEL: "#d1d6dc",
     MENU: "#c0c5cb",
-    TEXT: "#000000"
+    TEXT: "#000000",
+    ERROR: "#ff3333",
+    MESSAGE: "#33ff33",
+    CONTROL: "#555555"
 }
 
 export const SIZE = {
@@ -33,6 +36,16 @@ export const FONT = {
     BUTTON: {
         FAMILY: "Arial",
         SIZE: "22px",
+        WEIGHT: "bold"
+    },
+    ERROR: {
+        FAMILY: "Arial",
+        SIZE: "16px",
+        WEIGHT: "bold"
+    },
+    MESSAGE: {
+        FAMILY: "Arial",
+        SIZE: "16px",
         WEIGHT: "bold"
     }
 }

@@ -33,7 +33,10 @@ class TTop extends React.Component {
 
         return (
             <div style={style.container}>
-                <div style={style.button} onClick={this.handleClick}>&#9776;</div>
+                <TIcon
+                    name="menu"
+                    style={style.button} 
+                    onClick={this.handleClick} />
                 <div style={style.caption}>{caption}</div>
                 <div style={style.tools}>{tools}</div>
             </div>

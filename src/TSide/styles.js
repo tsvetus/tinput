@@ -18,15 +18,9 @@ export default {
     close: {
         display: "block",
         position: "absolute",
-        top: "0",
-        right: "25px",
-        fontSize: "36px",
-        fontWeight: "bold",
-        marginLeft: "50px",
-        cursor: "pointer",
-        padding: "8px 8px 8px 32px",
-        textDecoration: "none",
-        color: COLOR.TEXT,
+        top: "12px",
+        right: "12px",
+        color: COLOR.CONTROL,
         transition: "0.3s"
     },
 
@@ -38,6 +32,16 @@ export default {
         display: "block",
         transition: "0.3s",
         cursor: "pointer"
+    },
+
+    touch: {
+        position: "fixed",
+        zIndex: 2,
+        top: "0",
+        left: "0",
+        height: "100vh",
+        width: "8px",
+        opacity: "0"
     }
 
 }

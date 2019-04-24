@@ -91,6 +91,8 @@ class Main extends React.Component {
                 <TIcon style={{margin: "2px"}} name="down" />
                 <TIcon style={{margin: "2px"}} name="checked" />
                 <TIcon style={{margin: "2px"}} name="unchecked" />
+                <TIcon style={{margin: "2px", color: "red"}} name="close" />
+                <TIcon style={{margin: "2px", color: "black"}} name="menu" />
 
                 <TText
                     style={inputStyle}

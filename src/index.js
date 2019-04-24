@@ -24,6 +24,7 @@ import TSide from './TSide';
 import TLogin from './TLogin';
 import TModal from './TModal';
 import TForm from './TForm';
+import TResponse from './TResponse';
 
 import {mergeStyles} from './util';
 
@@ -87,6 +88,7 @@ export {
     TLogin,
     TModal,
     TForm,
+    TResponse,
 
     COLOR,
     SIZE,
