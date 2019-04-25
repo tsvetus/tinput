@@ -8,6 +8,8 @@ import styles from './styles.js';
 import List from '../List';
 import TIcon from '../TIcon';
 
+const MIN_CHARS = 2;
+
 class TSearch extends React.Component {
 
     constructor(props, context) {
@@ -34,12 +36,16 @@ class TSearch extends React.Component {
     }
 
     componentDidMount() {
+        this.mounted = true;
         this.findName(this.props.value);
     }
 
+    componentWillUnmout() {
+        this.mounted = false;
+    }
+
     findName(id) {
-        if (id) {
-            console.log('Try to find!');
+        if (id && this.props.onSearch) {
             this.props.onSearch({
                     id: id,
                     name: null
@@ -54,23 +60,27 @@ class TSearch extends React.Component {
     handleInputChange(event) {
         let v = event.currentTarget.value;
         clearTimeout(this.timer);
-        if (v && v.length > 2) {
+        if (v && v.length > MIN_CHARS) {
             this.timer = setTimeout(() => {
-                this.props.onSearch({
-                    id: null,
-                    name: v
-                }, (items) => {
-                    if (!items || !Array.isArray(items)) {
-                        items = [];
-                    }
-                    this.updateRect();
-                    this.setState({
-                        inputValue: v ? v : '',
-                        items: items,
-                        showList: items.length > 0,
-                        autoFocus: false
+                if (this.mounted && this.props.onSearch) {
+                    this.props.onSearch({
+                        id: null,
+                        name: v
+                    }, (items) => {
+                        if (this.mounted) {
+                            if (!items || !Array.isArray(items)) {
+                                items = [];
+                            }
+                            this.updateRect();
+                            this.setState({
+                                inputValue: v ? v : '',
+                                items: items,
+                                showList: items.length > 0,
+                                autoFocus: false
+                            });
+                        }
                     });
-                });
+                }
             }, TIMEOUT);
         }
         this.setState({
@@ -80,12 +90,14 @@ class TSearch extends React.Component {
 
     handleChange(event) {
         if (event) {
-            this.props.onChange({
-                value: event.value,
-                caption: event.name,
-                name: this.props.name,
-                data: this.props.data
-            });
+            if (this.props.onChange) {
+                this.props.onChange({
+                    value: event.value,
+                    caption: event.name,
+                    name: this.props.name,
+                    data: this.props.data
+                });
+            }
             this.setState({
                 showList: false,
                 inputValue: this.props.empty && event.value ==

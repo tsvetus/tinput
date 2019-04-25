@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.673101"
-     inkscape:cx="124.40436"
-     inkscape:cy="150.1975"
+     inkscape:zoom="0.16827525"
+     inkscape:cx="-150.9697"
+     inkscape:cy="44.986148"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
      showgrid="true"
@@ -60,13 +60,13 @@
     </rdf:RDF>
   </metadata>
   <path
-     style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.30940104;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="M 81.69134,30.779652 353.22035,302.30866 302.30866,353.22035 30.779652,81.69134 Z"
-     id="path843"
+     style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.88561809;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 39.26493,310.79395 310.79394,39.264933 344.73507,73.20606 73.206063,344.73507 Z"
+     id="rect814-7"
      inkscape:connector-curvature="0" />
   <path
-     style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.30940104;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="M 353.22035,81.691342 81.69134,353.22035 30.779652,302.30866 302.30866,30.77965 Z"
-     id="rect814-7"
+     style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.88561809;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 310.79394,344.73507 39.264936,73.206057 73.206062,39.264933 344.73506,310.79394 Z"
+     id="rect814-7-5"
      inkscape:connector-curvature="0" />
 </svg>

@@ -17,6 +17,7 @@ class TSide extends React.Component {
         super(props, context);
         this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleMove = this.handleMove.bind(this);
     }
 
     handleClose(event) {
@@ -25,6 +26,14 @@ class TSide extends React.Component {
 
     handleClick(event) {
         this.props.onClick(event.target.getAttribute('name'));
+    }
+
+    handleMove(event) {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+                this.props.onClick();
+            }, 300
+        );
     }
 
     render () {
@@ -44,6 +53,7 @@ class TSide extends React.Component {
             this.props.items.forEach((v, i) => {
                 items.push(
                     <div
+                        onTouchMove={this.handleMove}
                         key={i}
                         style={{
                             ...style.item,
@@ -58,14 +68,14 @@ class TSide extends React.Component {
         }
 
         return (
-            <div style={style.container}>
+            <div style={style.container} onTouchMove={this.handleMove}>
                 <TIcon
                     name="close"
                     style={style.close}
                     onClick={this.handleClose} />
                 {items}
                 {this.props.children}
-                <div style={style.touch}></div>
+                <div style={style.touch} onTouchMove={this.handleMove}></div>
             </div>
         );
 
