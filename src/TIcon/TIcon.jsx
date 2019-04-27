@@ -17,10 +17,13 @@ class TIcon extends React.Component {
     }
 
     handleClick(event) {
-        this.props.onClick({
-            name: this.props.name,
-            data: this.props.data
-        });
+        event.stopPropagation();
+        if (this.props.onClick) {
+            this.props.onClick({
+                name: this.props.name,
+                data: this.props.data
+            });
+        }
     }
 
     render () {

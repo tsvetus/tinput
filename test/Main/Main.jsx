@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
 
-    TIcon,
+    TTop,
+    TSide,
 
     TListBox,
     TText,
@@ -51,10 +52,13 @@ class Main extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            events: []
+            events: [],
+            menuOpen: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleTopClick = this.handleTopClick.bind(this);
+        this.handleSideClick = this.handleSideClick.bind(this);
     }
 
     handleChange(event) {
@@ -72,27 +76,38 @@ class Main extends React.Component {
         callback(items);
     }
 
+    handleTopClick(event) {
+        this.setState({menuOpen: true});
+        this.handleChange(event);
+    }
+
+    handleSideClick(event) {
+        this.setState({menuOpen: false});
+        this.handleChange(event);
+    }
+
     render() {
 
         let events = [];
         this.state.events.forEach((v, i) => {
-            events.push(<div key={i} style={{margin: "8px 0 0 0"}}>{JSON.stringify(v)}</div>);
+            events.push(
+                <div key={i} style={{margin: "8px 0 0 0"}}>
+                    {JSON.stringify(v)}
+                </div>);
         });
 
         return (
 
             <div style={{width: "320px"}}>
 
-                <TIcon style={{margin: "2px"}} name="edit" />
-                <TIcon style={{margin: "2px"}} name="save" />
-                <TIcon style={{margin: "2px", color: "green"}} name="add" />
-                <TIcon style={{margin: "2px", color: "red"}} name="delete" />
-                <TIcon style={{margin: "2px"}} name="up" />
-                <TIcon style={{margin: "2px"}} name="down" />
-                <TIcon style={{margin: "2px"}} name="checked" />
-                <TIcon style={{margin: "2px"}} name="unchecked" />
-                <TIcon style={{margin: "2px", color: "red"}} name="close" />
-                <TIcon style={{margin: "2px", color: "black"}} name="menu" />
+                <TTop onClick={this.handleTopClick} />
+                <TSide
+                    onClick={this.handleSideClick}
+                    open={this.state.menuOpen}
+                    items={[
+                        {name: "first", caption: "First menu item"},
+                        {name: "second", caption: "Second menu item"}
+                    ]} />
 
                 <TText
                     style={inputStyle}
@@ -193,6 +208,7 @@ class Main extends React.Component {
                 </div>
 
             </div>
+
         );
 
     }

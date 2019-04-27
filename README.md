@@ -2,15 +2,21 @@
 Set of most common visual React components designed for constructing web application interfaces.
 
 `tinput` provides set of visual components constructed on `<input>` html tag:
-* `TText`
-* `TListBox`
-* `TSearch`
-* `TMask`
-* `TDate`
-* `TTime`
-* `TMail`
-* `TMemo`
-* `TCheck`
+* [`TText`](#ttext)
+* [`TListBox`](#tlistbox)
+* [`TSearch`](#tsearch)
+* [`TMask`](#tmask)
+* [`TDate`](#tdate)
+* [`TTime`](#ttime)
+* [`TMail`](#tmail)
+
+Extention of `<textarea>`: 
+* [`TMemo`](#tmemo)
+
+Other components:
+* [`TCheck`](#tcheck)
+* [`TTop`](#ttop)
+* [`TSide`](#tside)
 
 ## Stylization
 
@@ -315,6 +321,50 @@ Component `TMemo` extends html <textarea> tag:
     onChange={this.handleChange} />
 ```  
 
+## `TTop`
+
+Component `TTop` represents top menu with mail menu button in top left corner:
+
+* `onClick` - executes when menu button clicked.
+
+### Example
+
+```javascript
+<TTop 
+    onClick={this.handleTopClick} />
+```  
+
+## `TSide`
+
+Component `TSide` represents left sided slide menu:
+
+* `open` - When `true` - side menu is open.
+
+* `items` - Array of menu items of type: `{name: <item name>, caption: <item caption>}`.
+
+* `width` - Opened menu witdh. Default: `300px`.
+
+* `touchWidth` - Minimum touch move length before side menu will open or close.
+
+* `initWidth` - Sensible area width from left screen side.
+ 
+* `onClick` - Executes when menu closed or menu item clicked. Event: `{name: <clicked item name>}`.
+
+### Example
+
+```javascript
+<TSide
+    onClick={this.handleSideClick}
+    open={this.state.menuOpen}
+    width={"400px"}
+    touchWidth={20}
+    initWidth={"10px"}
+    items={[
+        {name: "first", caption: "First menu item"},
+        {name: "second", caption: "Second menu item"}
+    ]} />
+```  
+
 ## Usage
 
 ```javascript
@@ -322,6 +372,9 @@ Component `TMemo` extends html <textarea> tag:
 import React from 'react';
 
 import {
+
+    TTop,
+    TSide,
 
     TListBox,
     TText,
@@ -370,10 +423,13 @@ class Main extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            events: []
+            events: [],
+            menuOpen: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleTopClick = this.handleTopClick.bind(this);
+        this.handleSideClick = this.handleSideClick.bind(this);
     }
 
     handleChange(event) {
@@ -391,6 +447,16 @@ class Main extends React.Component {
         callback(items);
     }
 
+    handleTopClick(event) {
+        this.setState({menuOpen: true});
+        this.handleChange(event);
+    }
+
+    handleSideClick(event) {
+        this.setState({menuOpen: false});
+        this.handleChange(event);
+    }
+
     render() {
 
         let events = [];
@@ -398,13 +464,21 @@ class Main extends React.Component {
             events.push(
                 <div key={i} style={{margin: "8px 0 0 0"}}>
                     {JSON.stringify(v)}
-                </div>
-            );
+                </div>);
         });
 
         return (
 
             <div style={{width: "320px"}}>
+
+                <TTop onClick={this.handleTopClick} />
+                <TSide
+                    onClick={this.handleSideClick}
+                    open={this.state.menuOpen}
+                    items={[
+                        {name: "first", caption: "First menu item"},
+                        {name: "second", caption: "Second menu item"}
+                    ]} />
 
                 <TText
                     style={inputStyle}
@@ -456,7 +530,6 @@ class Main extends React.Component {
                     style={inputStyle}
                     name="date"
                     label="Date:"
-                    value={new Date()}
                     format={{mask: "DD.MM.YYYY", empty: "-"}}
                     onChange={this.handleChange} />
 
@@ -464,7 +537,6 @@ class Main extends React.Component {
                     style={inputStyle}
                     name="time"
                     label="Time:"
-                    value={new Date()}
                     format={{mask: "hh:mm", empty: "-"}}
                     onChange={this.handleChange} />
 
@@ -479,7 +551,7 @@ class Main extends React.Component {
                     style={inputStyle}
                     name="checkbox"
                     label="Check me:"
-                    value={1}
+                    value={true}
                     valueInt={true}
                     onChange={this.handleChange} />
 
@@ -507,6 +579,7 @@ class Main extends React.Component {
                 </div>
 
             </div>
+
         );
 
     }
@@ -514,6 +587,5 @@ class Main extends React.Component {
 }
 
 export default Main;
-
 
 ```
