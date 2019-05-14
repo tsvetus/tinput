@@ -25,6 +25,10 @@ import TLogin from './TLogin';
 import TModal from './TModal';
 import TForm from './TForm';
 import TResponse from './TResponse';
+import TList from './TList';
+
+import TMonth from './TMonth';
+import TYear from './TYear';
 
 import {mergeStyles} from './util';
 
@@ -89,6 +93,10 @@ export {
     TModal,
     TForm,
     TResponse,
+    TList,
+
+    TMonth,
+    TYear,
 
     COLOR,
     SIZE,
