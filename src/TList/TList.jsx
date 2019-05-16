@@ -53,6 +53,7 @@ class TList extends React.Component {
                     value={this.props.value}
                     style={this.props.style}
                     items={this.props.items}
+                    data={this.props.data}
                     empty={this.props.empty}
                     place={place}
                     onSelect={this.props.onSelect}

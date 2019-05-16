@@ -21,7 +21,8 @@ class List extends React.Component {
     handleClick(event) {
         this.props.onSelect({
             value: event.target.getAttribute("value"),
-            name: event.target.getAttribute("name")
+            name: event.target.getAttribute("name"),
+            data: this.props.data
         });
     }
 
