@@ -58,9 +58,9 @@ class TSearch extends React.Component {
     }
 
     handleInputChange(event) {
-        let v = event.currentTarget.value;
+        let v = event.currentTarget.value ? event.currentTarget.value : '';
         clearTimeout(this.timer);
-        if (v && v.length > MIN_CHARS) {
+        if (v.length > MIN_CHARS) {
             this.timer = setTimeout(() => {
                 if (this.mounted && this.props.onSearch) {
                     this.props.onSearch({
@@ -73,7 +73,7 @@ class TSearch extends React.Component {
                             }
                             this.updateRect();
                             this.setState({
-                                inputValue: v ? v : '',
+                                inputValue: v,
                                 items: items,
                                 showList: items.length > 0,
                                 autoFocus: false
@@ -82,9 +82,27 @@ class TSearch extends React.Component {
                     });
                 }
             }, TIMEOUT);
+        } else if (v.length == 0) {
+            this.timer = setTimeout(() => {
+                if (this.mounted) {
+                    if (this.props.onChange) {
+                        this.props.onChange({
+                            value: this.props.empty ? this.props.empty.id : null,
+                            caption: '',
+                            name: this.props.name,
+                            data: this.props.data
+                        });
+                    }
+                    this.setState({
+                        items: [],
+                        showList: false,
+                        autoFocus: false
+                    });
+                }
+            }, TIMEOUT);
         }
         this.setState({
-            inputValue: v ? v : ''
+            inputValue: v
         });
     }
 
