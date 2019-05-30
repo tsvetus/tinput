@@ -8,12 +8,27 @@ class TList extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {show: props.show}
+        this.updateWindow = this.updateWindow.bind(this);
     }
 
     componentDidUpdate(old) {
         if (old.show !== this.props.show) {
             this.setState({show: this.props.show});
         }
+    }
+
+    componentDidMount() {
+        this.updateWindow();
+        window.addEventListener('resize', this.updateWindow);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindow);
+    }
+
+    updateWindow() {
+        this.windowWidth = window.innerWidth,
+        this.windowHeight = window.innerHeight
     }
 
     render () {
@@ -23,7 +38,11 @@ class TList extends React.Component {
         }
 
         if (this.props.rect) {
-            place.top = this.props.rect.y;
+            if (this.props.rect.y + this.props.items.length*34 > this.windowHeight) {
+                place.top = this.props.rect.y - this.props.items.length*34;
+            } else {
+                place.top = this.props.rect.y;
+            }
             place.left = this.props.rect.x;
         }
 
