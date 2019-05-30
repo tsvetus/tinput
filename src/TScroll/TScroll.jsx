@@ -43,15 +43,19 @@ class TScroll extends React.Component {
                 ov = 'auto';
             } else if (this.props.scrollBars.toLowerCase().indexOf('scr') == 0) {
                 ov = 'scroll';
+            } else if (this.props.scrollBars.toLowerCase().indexOf('hid') == 0) {
+                ov = 'hidden';
+            } else if (this.props.scrollBars.toLowerCase().indexOf('vis') == 0) {
+                ov = 'visible';
             }
         }
 
         let overflow = {overflow: ov};
         if (this.props.scrollBars) {
             if (this.props.scrollBars.toLowerCase().indexOf('hor') == 0) {
-                overflow = {overflowX: ov, overflowY: hidden}
+                overflow = {overflowX: ov, overflowY: 'hidden'}
             } else if (this.props.scrollBars.toLowerCase().indexOf('ver') == 0) {
-                overflow = {overflowY: ov, overflowX: hidden}
+                overflow = {overflowY: ov, overflowX: 'hidden'}
             } else if (this.props.scrollBars.toLowerCase().indexOf('bot') == 0) {
                 overflow = {overflow: ov};
             } else if (this.props.scrollBars.toLowerCase().indexOf('non') == 0) {

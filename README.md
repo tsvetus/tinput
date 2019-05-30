@@ -19,7 +19,8 @@ Other components:
 * [`TSide`](#tside)
 * [`TScroll`](#tscroll)
 
-[Example page:](https://tsvetus.github.io/tinput/)
+## Example
+[Example page](https://tsvetus.github.io/tinput/)
 
 ## Stylization
 

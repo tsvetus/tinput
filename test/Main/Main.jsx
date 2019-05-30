@@ -100,7 +100,7 @@ class Main extends React.Component {
 
         return (
 
-            <div style={{width: "320px"}}>
+            <div>
 
                 <TTop onClick={this.handleTopClick} />
                 <TSide
@@ -111,122 +111,146 @@ class Main extends React.Component {
                         {name: "second", caption: "Second menu item"}
                     ]} />
 
-                <TText
-                    style={inputStyle}
-                    name="text"
-                    label="Text:"
-                    placeholder="Enter text"
-                    value="default text"
-                    onChange={this.handleChange} />
-
-                <TText
-                    style={inputStyle}
-                    name="password"
-                    label="Password:"
-                    placeholder="Enter password"
-                    onChange={this.handleChange}
-                    password={true} />
-
-                <TListBox
-                    style={inputStyle}
-                    name="listbox"
-                    label="Item:"
-                    value={1}
-                    placeholder="Choose item"
-                    items={[
-                        {id: 1, name: "First item"},
-                        {id: 2, name: "Second item"}
-                    ]}
-                    empty={{id: 0, name: "-"}}
-                    onChange={this.handleChange} />
-
-                <TSearch
-                    style={inputStyle}
-                    name="search"
-                    label="Search:"
-                    placeholder="Enter text 'item'"
-                    value={1}
-                    onSearch={this.handleSearch}
-                    onChange={this.handleChange} />
-
-                <TMask
-                    style={inputStyle}
-                    name="dateMask"
-                    label="Masked date:"
-                    value="22.04.2019"
-                    mask={{mask: "NN.NN.NNNN", empty: "-"}}
-                    onChange={this.handleChange} />
-
-                <TDate
-                    style={inputStyle}
-                    name="date"
-                    label="Date:"
-                    format={{mask: "DD.MM.YYYY", empty: "-"}}
-                    onChange={this.handleChange} />
-
-                <TTime
-                    style={inputStyle}
-                    name="time"
-                    label="Time:"
-                    format={{mask: "hh:mm", empty: "-"}}
-                    onChange={this.handleChange} />
-
-                <TMail
-                    style={inputStyle}
-                    name="email"
-                    label="EMail:"
-                    value="google@google.com"
-                    onChange={this.handleChange} />
-
-                <TCheck
-                    style={inputStyle}
-                    name="checkbox"
-                    label="Check me:"
-                    value={true}
-                    valueInt={true}
-                    onChange={this.handleChange} />
-
-                <TMemo
-                    style={{margin: "16px 0 0 0", height: "100px"}}
-                    name="memo"
-                    label="Textarea:"
-                    value="Text"
-                    onChange={this.handleChange} />
-
                 <div style={{
-                        color: COLOR.BORDER,
+                        ...TABLE.CELL,
                         fontFamily: FONT.LABEL.FAMILY,
                         fontSize: FONT.LABEL.SIZE,
-                        margin: "16px 0 0 0"
+                        textAlign: "center",
+                        margin: "auto",
+                        maxWidth: "800px",
+                        marginTop: "32px",
+                        marginBottom: "32px",
+                        padding: "16px"
                     }}>
-                    On change event:
+                    TInput components example page
                 </div>
 
-                <div style={{
-                        overflow: "auto",
-                        minHeight: "100px",
-                        ...TABLE.CELL
-                    }}>
-                    {events}
-                </div>
+                <TScroll>
 
-                <div style={{
-                        color: COLOR.BORDER,
-                        fontFamily: FONT.LABEL.FAMILY,
-                        fontSize: FONT.LABEL.SIZE,
-                        margin: "16px 0 0 0"
-                    }}>
-                    TScroll example:
-                </div>
-                <TScroll style={{height: "100px", width: "100%", margin: "16px 4px 4px 4px"}}>
-                    <div>
-                        Tears glistened in her eyes. And when we steamed slowly out of the lagoon,
-                        making our way gingerly through the opening in the reef, and then steered
-                        for the open sea, a certain melancholy fell upon me. The breeze was laden
-                        still with the pleasant odours of the land. Tahiti is very far away, and I
-                        knew that I should never see it again. A chapter of my life was closed,
-                        and I felt a little nearer to inevitable death.
+                    <div style={{maxWidth: "380px", margin: "auto"}}>
+
+
+                        <TText
+                            style={inputStyle}
+                            name="text"
+                            label="Text:"
+                            placeholder="Enter text"
+                            value="default text"
+                            onChange={this.handleChange} />
+
+                        <TText
+                            style={inputStyle}
+                            name="password"
+                            label="Password:"
+                            placeholder="Enter password"
+                            onChange={this.handleChange}
+                            password={true} />
+
+                        <TListBox
+                            style={inputStyle}
+                            name="listbox"
+                            label="Item:"
+                            value={1}
+                            placeholder="Choose item"
+                            items={[
+                                {id: 1, name: "First item"},
+                                {id: 2, name: "Second item"}
+                            ]}
+                            empty={{id: 0, name: "-"}}
+                            onChange={this.handleChange} />
+
+                        <TSearch
+                            style={inputStyle}
+                            name="search"
+                            label="Search:"
+                            placeholder="Enter text 'item'"
+                            value={1}
+                            onSearch={this.handleSearch}
+                            onChange={this.handleChange} />
+
+                        <TMask
+                            style={inputStyle}
+                            name="dateMask"
+                            label="Masked date:"
+                            value="22.04.2019"
+                            mask={{mask: "NN.NN.NNNN", empty: "-"}}
+                            onChange={this.handleChange} />
+
+                        <TDate
+                            style={inputStyle}
+                            name="date"
+                            label="Date:"
+                            format={{mask: "DD.MM.YYYY", empty: "-"}}
+                            onChange={this.handleChange} />
+
+                        <TTime
+                            style={inputStyle}
+                            name="time"
+                            label="Time:"
+                            format={{mask: "hh:mm", empty: "-"}}
+                            onChange={this.handleChange} />
+
+                        <TMail
+                            style={inputStyle}
+                            name="email"
+                            label="EMail:"
+                            value="google@google.com"
+                            onChange={this.handleChange} />
+
+                        <TCheck
+                            style={inputStyle}
+                            name="checkbox"
+                            label="Check me:"
+                            value={true}
+                            valueInt={true}
+                            onChange={this.handleChange} />
+
+                        <TMemo
+                            style={{margin: "16px 0 0 0", height: "100px"}}
+                            name="memo"
+                            label="Textarea:"
+                            value="Text"
+                            onChange={this.handleChange} />
+
+                        <div style={{
+                                color: COLOR.BORDER,
+                                fontFamily: FONT.LABEL.FAMILY,
+                                fontSize: FONT.LABEL.SIZE,
+                                margin: "16px 0 0 0"
+                            }}>
+                            On change event:
+                        </div>
+
+                        <div style={{
+                                overflow: "auto",
+                                minHeight: "100px",
+                                ...TABLE.CELL
+                            }}>
+                            {events}
+                        </div>
+
+                        <div style={{
+                                color: COLOR.BORDER,
+                                fontFamily: FONT.LABEL.FAMILY,
+                                fontSize: FONT.LABEL.SIZE,
+                                margin: "16px 0 0 0"
+                            }}>
+                            TScroll example:
+                        </div>
+                        <TScroll style={{height: "100px", width: "100%", margin: "16px 4px 4px 4px"}}>
+                            <div>
+                                Tears glistened in her eyes. And when we steamed slowly out of the lagoon,
+                                making our way gingerly through the opening in the reef, and then steered
+                                for the open sea, a certain melancholy fell upon me. The breeze was laden
+                                still with the pleasant odours of the land. Tahiti is very far away, and I
+                                knew that I should never see it again. A chapter of my life was closed,
+                                and I felt a little nearer to inevitable death.
+                            </div>
+
+                        </TScroll>
+
                     </div>
+
                 </TScroll>
 
             </div>
