@@ -10,13 +10,14 @@ Set of most common visual React components designed for constructing web applica
 * [`TTime`](#ttime)
 * [`TMail`](#tmail)
 
-Extention of `<textarea>`: 
+Extention of `<textarea>`:
 * [`TMemo`](#tmemo)
 
 Other components:
 * [`TCheck`](#tcheck)
 * [`TTop`](#ttop)
 * [`TSide`](#tside)
+* [`TScroll`](#tscroll)
 
 ## Stylization
 
@@ -330,7 +331,7 @@ Component `TTop` represents top menu with mail menu button in top left corner:
 ### Example
 
 ```javascript
-<TTop 
+<TTop
     onClick={this.handleTopClick} />
 ```  
 
@@ -347,7 +348,7 @@ Component `TSide` represents left sided slide menu:
 * `touchWidth` - Minimum touch move length before side menu will open or close.
 
 * `initWidth` - Sensible area width from left screen side.
- 
+
 * `onClick` - Executes when menu closed or menu item clicked. Event: `{name: <clicked item name>}`.
 
 ### Example
@@ -363,6 +364,27 @@ Component `TSide` represents left sided slide menu:
         {name: "first", caption: "First menu item"},
         {name: "second", caption: "Second menu item"}
     ]} />
+```  
+
+## `TScroll`
+
+Component `TScroll` represents scroll box:
+
+* `style` - Component style. If does' not contain `height` property then
+component height will be calculated to fit page height.
+
+* `scrollBars` - Defines scroll bars to show `horizontal`, `vertical`, `both` (default) or `none`.
+
+* `overflow` - If `auto` then scroll bars visible when needed. If `scroll` - always visible.
+
+* `margin` - Additional margin assigned to prevent showing body scroll bar in some browsers.
+
+### Example
+
+```javascript
+<TScroll>
+    <div>Scrolling content</div>
+</TScroll>
 ```  
 
 ## Usage
@@ -385,6 +407,8 @@ import {
     TMail,
     TMemo,
     TCheck,
+
+    TScroll,
 
     COLOR,
     TABLE,
@@ -472,6 +496,7 @@ class Main extends React.Component {
             <div style={{width: "320px"}}>
 
                 <TTop onClick={this.handleTopClick} />
+                
                 <TSide
                     onClick={this.handleSideClick}
                     open={this.state.menuOpen}
@@ -577,6 +602,17 @@ class Main extends React.Component {
                     }}>
                     {events}
                 </div>
+
+                <TScroll style={{height: "100px", width: "100%", margin: "16px 4px 4px 4px"}}>
+                    <div>
+                        Tears glistened in her eyes. And when we steamed slowly out of the lagoon,
+                        making our way gingerly through the opening in the reef, and then steered
+                        for the open sea, a certain melancholy fell upon me. The breeze was laden
+                        still with the pleasant odours of the land. Tahiti is very far away, and I
+                        knew that I should never see it again. A chapter of my life was closed,
+                        and I felt a little nearer to inevitable death.
+                    </div>
+                </TScroll>                
 
             </div>
 
