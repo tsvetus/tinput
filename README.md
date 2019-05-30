@@ -19,6 +19,8 @@ Other components:
 * [`TSide`](#tside)
 * [`TScroll`](#tscroll)
 
+[Example page:](https://tsvetus.github.io/tinput/)
+
 ## Stylization
 
 Style structure for custom stylization contains sections for all `tinput` components:
@@ -496,7 +498,7 @@ class Main extends React.Component {
             <div style={{width: "320px"}}>
 
                 <TTop onClick={this.handleTopClick} />
-                
+
                 <TSide
                     onClick={this.handleSideClick}
                     open={this.state.menuOpen}

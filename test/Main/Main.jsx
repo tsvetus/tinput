@@ -203,12 +203,21 @@ class Main extends React.Component {
                 </div>
 
                 <div style={{
+                        overflow: "auto",
                         minHeight: "100px",
                         ...TABLE.CELL
                     }}>
                     {events}
                 </div>
 
+                <div style={{
+                        color: COLOR.BORDER,
+                        fontFamily: FONT.LABEL.FAMILY,
+                        fontSize: FONT.LABEL.SIZE,
+                        margin: "16px 0 0 0"
+                    }}>
+                    TScroll example:
+                </div>
                 <TScroll style={{height: "100px", width: "100%", margin: "16px 4px 4px 4px"}}>
                     <div>
                         Tears glistened in her eyes. And when we steamed slowly out of the lagoon,
