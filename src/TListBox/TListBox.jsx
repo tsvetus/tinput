@@ -33,10 +33,14 @@ class TListBox extends React.Component {
     }
 
     findName(id, items) {
-        let item = items.find((v) => {
-            return v.id === id;
-        });
-        return item ? item.name : '';
+        if (items) {
+            let item = items.find((v) => {
+                return v.id === id;
+            });
+            return item ? item.name : '';
+        } else {
+            return '';
+        }
     }
 
     handleInputChange(event) {
@@ -129,7 +133,7 @@ class TListBox extends React.Component {
 TListBox.propTypes = {
     name: PropTypes.string.isRequired,
     empty: PropTypes.object,
-    list: PropTypes.array,
+    items: PropTypes.array,
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired
 }

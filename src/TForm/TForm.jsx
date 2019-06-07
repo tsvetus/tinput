@@ -23,7 +23,7 @@ class TForm extends React.Component {
     }
 
     handleCancel() {
-        this.props.onClose('cancel');
+        this.props.onClose({name: 'cancel'});
     }
 
     render () {
