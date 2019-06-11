@@ -70,8 +70,8 @@ class TListBox extends React.Component {
     handleButtonClick() {
         let rect = this.inputRef.current.getBoundingClientRect();
         this.listPlace = {
-            top: rect.bottom + 4 + 'px',
-            left: rect.left + 'px',
+            top: this.inputRef.current.offsetTop + rect.height + "px",
+            left: this.inputRef.current.offsetLeft + 'px',
             width: rect.width + 'px'
         }
         this.setState({showList: !this.state.showList});
@@ -91,7 +91,6 @@ class TListBox extends React.Component {
                 value={this.state.inputValue}
                 placeholder={this.props.placeholder}
                 style={style.edit}
-                ref={this.inputRef}
                 onClick={this.handleButtonClick}
                 readOnly />
         );
@@ -118,7 +117,7 @@ class TListBox extends React.Component {
         }
 
         return (
-            <div style={style.container}>
+            <div style={style.container} ref={this.inputRef}>
                 {label}
                 {content}
                 {button}

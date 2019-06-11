@@ -16,6 +16,7 @@ class List extends React.Component {
         this.handleKey = this.handleKey.bind(this);
         this.updateFocus = this.updateFocus.bind(this);
         this.ref = [];
+        this.self = React.createRef();
     }
 
     handleClick(event) {
@@ -124,7 +125,7 @@ class List extends React.Component {
         }
 
         return (
-            <div style={style.container} onKeyDown={this.handleKey}>
+            <div style={style.container} onKeyDown={this.handleKey} ref={this.self}>
                 {items}
             </div>
         );

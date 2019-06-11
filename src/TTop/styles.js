@@ -23,6 +23,10 @@ export default {
 
     tools: {
         margin: "0 8px 0 0"
+    },
+
+    icon: {
+        margin: "0 0 0 8px"
     }
 
 }

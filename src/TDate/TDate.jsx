@@ -13,11 +13,14 @@ import {
 
 import styles from './styles.js';
 
+const DEFAULT_FORMAT = {mask: "DD.MM.YYYY", empty: "-"}
+
 class TDate extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {value: strDate(props.value, props.format)}
+        this.format = props.format ? props.format : DEFAULT_FORMAT;
+        this.state = {value: strDate(props.value, this.format)}
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -27,7 +30,7 @@ class TDate extends React.Component {
             () => {
                 this.props.onChange({
                     ...event,
-                    value: isoDate(event.value, this.props.format.mask)
+                    value: isoDate(event.value, this.format.mask)
                 });
             },
             TIMEOUT
@@ -35,8 +38,9 @@ class TDate extends React.Component {
     }
 
     componentDidUpdate(old) {
-        if (old.value !== this.props.value) {
-            this.setState({value: strDate(this.props.value, this.props.format)});
+        if (old.value !== this.props.value || old.format !== this.props.format) {
+            this.format = props.format ? props.format : DEFAULT_FORMAT;
+            this.setState({value: strDate(this.props.value, this.format)});
         }
     }
 
@@ -51,7 +55,7 @@ class TDate extends React.Component {
                    name={this.props.name}
                    label={this.props.label}
                    data={this.props.data}
-                   mask={dateMask(this.props.format)}
+                   mask={dateMask(this.format)}
                    onChange={this.handleChange} />
         );
 

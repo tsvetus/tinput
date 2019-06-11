@@ -25,7 +25,8 @@ class TTop extends React.Component {
         let tools = [];
         if (this.props.tools) {
             this.props.tools.forEach((v, i) => {
-                tools.push(<TIcon key={i} name={v.icon} onClick={v.onClick} />);
+                tools.push(<TIcon key={i} name={v.icon}
+                    onClick={v.onClick} style={style.icon} />);
             });
         }
 
@@ -35,7 +36,7 @@ class TTop extends React.Component {
             <div style={style.container}>
                 <TIcon
                     name="menu"
-                    style={style.button} 
+                    style={style.button}
                     onClick={this.handleClick} />
                 <div style={style.caption}>{caption}</div>
                 <div style={style.tools}>{tools}</div>

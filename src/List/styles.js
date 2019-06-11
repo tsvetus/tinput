@@ -4,7 +4,8 @@ export default {
 
     container: {
         ...INPUT.LIST,
-        tabIndex: "0"
+        tabIndex: "0",
+        position: "fixed"
     },
 
     item: {

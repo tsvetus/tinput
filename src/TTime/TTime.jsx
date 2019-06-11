@@ -13,11 +13,14 @@ import {
 
 import styles from './styles.js';
 
+const DEFAULT_FORMAT = {mask: "hh:mm", empty: "-"}
+
 class TTime extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {value: strTime(props.value, props.format)}
+        this.format = props.format ? props.format : DEFAULT_FORMAT;
+        this.state = {value: strTime(props.value, this.format)}
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -27,7 +30,7 @@ class TTime extends React.Component {
             () => {
                 this.props.onChange({
                     ...event,
-                    value: isoTime(event.value, this.props.format.mask)
+                    value: isoTime(event.value, this.format.mask)
                 });
             },
             TIMEOUT
@@ -35,8 +38,9 @@ class TTime extends React.Component {
     }
 
     componentDidUpdate(old) {
-        if (old.value !== this.props.value) {
-            this.setState({value: strTime(this.props.value, this.props.format)});
+        if (old.format !== this.props.format || old.value !== this.props.value) {
+            this.format = props.format ? props.format : DEFAULT_FORMAT;
+            this.state = {value: strTime(props.value, this.format)}
         }
     }
 
@@ -51,7 +55,7 @@ class TTime extends React.Component {
                    name={this.props.name}
                    label={this.props.label}
                    data={this.props.data}
-                   mask={timeMask(this.props.format)}
+                   mask={timeMask(this.format)}
                    onChange={this.handleChange} />
         );
 
