@@ -39,7 +39,7 @@ class TDate extends React.Component {
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value || old.format !== this.props.format) {
-            this.format = props.format ? props.format : DEFAULT_FORMAT;
+            this.format = this.props.format ? this.props.format : DEFAULT_FORMAT;
             this.setState({value: strDate(this.props.value, this.format)});
         }
     }
