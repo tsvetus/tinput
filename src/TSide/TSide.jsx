@@ -85,7 +85,7 @@ class TSide extends React.Component {
             this.props.onClick({name: name});
         }
     }
-
+    
     componentDidUpdate(old) {
         if (old.open !== this.props.open) {
             this.setState(this.calcState(this.props));
@@ -94,7 +94,11 @@ class TSide extends React.Component {
 
     render () {
 
-        let style = mergeStyles(styles, this.props.style, {container: {width: this.state.width}});
+        let style = mergeStyles(
+            styles,
+            this.props.style,
+            {width: this.state.width}
+        );
 
         let items = [];
         if (this.props.items) {

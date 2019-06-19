@@ -103,6 +103,7 @@ class Main extends React.Component {
             <div>
 
                 <TTop onClick={this.handleTopClick} />
+
                 <TSide
                     onClick={this.handleSideClick}
                     open={this.state.menuOpen}

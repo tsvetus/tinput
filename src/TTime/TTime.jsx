@@ -40,7 +40,7 @@ class TTime extends React.Component {
     componentDidUpdate(old) {
         if (old.format !== this.props.format || old.value !== this.props.value) {
             this.format = this.props.format ? this.props.format : DEFAULT_FORMAT;
-            this.state = {value: strTime(this.props.value, this.format)}
+            this.setState({value: strTime(this.props.value, this.format)});
         }
     }
 

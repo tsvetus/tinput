@@ -1,5 +1,7 @@
 import {maskedValue} from './mask.js';
 
+const ISO_DATE_EXP = /^\d{4}-([0]\d|1[0-2])-([0-2]\d|3[01])$/;
+
 /**
  * Returns date mask based on date format
  * @param format
@@ -17,7 +19,7 @@ export function dateMask(format) {
 
 export function dateValue(value, format) {
     let mask = dateMask(format);
-    return maskedValue(value, format.mask, format.empty);
+    return maskedValue(value, mask.mask, mask.empty);
 }
 
 /**
@@ -49,6 +51,8 @@ export function strDate(source, format) {
     let str = null;
     if (source instanceof Date) {
         str = source.toISOString().substr(0, 10);
+    } else if (ISO_DATE_EXP.test(source)) {
+        str = source.substr(0, 10);
     } else {
         str = dateValue(source, format);
     }
@@ -78,7 +82,7 @@ export function timeMask(format) {
 
 export function timeValue(value, format) {
     let mask = timeMask(format);
-    return maskedValue(value, format.mask, format.empty);
+    return maskedValue(value, mask.mask, mask.empty);
 }
 
 /**
