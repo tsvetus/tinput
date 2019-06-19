@@ -24,7 +24,7 @@ class TListBox extends React.Component {
     }
 
     componentDidUpdate(old) {
-        if (old.value !== this.props.value) {
+        if (old.value !== this.props.value || old.items != this.props.items) {
             this.setState({
                 value: this.props.value,
                 inputValue: this.findName(this.props.value, this.props.items)
