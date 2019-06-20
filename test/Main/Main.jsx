@@ -151,7 +151,7 @@ class Main extends React.Component {
                             style={inputStyle}
                             name="listbox"
                             label="Item:"
-                            value={1}
+                            value={2}
                             placeholder="Choose item"
                             items={[
                                 {id: 1, name: "First item"},
