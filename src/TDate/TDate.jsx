@@ -49,7 +49,7 @@ class TDate extends React.Component {
         let style = mergeStyles(styles, this.props.style);
 
         return (
-            <TMask style={style.container}
+            <TMask style={style}
                    value={this.state.value}
                    valueNull={this.props.valueNull}
                    name={this.props.name}
