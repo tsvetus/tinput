@@ -25,7 +25,6 @@ class TTime extends React.Component {
     }
 
     handleChange(event) {
-        console.log('time change');
         clearTimeout(this.timer);
         this.timer = setTimeout(
             () => {
