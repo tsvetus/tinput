@@ -210,6 +210,23 @@ class Mask {
         return this.value.indexOf(this.empty) < 0;
     }
 
+    /**
+     * Checks if value is <empty>
+     * @returns {boolean}
+     */
+    checkEmpty() {
+        if (this.value) {
+            for (let i=0; i<this.value.length; i++) {
+                if (masks.numbers.value.indexOf(this.value[i]) >= 0) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return true;
+        }
+    }
+
 }
 
 export default Mask;

@@ -15,7 +15,8 @@ class TMask extends React.Component {
         this.MASK = new Mask();
         this.MASK.set(props.mask);
         this.mask = this.MASK.parse({value: props.value});
-        this.state = {value: this.mask.value}
+        this.state = {value: this.mask.value};
+        this.lastValue = this.mask.value;
         this.handleChange = this.handleChange.bind(this);
         this.handleKey = this.handleKey.bind(this);
         this.ref = React.createRef();
@@ -35,21 +36,6 @@ class TMask extends React.Component {
                 this.ref.current.selectionStart = this.mask.caret;
                 this.ref.current.selectionEnd = this.mask.caret;
         });
-        if (this.MASK.checkComplete()) {
-            this.lastValue = this.mask.value;
-            this.props.onChange({
-                value: this.mask.value,
-                name: this.props.name,
-                data: this.props.data
-            });
-        } else if (this.props.valueNull && this.lastValue !== null) {
-            this.lastValue = null;
-            this.props.onChange({
-                value: null,
-                name: this.props.name,
-                data: this.props.data
-            });
-        }
     }
 
     handleKey(event) {
@@ -63,6 +49,21 @@ class TMask extends React.Component {
                 this.ref.current.selectionStart = this.mask.caret;
                 this.ref.current.selectionEnd = this.mask.caret;
         });
+        if (this.MASK.checkComplete()) {
+            this.lastValue = this.mask.value;
+            this.props.onChange({
+                value: this.mask.value,
+                name: this.props.name,
+                data: this.props.data
+            });
+        } else if (this.props.valueNull && this.MASK.checkEmpty() && this.lastValue !== this.mask.value) {
+            this.lastValue = this.mask.value;
+            this.props.onChange({
+                value: null,
+                name: this.props.name,
+                data: this.props.data
+            });
+        }
     }
 
     render () {
@@ -116,6 +117,6 @@ TMask.propTypes = {
      */
     onChange: PropTypes.func.isRequired
 
-}
+};
 
 export default TMask;

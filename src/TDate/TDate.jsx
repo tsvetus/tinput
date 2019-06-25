@@ -33,7 +33,7 @@ class TDate extends React.Component {
                     value: isoDate(event.value, this.format.mask)
                 });
             },
-            TIMEOUT
+            this.props.timeout ? this.props.timeout : TIMEOUT
         );
     }
 
@@ -64,8 +64,14 @@ class TDate extends React.Component {
 }
 
 TDate.propTypes = {
+    style: PropTypes.object,
     name: PropTypes.string.isRequired,
-    format: PropTypes.object.isRequired,
+    label: PropTypes.string,
+    format: PropTypes.object,
+    value: PropTypes.any,
+    valueNull: PropTypes.any,
+    data: PropTypes.any,
+    timeout: PropTypes.number,
     onChange: PropTypes.func.isRequired
 }
 

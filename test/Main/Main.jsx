@@ -181,6 +181,7 @@ class Main extends React.Component {
                             style={inputStyle}
                             name="date"
                             label="Date:"
+                            valueNull={true}
                             format={{mask: "DD.MM.YYYY", empty: "-"}}
                             onChange={this.handleChange} />
 
@@ -189,6 +190,7 @@ class Main extends React.Component {
                             name="time"
                             label="Time:"
                             format={{mask: "hh:mm", empty: "-"}}
+                            valueNull={true}
                             onChange={this.handleChange} />
 
                         <TMail

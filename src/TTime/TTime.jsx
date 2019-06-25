@@ -25,6 +25,7 @@ class TTime extends React.Component {
     }
 
     handleChange(event) {
+        console.log('time change');
         clearTimeout(this.timer);
         this.timer = setTimeout(
             () => {
@@ -33,7 +34,7 @@ class TTime extends React.Component {
                     value: isoTime(event.value, this.format.mask)
                 });
             },
-            TIMEOUT
+            this.props.timeout ? this.props.timeout : TIMEOUT
         );
     }
 
@@ -64,8 +65,14 @@ class TTime extends React.Component {
 }
 
 TTime.propTypes = {
+    style: PropTypes.object,
     name: PropTypes.string.isRequired,
-    format: PropTypes.object.isRequired,
+    label: PropTypes.string,
+    format: PropTypes.object,
+    value: PropTypes.any,
+    valueNull: PropTypes.any,
+    data: PropTypes.any,
+    timeout: PropTypes.number,
     onChange: PropTypes.func.isRequired
 }
 
