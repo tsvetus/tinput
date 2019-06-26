@@ -57,8 +57,7 @@ export const INPUT = {
         overlay: "0",
         backgroundColor: "#ffffff",
         margin: "0",
-        padding: "0",
-        border: "1px solid " + COLOR.BORDER
+        padding: "0"
     },
 
     ITEM: {
@@ -69,7 +68,9 @@ export const INPUT = {
         margin: "0",
         color: COLOR.TEXT,
         padding: "4px",
-        cursor: "pointer"
+        cursor: "pointer",
+        border: "1px solid " + COLOR.BORDER,
+        backgroundColor: "#fff"
     }
 
 }
