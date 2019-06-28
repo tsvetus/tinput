@@ -17,6 +17,8 @@ import {
 
     TScroll,
 
+    TButton,
+
     COLOR,
     TABLE,
     FONT
@@ -55,18 +57,25 @@ class Main extends React.Component {
         super(props, context);
         this.state = {
             events: [],
-            menuOpen: false
-        }
+            menuOpen: false,
+            mask: '212-85-06',
+            date: new Date(),
+            time: new Date()
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleTopClick = this.handleTopClick.bind(this);
         this.handleSideClick = this.handleSideClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleChange(event) {
         let e = this.state.events.slice();
         e.unshift(event);
-        this.setState({events: e});
+        this.setState({
+            events: e,
+            [event.name]: event.value
+        });
     }
 
     handleSearch(query, callback) {
@@ -85,6 +94,13 @@ class Main extends React.Component {
 
     handleSideClick(event) {
         this.setState({menuOpen: false});
+        this.handleChange(event);
+    }
+
+    handleClick(event) {
+        this.setState({
+            time: new Date()
+        });
         this.handleChange(event);
     }
 
@@ -130,6 +146,13 @@ class Main extends React.Component {
 
                     <div style={{maxWidth: "380px", margin: "auto"}}>
 
+                        <TButton
+                            style={{width: "100px"}}
+                            name={'button'}
+                            data={'button data'}
+                            onClick={this.handleClick}>
+                            Button
+                        </TButton>
 
                         <TText
                             style={inputStyle}
@@ -171,26 +194,29 @@ class Main extends React.Component {
 
                         <TMask
                             style={inputStyle}
-                            name="dateMask"
-                            label="Masked date:"
-                            value="22.04.2019"
-                            mask={{mask: "NN.NN.NNNN", empty: "-"}}
+                            name="mask"
+                            label="Masked number:"
+                            value={this.state.mask}
+                            valueNull={true}
+                            mask={{mask: "NNN-NN-NN", empty: "_"}}
                             onChange={this.handleChange} />
 
                         <TDate
                             style={inputStyle}
-                            name="date"
-                            label="Date:"
+                            name={'date'}
+                            label={'Date:'}
+                            value={this.state.date}
                             valueNull={true}
-                            format={{mask: "DD.MM.YYYY", empty: "-"}}
+                            format={{mask: "DD/MM/YYYY", empty: "-"}}
                             onChange={this.handleChange} />
 
                         <TTime
                             style={inputStyle}
-                            name="time"
-                            label="Time:"
-                            format={{mask: "hh:mm", empty: "-"}}
+                            name={'time'}
+                            label={'Time:'}
+                            value={this.state.time}
                             valueNull={true}
+                            format={{mask: "hh:mm", empty: "-"}}
                             onChange={this.handleChange} />
 
                         <TMail

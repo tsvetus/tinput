@@ -27,7 +27,7 @@ class TButton extends React.Component {
         if (this.props.wait) {
             style = {
                 ...style,
-                color: "#dddddd"
+                color: "#ddd"
             }
         }
 
@@ -46,7 +46,10 @@ class TButton extends React.Component {
 
 TButton.propTypes = {
     onClick: PropTypes.func.isRequired,
-    name: PropTypes.string
+    style: PropTypes.object,
+    name: PropTypes.string,
+    data: PropTypes.any,
+    wait: PropTypes.any
 }
 
 export default TButton;

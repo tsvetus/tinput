@@ -1,232 +1,120 @@
-/**
- * Contains available masks
- * @type {{numbers: {value: string, mask: string}}}
- */
-const masks = {
-    numbers: {
-        mask: 'N',
-        value: '1234567890'
-    }
-}
+const DEFAULT_MASK = {mask: "NN.NN.NNN", empty: "-"};
+const NUMBERS='NYMDhms';
 
-export function maskedValue(value, mask, empty) {
-    let v = '';
-    for (let i=0; i<mask.length; i++) {
-        if (value) {
-            if (value[i]) {
-                if (mask[i] == 'N') {
-                    v += value[i];
-                } else {
-                    v += mask[i];
-                }
-            } else {
-                if (mask[i] == 'N') {
-                    v += empty;
-                } else {
-                    v += mask[i];
-                }
-            }
-        } else {
-            if (mask[i] == 'N') {
-                v += empty;
-            } else {
-                v += mask[i];
-            }
-        }
-    }
-    return v;
-}
-
-/**
- * Determines type of character at <caret> position
- * @param {number} caret - Caret position
- * @param {string} mask - Mask
- * @returns {string|*} Returns position type
- */
-function positionType(caret, mask) {
-    let k = mask[caret];
-    if (k === undefined) {
-        return 'undefined';
-    }
-    for (let [key, val] of Object.entries(masks)) {
-        if (val instanceof Object) {
-            if (val.mask.indexOf(k) >= 0) {
-                return key;
-            }
-        }
-    }
-    return 'none';
-}
-
-/**
- * Performs check if <key> valid for insertion in result string
- * @param  {string} key   Char to check
- * @param  {number} caret Caret position
- * @param  {string} mask  Mask string
- * @return {bool}       Returns check result
- */
-function checkKey(key, caret, mask) {
-
-    if (caret < 0 || caret >= mask.lengh) {
+function isDelimiter(char, mask) {
+    if (char === null || char === undefined || char === '') {
         return false;
     }
-
-    let m = mask[caret];
-    if (m && masks.numbers.mask.indexOf(m) >= 0) {
-        return masks.numbers.value.indexOf(key) >= 0;
+    let i = mask.mask.indexOf(char);
+    if (i < 0) {
+        return false;
+    } else {
+        return NUMBERS.indexOf(i) < 0;
     }
-
-    return false;
-
 }
 
-/**
- * Replaces char in a <source> string at <index> position
- * @param  {string} source - Source string
- * @param  {string} char   - Char for replacement
- * @param  {number} index  - Char index for replacement
- * @return {string}         - Result string
- */
-function replace(source, char, index) {
-    return source.substr(0, index) + char + source.substr(index + 1);
-}
-
-/**
- * Generates masked string
- */
-class Mask {
-
-    /**
-     * Sets initial parameters for Mask object
-     * @param {object} params - Input parameters
-     * @param {object} params.mask - Input mask
-     * @param {object} params.empty - Empty sympol
-     * @param {object} params.value - Initial value
-     */
-    constructor(params) {
-        if (params) {
-            this.value = params.value ? params.value : '';
-            this.mask = params.mask;
-            this.empty = params.empty;
-        } else {
-            this.value = '';
-            this.mask = '';
-            this.empty = '';
-        }
-    }
-
-    /**
-     * Sets initial parameters for Mask object
-     * @param {object} params - Input parameters
-     * @param {object} params.mask - Input mask
-     * @param {object} params.empty - Empty sympol
-     * @param {object} params.value - Initial value
-     */
-    set(params) {
-
-        this.mask = params.mask ? params.mask : this.mask;
-        this.empty = params.empty ? params.empty : this.empty;
-
-        if (params.value) {
-            let v = params.value;
-            for (let i=0; i<this.mask.length; i++) {
-                if (positionType(i, this.mask) == 'none') {
-                    let m = this.mask[i];
-                    this.value = replace(this.value, m, i);
-                } else {
-                    let k = v[i];
-                    if (checkKey(k, i, this.mask)) {
-                        this.value = replace(this.value, k, i);
-                    } else {
-                        this.value = replace(this.value, this.empty, i);
-                    }
-                }
-            }
-            this.caret = 0;
-        }
-
-    }
-
-    /**
-     * Perses input parameters and returns masked value and caret position
-     * @param  {object} event - Input parameters
-     * @param  {object} event.value - Inpet value
-     * @param  {object} event.key - Last pressed key
-     * @param  {object} event.caret  - last caret position
-     * @return {object} - {value: <masked value>, caret: <new caret position>}
-     */
-    parse(event) {
-
-        if (!event) {
-            return '';
-        }
-
-        if (event.caret) {
-            this.caret = event.caret;
-        } else {
-            this.caret = 0;
-        }
-
-        this.set(event);
-
-        if (event.key && event.key.length == 1) {
-            if (checkKey(event.key, event.caret, this.mask)) {
-                if (positionType(this.caret, this.mask) !== 'none') {
-                    this.value = replace(this.value, event.key, event.caret);
-                    this.caret = event.caret + 1;
-                }
-                while (positionType(this.caret, this.mask) === 'none') {
-                    this.caret += 1;
-                }
-            }
-        } else if (event.key === 'Backspace') {
-            if (this.caret > 0) {
-                if (positionType(this.caret - 1, this.mask) !== 'none') {
-                    this.value = replace(this.value, this.empty, event.caret - 1);
-                }
-                this.caret = event.caret - 1;
-            }
-        } else if (event.key === 'Delete') {
-            if (this.caret < this.mask.length) {
-                if (positionType(this.caret, this.mask) !== 'none') {
-                    this.value = replace(this.value, this.empty, event.caret);
-                }
-                this.caret = event.caret + 1;
-            }
-        }
-
+export function parseMask(mask) {
+    if (mask !== null && mask !== undefined) {
         return {
-            value: this.value,
-            caret: this.caret ? this.caret : 0
+            mask: mask.mask ? mask.mask : DEFAULT_MASK.mask,
+            empty: mask.empty ? mask.empty : DEFAULT_MASK.empty
         }
-
+    } else {
+        return DEFAULT_MASK;
     }
+}
 
-    /**
-     * Checks if value contains no <empty> symbols
-     * @returns {boolean}
-     */
-    checkComplete() {
-        return this.value.indexOf(this.empty) < 0;
-    }
-
-    /**
-     * Checks if value is <empty>
-     * @returns {boolean}
-     */
-    checkEmpty() {
-        if (this.value) {
-            for (let i=0; i<this.value.length; i++) {
-                if (masks.numbers.value.indexOf(this.value[i]) >= 0) {
-                    return false;
-                }
-            }
-            return true;
+export function parseValue(value, mask) {
+    let m = parseMask(mask);
+    let v = (value === null || value === undefined) ? '' : value;
+    let result = '';
+    let k = 0;
+    for (let i = 0; i < m.mask.length; i++) {
+        let mc = m.mask.charAt(i);
+        if (NUMBERS.indexOf(mc) < 0) {
+            result += mc;
         } else {
-            return true;
+            let vc = v.charAt(k++);
+            while (isDelimiter(vc, mask)) {
+                vc = v.charAt(k++);
+            }
+            if (vc === null || vc === undefined || vc === '') {
+                result += m.empty;
+            } else {
+                result += vc;
+            }
         }
+    }
+    return result;
+}
+
+export function correctValue(from, to, caret, mask) {
+
+    if (from.length > to.length) {
+
+        let mc = mask.mask.charAt(caret);
+
+        if (NUMBERS.indexOf(mc) < 0) {
+            return {
+                value: from,
+                caret: caret
+            }
+        } else {
+            return {
+                value: from.substr(0, caret) + mask.empty + from.substr(caret + 1),
+                caret: caret
+            }
+        }
+
+    } else if (from.length < to.length) {
+
+        let mc = mask.mask.charAt(caret - 1);
+        let vc = to.charAt(caret - 1);
+
+        if (NUMBERS.indexOf(mc) < 0) {
+            return {
+                value: from.substr(0, caret) + vc + from.substr(caret + 1),
+                caret: caret + 1
+            }
+        } else if (caret <= from.length) {
+            return {
+                value: from.substr(0, caret - 1) + vc + from.substr(caret),
+                caret: caret
+            }
+        }
+
+    } else {
+
+        let mc = mask.mask.charAt(caret - 1);
+
+        if (NUMBERS.indexOf(mc) < 0) {
+            return {
+                value: from,
+                caret: caret
+            }
+        } else {
+            return {
+                value: to,
+                caret: caret
+            }
+        }
+
     }
 
 }
 
-export default Mask;
+export function completed(value, mask) {
+    return value.length === mask.mask.length && value.indexOf(mask.empty) < 0;
+}
+
+export function empty(value, mask) {
+    for (let i = 0; i < mask.mask.length; i++) {
+        let mc = mask.mask.charAt(i);
+        if (NUMBERS.indexOf(mc) >= 0) {
+            if (value.charAt(i) !== mask.empty) {
+                return false;
+            }
+        }
+    }
+    return true;
+}

@@ -25,6 +25,7 @@ class TTime extends React.Component {
     }
 
     handleChange(event) {
+        this.setState({value: event.value});
         clearTimeout(this.timer);
         this.timer = setTimeout(
             () => {

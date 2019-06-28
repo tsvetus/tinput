@@ -20,7 +20,6 @@ class TPanel extends React.Component {
             ...this.props.style
         }
 
-
         return (
             <div style={style}>
                 {this.props.children}

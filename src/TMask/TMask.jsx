@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {mergeStyles, Mask} from '../util';
+import {mergeStyles} from '../util';
+
+import {parseValue, parseMask, correctValue, completed, empty} from '../util/mask.js';
 
 import styles from './styles.js';
 
@@ -12,58 +14,66 @@ class TMask extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.MASK = new Mask();
-        this.MASK.set(props.mask);
-        this.mask = this.MASK.parse({value: props.value});
-        this.state = {value: this.mask.value};
-        this.lastValue = this.mask.value;
+        this.mask = parseMask(props.mask);
+        this.value = parseValue(props.value, props.mask);
+        this.state = {
+            mask: this.mask,
+            value: this.value
+        };
+        this.handleInput = this.handleInput.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleKey = this.handleKey.bind(this);
         this.ref = React.createRef();
     }
 
     componentDidUpdate(old) {
-        if (old.value !== this.props.value) {
-            this.mask = this.MASK.parse({value: this.props.value});
-            this.setState({value: this.mask.value});
+        if (old.value !== this.props.value || old.mask !== this.props.mask) {
+            this.mask = parseMask(this.props.mask);
+            this.value = parseValue(this.props.value, this.props.mask);
+            this.setState({
+                mask: this.mask,
+                value: this.value
+            });
         }
     }
 
-    handleChange(event) {
-        this.setState({
-                value: this.mask.value
+    handleInput(event) {
+
+        let cv = correctValue(
+            this.state.value,
+            event.target.value,
+            this.ref.current.selectionStart,
+            this.mask
+        );
+
+        if (cv) {
+
+            if (completed(cv.value, this.mask) && cv.value !== this.state.value) {
+                this.props.onChange({
+                    value: cv.value,
+                    name: this.props.name,
+                    data: this.props.data
+                });
+            } else if (this.props.valueNull && empty(cv.value, this.mask) && cv.value !== this.state.value) {
+                this.props.onChange({
+                    value: null,
+                    name: this.props.name,
+                    data: this.props.data
+                });
+            }
+
+            this.setState({
+                value: cv.value
             }, () => {
-                this.ref.current.selectionStart = this.mask.caret;
-                this.ref.current.selectionEnd = this.mask.caret;
-        });
+                this.ref.current.selectionStart = cv.caret;
+                this.ref.current.selectionEnd = cv.caret;
+            });
+
+        }
+
     }
 
-    handleKey(event) {
-        this.mask = this.MASK.parse({
-            key: event.key,
-            caret: this.ref.current.selectionStart
-        });
-        this.setState({
-                value: this.mask.value
-            }, () => {
-                this.ref.current.selectionStart = this.mask.caret;
-                this.ref.current.selectionEnd = this.mask.caret;
-        });
-        if (this.MASK.checkComplete() && this.lastValue !== this.mask.value) {
-            this.lastValue = this.mask.value;
-            this.props.onChange({
-                value: this.mask.value,
-                name: this.props.name,
-                data: this.props.data
-            });
-        } else if (this.props.valueNull && this.MASK.checkEmpty() && this.lastValue !== this.mask.value) {
-            this.lastValue = this.mask.value;
-            this.props.onChange({
-                value: null,
-                name: this.props.name,
-                data: this.props.data
-            });
-        }
+    handleChange() {
+
     }
 
     render () {
@@ -82,7 +92,7 @@ class TMask extends React.Component {
                 value={this.state.value}
                 placeholder={this.props.placeholder}
                 style={style.edit}
-                onKeyDown={this.handleKey}
+                onInput={this.handleInput}
                 onChange={this.handleChange} />
         );
 
@@ -98,25 +108,14 @@ class TMask extends React.Component {
 }
 
 TMask.propTypes = {
-
-    /**
-     * Component name
-     */
+    style: PropTypes.object,
     name: PropTypes.string.isRequired,
-
-    /**
-     * TText mask. For example mask={{mask: "NN.NN.NNNN", empty: "-"}} where:
-     * mask - text mask and N means - number. For today N is an only option available;
-     * empty - empty character;
-     */
+    data: PropTypes.any,
+    placeholder: PropTypes.string,
+    value: PropTypes.any,
+    valueNull: PropTypes.any,
     mask: PropTypes.object.isRequired,
-
-    /**
-     * On component text change event. Fires only if result text contains no <empty> symbols.
-     * @returns {value: <masked text>, name: <value of name property>, data: <value of data property>}
-     */
     onChange: PropTypes.func.isRequired
-
 };
 
 export default TMask;

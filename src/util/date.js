@@ -1,4 +1,4 @@
-import {maskedValue} from './mask.js';
+import {parseValue} from './mask.js';
 
 const ISO_DATE_EXP = /^\d{4}-([0]\d|1[0-2])-([0-2]\d|3[01])$/;
 
@@ -19,7 +19,7 @@ export function dateMask(format) {
 
 export function dateValue(value, format) {
     let mask = dateMask(format);
-    return maskedValue(value, mask.mask, mask.empty);
+    return parseValue(value, mask);
 }
 
 /**
@@ -82,7 +82,7 @@ export function timeMask(format) {
 
 export function timeValue(value, format) {
     let mask = timeMask(format);
-    return maskedValue(value, mask.mask, mask.empty);
+    return parseValue(value, mask);
 }
 
 /**

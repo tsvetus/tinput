@@ -13,18 +13,19 @@ import {
 
 import styles from './styles.js';
 
-const DEFAULT_FORMAT = {mask: "DD.MM.YYYY", empty: "-"}
+const DEFAULT_FORMAT = {mask: "DD.MM.YYYY", empty: "-"};
 
 class TDate extends React.Component {
 
     constructor(props, context) {
         super(props, context);
         this.format = props.format ? props.format : DEFAULT_FORMAT;
-        this.state = {value: strDate(props.value, this.format)}
+        this.state = {value: strDate(props.value, this.format)};
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
+        this.setState({value: event.value});
         clearTimeout(this.timer);
         this.timer = setTimeout(
             () => {
@@ -73,6 +74,6 @@ TDate.propTypes = {
     data: PropTypes.any,
     timeout: PropTypes.number,
     onChange: PropTypes.func.isRequired
-}
+};
 
 export default TDate;

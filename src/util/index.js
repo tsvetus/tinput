@@ -15,8 +15,6 @@ import {
     seconds
 } from './date.js';
 
-import Mask from './mask.js';
-
 export {
 
     merge,
@@ -30,8 +28,6 @@ export {
     strTime,
     timeMask,
     seconds,
-
-    Mask,
 
     TIMEOUT
 
