@@ -143,9 +143,10 @@ class TSearch extends React.Component {
     updateRect() {
         let rect = this.inputRef.current.getBoundingClientRect();
         this.listPlace = {
-            top: this.inputRef.current.offsetTop + rect.height + "px",
-            left: this.inputRef.current.offsetLeft + 'px',
-            width: rect.width + 'px'
+            top: rect.height + "px",
+            left: 0,
+            width: rect.width + 'px',
+            marginLeft: "-" + rect.width + 'px'
         }
     }
 
@@ -187,6 +188,9 @@ class TSearch extends React.Component {
                 />
             );
         }
+
+        console.log('STATE: ' + JSON.stringify(this.state));
+        console.log('PLACE: ' + JSON.stringify(this.listPlace));
 
         return (
             <div style={style.container} ref={this.inputRef}>
