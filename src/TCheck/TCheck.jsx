@@ -27,7 +27,11 @@ class TCheck extends React.Component {
     }
 
     checked(value) {
-        return value === true || value > 0 || value !== '0';
+        if (value) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     handleClick(event) {
@@ -74,8 +78,13 @@ class TCheck extends React.Component {
 }
 
 TCheck.propTypes = {
+    style: PropTypes.object,
     name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    label: PropTypes.string,
+    value: PropTypes.any,
+    valueInt: PropTypes.any,
+    data: PropTypes.any
 }
 
 export default TCheck;
