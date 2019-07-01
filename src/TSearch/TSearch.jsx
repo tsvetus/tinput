@@ -40,20 +40,67 @@ class TSearch extends React.Component {
         this.findName(this.props.value);
     }
 
-    componentWillUnmout() {
+    componentWillUnmount() {
         this.mounted = false;
     }
 
-    findName(id) {
-        if (id && this.props.onSearch) {
-            this.props.onSearch({
-                    id: id,
-                    name: null
-                },
+    getIdQuery(props, value) {
+        if (props.useCode) {
+            return {
+                id: null,
+                code: value,
+                name: null
+            }
+        } else {
+            return {
+                id: value,
+                code: null,
+                name: null
+            }
+        }
+    }
+
+    findName(value) {
+        if (value === null || value === undefined) {
+            this.setState({
+                value: null,
+                items: [],
+                inputValue: ''
+            });
+        } else if (value && this.props.onSearch) {
+            this.props.onSearch(
+                this.getIdQuery(this.props, value),
                 (items) => {
-                    this.setState({inputValue: items ? items[0].name : ''});
+                    this.setState({
+                        items: items,
+                        inputValue: items ? items[0].name : ''
+                    });
                 }
             );
+        }
+    }
+
+    getValue(props) {
+        if (props.useCode) {
+            return props.empty ? props.empty.code : null;
+        } else {
+            return props.empty ? props.empty.id : null;
+        }
+    }
+
+    getNameQuery(props, value) {
+        if (props.useCode) {
+            return {
+                id: null,
+                code: null,
+                name: value
+            }
+        } else {
+            return {
+                id: null,
+                code: null,
+                name: value
+            }
         }
     }
 
@@ -63,10 +110,9 @@ class TSearch extends React.Component {
         if (v.length > MIN_CHARS) {
             this.timer = setTimeout(() => {
                 if (this.mounted && this.props.onSearch) {
-                    this.props.onSearch({
-                        id: null,
-                        name: v
-                    }, (items) => {
+                    this.props.onSearch(
+                        this.getNameQuery(this.props, v),
+                        (items) => {
                         if (this.mounted) {
                             if (!items || !Array.isArray(items)) {
                                 items = [];
@@ -87,7 +133,7 @@ class TSearch extends React.Component {
                 if (this.mounted) {
                     if (this.props.onChange) {
                         this.props.onChange({
-                            value: this.props.empty ? this.props.empty.id : null,
+                            value: this.getValue(this.props),
                             caption: '',
                             name: this.props.name,
                             data: this.props.data
@@ -106,6 +152,14 @@ class TSearch extends React.Component {
         });
     }
 
+    getInputValue(props, event) {
+        if (props.useCode) {
+            return props.empty && event.value == props.empty.code ? '' : event.name;
+        } else {
+            return props.empty && event.value == props.empty.id ? '' : event.name;
+        }
+    }
+
     handleChange(event) {
         if (event) {
             if (this.props.onChange) {
@@ -118,8 +172,7 @@ class TSearch extends React.Component {
             }
             this.setState({
                 showList: false,
-                inputValue: this.props.empty && event.value ==
-                    this.props.empty.id ? '' : event.name,
+                inputValue: this.getInputValue(this.props, event),
                 value: event.value
             });
         } else {
@@ -185,12 +238,10 @@ class TSearch extends React.Component {
                     place={this.listPlace}
                     onSelect={this.handleChange}
                     autoFocus={this.state.autoFocus}
+                    useCode={this.props.useCode}
                 />
             );
         }
-
-        console.log('STATE: ' + JSON.stringify(this.state));
-        console.log('PLACE: ' + JSON.stringify(this.listPlace));
 
         return (
             <div style={style.container} ref={this.inputRef}>
@@ -206,12 +257,14 @@ class TSearch extends React.Component {
 }
 
 TSearch.propTypes = {
+    style: PropTypes.object,
     name: PropTypes.string.isRequired,
     empty: PropTypes.object,
     list: PropTypes.array,
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    onSearch: PropTypes.func.isRequired
+    onSearch: PropTypes.func.isRequired,
+    useCode: PropTypes.any
 }
 
 export default TSearch;

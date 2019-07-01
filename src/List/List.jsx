@@ -93,6 +93,7 @@ class List extends React.Component {
         let items = [];
         if (this.props.items) {
             if (this.props.empty) {
+                let value = this.props.useCode ? this.props.empty.code : this.props.empty.id;
                 items.push(
                     <div
                             tabIndex={-1}
@@ -100,7 +101,7 @@ class List extends React.Component {
                             style={style.item}
                             className="list-item"
                             key={'empty'}
-                            value={this.props.empty.id}
+                            value={value}
                             name={this.props.empty.name}
                             onClick={this.handleClick}>
                         {this.props.empty.name}
@@ -108,6 +109,7 @@ class List extends React.Component {
                 );
             }
             this.props.items.forEach((v, i) => {
+                let value = this.props.useCode ? v.code : v.id;
                 items.push(
                     <div
                             tabIndex={i}
@@ -115,7 +117,7 @@ class List extends React.Component {
                             className="list-item"
                             style={style.item}
                             key={i}
-                            value={v.id}
+                            value={value}
                             name={v.name}
                             onClick={this.handleClick}>
                         {v.name}
@@ -139,7 +141,8 @@ List.propTypes = {
     items: PropTypes.array,
     empty: PropTypes.object,
     place: PropTypes.object,
-    autoFocus: PropTypes.bool
+    autoFocus: PropTypes.bool,
+    useCode: PropTypes.any
 }
 
 export default List;
