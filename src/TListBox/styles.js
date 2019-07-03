@@ -20,6 +20,10 @@ export default {
 
     item: {
 
+    },
+
+    button: {
+        width: "16px"
     }
 
 }

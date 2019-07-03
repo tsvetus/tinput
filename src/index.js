@@ -30,6 +30,8 @@ import TList from './TList';
 import TMonth from './TMonth';
 import TYear from './TYear';
 
+import TGroup from './TGroup';
+
 import {mergeStyles} from './util';
 
 import {
@@ -97,6 +99,8 @@ export {
 
     TMonth,
     TYear,
+
+    TGroup,
 
     COLOR,
     SIZE,

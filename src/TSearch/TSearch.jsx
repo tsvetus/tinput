@@ -8,7 +8,7 @@ import styles from './styles.js';
 import List from '../List';
 import TIcon from '../TIcon';
 
-const MIN_CHARS = 2;
+const MIN_CHARS = 3;
 
 class TSearch extends React.Component {
 
@@ -30,7 +30,9 @@ class TSearch extends React.Component {
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value) {
-            this.setState({value: this.props.value});
+//            this.setState({value: this.props.value});
+            this.findName(this.props.value);
+        } else if (this.props.value !== this.state.value && this.props.value === null) {
             this.findName(this.props.value);
         }
     }
@@ -45,16 +47,14 @@ class TSearch extends React.Component {
     }
 
     getIdQuery(props, value) {
-        if (props.useCode) {
+        if (props.keyName) {
             return {
-                id: null,
-                code: value,
+                [props.keyName]: value,
                 name: null
             }
         } else {
             return {
                 id: value,
-                code: null,
                 name: null
             }
         }
@@ -65,15 +65,27 @@ class TSearch extends React.Component {
             this.setState({
                 value: null,
                 items: [],
-                inputValue: ''
+                inputValue: '',
+                current: null
             });
         } else if (value && this.props.onSearch) {
             this.props.onSearch(
                 this.getIdQuery(this.props, value),
                 (items) => {
+                    let v = '';
+                    if (items) {
+                        if (items[0]) {
+                            if (this.props.keyName) {
+                                v = items[0][this.props.keyName] + ' ' + items[0].name;
+                            } else {
+                                v = items[0].name;
+                            }
+                        }
+                    }
                     this.setState({
+                        value: value,
                         items: items,
-                        inputValue: items ? items[0].name : ''
+                        inputValue: v
                     });
                 }
             );
@@ -81,24 +93,22 @@ class TSearch extends React.Component {
     }
 
     getValue(props) {
-        if (props.useCode) {
-            return props.empty ? props.empty.code : null;
+        if (props.keyName) {
+            return props.empty ? props.empty[props.keyName] : null;
         } else {
             return props.empty ? props.empty.id : null;
         }
     }
 
     getNameQuery(props, value) {
-        if (props.useCode) {
+        if (props.keyName) {
             return {
-                id: null,
-                code: null,
+                [props.keyName]: null,
                 name: value
             }
         } else {
             return {
                 id: null,
-                code: null,
                 name: value
             }
         }
@@ -107,7 +117,8 @@ class TSearch extends React.Component {
     handleInputChange(event) {
         let v = event.currentTarget.value ? event.currentTarget.value : '';
         clearTimeout(this.timer);
-        if (v.length > MIN_CHARS) {
+        let minChars = this.props.count ? this.props.count : MIN_CHARS;
+        if (v.length >= minChars) {
             this.timer = setTimeout(() => {
                 if (this.mounted && this.props.onSearch) {
                     this.props.onSearch(
@@ -131,18 +142,19 @@ class TSearch extends React.Component {
         } else if (v.length == 0) {
             this.timer = setTimeout(() => {
                 if (this.mounted) {
-                    if (this.props.onChange) {
-                        this.props.onChange({
-                            value: this.getValue(this.props),
-                            caption: '',
-                            name: this.props.name,
-                            data: this.props.data
-                        });
-                    }
                     this.setState({
                         items: [],
                         showList: false,
                         autoFocus: false
+                    }, () => {
+                        if (this.props.onChange) {
+                            this.props.onChange({
+                                value: this.getValue(this.props),
+                                caption: '',
+                                name: this.props.name,
+                                data: this.props.data
+                            });
+                        }
                     });
                 }
             }, TIMEOUT);
@@ -153,8 +165,8 @@ class TSearch extends React.Component {
     }
 
     getInputValue(props, event) {
-        if (props.useCode) {
-            return props.empty && event.value == props.empty.code ? '' : event.name;
+        if (props.keyName) {
+            return props.empty && event.value == props.empty[props.keyName] ? '' : event.name;
         } else {
             return props.empty && event.value == props.empty.id ? '' : event.name;
         }
@@ -162,18 +174,20 @@ class TSearch extends React.Component {
 
     handleChange(event) {
         if (event) {
-            if (this.props.onChange) {
-                this.props.onChange({
-                    value: event.value,
-                    caption: event.name,
-                    name: this.props.name,
-                    data: this.props.data
-                });
-            }
             this.setState({
                 showList: false,
                 inputValue: this.getInputValue(this.props, event),
                 value: event.value
+            }, () => {
+                if (this.props.onChange) {
+                    this.props.onChange({
+                        value: event.value,
+                        caption: event.name,
+                        item: event.item,
+                        name: this.props.name,
+                        data: this.props.data
+                    });
+                }
             });
         } else {
             this.setState({
@@ -195,11 +209,22 @@ class TSearch extends React.Component {
 
     updateRect() {
         let rect = this.inputRef.current.getBoundingClientRect();
+        console.log('RECT: ' + JSON.stringify(rect));
         this.listPlace = {
             top: rect.height + "px",
             left: 0,
             width: rect.width + 'px',
             marginLeft: "-" + rect.width + 'px'
+        }
+    }
+
+    getShowButton(props) {
+        if (props.showButton === null || props.showButton === undefined) {
+            return true;
+        } else if (props.showButton) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -221,12 +246,15 @@ class TSearch extends React.Component {
                 onKeyDown={this.handleKey} />
         );
 
-        let button = (
-            <TIcon
-                style={{width: "16px"}}
-                name={this.state.showList ? "up" : "down"}
-                onClick={this.handleButtonClick} />
-        );
+        let button = null;
+        if (this.getShowButton(this.props)) {
+            button = (
+                <TIcon
+                    style={{width: "16px"}}
+                    name={this.state.showList ? "up" : "down"}
+                    onClick={this.handleButtonClick} />
+            );
+        }
 
         let list = null;
         if (this.state.showList && this.state.items.length > 0) {
@@ -238,7 +266,7 @@ class TSearch extends React.Component {
                     place={this.listPlace}
                     onSelect={this.handleChange}
                     autoFocus={this.state.autoFocus}
-                    useCode={this.props.useCode}
+                    keyName={this.props.keyName}
                 />
             );
         }
@@ -264,7 +292,9 @@ TSearch.propTypes = {
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
-    useCode: PropTypes.any
+    keyName: PropTypes.string,
+    showButton: PropTypes.any,
+    count: PropTypes.number
 }
 
 export default TSearch;

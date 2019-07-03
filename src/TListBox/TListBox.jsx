@@ -60,8 +60,8 @@ class TListBox extends React.Component {
             });
             this.setState({
                 showList: false,
-                inputValue: this.props.empty && event.value ==
-                    this.props.empty.id ? '' : event.name,
+                inputValue: this.props.empty && (event.value ==
+                    this.props.empty.id || event.value == this.props.empty.code) ? '' : event.name,
                 value: event.value
             });
         } else {
@@ -82,6 +82,16 @@ class TListBox extends React.Component {
         this.setState({showList: !this.state.showList});
     }
 
+    getShowButton(props) {
+        if (props.showButton === null || props.showButton === undefined) {
+            return true;
+        } else if (props.showButton) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     render () {
 
         let style = mergeStyles(styles, this.props.style);
@@ -100,11 +110,14 @@ class TListBox extends React.Component {
                 readOnly />
         );
 
-        let button = (
-            <TIcon style={{width: "16px"}}
-                name={this.state.showList ? "up" : "down"}
-                onClick={this.handleButtonClick} />
-        );
+        let button = null;
+        if (this.getShowButton(this.props)) {
+            button = (
+                <TIcon style={style.button}
+                       name={this.state.showList ? "up" : "down"}
+                       onClick={this.handleButtonClick} />
+            );
+        }
 
         let list = null;
         if (this.state.showList) {
@@ -139,7 +152,8 @@ TListBox.propTypes = {
     empty: PropTypes.object,
     items: PropTypes.array,
     placeholder: PropTypes.string,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    showButton: PropTypes.any
 }
 
 export default TListBox;

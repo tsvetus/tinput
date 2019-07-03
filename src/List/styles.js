@@ -9,7 +9,8 @@ export default {
     },
 
     item: {
-        ...INPUT.ITEM
+        ...INPUT.ITEM,
+        zIndex: "99"
     }
 
 }

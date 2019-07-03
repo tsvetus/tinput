@@ -68,6 +68,10 @@ class TText extends React.Component {
 }
 
 TText.propTypes = {
+    style: PropTypes.object,
+    value: PropTypes.string,
+    password: PropTypes.any,
+    data: PropTypes.any,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired

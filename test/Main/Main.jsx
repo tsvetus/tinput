@@ -26,10 +26,10 @@ import {
 } from 'tinput';
 
 const list = [
-    {id: 1, name: "First item"},
-    {id: 2, name: "Second item"},
-    {id: 3, name: "Third item"},
-    {id: 4, name: "Forth item"}
+    {id: 1, code: "1", name: "First item"},
+    {id: 2, code: "2", name: "Second item"},
+    {id: 3, code: "3", name: "Third item"},
+    {id: 4, code: "4", name: "Forth item"}
 ];
 
 const inputStyle = {
@@ -81,6 +81,7 @@ class Main extends React.Component {
     handleSearch(query, callback) {
         let items = list.filter((v, i) => {
             return ((query.id && query.id == v.id) ||
+                (query.code && query.code == v.code) ||
                 (query.name && v.name.toLowerCase()
                     .indexOf(query.name.toLowerCase()) >= 0));
         });
@@ -188,7 +189,7 @@ class Main extends React.Component {
                             name="search"
                             label="Search:"
                             placeholder="Enter text 'item'"
-                            value={1}
+                            value={3}
                             onSearch={this.handleSearch}
                             onChange={this.handleChange} />
 

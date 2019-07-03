@@ -11,7 +11,7 @@ Set of most common visual React components designed for constructing web applica
 * [`TMail`](#tmail)
 
 Extention of `<textarea>`:
-* [`TMemo`](#tmemo)
+* [`TGroup`](#tmemo)
 
 Other components:
 * [`TCheck`](#tcheck)
@@ -281,9 +281,9 @@ Component `TMail` represents input for email:
     placeholder="Enter email"
     onChange={this.handleChange} />
 ```  
-## `TMemo`
+## `TGroup`
 
-Component `TMemo` extends html <textarea> tag:
+Component `TGroup` extends html <textarea> tag:
 
 * `style`, `name`, `data`, `label` - Same as in <TText> component.
 
@@ -294,7 +294,7 @@ Component `TMemo` extends html <textarea> tag:
 ### Example
 
 ```javascript
-<TMemo
+<TGroup
     style={{container: {border: "1px solid red"}}}
     name="MyMemo"
     label="Textarea:"
@@ -303,7 +303,7 @@ Component `TMemo` extends html <textarea> tag:
 
 ## `TCheck`
 
-Component `TMemo` extends html <textarea> tag:
+Component `TGroup` extends html <textarea> tag:
 
 * `style`, `name`, `data`, `label` - Same as in <TText> component.
 
@@ -408,7 +408,7 @@ import {
     TDate,
     TTime,
     TMail,
-    TMemo,
+    TGroup,
     TCheck,
 
     TScroll,
@@ -583,7 +583,7 @@ class Main extends React.Component {
                     valueInt={true}
                     onChange={this.handleChange} />
 
-                <TMemo
+                <TGroup
                     style={{margin: "16px 0 0 0", height: "100px"}}
                     name="memo"
                     label="Textarea:"
