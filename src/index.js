@@ -32,7 +32,11 @@ import TYear from './TYear';
 
 import TGroup from './TGroup';
 
-import {mergeStyles} from './util';
+import {
+    mergeStyles,
+    getCookie,
+    setCookie
+} from './util';
 
 import {
     COLOR,
@@ -107,6 +111,8 @@ export {
     TABLE,
     FONT,
 
-    mergeStyles
+    mergeStyles,
+    getCookie,
+    setCookie
 
 }

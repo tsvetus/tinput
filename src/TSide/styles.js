@@ -6,13 +6,13 @@ export default {
         height: "100%",
         width: "0",
         position: "fixed",
-        zIndex: "1",
+        zIndex: "100",
         top: "0",
         left: "0",
         backgroundColor: COLOR.MENU,
         overflowX: "hidden",
         transition: "0.5s",
-        paddingTop: "60px"
+        paddingTop: "60px",
     },
 
     close: {

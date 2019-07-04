@@ -36,6 +36,11 @@ class TListBox extends React.Component {
                 value: this.props.value,
                 inputValue: this.findName(this.props.value, this.props.items)
             });
+        } else if (this.props.value !== this.state.value && this.props.value === null) {
+            this.setState({
+                value: this.props.value,
+                inputValue: this.findName(this.props.value, this.props.items)
+            });
         }
     }
 

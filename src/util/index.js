@@ -15,6 +15,12 @@ import {
     seconds
 } from './date.js';
 
+import {
+    getCookie,
+    setCookie
+} from './cookie.js'
+
+
 export {
 
     merge,
@@ -28,6 +34,9 @@ export {
     strTime,
     timeMask,
     seconds,
+
+    getCookie,
+    setCookie,
 
     TIMEOUT
 
