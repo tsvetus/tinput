@@ -14,6 +14,7 @@ class TText extends React.Component {
         super(props, context);
         this.state = {value: this.props.value ? this.props.value : ''}
         this.handleChange = this.handleChange.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
     }
 
     componentDidUpdate(old) {
@@ -38,6 +39,12 @@ class TText extends React.Component {
         );
     }
 
+    handleKeyDown(event) {
+        if (this.props.onKeyDown) {
+            this.props.onKeyDown(event);
+        }
+    }
+
     render () {
 
         let style = mergeStyles(styles, this.props.style);
@@ -53,6 +60,7 @@ class TText extends React.Component {
                 value={this.state.value}
                 placeholder={this.props.placeholder}
                 style={style.edit}
+                onKeyDown={this.handleKeyDown}
                 onChange={this.handleChange} />
         );
 
@@ -74,7 +82,8 @@ TText.propTypes = {
     data: PropTypes.any,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    onKeyDown: PropTypes.func
 }
 
 export default TText;
