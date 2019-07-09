@@ -1,5 +1,6 @@
 const DEFAULT_MASK = {mask: "NN.NN.NNN", empty: "-"};
-const NUMBERS='NYMDhms';
+const NUMBERS_MASK='NYMDhms';
+const NUMBERS='1234567890';
 
 function isDelimiter(char, mask) {
     if (char === null || char === undefined || char === '') {
@@ -9,7 +10,7 @@ function isDelimiter(char, mask) {
     if (i < 0) {
         return false;
     } else {
-        return NUMBERS.indexOf(i) < 0;
+        return NUMBERS_MASK.indexOf(i) < 0;
     }
 }
 
@@ -31,7 +32,7 @@ export function parseValue(value, mask) {
     let k = 0;
     for (let i = 0; i < m.mask.length; i++) {
         let mc = m.mask.charAt(i);
-        if (NUMBERS.indexOf(mc) < 0) {
+        if (NUMBERS_MASK.indexOf(mc) < 0) {
             result += mc;
         } else {
             let vc = v.charAt(k++);
@@ -54,7 +55,7 @@ export function correctValue(from, to, caret, mask) {
 
         let mc = mask.mask.charAt(caret);
 
-        if (NUMBERS.indexOf(mc) < 0) {
+        if (NUMBERS_MASK.indexOf(mc) < 0) {
             return {
                 value: from,
                 caret: caret
@@ -70,16 +71,32 @@ export function correctValue(from, to, caret, mask) {
 
         let mc = mask.mask.charAt(caret - 1);
         let vc = to.charAt(caret - 1);
+        
+        console.log(mc + '   ' + vc);
 
-        if (NUMBERS.indexOf(mc) < 0) {
-            return {
-                value: from.substr(0, caret) + vc + from.substr(caret + 1),
-                caret: caret + 1
+        if (NUMBERS_MASK.indexOf(mc) < 0) {
+            if (NUMBERS.indexOf(vc) < 0) {
+                return {
+                    value: from,
+                    caret: caret -1
+                }
+            } else {
+                return {
+                    value: from.substr(0, caret) + vc + from.substr(caret + 1),
+                    caret: caret + 1
+                }
             }
         } else if (caret <= from.length) {
-            return {
-                value: from.substr(0, caret - 1) + vc + from.substr(caret),
-                caret: caret
+            if (NUMBERS.indexOf(vc) < 0) {
+                return {
+                    value: from,
+                    caret: caret -1
+                }
+            } else {
+                return {
+                    value: from.substr(0, caret - 1) + vc + from.substr(caret),
+                    caret: caret
+                }
             }
         }
 
@@ -87,15 +104,22 @@ export function correctValue(from, to, caret, mask) {
 
         let mc = mask.mask.charAt(caret - 1);
 
-        if (NUMBERS.indexOf(mc) < 0) {
+        if (NUMBERS_MASK.indexOf(mc) < 0) {
             return {
                 value: from,
                 caret: caret
             }
         } else {
-            return {
-                value: to,
-                caret: caret
+            if (NUMBERS.indexOf(vc) < 0) {
+                return {
+                    value: from,
+                    caret: caret
+                }
+            } else {
+                return {
+                    value: to,
+                    caret: caret
+                }
             }
         }
 
@@ -110,7 +134,7 @@ export function completed(value, mask) {
 export function empty(value, mask) {
     for (let i = 0; i < mask.mask.length; i++) {
         let mc = mask.mask.charAt(i);
-        if (NUMBERS.indexOf(mc) >= 0) {
+        if (NUMBERS_MASK.indexOf(mc) >= 0) {
             if (value.charAt(i) !== mask.empty) {
                 return false;
             }
