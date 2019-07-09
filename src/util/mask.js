@@ -71,8 +71,6 @@ export function correctValue(from, to, caret, mask) {
 
         let mc = mask.mask.charAt(caret - 1);
         let vc = to.charAt(caret - 1);
-        
-        console.log(mc + '   ' + vc);
 
         if (NUMBERS_MASK.indexOf(mc) < 0) {
             if (NUMBERS.indexOf(vc) < 0) {
