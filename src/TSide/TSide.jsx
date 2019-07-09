@@ -69,7 +69,13 @@ class TSide extends React.Component {
     }
 
     calcState(props) {
-        let sideWidth = props.width ? props.width : DEFAULT_SIDE_WIDTH;
+        let width = props.width;
+        if (this.props.params) {
+            if (this.props.params.width) {
+                width = this.props.params.width;
+            }
+        }
+        let sideWidth = width ? width : DEFAULT_SIDE_WIDTH;
         let touchWidth = props.touchWidth ? props.touchWidth : DEFAULT_TOUCH_WIDTH;
         let initWidth = props.initWidth ? props.initWidth : DEFAULT_INIT_WIDTH;
         return {
