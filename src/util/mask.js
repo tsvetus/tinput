@@ -103,6 +103,7 @@ export function correctValue(from, to, caret, mask) {
     } else {
 
         let mc = mask.mask.charAt(caret - 1);
+        let vc = to.charAt(caret - 1);
 
         if (NUMBERS_MASK.indexOf(mc) < 0) {
             return {
