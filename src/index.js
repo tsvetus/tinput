@@ -34,6 +34,7 @@ import TGroup from './TGroup';
 
 import {
     mergeStyles,
+    strDate,
     getCookie,
     setCookie
 } from './util';
@@ -112,6 +113,7 @@ export {
     FONT,
 
     mergeStyles,
+    strDate,
     getCookie,
     setCookie
 

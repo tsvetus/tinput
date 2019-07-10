@@ -15,6 +15,8 @@ export default {
 
     edit: {
         flex: "1",
+        boxSizing: "border-box",
+        display: "block",
         border: "2px solid " + COLOR.BORDER,
         margin: "0",
         resize: "none",

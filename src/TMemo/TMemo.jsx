@@ -11,23 +11,47 @@ class TMemo extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            value: this.props.value,
-        }
+            value: props.value ? props.value : '',
+            height: null
+        };
         this.handleChange = this.handleChange.bind(this);
+        this.ref = React.createRef();
     }
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value) {
-            this.setState({value: this.props.value});
+            this.setState({
+                value: this.props.value ? this.props.value : '',
+                height: this.ref.current.scrollHeight});
         }
     }
 
+    componentDidMount() {
+        this.setState({height: this.ref.current.scrollHeight});
+    }
+
     handleChange(event) {
+        if (!this.height) {
+            this.height = this.ref.current.scrollHeight + 4;
+        }
+        let h = this.ref.current.scrollHeight;
         let v = event.currentTarget.value;
-        this.setState({value: v});
-        clearTimeout(this.timer);        
+        if (h > this.height) {
+            this.setState({
+                value: v,
+                height: h
+            });
+        } else {
+            this.setState({
+                value: v
+            });
+        }
+        clearTimeout(this.timer);
         this.timer = setTimeout(
             () => {
+                if (this.props.valueNull && v !== null && v.length === 0) {
+                    v = null;
+                }
                 this.props.onChange({
                     value: v,
                     name: this.props.name,
@@ -40,7 +64,15 @@ class TMemo extends React.Component {
 
     render () {
 
-        let style = mergeStyles(styles, this.props.style);
+        let st = {};
+        if (this.props.autoSize) {
+            st.edit = {
+                height: this.state.height ? this.state.height + 'px' : 'auto',
+                flex: null
+            }
+        }
+
+        let style = mergeStyles(styles, this.props.style, st);
 
         let label = null;
         if (this.props.label) {
@@ -49,6 +81,7 @@ class TMemo extends React.Component {
 
         let content = (
             <textarea
+                ref={this.ref}
                 style={style.edit}
                 value={this.state.value}
                 onChange={this.handleChange}>
@@ -58,9 +91,7 @@ class TMemo extends React.Component {
         return (
             <div style={style.container}>
                 {label}
-                <div style={style.box}>
                     {content}
-                </div>
             </div>
         );
 
@@ -69,8 +100,13 @@ class TMemo extends React.Component {
 }
 
 TMemo.propTypes = {
+    style: PropTypes.object,
+    data: PropTypes.object,
     name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    value: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    autoSize: PropTypes.any,
+    valueNull: PropTypes.any
 }
 
 export default TMemo;
