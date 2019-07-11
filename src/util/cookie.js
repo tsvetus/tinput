@@ -9,7 +9,7 @@ export function setCookie(cname, cvalue, exdays) {
     }
 }
 
-export function getCookie(cname) {
+export function getCookie(cname, def) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -19,8 +19,17 @@ export function getCookie(cname) {
             c = c.substring(1);
         }
         if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
+            let res = c.substring(name.length, c.length);
+            if (isNaN(def)) {
+                return res;
+            } else {
+                return Number(res);
+            }
         }
     }
-    return "";
+    if (def === undefined) {
+        return "";
+    } else {
+        return def;
+    }
 }

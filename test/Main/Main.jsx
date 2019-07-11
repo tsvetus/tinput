@@ -49,7 +49,7 @@ const inputStyle = {
     item: {
     }
 
-}
+};
 
 class Main extends React.Component {
 
