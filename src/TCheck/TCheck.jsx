@@ -61,7 +61,7 @@ class TCheck extends React.Component {
 
         let content = (
             <TIcon
-                style={{width: "16px"}}
+                style={style.icon}
                 name={name}
                 onClick={this.handleClick} />
         );

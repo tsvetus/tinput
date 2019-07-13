@@ -13,6 +13,10 @@ export default {
 
     edit: {
         alignSelf: "center"
+    },
+
+    icon: {
+        ...INPUT.ICON
     }
 
 }

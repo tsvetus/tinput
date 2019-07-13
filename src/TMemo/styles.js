@@ -24,7 +24,7 @@ export default {
     },
 
     label: {
-        ...INPUT.TEXTLABEL
+        ...INPUT.TEXT_LABEL
     }
 
 }

@@ -20,7 +20,7 @@ class TListBox extends React.Component {
         this.findName = this.findName.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
-        this.inputRef = React.createRef();
+        this.ref = React.createRef();
     }
 
     compare(a, b) {
@@ -77,13 +77,12 @@ class TListBox extends React.Component {
     }
 
     handleButtonClick() {
-        let rect = this.inputRef.current.getBoundingClientRect();
+        let rect = this.ref.current.getBoundingClientRect();
         this.listPlace = {
-            top: rect.height + "px",//this.inputRef.current.offsetTop + rect.height + "px",
-            left: 0,//this.inputRef.current.offsetLeft + 'px',
-            width: rect.width + 'px',
-            marginLeft: "-" + rect.width + 'px'
-        }
+            top: 0,
+            left: 0,
+            width: rect.width + 'px'
+        };
         this.setState({showList: !this.state.showList});
     }
 
@@ -103,7 +102,13 @@ class TListBox extends React.Component {
 
         let label = null;
         if (this.props.label) {
-            label = (<div style={style.label}>{this.props.label}</div>);
+            label = (
+                <div
+                    style={style.label}
+                    onClick={this.handleButtonClick}>
+                    {this.props.label}
+                </div>
+            );
         }
 
         let content = (
@@ -117,9 +122,13 @@ class TListBox extends React.Component {
 
         let button = null;
         if (this.getShowButton(this.props)) {
+            let icon = this.state.showList ? "up" : "down";
+            if (this.props.icon) {
+                icon = this.props.icon;
+            }
             button = (
-                <TIcon style={style.button}
-                       name={this.state.showList ? "up" : "down"}
+                <TIcon style={style.icon}
+                       name={icon}
                        onClick={this.handleButtonClick} />
             );
         }
@@ -140,11 +149,13 @@ class TListBox extends React.Component {
         }
 
         return (
-            <div style={style.container} ref={this.inputRef}>
-                {label}
-                {content}
+            <div style={style.container}>
+                <div style={style.edit_container} ref={this.ref}>
+                    {label}
+                    {content}
+                    {button}
+                </div>
                 {list}
-                {button}
             </div>
         );
 
@@ -158,7 +169,8 @@ TListBox.propTypes = {
     items: PropTypes.array,
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    showButton: PropTypes.any
+    showButton: PropTypes.any,
+    icon: PropTypes.string
 }
 
 export default TListBox;

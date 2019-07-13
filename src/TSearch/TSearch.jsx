@@ -211,10 +211,9 @@ class TSearch extends React.Component {
         let rect = this.inputRef.current.getBoundingClientRect();
         console.log('RECT: ' + JSON.stringify(rect));
         this.listPlace = {
-            top: rect.height + "px",
+            top: 0,
             left: 0,
-            width: rect.width + 'px',
-            marginLeft: "-" + rect.width + 'px'
+            width: rect.width + 'px'
         }
     }
 
@@ -250,7 +249,7 @@ class TSearch extends React.Component {
         if (this.getShowButton(this.props)) {
             button = (
                 <TIcon
-                    style={{width: "16px"}}
+                    style={style.icon}
                     name={this.state.showList ? "up" : "down"}
                     onClick={this.handleButtonClick} />
             );
@@ -273,9 +272,11 @@ class TSearch extends React.Component {
 
         return (
             <div style={style.container} ref={this.inputRef}>
-                {label}
-                {content}
-                {button}
+                <div style={style.edit_container}>
+                    {label}
+                    {content}
+                    {button}
+                </div>
                 {list}
             </div>
         );

@@ -2,8 +2,12 @@ import {INPUT} from '../styles';
 
 export default {
 
+    edit_container: {
+        ...INPUT.EDIT_CONTAINER
+    },
+
     container: {
-        ...INPUT.CONTAINER
+        ...INPUT.MAIN_CONTAINER
     },
 
     label: {
@@ -15,11 +19,13 @@ export default {
     },
 
     list: {
-
     },
 
     item: {
-        
+    },
+
+    icon: {
+        ...INPUT.ICON
     }
 
 }

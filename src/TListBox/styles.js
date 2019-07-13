@@ -2,8 +2,12 @@ import {INPUT} from '../styles';
 
 export default {
 
+    edit_container: {
+        ...INPUT.EDIT_CONTAINER
+    },
+
     container: {
-        ...INPUT.CONTAINER
+        ...INPUT.MAIN_CONTAINER
     },
 
     label: {
@@ -22,8 +26,8 @@ export default {
 
     },
 
-    button: {
-        width: "16px"
+    icon: {
+        ...INPUT.ICON
     }
 
 }

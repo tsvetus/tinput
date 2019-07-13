@@ -2,13 +2,33 @@ import {COLOR, SIZE, DEBUG, FONT} from './consts.js';
 
 export const INPUT = {
 
+    MAIN_CONTAINER: {
+        ...DEBUG,
+        borderBottom: "2px solid " + COLOR.BORDER,
+        height: SIZE.EDIT_HEIGHT,
+        backgroundColor: "transparent",
+        overflow: "visible",
+        cursor: "pointer"
+    },
+
+    EDIT_CONTAINER: {
+        ...DEBUG,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-end",
+        cursor: "pointer"
+    },
+
     CONTAINER: {
         ...DEBUG,
         display: "flex",
-        justifyContent: "flex-start",
+        justifyContent: "space-between",
+        alignItems: "flex-end",
         borderBottom: "2px solid " + COLOR.BORDER,
         height: SIZE.EDIT_HEIGHT,
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
+        overflow: "visible",
+        cursor: "pointer"
     },
 
     LABEL: {
@@ -16,15 +36,13 @@ export const INPUT = {
         fontWeight: "normal",
         fontFamily: FONT.LABEL.FAMILY,
         fontSize: FONT.LABEL.SIZE,
-        alignSelf: "flex-end",
         padding: "0",
         margin: "0 4px 0 0",
-        flexGrow: 0,
-        flexShrink: 0,
+        flex: "0 0 auto",
         color: COLOR.BORDER
     },
 
-    TEXTLABEL: {
+    TEXT_LABEL: {
         ...DEBUG,
         fontWeight: "normal",
         fontFamily: FONT.LABEL.FAMILY,
@@ -39,9 +57,9 @@ export const INPUT = {
         fontWeight: "normal",
         fontFamily: FONT.EDIT.FAMILY,
         fontSize: FONT.EDIT.SIZE,
-        alignSelf: "flex-end",
         padding: "0",
         margin: "0 0 0 0",
+        flex: "1 1 auto",
         width: "100%",
         color: COLOR.TEXT,
         outline: "none",
@@ -51,9 +69,10 @@ export const INPUT = {
 
     LIST: {
         ...DEBUG,
+        tabIndex: "0",
+        position: "relative",
         display: "flex",
         flexDirection: "column",
-        position: "fixed",
         overlay: "0",
         backgroundColor: "#ffffff",
         margin: "0",
@@ -62,7 +81,6 @@ export const INPUT = {
 
     ITEM: {
         ...DEBUG,
-//        fontWeight: "normal",
         fontFamily: FONT.EDIT.FAMILY,
         fontSize: FONT.EDIT.SIZE,
         margin: "0",
@@ -70,7 +88,15 @@ export const INPUT = {
         padding: "4px",
         cursor: "pointer",
         border: "1px solid " + COLOR.BORDER,
-        backgroundColor: "#fff"
+        zIndex: "99",
+        backgroundColor: "#fff",
+        marginTop: "-1px"
+    },
+
+    ICON: {
+        flex: "0 0 auto",
+        width: "18px",
+        marginLeft: "8px"
     }
 
-}
+};

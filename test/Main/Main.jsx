@@ -41,6 +41,7 @@ const inputStyle = {
     },
 
     edit: {
+        textAlign: "left"
     },
 
     list: {
@@ -177,6 +178,20 @@ class Main extends React.Component {
                             label="Item:"
                             value={2}
                             placeholder="Choose item"
+                            items={[
+                                {id: 1, name: "First item"},
+                                {id: 2, name: "Second item"}
+                            ]}
+                            empty={{id: 0, name: "-"}}
+                            onChange={this.handleChange} />
+
+                        <TListBox
+                            style={inputStyle}
+                            name="listboxIcon"
+                            label="Item:"
+                            value={2}
+                            placeholder="Choose item"
+                            icon={'add'}
                             items={[
                                 {id: 1, name: "First item"},
                                 {id: 2, name: "Second item"}

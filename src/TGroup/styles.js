@@ -15,11 +15,11 @@ export default {
     },
 
     label: {
-        ...INPUT.TEXTLABEL,
+        ...INPUT.TEXT_LABEL,
         display: "inline",
-        marginLeft: "16px",
-        marginBottom: "-8px",
-        margin: "0 0 -8px 4px",
+        // marginLeft: "16px",
+        // marginBottom: "-8px",
+        margin: "0 0 -8px 16px",
         padding: "0 4px 0 4px",
         backgroundColor: "#fff",
         opacity: "1",
