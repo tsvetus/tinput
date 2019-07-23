@@ -15,6 +15,7 @@ class TText extends React.Component {
         this.state = {value: this.props.value ? this.props.value : ''}
         this.handleChange = this.handleChange.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidUpdate(old) {
@@ -45,6 +46,12 @@ class TText extends React.Component {
         }
     }
 
+    handleClick(event) {
+        if (this.props.onClick) {
+            this.props.onClick(event);
+        }
+    }
+
     render () {
 
         let style = mergeStyles(styles, this.props.style);
@@ -65,7 +72,7 @@ class TText extends React.Component {
         );
 
         return (
-            <div style={style.container}>
+            <div style={style.container} onClick={this.handleClick}>
                 {label}
                 {content}
             </div>

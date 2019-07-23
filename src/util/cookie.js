@@ -33,3 +33,40 @@ export function getCookie(cname, def) {
         return def;
     }
 }
+
+const LIST_COUNT = 3;
+
+export function getCookieList(prefix) {
+    let list = [];
+    for (let i = 0; i < LIST_COUNT; i++) {
+        if (getCookie(prefix + i) != ""){
+            list[i] = {
+                id: i,
+                name: getCookie(prefix + i)
+            }
+        }
+    }
+    return list;
+}
+
+export function setCookieList(prefix, value) {
+    let found = false;
+    for (let i = 0; i < LIST_COUNT; i++) {
+        if (value == getCookie(prefix + i)) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        for (let i = 1; i < LIST_COUNT; i++) {
+            setCookie(prefix + i, getCookie(prefix + (i - 1)));
+        }
+        setCookie(prefix + 0, value);
+    }
+}
+
+export function deleteCookie(cname) {
+    setCookie(cname, "", {
+        expires: -1
+    })
+}

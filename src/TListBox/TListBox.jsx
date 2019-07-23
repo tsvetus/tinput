@@ -16,7 +16,7 @@ class TListBox extends React.Component {
             value: props.value,
             inputValue: this.findName(props.value, props.items),
             showList: false
-        }
+        };
         this.findName = this.findName.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -171,6 +171,6 @@ TListBox.propTypes = {
     onChange: PropTypes.func.isRequired,
     showButton: PropTypes.any,
     icon: PropTypes.string
-}
+};
 
 export default TListBox;

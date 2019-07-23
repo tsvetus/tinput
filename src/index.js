@@ -36,7 +36,9 @@ import {
     mergeStyles,
     strDate,
     getCookie,
-    setCookie
+    setCookie,
+    getCookieList,
+    setCookieList
 } from './util';
 
 import {
@@ -115,6 +117,8 @@ export {
     mergeStyles,
     strDate,
     getCookie,
-    setCookie
+    setCookie,
+    getCookieList,
+    setCookieList
 
 }

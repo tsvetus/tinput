@@ -1,6 +1,6 @@
 export const DEBUG = {
 //    border: "1px solid red"
-}
+};
 
 export const COLOR = {
     BORDER: "#6ca7b0",
@@ -11,11 +11,11 @@ export const COLOR = {
     ERROR: "#ff3333",
     MESSAGE: "#33ff33",
     CONTROL: "#555555"
-}
+};
 
 export const SIZE = {
     EDIT_HEIGHT: "34px"
-}
+};
 
 export const FONT = {
     EDIT: {
@@ -48,7 +48,7 @@ export const FONT = {
         SIZE: "16px",
         WEIGHT: "bold"
     }
-}
+};
 
 export const TABLE = {
 
@@ -62,4 +62,4 @@ export const TABLE = {
         border: "none"
     }
 
-}
+};
