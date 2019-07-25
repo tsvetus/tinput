@@ -205,6 +205,7 @@ class Main extends React.Component {
                             label="Search:"
                             placeholder="Enter text 'item'"
                             value={3}
+                            showButton={false}
                             onSearch={this.handleSearch}
                             onChange={this.handleChange} />
 

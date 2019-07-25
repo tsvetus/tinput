@@ -4,6 +4,7 @@ export const INPUT = {
 
     MAIN_CONTAINER: {
         ...DEBUG,
+        position: "relative",
         borderBottom: "2px solid " + COLOR.BORDER,
         height: SIZE.EDIT_HEIGHT,
         backgroundColor: "transparent",
@@ -13,6 +14,9 @@ export const INPUT = {
 
     EDIT_CONTAINER: {
         ...DEBUG,
+        position: "absolute",
+        bottom: "0",
+        width: "100%",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "flex-end",

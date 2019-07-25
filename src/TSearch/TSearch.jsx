@@ -20,7 +20,7 @@ class TSearch extends React.Component {
             showList: false,
             items: [],
             autoFocus: false
-        }
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);

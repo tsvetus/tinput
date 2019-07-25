@@ -25,8 +25,12 @@ class TTop extends React.Component {
         let tools = [];
         if (this.props.tools) {
             this.props.tools.forEach((v, i) => {
+                let st = {
+                    ...style.icon,
+                    ...v.style
+                };
                 tools.push(<TIcon key={i} name={v.icon}
-                    onClick={v.onClick} style={style.icon} />);
+                    onClick={v.onClick} style={st} />);
             });
         }
 
@@ -48,7 +52,9 @@ class TTop extends React.Component {
 }
 
 TTop.propTypes = {
+    style: PropTypes.object,
+    caption: PropTypes.string,
     onClick: PropTypes.func.isRequired
-}
+};
 
 export default TTop;

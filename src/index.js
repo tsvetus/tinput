@@ -33,6 +33,7 @@ import TYear from './TYear';
 import TGroup from './TGroup';
 
 import {
+    merge,
     mergeStyles,
     strDate,
     getCookie,
@@ -114,6 +115,7 @@ export {
     TABLE,
     FONT,
 
+    merge,
     mergeStyles,
     strDate,
     getCookie,

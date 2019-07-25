@@ -1,7 +1,7 @@
 export const TIMEOUT = 500;
 
 export function merge(...sources) {
-    let res = {}
+    let res = {};
     for (const source of sources) {
         if (source instanceof Array) {
             if (!(res instanceof Array)) {
