@@ -106,7 +106,8 @@ TMemo.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     autoSize: PropTypes.any,
-    valueNull: PropTypes.any
-}
+    valueNull: PropTypes.any,
+    label: PropTypes.string
+};
 
 export default TMemo;

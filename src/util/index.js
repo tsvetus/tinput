@@ -19,7 +19,8 @@ import {
     getCookie,
     setCookie,
     getCookieList,
-    setCookieList
+    setCookieList,
+    deleteCookie
 } from './cookie.js'
 
 
@@ -41,6 +42,7 @@ export {
     setCookie,
     getCookieList,
     setCookieList,
+    deleteCookie,
 
     TIMEOUT
 

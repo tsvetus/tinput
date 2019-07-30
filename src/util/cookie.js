@@ -1,11 +1,15 @@
 export function setCookie(cname, cvalue, exdays) {
+    let val = cvalue;
+    if (typeof cvalue === 'object') {
+        val = JSON.stringify(cvalue);
+    }
     if (exdays) {
         let d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        document.cookie = cname + "=" + val + ";" + expires + ";path=/";
     } else {
-        document.cookie = cname + "=" + cvalue + ";path=/";
+        document.cookie = cname + "=" + val + ";path=/";
     }
 }
 
@@ -20,10 +24,16 @@ export function getCookie(cname, def) {
         }
         if (c.indexOf(name) == 0) {
             let res = c.substring(name.length, c.length);
-            if (isNaN(def)) {
-                return res;
-            } else {
+            if (typeof def === 'number') {
                 return Number(res);
+            } else if (typeof def === 'object') {
+                if (res == 'undefined' || res == 'null' || res == '') {
+                    return def;
+                } else {
+                    return JSON.parse(res);
+                }
+            } else {
+                return res;
             }
         }
     }

@@ -39,7 +39,8 @@ import {
     getCookie,
     setCookie,
     getCookieList,
-    setCookieList
+    setCookieList,
+    deleteCookie
 } from './util';
 
 import {
@@ -121,6 +122,7 @@ export {
     getCookie,
     setCookie,
     getCookieList,
-    setCookieList
+    setCookieList,
+    deleteCookie
 
 }
