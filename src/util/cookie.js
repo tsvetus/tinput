@@ -27,11 +27,13 @@ export function getCookie(cname, def) {
             if (typeof def === 'number') {
                 return Number(res);
             } else if (typeof def === 'object') {
-                if (res == 'undefined' || res == 'null' || res == '') {
-                    return def;
-                } else {
-                    return JSON.parse(res);
+                let r = null;
+                try {
+                    r = JSON.parse(res);
+                } catch (err) {
+                    r = def;
                 }
+                return r;
             } else {
                 return res;
             }
