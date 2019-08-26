@@ -88,6 +88,6 @@ TScroll.propTypes = {
     margin: PropTypes.number,
     scrollBars: PropTypes.string,
     overflow: PropTypes.string
-}
+};
 
 export default TScroll;

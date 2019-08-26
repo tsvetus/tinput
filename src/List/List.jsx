@@ -152,7 +152,7 @@ List.propTypes = {
     empty: PropTypes.object,
     place: PropTypes.object,
     autoFocus: PropTypes.bool,
-    keyName: PropTypes.string
+    keyName: PropTypes.string,
 };
 
 export default List;

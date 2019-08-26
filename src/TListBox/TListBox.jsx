@@ -60,6 +60,7 @@ class TListBox extends React.Component {
             this.props.onChange({
                 value: event.value,
                 caption: event.name,
+                item: event.item,
                 name: this.props.name,
                 data: this.props.data
             });
@@ -79,7 +80,7 @@ class TListBox extends React.Component {
     handleButtonClick() {
         let rect = this.ref.current.getBoundingClientRect();
         this.listPlace = {
-            top: 0,
+            top: rect.height + 'px',
             left: 0,
             width: rect.width + 'px'
         };

@@ -29,9 +29,11 @@ class TDate extends React.Component {
         clearTimeout(this.timer);
         this.timer = setTimeout(
             () => {
+                let v = isoDate(event.value, this.format.mask);
+                let value = this.props.valueDate ? new Date(v) : v;
                 this.props.onChange({
                     ...event,
-                    value: isoDate(event.value, this.format.mask)
+                    value: value
                 });
             },
             this.props.timeout ? this.props.timeout : TIMEOUT
@@ -71,6 +73,7 @@ TDate.propTypes = {
     format: PropTypes.object,
     value: PropTypes.any,
     valueNull: PropTypes.any,
+    valueDate: PropTypes.any,
     data: PropTypes.any,
     timeout: PropTypes.number,
     onChange: PropTypes.func.isRequired

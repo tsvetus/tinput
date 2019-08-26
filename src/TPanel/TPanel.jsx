@@ -16,7 +16,7 @@ class TPanel extends React.Component {
             }
         }
 
-        let align = {}
+        let align = {};
         if (this.props.align === 'right') {
             align = {
                 justifyContent: "flex-end"
@@ -39,6 +39,6 @@ TPanel.propTypes = {
     style: PropTypes.object,
     dir: PropTypes.string,
     align: PropTypes.string
-}
+};
 
 export default TPanel;

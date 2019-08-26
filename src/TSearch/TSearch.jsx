@@ -75,10 +75,14 @@ class TSearch extends React.Component {
                     let v = '';
                     if (items) {
                         if (items[0]) {
-                            if (this.props.keyName) {
-                                v = items[0][this.props.keyName] + ' ' + items[0].name;
+                            let key = this.props.keyName ? items[0][this.props.keyName] : items[0].name.id;
+                            let name = items[0].name;
+                            if (this.props.showType === 'union') {
+                                v = key + ' ' + name;
+                            } else if (this.props.showType === 'key') {
+                                v = key;
                             } else {
-                                v = items[0].name;
+                                v = name;
                             }
                         }
                     }
@@ -209,9 +213,8 @@ class TSearch extends React.Component {
 
     updateRect() {
         let rect = this.inputRef.current.getBoundingClientRect();
-        console.log('RECT: ' + JSON.stringify(rect));
         this.listPlace = {
-            top: 0,
+            top: rect.height + 'px',
             left: 0,
             width: rect.width + 'px'
         }
@@ -295,7 +298,8 @@ TSearch.propTypes = {
     onSearch: PropTypes.func.isRequired,
     keyName: PropTypes.string,
     showButton: PropTypes.any,
-    count: PropTypes.number
-}
+    count: PropTypes.number,
+    showType: PropTypes.string
+};
 
 export default TSearch;
