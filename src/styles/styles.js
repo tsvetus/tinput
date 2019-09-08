@@ -89,7 +89,7 @@ export const INPUT = {
         fontSize: FONT.EDIT.SIZE,
         margin: "0",
         color: COLOR.TEXT,
-        padding: "4px",
+        padding: "8px",
         cursor: "pointer",
         border: "1px solid " + COLOR.BORDER,
         zIndex: "99",

@@ -5,7 +5,8 @@ export default {
     svg: {
         width: "32px",
         height: "32px",
-        cursor: "pointer"
+        cursor: "pointer",
+        flexShrink: "0"
     },
 
     path: {

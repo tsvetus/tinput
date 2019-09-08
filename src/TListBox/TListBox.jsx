@@ -150,8 +150,8 @@ class TListBox extends React.Component {
         }
 
         return (
-            <div style={style.container}>
-                <div style={style.edit_container} ref={this.ref}>
+            <div style={style.container} ref={this.ref}>
+                <div style={style.edit_container}>
                     {label}
                     {content}
                     {button}

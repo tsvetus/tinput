@@ -22,6 +22,7 @@ class TTime extends React.Component {
         this.format = props.format ? props.format : DEFAULT_FORMAT;
         this.state = {value: strTime(props.value, this.format)}
         this.handleChange = this.handleChange.bind(this);
+        this.handleIconClick = this.handleIconClick.bind(this);
     }
 
     handleChange(event) {
@@ -45,6 +46,16 @@ class TTime extends React.Component {
         }
     }
 
+    handleIconClick() {
+        this.setState({value: strTime(new Date(), this.format)}, () => {
+            this.props.onChange({
+                name: this.props.name,
+                data: this.props.data,
+                value: isoTime(this.state.value, this.format.mask)
+            });
+        });
+    }
+
     render () {
 
         let style = mergeStyles(styles, this.props.style);
@@ -57,6 +68,8 @@ class TTime extends React.Component {
                    label={this.props.label}
                    data={this.props.data}
                    mask={timeMask(this.format)}
+                   icon={this.props.icon}
+                   onIconClick={this.handleIconClick}
                    onChange={this.handleChange} />
         );
 
@@ -73,7 +86,9 @@ TTime.propTypes = {
     valueNull: PropTypes.any,
     data: PropTypes.any,
     timeout: PropTypes.number,
-    onChange: PropTypes.func.isRequired
-}
+    onChange: PropTypes.func.isRequired,
+    icon: PropTypes.string,
+    onIconClick: PropTypes.func
+};
 
 export default TTime;

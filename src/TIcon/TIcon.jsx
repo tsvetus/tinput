@@ -35,19 +35,25 @@ class TIcon extends React.Component {
         let svgStyle = {
             ...styles.svg,
             ...this.props.style
-        }
+        };
 
-        let pathStyle = {
-            ...icon.s
-        }
-        if (svgStyle.color) {
-            pathStyle.fill = svgStyle.color;
+        let content = null;
+        let w = "0 0 384 384";
+        if (icon) {
+            let pathStyle = {
+                ...icon.s
+            };
+            if (svgStyle.color) {
+                pathStyle.fill = svgStyle.color;
+            }
+            content = (<path style={pathStyle} d={icon.d}></path>);
+            w = icon.w;
         }
 
         return (
-            <svg style={svgStyle} viewBox={icon.w}
+            <svg style={svgStyle} viewBox={w}
                 onClick={this.handleClick}>
-                <path style={pathStyle} d={icon.d}></path>
+                {content}
             </svg>
         );
 

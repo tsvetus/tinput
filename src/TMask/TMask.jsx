@@ -5,6 +5,8 @@ import {mergeStyles} from '../util';
 
 import {parseValue, parseMask, correctValue, completed, empty} from '../util/mask.js';
 
+import TIcon from '../TIcon';
+
 import styles from './styles.js';
 
 /**
@@ -22,6 +24,7 @@ class TMask extends React.Component {
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleIconClick = this.handleIconClick.bind(this);
         this.ref = React.createRef();
     }
 
@@ -76,6 +79,12 @@ class TMask extends React.Component {
 
     }
 
+    handleIconClick() {
+        if (this.props.onIconClick) {
+            this.props.onIconClick();
+        }
+    }
+
     render () {
 
         let style = mergeStyles(styles, this.props.style);
@@ -96,10 +105,16 @@ class TMask extends React.Component {
                 onChange={this.handleChange} />
         );
 
+        let icon = null;
+        if (this.props.icon && this.props) {
+            icon = (<TIcon style={style.icon} name={this.props.icon} onClick={this.handleIconClick} />);
+        }
+
         return (
             <div style={style.container}>
                 {label}
                 {content}
+                {icon}
             </div>
         );
 
@@ -115,7 +130,9 @@ TMask.propTypes = {
     value: PropTypes.any,
     valueNull: PropTypes.any,
     mask: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    icon: PropTypes.string,
+    onIconClick: PropTypes.func
 };
 
 export default TMask;

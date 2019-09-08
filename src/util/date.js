@@ -50,7 +50,9 @@ export function strDate(source, format) {
 
     let str = null;
     if (source instanceof Date) {
-        str = source.toISOString().substr(0, 10);
+        let offset = source.getTimezoneOffset();
+        let d = new Date(source.getTime() - offset*60*1000);
+        str = d.toISOString().substr(0, 10);
     } else if (ISO_DATE_EXP.test(source)) {
         str = source.substr(0, 10);
     } else {
@@ -113,7 +115,9 @@ export function strTime(source, format) {
 
     let str = null;
     if (source instanceof Date) {
-        str = source.toISOString().substr(11, 8);
+        let offset = source.getTimezoneOffset();
+        let d = new Date(source.getTime() - offset*60*1000);
+        str = d.toISOString().substr(11, 8);
     } else {
         str = timeValue(source, format);
     }
