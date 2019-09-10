@@ -7,7 +7,7 @@ class TYear extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {value: new Date(props.value, 1, 1)}
+        this.state = {value: new Date(props.value, 1, 1, 12)}
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -20,7 +20,7 @@ class TYear extends React.Component {
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value) {
-            this.setState({value: new Date(this.props.value, 1, 1)});
+            this.setState({value: new Date(this.props.value, 1, 1, 12)});
         }
     }
 

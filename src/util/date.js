@@ -50,7 +50,7 @@ export function strDate(source, format) {
 
     let str = null;
     if (source instanceof Date) {
-        let offset = source.getTimezoneOffset();
+        let offset = 0;//source.getTimezoneOffset();
         let d = new Date(source.getTime() - offset*60*1000);
         str = d.toISOString().substr(0, 10);
     } else if (ISO_DATE_EXP.test(source)) {
