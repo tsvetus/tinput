@@ -10,6 +10,8 @@ import {
     INPUT
 } from './styles.js';
 
+import ICONS from './icons.js';
+
 export {
 
     COLOR,
@@ -18,6 +20,8 @@ export {
     FONT,
     DEBUG,
 
-    INPUT
+    INPUT,
+
+    ICONS
 
 }

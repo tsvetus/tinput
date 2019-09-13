@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.js';
 
-import icons from './icons.js';
+import {ICONS} from '../styles';
 
 /**
  * Component representing icons.
@@ -30,7 +30,7 @@ class TIcon extends React.Component {
 
     render () {
 
-        let icon = icons[this.props.name];
+        let icon = ICONS[this.props.name];
 
         let svgStyle = {
             ...styles.svg,

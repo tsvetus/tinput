@@ -48,6 +48,7 @@ import {
     SIZE,
     TABLE,
     FONT,
+    ICONS
 } from './styles';
 
 export {
@@ -115,6 +116,7 @@ export {
     SIZE,
     TABLE,
     FONT,
+    ICONS,
 
     merge,
     mergeStyles,
