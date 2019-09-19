@@ -50,6 +50,6 @@ TButton.propTypes = {
     name: PropTypes.string,
     data: PropTypes.any,
     wait: PropTypes.any
-}
+};
 
 export default TButton;

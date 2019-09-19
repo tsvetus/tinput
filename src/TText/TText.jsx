@@ -90,7 +90,8 @@ TText.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    onKeyDown: PropTypes.func
-}
+    onKeyDown: PropTypes.func,
+    label: PropTypes.string
+};
 
 export default TText;
