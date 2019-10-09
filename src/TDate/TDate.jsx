@@ -22,6 +22,7 @@ class TDate extends React.Component {
         this.format = props.format ? props.format : DEFAULT_FORMAT;
         this.state = {value: strDate(props.value, this.format)};
         this.handleChange = this.handleChange.bind(this);
+        this.handleIconClick = this.handleIconClick.bind(this);
     }
 
     handleChange(event) {
@@ -47,6 +48,16 @@ class TDate extends React.Component {
         }
     }
 
+    handleIconClick() {
+        this.setState({value: strDate(new Date(), this.format)}, () => {
+            this.props.onChange({
+                name: this.props.name,
+                data: this.props.data,
+                value: isoDate(this.state.value, this.format.mask)
+            });
+        });
+    }
+
     render () {
 
         let style = mergeStyles(styles, this.props.style);
@@ -59,6 +70,8 @@ class TDate extends React.Component {
                    label={this.props.label}
                    data={this.props.data}
                    mask={dateMask(this.format)}
+                   icon={this.props.icon}
+                   onIconClick={this.handleIconClick}
                    onChange={this.handleChange} />
         );
 
