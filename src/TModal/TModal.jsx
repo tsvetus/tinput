@@ -100,7 +100,7 @@ TModal.propTypes = {
     style: PropTypes.object,
     open: PropTypes.any,
     wait: PropTypes.any,
-    caption: PropTypes.caption.string,
+    caption: PropTypes.string,
     onClose: PropTypes.func.isRequired
 };
 
