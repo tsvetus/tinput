@@ -29,6 +29,8 @@ class TResponse extends React.Component {
 }
 
 TResponse.propTypes = {
-}
+    error: PropTypes.string,
+    message: PropTypes.string
+};
 
 export default TResponse;

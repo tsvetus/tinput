@@ -13,7 +13,7 @@ class TIndicator extends React.Component {
         let style = {
             ...styles,
             ...this.props.style
-        }
+        };
 
         let char = (this.props.open === true) ? '&#8593;' : '&#8595;';
 

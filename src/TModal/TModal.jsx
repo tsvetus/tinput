@@ -12,7 +12,7 @@ class TModal extends React.Component {
         this.state = {
             timer: null,
             wait: 0
-        }
+        };
         this.handleCancel = this.handleCancel.bind(this);
     }
 
@@ -97,7 +97,11 @@ class TModal extends React.Component {
 }
 
 TModal.propTypes = {
+    style: PropTypes.object,
+    open: PropTypes.any,
+    wait: PropTypes.any,
+    caption: PropTypes.caption.string,
     onClose: PropTypes.func.isRequired
-}
+};
 
 export default TModal;

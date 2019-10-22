@@ -85,10 +85,15 @@ class TForm extends React.Component {
 }
 
 TForm.propTypes = {
+    style: PropTypes.object,
+    open: PropTypes.any,
+    wait: PropTypes.any,
+    caption: PropTypes.string,
+    disable: PropTypes.any,
     onClose: PropTypes.func.isRequired,
     buttons: PropTypes.object.isRequired,
     error: PropTypes.string,
     message: PropTypes.string
-}
+};
 
 export default TForm;
