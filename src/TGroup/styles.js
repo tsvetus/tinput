@@ -1,4 +1,4 @@
-import {COLOR, FONT, INPUT} from '../styles';
+import {COLOR, INPUT} from '../styles';
 
 export default {
 
@@ -17,8 +17,6 @@ export default {
     label: {
         ...INPUT.TEXT_LABEL,
         display: "inline",
-        // marginLeft: "16px",
-        // marginBottom: "-8px",
         margin: "0 0 -8px 16px",
         padding: "0 4px 0 4px",
         backgroundColor: "#fff",

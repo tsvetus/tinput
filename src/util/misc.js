@@ -37,3 +37,11 @@ export function checkEmail(source) {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(source).toLowerCase());
 }
+
+export function nvl(source, def) {
+    if (source === null || source === undefined) {
+        return def;
+    } else {
+        return source;
+    }
+}

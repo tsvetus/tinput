@@ -17,6 +17,7 @@ export const INPUT = {
         position: "absolute",
         bottom: "0",
         width: "100%",
+        height: "100%",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "flex-end",

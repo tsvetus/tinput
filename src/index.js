@@ -33,6 +33,7 @@ import TYear from './TYear';
 import TGroup from './TGroup';
 
 import {
+    nvl,
     merge,
     mergeStyles,
     strDate,
@@ -118,6 +119,7 @@ export {
     FONT,
     ICONS,
 
+    nvl,
     merge,
     mergeStyles,
     strDate,
