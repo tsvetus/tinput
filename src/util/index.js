@@ -1,4 +1,5 @@
 import {
+    clone,
     nvl,
     merge,
     mergeStyles,
@@ -26,6 +27,7 @@ import {
 
 export {
 
+    clone,
     nvl,
     merge,
     mergeStyles,

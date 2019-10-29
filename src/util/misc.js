@@ -45,3 +45,22 @@ export function nvl(source, def) {
         return source;
     }
 }
+
+export function clone(source) {
+    let dest = null;
+    if (source instanceof Array) {
+        dest = source.slice();
+        for (let i=0; i<dest.length; i++) {
+            dest[i] = clone(dest[i]);
+        }
+    } else if (source instanceof Object) {
+        dest = Object.assign({}, source);
+        let keys = Object.keys(dest);
+        for (let i=0; i<keys.length; i++) {
+            dest[keys[i]] = clone(dest[keys[i]]);
+        }
+    } else {
+        dest = source;
+    }
+    return dest;
+}
