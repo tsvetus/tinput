@@ -33,6 +33,7 @@ import TYear from './TYear';
 import TGroup from './TGroup';
 
 import {
+    download,
     clone,
     nvl,
     merge,
@@ -120,6 +121,7 @@ export {
     FONT,
     ICONS,
 
+    download,
     clone,
     nvl,
     merge,

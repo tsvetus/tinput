@@ -6,13 +6,12 @@ export default {
     modal: {
         display: "block", /* Hidden by default */
         position: "fixed", /* Stay in place */
-        zindex: "1", /* Sit on top */
+        zIndex: "10", /* Sit on top */
         left: "0",
         top: "0",
         width: "100%", /* Full width */
         height: "100%", /* Full height */
         overflow: "auto", /* Enable scroll if needed */
-        backgroundColor: "rgb(0,0,0)", /* Fallback color */
         backgroundColor: "rgba(0,0,0,0.4)", /* Black w/ opacity */
         backdrop: "static",
         keyboard: "false",

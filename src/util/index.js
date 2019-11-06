@@ -1,4 +1,5 @@
 import {
+    download,
     clone,
     nvl,
     merge,
@@ -27,6 +28,7 @@ import {
 
 export {
 
+    download,
     clone,
     nvl,
     merge,

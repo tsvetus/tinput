@@ -64,3 +64,16 @@ export function clone(source) {
     }
     return dest;
 }
+
+export function download(url, filename) {
+    let link = document.createElement("a");
+    if (filename) {
+        link.download = filename;
+    }
+    link.target = "_blank";
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+//    delete link;
+}
