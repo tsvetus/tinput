@@ -156,9 +156,8 @@ class TSide extends React.Component {
 
         let scrollStyle = {
             container: {
-                width: "100%",
+                width: this.props.width,
                 backgroundColor: "none"
-
             },
             content: {
                 ...style.content,

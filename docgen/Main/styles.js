@@ -4,7 +4,8 @@ export default {
 
     top: {
         padding: "16px",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        borderBottom: "1px solid " + styles.colors.frame
     },
 
     box: {
@@ -17,7 +18,7 @@ export default {
             backgroundColor: styles.colors.face,
             borderRight: "1px solid " + styles.colors.frame
         },
-        frame: {
+        content: {
             paddingTop: "8px"
         }
     },
@@ -27,8 +28,7 @@ export default {
             width: "100%"
         },
         content: {
-            padding: "32px 8px 0 8px",
-            borderTop: "1px solid " + styles.colors.frame
+            padding: "32px 8px 0 8px"
         }
     },
 
