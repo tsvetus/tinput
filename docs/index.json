@@ -2066,11 +2066,11 @@
           "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
           "required": false
         },
-        "button": {
-          "type": "any",
-          "description": "If \"true\" (by default) main menu button appears in the left corner of component",
+        "icon": {
+          "type": "string",
+          "description": "Name of the main menu icon appeared in the left corner of component",
           "required": false,
-          "defaultValue": "true"
+          "defaultValue": "'menu'"
         },
         "caption": {
           "type": "any",

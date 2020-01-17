@@ -50,6 +50,14 @@ class TTop extends React.Component {
             contain(this.props.style)
         );
 
+        let icon = null;
+        if (this.props.icon) {
+            icon = <Icon
+                name={this.props.icon}
+                style={style.button}
+                onClick={this.handleClick} />;
+        }
+
         let tools = [];
         if (this.props.tools) {
             this.props.tools.forEach((v, i) => {
@@ -70,10 +78,7 @@ class TTop extends React.Component {
 
         return (
             <div style={style.container}>
-                {this.props.button ? <Icon
-                    name="menu"
-                    style={style.button}
-                    onClick={this.handleClick} /> : <div></div>}
+                {icon}
                 <div style={style.caption}>{caption}</div>
                 <div style={style.tools}>{tools}</div>
             </div>
@@ -105,8 +110,8 @@ TTop.propTypes = {
     name: PropTypes.string,
     /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
-    /** If "true" (by default) main menu button appears in the left corner of component */
-    button: PropTypes.any,
+    /** Name of the main menu icon appeared in the left corner of component */
+    icon: PropTypes.string,
     /** Component caption */
     caption: PropTypes.any,
     /** Array of component tools */
@@ -129,7 +134,7 @@ TTop.propTypes = {
 };
 
 TTop.defaultProps = {
-    button: true
+    icon: 'menu'
 };
 
 export default TTop;
