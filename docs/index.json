@@ -1321,6 +1321,59 @@
         }
       }
     },
+    "TIcon": {
+      "description": "Clickable icon",
+      "displayName": "TIcon",
+      "methods": [],
+      "example": {
+        "name": "TIconExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Component name",
+          "required": true
+        },
+        "data": {
+          "type": "any",
+          "description": "Component data",
+          "required": false
+        },
+        "onClick": {
+          "type": "func",
+          "description": "On click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            }
+          },
+          "required": false
+        }
+      }
+    },
     "TDate": {
       "description": "Date editor with masked input and date value validation",
       "displayName": "TDate",

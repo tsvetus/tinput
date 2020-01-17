@@ -7,6 +7,7 @@ import {merge, contain} from '../../util';
 
 import styles from '../../styles';
 
+/** Clickable icon */
 class TIcon extends React.Component {
 
     render () {
@@ -31,9 +32,21 @@ class TIcon extends React.Component {
 TIcon.icons = Icon.icons;
 
 TIcon.propTypes = {
-    style: PropTypes.object,
+    /** Component style: */
+    style: PropTypes.shape({
+        /** Style for outer component container */
+        container: PropTypes.object
+    }),
+    /** Component name */
     name: PropTypes.string.isRequired,
+    /** Component data */
     data: PropTypes.any,
+    /**
+     * On click event
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     */
     onClick: PropTypes.func
 };
 
