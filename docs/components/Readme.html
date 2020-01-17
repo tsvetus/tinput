@@ -1,0 +1,289 @@
+<h1 id="tinput">tinput</h1>
+
+<p>Set of visual React components designed for constructing web application interfaces.</p>
+
+<p><code>tinput</code> provides set of visual components constructed on <code>&lt;div&gt;</code> element with editable content:</p>
+
+<ul>
+    <li><code>TText</code></li>
+
+    <li><code>TMemo</code></li>
+
+    <li><code>TListBox</code></li>
+
+    <li><code>TSearch</code></li>
+
+    <li><code>TDate</code></li>
+
+    <li><code>TTime</code></li>
+</ul>
+
+<p>No text editor components:</p>
+
+<ul>
+    <li><code>TCheck</code></li>
+</ul>
+
+<p>Buttons and icons:</p>
+
+<ul>
+    <li><code>TButton</code></li>
+
+    <li><code>TIcon</code></li>
+</ul>
+
+<p>Grids and lists:</p>
+
+<ul>
+    <li><code>TGrid</code></li>
+
+    <li><code>TFilm</code></li>
+</ul>
+
+<p>Control organizers:</p>
+
+<ul>
+    <li><code>TGroup</code></li>
+
+    <li><code>TPanel</code></li>
+
+    <li><code>TScroll</code></li>
+
+    <li><code>TPager</code></li>
+</ul>
+
+<p>Menus:</p>
+
+<ul>
+    <li><code>TTop</code></li>
+
+    <li><code>TSide</code></li>
+</ul>
+
+<p>Modals:</p>
+
+<ul>
+    <li><code>TModal</code></li>
+
+    <li><code>TForm</code></li>
+</ul>
+
+<h2 id="stylization">Stylization</h2>
+
+<p>Every component in <code>tinput</code> library has <code>style</code> property stands for providing custom style for each component:</p>
+
+<pre><code class="javascript language-javascript">import React from 'react';
+import {TText} from 'tinput';
+
+const style = {container: {border: "1px solid red"}, label: {width: "100px"}};
+
+class MyComponent extends React.Component {
+    render () {
+         return &lt;TText style={style} label={'TText component:'} /&gt;
+    }
+}
+
+export default MyComponent;
+</code></pre>
+
+<p>Each component has it's own style structure described in component's page. Every
+    component style has <code>container</code> field represents outer component box. Any <code>string</code> fields on zero level of style treated
+    as <code>container</code> style fields. It means that <code>style={{width: "100px"}}</code> equals to <code>style={{container: {width: "100px"}}}</code></p>
+
+<p>In addition one can register global project styles using <code>registerStyles</code> function as follows: </p>
+
+<pre><code class="javascript language-javascript">import {registerStyles} from 'tinput';
+
+const styles = {
+    TComponent: {
+        /** Global style for components: TText, TListBox, TMemo, TCheck, TGroup e.t.c. */
+        container: {
+            backgroundColor: '#eee'
+        },
+        edit: {
+            border: "1px solid red"
+        }
+    },
+    TMemo: {
+        /** Custom style for TMemo component. */
+        edit: {
+            border: "1px solid green"
+        }
+    },
+    MyListBox: {
+        /** Custom style for component with 'name' property equals to 'MyListBox' */
+        list: {
+            item: {
+                backgroundColor: "yellow"
+            }
+        }
+    }
+};
+
+const templates = {
+
+    /** Global color palette */
+    colors: {
+        border: "rgba(42,41,117,0.89)",
+        face: "#eee",
+        frame: "#bfbbff",
+        control: "#777",
+        placeholder: "#777",
+        text: "#000",
+        invalid: "#a31",
+        window: "#fff",
+        panel: "#eee",
+        error: "#a31",
+        message: "#31a",
+        signal: "#f55",
+        indicator: "#a31"
+    },
+
+    /** Global fonts palette */
+    fonts: {
+        common: {
+            fontFamily: "Arial",
+            fontSize: "18px"
+        },
+        code: {
+            fontFamily: "Helvetica",
+            fontSize: "16px"
+        }
+    }
+
+};
+
+registerStyles(styles, templates);
+</code></pre>
+
+<p>New <code>styles</code> make all controls appeared on grey background then all editable controls have <code>red</code> border except <code>green</code>
+    border for <code>TMemo</code> and with yellow list items in <code>TListBox</code> component with <code>name="MyListBox"</code>. </p>
+
+<h2 id="properties">Properties</h2>
+
+<p>Each component has it's own set of properties described in component's page. The
+    most common properties are:</p>
+
+<ul>
+    <li><code>style</code> - <code>Object</code> containing component styles organized in hierarchical structure. If assigned component
+        merges supplied styles with internal styles. Styles assigned to <code>style</code> property has highest priority than
+        any other component styles.</li>
+
+    <li><code>name</code> - <code>String</code> containing component name. If assigned any component events return back <code>name</code> value in
+        <code>event</code> object. In addition <code>name</code> value may be used in global styles registered by <code>registerStyles</code> function to
+        assign to this component individual style. This style has higher priority than internal styles but lower priority
+        than style assigned to <code>style</code> property.</li>
+
+    <li><code>data</code> - Property of <code>any type</code>. Contains any data associated with component. If assigned any component events
+        return back <code>data</code> value in <code>event</code> object.</li>
+
+    <li><code>label</code> - <code>String</code> contains label text.</li>
+
+    <li><code>placeholder</code> - <code>String</code> placeholder text.</li>
+
+    <li><code>value</code> - Component value. Type of <code>value</code> depends on component itself. In text edit component <code>value</code> is of
+        <code>String</code> type. In list box components <code>value</code> contains list item key value.  </li>
+
+    <li><code>icon</code> - Icon name from available icon list (see <code>TIcon</code> component description).
+        If assigned the appropriate icon appeared near text editor. </li>
+
+    <li><code>timeout</code> - <code>Number</code> contains timeout for <code>onChange</code> event. Default: <code>700 ms</code>.</li>
+
+    <li><code>layout</code> - Label position towards text editor. Available values:
+
+
+        <ul>
+            <li><code>left</code> - Label is on the left from text editor.</li>
+
+            <li><code>top</code> - Label is on the top of text editor.</li></ul>
+    </li>
+</ul>
+
+<p>The full list of properties shown in component's page</p>
+
+<h3 id="example">Example</h3>
+
+<pre><code class="javascript language-javascript">import React from 'react';
+import {TGroup, TButton, TText, clone, nvl} from 'tinput';
+
+class MyComponent extends React.Component {
+
+    constructor (props) {
+        super(props);
+        this.state = {
+            text: '',
+            phone: '',
+            email: ''
+        };
+        this.change = this.change.bind(this);
+    }
+
+    change(event) {
+        this.setState({[event.name]: event.value});
+    }
+
+    render () {
+
+         return (
+
+            &lt;TGroup
+                style={{container: {display: "flex", flexDirection: "column", width: "500px"}}}
+                label="Group box"&gt;
+
+                &lt;TButton style={{color: "green"}}&gt;
+                    {'Click me'}
+                &lt;/TButton&gt;
+
+                &lt;TText
+                    style={{label: {width: "80px"}}}
+                    value={this.state.text}
+                    label={'Text:'}
+                    name={'text'}
+                    placeholder={'Enter more than 3 symbols ...'}
+                    onValidate={(event) =&gt; {return nvl(event.value, '').length &gt; 3;}}
+                    onChange={this.change} /&gt;
+
+                &lt;TText
+                    style={{label: {width: "180px"}}}
+                    value={this.state.phone}
+                    label={'Phone:'}
+                    name={'phone'}
+                    placeholder={'Enter phone number ...'}
+                    mask={{mask: '+1 (NNN) NNN-NN-NN', empty: '_'}}
+                    onChange={this.change} /&gt;
+
+                &lt;TText
+                    style={{label: {width: "180px"}}}
+                    value={this.state.email}
+                    label={'EMail:'}
+                    name={'email'}
+                    regexp={TText.regexp['email']}
+                    placeholder={'Enter email address ...'}
+                    onChange={this.change} /&gt;
+
+            &lt;/TGroup&gt;
+
+         );
+
+    }
+
+}
+
+export default MyComponent;
+</code></pre>
+
+<h2 id="events">Events</h2>
+
+<p>Some events are occur with delay determined by <code>timeout</code> property. Default timeout is <code>700 ms</code>.
+    All events have one argument <code>event</code> of type <code>Object</code>. The structure of <code>event</code> object depends on caller
+    component. The most common list of <code>event</code> fields listed below: </p>
+
+<ul>
+    <li><code>name</code> - component name from <code>name</code> property.</li>
+
+    <li><code>data</code> - any data from <code>data</code> property.</li>
+
+    <li><code>value</code> - current component value. Text editors contain entered tex but list boxes contain selected item key value. </li>
+</ul>
+
+<p>The full list of event fields shown in component's page</p>

@@ -1,18 +1,16 @@
-const util = require('util');
 const path = require('path');
 
 module.exports = {
     mode: 'development',
     entry: {
-        test: [
-//            'webpack-dev-server/client?http://localhost:9090',
-            path.resolve(__dirname, './test/test.jsx')
+        example: [
+            path.resolve(__dirname, './docgen/index.jsx')
         ]
     },
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'docs'),
         publicPath: '/',
-        filename: '[name].js'
+        filename: 'index.js'
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -21,7 +19,8 @@ module.exports = {
         	path.resolve(__dirname, 'node_modules')
         ],
         alias: {
-            tinput: path.resolve(__dirname, 'src')
+            tinput: path.resolve(__dirname, 'src'),
+            examples: path.resolve(__dirname, 'src/examples')
         }
     },
     module: {
@@ -29,15 +28,12 @@ module.exports = {
             test: /\.js$|\.jsx$/,
             use: ['babel-loader'],
             exclude: [/node_modules/, /build/]
-        }, {
-            test: /\.css|\.less$$/,
-            use: ['style-loader', 'css-loader', 'less-loader']
         }]
     },
     devServer: {
-        contentBase: path.resolve(__dirname, 'build'),
+        contentBase: path.resolve(__dirname, 'docs'),
         publicPath: '/',
-        port: 9090,
+        port: 7070,
         host: '0.0.0.0'
     }
-}
+};

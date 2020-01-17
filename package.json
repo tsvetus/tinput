@@ -1,23 +1,22 @@
 {
   "name": "tinput",
-  "version": "1.2.14",
+  "version": "2.0.0",
   "description": "Set of visual React components",
   "main": "./index.js",
   "scripts": {
-    "watch": "webpack --watch --config webpack.config.watch.js",
     "dev": "webpack-dev-server --color --hot --inline --watch --config webpack.config.dev.js",
-    "test": "webpack --display-error-details --config webpack.config.test.js",
+    "docs": "webpack --display-error-details --config webpack.config.docs.js",
     "prod": "webpack --display-error-details --config webpack.config.prod.js",
-    "doc": "jsdoc src/index.js --destination doc",
-    "build": "webpack --config webpack.config.test.js && webpack --config webpack.config.prod.js && jsdoc src/index.js --destination doc"
+    "build": "(node docgen/docgen.js) && webpack --config webpack.config.prod.js && webpack --config webpack.config.docs.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/tsvetus/tinput.git"
   },
   "keywords": [
+    "edit",
     "input",
-    "ReactJS",
+    "React",
     "component"
   ],
   "author": "Vyacheslav Tsvetus",
@@ -25,25 +24,18 @@
   "license": "MIT",
   "dependencies": {
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.0",
-    "@babel/core": "^7.5.0",
-    "@babel/preset-env": "^7.5.0",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
-    "css-loader": "^3.0.0",
-    "install": "^0.13.0",
-    "jsdoc": "^3.6.2",
-    "less": "^3.9.0",
-    "less-loader": "^5.0.0",
     "path": "^0.12.7",
-    "style-loader": "^0.23.1",
-    "util": "^0.12.1",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.5",
-    "webpack-dev-server": "^3.7.2"
+    "react-docgen": "^5.1.0",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   }
 }

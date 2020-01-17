@@ -1,33 +1,5 @@
-import {parseValue} from './mask.js';
+import {REGEXP} from './const.js';
 
-const ISO_DATE_EXP = /^\d{4}-([0]\d|1[0-2])-([0-2]\d|3[01])$/;
-
-/**
- * Returns date mask based on date format
- * @param format
- * @returns {{mask: string, empty: *}}
- */
-export function dateMask(format) {
-    return {
-        mask: format.mask
-            .replace(/D/g, 'N')
-            .replace(/M/g, 'N')
-            .replace(/Y/g, 'N'),
-        empty: format.empty
-    };
-}
-
-export function dateValue(value, format) {
-    let mask = dateMask(format);
-    return parseValue(value, mask);
-}
-
-/**
- * Converts Date or masked string to ISO date
- * @param source - source Date or masked string date
- * @param mask - date mask for string date
- * @returns {string|null} - ISO date
- */
 export function isoDate(source, mask) {
     if (source instanceof Date) {
         return source.toISOString().substr(0, 10);
@@ -36,64 +8,76 @@ export function isoDate(source, mask) {
         let m = mask.indexOf('MM') >= 0 ? source.substr(mask.indexOf('MM'), 2) : '01';
         let y = mask.indexOf('YYYY') >= 0 ? source.substr(mask.indexOf('YYYY'), 4) : '1970';
         return y + '-' + m + '-' + d;
+    } else if (source) {
+        if (testIsoDate(source)) {
+            return source;
+        }
     }
     return null;
 }
 
-/**
- * Converts Date or ISO date to masked string date
- * @param source - Date or ISO string date
- * @param mask - Mask for conversion
- * @returns {string|null} - Masked string date
- */
-export function strDate(source, format) {
+export function strDate(source, mask, empty) {
 
     let str = null;
     if (source instanceof Date) {
-        let offset = 0;//source.getTimezoneOffset();
+        let offset = 0;
         let d = new Date(source.getTime() - offset*60*1000);
         str = d.toISOString().substr(0, 10);
-    } else if (ISO_DATE_EXP.test(source)) {
+    } else if (REGEXP.isoDate.test(source)) {
         str = source.substr(0, 10);
     } else {
-        str = dateValue(source, format);
+        return source;
+    }
+
+    if (!str) {
+        str = '';
     }
 
     let d = str.substr(8, 2);
     let m = str.substr(5, 2);
     let y = str.substr(0, 4);
 
-    return format.mask.replace('DD', d).replace('MM', m).replace('YYYY', y);
+    if (mask) {
+        return mask.replace('DD', d).replace('MM', m).replace('YYYY', y);
+    } else {
+        return 'DD.MM.YYYY'.replace('DD', d).replace('MM', m).replace('YYYY', y);
+    }
 
 }
 
-/**
- * Returns time mask based on time format
- * @param format
- * @returns {{mask: string, empty: *}}
- */
-export function timeMask(format) {
-    return {
-        mask: format.mask
-            .replace(/h/g, 'N')
-            .replace(/m/g, 'N')
-            .replace(/s/g, 'N'),
-        empty: format.empty
-    };
+function leapYear(year) {
+    return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 }
 
-export function timeValue(value, format) {
-    let mask = timeMask(format);
-    return parseValue(value, mask);
+export function testIsoDate(source) {
+    if (REGEXP.isoDate.test(source)) {
+        let d = Number.parseInt(source.substr(8, 2));
+        let m = Number.parseInt(source.substr(5, 2));
+        let y = Number.parseInt(source.substr(0, 4));
+        if ([1, 3, 5, 7, 8, 10, 12].indexOf(m) >= 0) {
+            return d > 0 && d <= 31;
+        } else if ([4, 6, 9, 11].indexOf(m) >= 0) {
+            return d > 0 && d <= 30;
+        } else if (m === 2) {
+            if (leapYear(Number.parseInt(y))) {
+                return d > 0 && d <= 29;
+            } else {
+                return d > 0 && d <= 28;
+            }
+        }
+    } else {
+        return false;
+    }
 }
 
-/**
- * Converts Date or masked string to ISO time
- * @param source - source Date or masked string time
- * @param mask - time mask for string time
- * @returns {string|null} - ISO time
- */
-export function isoTime(source, mask) {
+export function cutDate(source) {
+    let date = (new Date(source)).toISOString();
+    let d = date.substr(8, 2);
+    let m = date.substr(5, 2);
+    return d + '.' + m;
+}
+
+export function isoTime(mask, source) {
     if (source instanceof Date) {
         return source.toISOString().substr(11, 8);
     } else if (source && mask) {
@@ -105,13 +89,7 @@ export function isoTime(source, mask) {
     return null;
 }
 
-/**
- * Converts Date or ISO time to masked string time
- * @param source - Date or ISO string time
- * @param mask - Mask for conversion
- * @returns {string|null} - Masked string time
- */
-export function strTime(source, format) {
+export function strTime(mask, empty, source) {
 
     let str = null;
     if (source instanceof Date) {
@@ -119,17 +97,36 @@ export function strTime(source, format) {
         let d = new Date(source.getTime() - offset*60*1000);
         str = d.toISOString().substr(11, 8);
     } else {
-        str = timeValue(source, format);
+        str = source;
+    }
+
+    if (!str) {
+        str = '';
     }
 
     let h = str.substr(0, 2);
     let m = str.substr(3, 2);
     let s = str.substr(6, 2);
 
-    return format.mask.replace('hh', h).replace('mm', m).replace('ss', s);
+    return mask.replace('hh', h).replace('mm', m).replace('ss', s);
 
 }
 
-export function seconds(source) {
-    return Date.parse('1970 ' + source + ' GMT')/1000;
+export function testIsoTime(source) {
+    if (REGEXP.isoTime.test(source)) {
+        let h = Number.parseInt(source.substr(0, 2));
+        let m = Number.parseInt(source.substr(3, 2));
+        let s = Number.parseInt(source.substr(6, 2));
+        return (
+            h >= 0 && h <= 59 &&
+            m >= 0 && m <= 59 &&
+            s >= 0 && s <= 59);
+    } else {
+        return false;
+    }
 }
+
+export function cutTime(source) {
+    return source.substring(0, 5);
+}
+

@@ -1,136 +1,97 @@
-/**
- * TInput  module
- * @module tinput
- */
-
-import TIcon from './TIcon';
-
-import TText from './TText';
-import TListBox from './TListBox';
-import TSearch from './TSearch';
-import TMask from './TMask';
-import TDate from './TDate';
-import TTime from './TTime';
-import TMail from './TMail';
-import TMemo from './TMemo';
-import TCheck from './TCheck';
-
-import TButton from './TButton';
-import TIndicator from './TIndicator';
-import TPanel from './TPanel';
-import TScroll from './TScroll';
-import TTop from './TTop';
-import TSide from './TSide';
-import TLogin from './TLogin';
-import TModal from './TModal';
-import TForm from './TForm';
-import TResponse from './TResponse';
-import TList from './TList';
-
-import TMonth from './TMonth';
-import TYear from './TYear';
-
-import TGroup from './TGroup';
-
 import {
-    download,
-    clone,
-    nvl,
-    merge,
-    mergeStyles,
-    strDate,
-    getCookie,
-    setCookie,
-    getCookieList,
-    setCookieList,
-    deleteCookie
-} from './util';
-
-import {
-    COLOR,
-    SIZE,
-    TABLE,
-    FONT,
-    ICONS
-} from './styles';
-
-export {
-
-    /**
-     * TText component
-     */
-    TText,
-
-    /**
-     * TListbox component
-     */
-    TListBox,
-
-    /**
-     * TListbox with search
-     */
-    TSearch,
-
-    /**
-     * TMask component
-     */
-    TMask,
-
-    /**
-     * TDate component
-     */
-    TDate,
-
-    /**
-     * TTime component
-     */
-    TTime,
-
-    /**
-     * TMail component
-     */
-    TMail,
-
-    /**
-     * TMemo component
-     */
-    TMemo,
-    TCheck,
-
     TIcon,
+    TText,
+    TMask,
+    TMail,
+    TMemo,
+    TGroup,
+    TListBox,
+    TCheck,
+    TSearch,
     TButton,
     TIndicator,
-    TPanel,
-    TScroll,
-    TTop,
-    TSide,
     TLogin,
     TModal,
     TForm,
+    TPanel,
+    TTop,
+    TSide,
+    TScroll,
     TResponse,
-    TList,
+    TDate,
+    TTime,
+    TInput,
+    TPager,
+    TLoad,
+    TGrid,
+    TFilm,
+    TMenu
+} from './components';
 
-    TMonth,
-    TYear,
+import {
+    download,
+    clone,
+    nvl,
+    merge,
+    seconds,
+    cutTime,
+    cutDate,
+    isoDate,
+    strDate,
+    params,
+    getFile,
+    Sizer,
+    Uploader
+} from './util';
 
+import {styles, registerStyles} from './styles/const.js';
+
+export {
+
+    TIcon,
+    TText,
+    TMask,
+    TMail,
+    TMemo,
     TGroup,
-
-    COLOR,
-    SIZE,
-    TABLE,
-    FONT,
-    ICONS,
+    TListBox,
+    TCheck,
+    TSearch,
+    TButton,
+    TIndicator,
+    TLogin,
+    TModal,
+    TForm,
+    TPanel,
+    TTop,
+    TSide,
+    TScroll,
+    TResponse,
+    TDate,
+    TTime,
+    TInput,
+    TPager,
+    TLoad,
+    TGrid,
+    TFilm,
+    TMenu,
 
     download,
     clone,
     nvl,
     merge,
-    mergeStyles,
+    seconds,
+    cutTime,
+    cutDate,
+    isoDate,
     strDate,
-    getCookie,
-    setCookie,
-    getCookieList,
-    setCookieList,
-    deleteCookie
+    params,
+    getFile,
+
+    Sizer,
+    Uploader,
+
+    styles,
+    registerStyles
 
 }
