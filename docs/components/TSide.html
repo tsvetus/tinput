@@ -8,21 +8,25 @@ class TSideExample extends React.Component {
         super(props);
         this.state = {
             side: false,
+            item: null,
             event: ''
         };
         this.click = this.click.bind(this);
         this.clear = this.clear.bind(this);
+        this.menuClick = this.menuClick.bind(this);
+    }
+
+    menuClick(event) {
+        this.setState({
+            item: event.item.name,
+            side: false,
+            event: this.state.event + ' ' + JSON.stringify(event)
+        });
     }
 
     click(event) {
-        let side = false;
-        if (event.name === 'top') {
-            side = true;
-        } else if (event.name === 'side') {
-            side = false;
-        }
         this.setState({
-            side: side,
+            side: true,
             event: this.state.event + ' ' + JSON.stringify(event)
         });
     }
@@ -46,7 +50,8 @@ class TSideExample extends React.Component {
                             {name: 'first', caption: 'First item'},
                             {name: 'second', caption: 'Second item'}
                         ]}
-                        onClick={this.click} /&gt;
+                        item={this.state.item}
+                        onClick={this.menuClick} /&gt;
 
                     &lt;TTop
                         style={{container: {width: "100%", padding: "8px"}}}
