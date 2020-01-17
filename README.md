@@ -35,7 +35,13 @@ Modals:
 * `TModal`
 * `TForm`
 
-## Full documentation with Examples:
+## Installation
+
+``
+npm install tinput
+``
+
+## Full documentation with examples
 [Project page](https://tsvetus.github.io/tinput/)
 
 ## Stylization
