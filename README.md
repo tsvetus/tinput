@@ -36,7 +36,7 @@ Modals:
 * `TForm`
 
 ## Full documentation with Examples:
-[Project page](https://tsvetus.github.io/input/)
+[Project page](https://tsvetus.github.io/tinput/)
 
 ## Stylization
 
