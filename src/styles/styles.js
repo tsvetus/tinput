@@ -332,6 +332,11 @@ export default function defaultStyles(template) {
                 padding: "8px 8px 8px 32px",
                 fontSize: "24px",
                 color: template.colors.text
+            },
+
+            current: {
+                fontWeight: "bold",
+                marginLeft: "8px"
             }
 
         },

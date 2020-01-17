@@ -85,6 +85,7 @@ class Main extends React.Component {
                 <TSide
                     onClick={this.menuClick}
                     show={this.state.menu}
+                    item={this.state.page}
                     items={items} />
             );
         } else {

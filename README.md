@@ -52,7 +52,11 @@ Every component in `tinput` library has `style` property stands for providing cu
 import React from 'react';
 import {TText} from 'tinput';
 
-const style = {container: {border: "1px solid red"}, label: {width: "100px"}};
+const style = {
+    container: {width: "320px"}, 
+    edit: {border: "1px solid red"}, 
+    label: {width: "100px"}
+};
 
 class MyComponent extends React.Component {
     render () {

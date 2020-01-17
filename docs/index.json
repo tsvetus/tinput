@@ -815,7 +815,7 @@
             },
             "list": {
               "type": "shape",
-              "description": "Style for dropdown list. Contains all listed above fields:",
+              "description": "Style for dropdown list. Contains fields:",
               "structure": {
                 "container": {
                   "type": "object",
@@ -1045,7 +1045,7 @@
             },
             "list": {
               "type": "shape",
-              "description": "Style for dropdown list. Contains all listed above fields:",
+              "description": "Style for dropdown list. Contains fields:",
               "structure": {
                 "container": {
                   "type": "object",
@@ -2252,6 +2252,10 @@
             "content": {
               "type": "object",
               "description": "Style for menu content"
+            },
+            "current": {
+              "type": "object",
+              "description": "Style for current menu item"
             }
           }
         },
@@ -2283,6 +2287,11 @@
               "description": "Item custom style. In addition one can specify custom item style by use of item name in \"style\" property"
             }
           }
+        },
+        "item": {
+          "type": "string",
+          "description": "Current menu item",
+          "required": false
         },
         "show": {
           "type": "any",
@@ -2326,10 +2335,15 @@
               "type": "object",
               "description": "Component data from \"data\" property"
             },
-            "event.icon": {
-              "name": "event.icon",
-              "type": "string",
-              "description": "Clicked icon name"
+            "event.index": {
+              "name": "event.index",
+              "type": "number",
+              "description": "Clicked menu index"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "object",
+              "description": "Clicked menu item"
             }
           },
           "required": false

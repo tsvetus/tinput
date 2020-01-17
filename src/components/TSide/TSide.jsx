@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import TScroll from '../TScroll';
+
 import {Icon} from '../../lib';
 
 import {merge, contain} from '../../util';
@@ -127,13 +129,20 @@ class TSide extends React.Component {
         let items = [];
         if (this.props.items) {
             this.props.items.forEach((v, i) => {
+                let st = style.item;
+                if (this.props.item && this.props.item === v.name) {
+                    st = merge(
+                        st,
+                        style.current
+                    );
+                }
                 items.push(
                     <div
                         onTouchMove={this.handleMove}
                         key={i}
                         index={i}
                         style={merge(
-                            style.item,
+                            st,
                             style[v.name],
                             v.style
                          )}
@@ -144,6 +153,18 @@ class TSide extends React.Component {
                 );
             });
         }
+
+        let scrollStyle = {
+            container: {
+                width: "100%",
+                backgroundColor: "none"
+
+            },
+            content: {
+                ...style.content,
+                backgroundColor: "none"
+            }
+        };
 
         return (
 
@@ -159,10 +180,10 @@ class TSide extends React.Component {
                     style={style.close}
                     onClick={this.handleClose} />
 
-                <div style={style.content}>
+                <TScroll style={scrollStyle}>
                     {items}
                     {this.props.children}
-                </div>
+                </TScroll>
 
                 <div
                     style={{...style.touch, width: this.state.initWidth + 'px'}}
@@ -188,6 +209,8 @@ TSide.propTypes = {
         close: PropTypes.object,
         /** Style for menu content */
         content: PropTypes.object,
+        /** Style for current menu item */
+        current: PropTypes.object
     }),
     /**
      * Any component name that associated with component and returned in "onChange" event in "event.name" field.
@@ -206,6 +229,8 @@ TSide.propTypes = {
         /** Item custom style. In addition one can specify custom item style by use of item name in "style" property */
         style: PropTypes.object
     })),
+    /** Current menu item */
+    item: PropTypes.string,
     /** Indicates weather to show or close menu */
     show: PropTypes.any,
     /** Menu default width */
@@ -219,7 +244,8 @@ TSide.propTypes = {
      * @param {object} event Event object with following structure:
      * @param {string} event.name Component name from "name" property
      * @param {object} event.data Component data from "data" property
-     * @param {string} event.icon Clicked icon name
+     * @param {number} event.index Clicked menu index
+     * @param {object} event.item Clicked menu item
      */
     onClick: PropTypes.func
 };

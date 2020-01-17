@@ -57,7 +57,7 @@ TListBox.propTypes = {
         edit: PropTypes.object,
         /** Style for component icon */
         icon: PropTypes.object,
-        /** Style for dropdown list. Contains all listed above fields: */
+        /** Style for dropdown list. Contains fields: */
         list:  PropTypes.shape({
             /** Style for dropdown list container */
             container: PropTypes.object,
