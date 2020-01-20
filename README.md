@@ -19,7 +19,7 @@ Buttons and icons:
 
 Grids and lists:
 * `TGrid`
-* `TFilm`
+* `TRibbon`
 
 Control organizers:
 * `TGroup`
@@ -53,15 +53,15 @@ import React from 'react';
 import {TText} from 'tinput';
 
 const style = {
-    container: {width: "320px"}, 
-    edit: {border: "1px solid red"}, 
-    label: {width: "100px"}
+  container: {width: "320px"}, 
+  edit: {border: "1px solid red"}, 
+  label: {width: "100px"}
 };
 
 class MyComponent extends React.Component {
-    render () {
-         return <TText style={style} label={'TText component:'} />   
-    }   
+  render () {
+     return <TText style={style} label={'TText component:'} />   
+  }   
 }
 
 export default MyComponent;
@@ -77,61 +77,64 @@ In addition one can register global project styles using `registerStyles` functi
 import {registerStyles} from 'tinput';
 
 const styles = {    
-    TComponent: {
-        /** Global style for components: TText, TListBox, TMemo, TCheck, TGroup e.t.c. */
-        container: {
-            backgroundColor: '#eee'
-        },
-        edit: {
-            border: "1px solid red"
-        }
+  TComponent: {
+    /** Global style for components. */
+    container: {
+      backgroundColor: '#eee'
     },
-    TMemo: {
-        /** Custom style for TMemo component. */
-        edit: {
-            border: "1px solid green"
-        }
-    },
-    MyListBox: {
-        /** Custom style for component with 'name' property equals to 'MyListBox' */
-        list: {
-            item: {
-                backgroundColor: "yellow"
-            }
-        }    
+    edit: {
+      border: "1px solid red"
     }
+  },
+  TMemo: {
+    /** Custom style for TMemo component. */
+    edit: {
+      border: "1px solid green"
+    }
+  },
+  MyListBox: {
+    /** 
+     * Custom style for component with 'name' property 
+     * equals to 'MyListBox' 
+     */
+    list: {
+      item: {
+        backgroundColor: "yellow"
+      }
+    }    
+  }
 };
 
 const templates = {
     
-    /** Global color palette */
-    colors: {
-        border: "rgba(42,41,117,0.89)",
-        face: "#eee",
-        frame: "#bfbbff",
-        control: "#777",
-        placeholder: "#777",
-        text: "#000",
-        invalid: "#a31",
-        window: "#fff",
-        panel: "#eee",
-        error: "#a31",
-        message: "#31a",
-        signal: "#f55",
-        indicator: "#a31"
-    },
+  /** Global color palette */
+  colors: {
+    border: "rgba(42,41,117,0.89)",
+    face: "#eee",
+    frame: "#bfbbff",
+    control: "#777",
+    placeholder: "#777",
+    text: "#000",
+    invalid: "#a31",
+    window: "#fff",
+    panel: "#eee",
+    error: "#a31",
+    message: "#31a",
+    signal: "#f55",
+    indicator: "#a31"
+  },
     
-    /** Global fonts palette */
-    fonts: {
-        common: {
-            fontFamily: "Arial",
-            fontSize: "18px"
-        },
-        code: {
-            fontFamily: "Helvetica",
-            fontSize: "16px"
-        }
+  /** Global fonts palette */
+  fonts: {
+    common: {
+      fontFamily: "Arial",
+      fontSize: "18px"
+    },
+    code: {
+      fontFamily: "Helvetica",
+      fontSize: "16px"
     }
+  }
     
 };
 
@@ -175,64 +178,72 @@ import {TGroup, TButton, TText, clone, nvl} from 'tinput';
 
 class MyComponent extends React.Component {
 
-    constructor (props) {
-        super(props);
-        this.state = {
-            text: '',
-            phone: '',
-            email: ''
-        };
-        this.change = this.change.bind(this);
-    }
+  constructor (props) {
+    super(props);
+    this.state = {
+      text: '',
+      phone: '',
+      email: ''
+    };
+    this.change = this.change.bind(this);
+  }
     
-    change(event) {
-        this.setState({[event.name]: event.value});
-    } 
+  change(event) {
+    this.setState({[event.name]: event.value});
+  } 
 
-    render () {
+  render () {
         
-         return (
+    return (
              
-            <TGroup 
-                style={{container: {display: "flex", flexDirection: "column", width: "500px"}}} 
-                label="Group box"> 
+      <TGroup 
+        style={{
+          container: {
+            display: "flex", 
+            flexDirection: "column", 
+            width: "500px"
+          }
+        }} 
+        label="Group box" > 
                 
-                <TButton style={{color: "green"}}>
-                    {'Click me'}
-                </TButton>
+        <TButton style={{color: "green"}}>
+          {'Click me'}
+        </TButton>
              
-                <TText
-                    style={{label: {width: "80px"}}}
-                    value={this.state.text}
-                    label={'Text:'}
-                    name={'text'}
-                    placeholder={'Enter more than 3 symbols ...'}
-                    onValidate={(event) => {return nvl(event.value, '').length > 3;}}
-                    onChange={this.change} />
+        <TText
+          style={{label: {width: "80px"}}}
+          value={this.state.text}
+          label={'Text:'}
+          name={'text'}
+          placeholder={'Enter more than 3 symbols ...'}
+          onValidate={(event) => {
+            return nvl(event.value, '').length > 3;
+          }}
+          onChange={this.change} />
     
-                <TText
-                    style={{label: {width: "180px"}}}
-                    value={this.state.phone}
-                    label={'Phone:'}
-                    name={'phone'}
-                    placeholder={'Enter phone number ...'}
-                    mask={{mask: '+1 (NNN) NNN-NN-NN', empty: '_'}}                    
-                    onChange={this.change} />
+        <TText
+          style={{label: {width: "180px"}}}
+          value={this.state.phone}
+          label={'Phone:'}
+          name={'phone'}
+          placeholder={'Enter phone number ...'}
+          mask={{mask: '+1 (NNN) NNN-NN-NN', empty: '_'}}                    
+          onChange={this.change} />
     
-                <TText
-                    style={{label: {width: "180px"}}}
-                    value={this.state.email}
-                    label={'EMail:'}
-                    name={'email'}
-                    regexp={TText.regexp['email']}
-                    placeholder={'Enter email address ...'}
-                    onChange={this.change} />
+        <TText
+          style={{label: {width: "180px"}}}
+          value={this.state.email}
+          label={'EMail:'}
+          name={'email'}
+          regexp={TText.regexp['email']}
+          placeholder={'Enter email address ...'}
+          onChange={this.change} />
                 
-            </TGroup>    
+      </TGroup>    
                 
-         );
+    );
          
-    }
+  }
     
 }
 

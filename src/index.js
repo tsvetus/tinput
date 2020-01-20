@@ -24,7 +24,7 @@ import {
     TPager,
     TLoad,
     TGrid,
-    TFilm,
+    TRibbon,
     TMenu
 } from './components';
 
@@ -73,7 +73,7 @@ export {
     TPager,
     TLoad,
     TGrid,
-    TFilm,
+    TRibbon,
     TMenu,
 
     download,

@@ -23,7 +23,7 @@ import TInput from './TInput';
 import TPager from './TPager';
 import TLoad from './TLoad';
 import TGrid from './TGrid';
-import TFilm from './TFilm';
+import TRibbon from './TRibbon';
 import TMenu from './TMenu';
 
 export {
@@ -52,6 +52,6 @@ export {
     TPager,
     TLoad,
     TGrid,
-    TFilm,
+    TRibbon,
     TMenu
 }

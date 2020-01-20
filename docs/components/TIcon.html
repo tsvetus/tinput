@@ -4,76 +4,76 @@ import {TIcon, TMemo, TGroup} from 'tinput';
 
 class TIconExample extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            event: ''
-        };
-        this.click = this.click.bind(this);
-        this.clear = this.clear.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      event: ''
+    };
+    this.click = this.click.bind(this);
+    this.clear = this.clear.bind(this);
+  }
+
+  click(event) {
+    this.setState({
+      event: this.state.event + ' ' +
+        JSON.stringify(event)
+    });
+  }
+
+  clear() {
+    this.setState({event: null});
+  }
+
+  render() {
+
+    let icons = [];
+    for (let key in TIcon.icons) {
+      icons.push(
+        &lt;div
+          key={key}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            margin: "16px"
+          }}&gt;
+          &lt;TIcon
+            style={{
+              container: {margin: "0 0 16px 0"}
+            }}
+            name={key}
+            onClick={this.click}/&gt;
+          &lt;div&gt;{key}&lt;/div&gt;
+        &lt;/div&gt;
+      );
     }
 
-    click(event) {
-        this.setState({
-            event: this.state.event + ' ' +
-                JSON.stringify(event)
-        });
-    }
+    return (
 
-    clear() {
-        this.setState({event: null});
-    }
+      &lt;div&gt;
 
-    render () {
+        &lt;TGroup
+          style={{
+            container: {margin: "0 0 16px 0"},
+            content: {justifyContent: "flex-start"}
+          }}&gt;
 
-        let icons = [];
-        for (let key in TIcon.icons) {
-            icons.push(
-                &lt;div
-                    key={key}
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        margin: "16px"
-                    }}&gt;
-                    &lt;TIcon
-                        style={{
-                            container: {margin: "0 0 16px 0"}
-                        }}
-                        name={key}
-                        onClick={this.click} /&gt;
-                    &lt;div&gt;{key}&lt;/div&gt;
-                &lt;/div&gt;
-            );
-        }
+          {icons}
 
-        return (
+        &lt;/TGroup&gt;
 
-            &lt;div&gt;
+        &lt;TMemo
+          style={{edit: {minHeight: "48px"}}}
+          label={'onChange events:'}
+          icon={'refresh'}
+          value={this.state.event}
+          onIcon={this.clear}/&gt;
 
-                &lt;TGroup
-                    style={{
-                        container: {margin: "0 0 16px 0"},
-                        content: {justifyContent: "flex-start"}
-                    }}&gt;
+      &lt;/div&gt;
 
-                    {icons}
+    );
 
-                &lt;/TGroup&gt;
-
-                &lt;TMemo
-                    style={{edit: {minHeight: "48px"}}}
-                    label={'onChange events:'}
-                    icon={'refresh'}
-                    value={this.state.event}
-                    onIcon={this.clear} /&gt;
-
-            &lt;/div&gt;
-
-        );
-
-    }
+  }
 
 }
 

@@ -1967,6 +1967,37 @@
         }
       }
     },
+    "TPanel": {
+      "description": "Groups components in a single block",
+      "displayName": "TPanel",
+      "methods": [],
+      "example": {
+        "name": "TPanelExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            }
+          }
+        },
+        "dir": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "align": {
+          "type": "string",
+          "description": "",
+          "required": false
+        }
+      }
+    },
     "TScroll": {
       "description": "Component represents scroll box",
       "displayName": "TScroll",
@@ -2537,7 +2568,7 @@
           "type": "number",
           "description": "Timeout between user clicks row and \"onChange\" event in milliseconds",
           "required": false,
-          "defaultValue": "1500"
+          "defaultValue": "1000"
         },
         "options": {
           "type": "shape",
@@ -2667,6 +2698,235 @@
               "name": "event.item",
               "type": "string",
               "description": "Selected item"
+            }
+          },
+          "required": false
+        }
+      }
+    },
+    "TRibbon": {
+      "description": "Shows list items in form of ribbon",
+      "displayName": "TRibbon",
+      "methods": [
+        {
+          "name": "change",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "index",
+              "type": null
+            },
+            {
+              "name": "item",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "scroll",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "index",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TRibbonExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "title": {
+              "type": "object",
+              "description": "Style for title component block"
+            },
+            "content": {
+              "type": "object",
+              "description": "Style for component content"
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "columns": {
+          "type": "shape",
+          "description": "Grid columns description. An object containing set of fields representing column names with parameters\r\n\"caption\", \"width\" and \"style\":",
+          "required": false,
+          "structure": {
+            "columnName": {
+              "type": "shape",
+              "structure": {
+                "caption": {
+                  "type": "any",
+                  "description": "Column caption"
+                },
+                "width": {
+                  "type": "string",
+                  "description": "Column width"
+                },
+                "style": {
+                  "type": "object",
+                  "description": "Column style (optional)"
+                }
+              }
+            }
+          }
+        },
+        "items": {
+          "type": "arrayOf",
+          "description": "Grid cell data. Each element of array contains name/value pairs where names coincide with column names\r\ndescribed in \"columns\" property",
+          "required": false,
+          "structure": {
+            "name": {}
+          }
+        },
+        "index": {
+          "type": "number",
+          "description": "Selected row index",
+          "required": false
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Timeout between user clicks row and \"onChange\" event in milliseconds",
+          "required": false,
+          "defaultValue": "500"
+        },
+        "onClick": {
+          "type": "func",
+          "description": "Happens when user clicks on row ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "string",
+              "description": "Selected item index"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "string",
+              "description": "Selected item"
+            }
+          },
+          "required": false
+        },
+        "onChange": {
+          "type": "func",
+          "description": "Happens when selected row index is changed or new items set loaded in grid ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "string",
+              "description": "Selected item index"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "string",
+              "description": "Selected item"
+            }
+          },
+          "required": false
+        },
+        "onFrame": {
+          "type": "func",
+          "description": "Happens when frame generation is needed. Mast return html element representing current item ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "object",
+              "description": "Current row"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "number",
+              "description": "Current row item"
+            },
+            "event.style": {
+              "name": "event.style",
+              "type": "object",
+              "description": "Component style"
+            },
+            "event.onClick": {
+              "name": "event.onClick",
+              "type": "func",
+              "description": "Reference to \"onClick\" event"
             }
           },
           "required": false

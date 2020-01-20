@@ -4,97 +4,97 @@ import {TSide, TTop, TGroup, TMemo} from 'tinput';
 
 class TSideExample extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            side: false,
-            item: null,
-            event: ''
-        };
-        this.click = this.click.bind(this);
-        this.clear = this.clear.bind(this);
-        this.menuClick = this.menuClick.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      side: false,
+      item: null,
+      event: ''
+    };
+    this.click = this.click.bind(this);
+    this.clear = this.clear.bind(this);
+    this.menuClick = this.menuClick.bind(this);
+  }
 
-    menuClick(event) {
-        this.setState({
-            item: event.item.name,
-            side: false,
-            event: this.state.event + ' ' +
-                JSON.stringify(event)
-        });
-    }
+  menuClick(event) {
+    this.setState({
+      item: event.item.name,
+      side: false,
+      event: this.state.event + ' ' +
+        JSON.stringify(event)
+    });
+  }
 
-    click(event) {
-        this.setState({
-            side: true,
-            event: this.state.event + ' ' +
-                JSON.stringify(event)
-        });
-    }
+  click(event) {
+    this.setState({
+      side: true,
+      event: this.state.event + ' ' +
+        JSON.stringify(event)
+    });
+  }
 
-    clear() {
-        this.setState({event: null});
-    }
+  clear() {
+    this.setState({event: null});
+  }
 
-    render () {
+  render() {
 
-        return (
+    return (
 
-            &lt;div&gt;
+      &lt;div&gt;
 
-                &lt;TGroup style={{
-                    container: {margin: "0 0 16px 0"}
-                }} &gt;
+        &lt;TGroup style={{
+          container: {margin: "0 0 16px 0"}
+        }}&gt;
 
-                    &lt;TSide
-                        show={this.state.side}
-                        name={'side'}
-                        items={[
-                            {name: 'first', caption: 'First item'},
-                            {name: 'second', caption: 'Second item'}
-                        ]}
-                        item={this.state.item}
-                        onClick={this.menuClick}
-                    &gt;
-                        &lt;div style={{
-                            border: "2px solid #aaa",
-                            margin: "16px",
-                            padding: "8px",
-                            textAlign: "center"
-                        }}&gt;
-                            Any other menu content as
-                            children elements
-                        &lt;/div&gt;
-                    &lt;/TSide&gt;
-
-                    &lt;TTop
-                        style={{
-                            container: {width: "100%", padding: "8px"}
-                        }}
-                        name={'top'}
-                        caption={'Click menu icon or touch/move ' +
-                            'from left side of screen to the right'}
-                        tools={[
-                            {icon: 'tinput'}
-                        ]}
-                        onClick={this.click} /&gt;
-
-                &lt;/TGroup&gt;
-
-                &lt;TMemo
-                    style={{edit: {minHeight: "48px"}}}
-                    label={'onChange events:'}
-                    icon={'refresh'}
-                    wrap={true}
-                    value={this.state.event}
-                    onIcon={this.clear} /&gt;
-
+          &lt;TSide
+            show={this.state.side}
+            name={'side'}
+            items={[
+              {name: 'first', caption: 'First item'},
+              {name: 'second', caption: 'Second item'}
+            ]}
+            item={this.state.item}
+            onClick={this.menuClick}
+          &gt;
+            &lt;div style={{
+              border: "2px solid #aaa",
+              margin: "16px",
+              padding: "8px",
+              textAlign: "center"
+            }}&gt;
+              Any other menu content as
+              children elements
             &lt;/div&gt;
+          &lt;/TSide&gt;
 
-        );
+          &lt;TTop
+            style={{
+              container: {width: "100%", padding: "8px"}
+            }}
+            name={'top'}
+            caption={'Click menu icon or touch/move ' +
+            'from left side of screen to the right'}
+            tools={[
+              {icon: 'tinput'}
+            ]}
+            onClick={this.click}/&gt;
 
-    }
+        &lt;/TGroup&gt;
+
+        &lt;TMemo
+          style={{edit: {minHeight: "48px"}}}
+          label={'onChange events:'}
+          icon={'refresh'}
+          wrap={true}
+          value={this.state.event}
+          onIcon={this.clear}/&gt;
+
+      &lt;/div&gt;
+
+    );
+
+  }
 
 }
 

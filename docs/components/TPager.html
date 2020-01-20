@@ -3,87 +3,87 @@
 import {TPager, TScroll, TGrid, TGroup} from 'tinput';
 
 const ITEMS = [];
-for (let i=0; i&lt;120; i++) {
-    ITEMS.push({
-        column1: 'value ' + i + 1,
-        column2: 'value ' + i + 2,
-        column3:
-            &lt;div style={{textAlign: "right"}}&gt;
-                {'value ' + i + 3}
-            &lt;/div&gt;
-    });
+for (let i = 0; i &lt; 120; i++) {
+  ITEMS.push({
+    column1: 'value ' + i + 1,
+    column2: 'value ' + i + 2,
+    column3:
+      &lt;div style={{textAlign: "right"}}&gt;
+        {'value ' + i + 3}
+      &lt;/div&gt;
+  });
 }
 
 class TPagerExample extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: []
-        };
-        this.change = this.change.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: []
+    };
+    this.change = this.change.bind(this);
+  }
 
-    change(event) {
-        this.setState({
-            items: event.items
-        });
-    }
+  change(event) {
+    this.setState({
+      items: event.items
+    });
+  }
 
-    render () {
+  render() {
 
-        return (
+    return (
 
-            &lt;div&gt;
+      &lt;div&gt;
 
-                &lt;TGroup style={{
-                    container: {margin: "0 0 16px 0"}
-                }}&gt;
+        &lt;TGroup style={{
+          container: {margin: "0 0 16px 0"}
+        }}&gt;
 
-                    &lt;TScroll
-                        style={{
-                            container: {maxHeight: "400px"},
-                            content: {padding: "8px"}
-                        }} &gt;
+          &lt;TScroll
+            style={{
+              container: {maxHeight: "400px"},
+              content: {padding: "8px"}
+            }}&gt;
 
-                        &lt;TGrid
-                            style={{
-                                container: {width: "100%"},
-                                caption: {backgroundColor: "#ddd"}
-                            }}
-                            name={'myGrid'}
-                            columns={{
-                                column1: {
-                                    caption: "Column 1",
-                                    width: "1fr"
-                                },
-                                column2: {
-                                    caption: "Column 2",
-                                    width: "2fr"
-                                },
-                                column3: {
-                                    caption: "Column 3",
-                                    width: "2fr"
-                                }
-                            }}
-                            items={this.state.items}&gt;
+            &lt;TGrid
+              style={{
+                container: {width: "100%"},
+                caption: {backgroundColor: "#ddd"}
+              }}
+              name={'myGrid'}
+              columns={{
+                column1: {
+                  caption: "Column 1",
+                  width: "1fr"
+                },
+                column2: {
+                  caption: "Column 2",
+                  width: "2fr"
+                },
+                column3: {
+                  caption: "Column 3",
+                  width: "2fr"
+                }
+              }}
+              items={this.state.items}&gt;
 
-                            &lt;TPager
-                                size={25}
-                                items={ITEMS}
-                                onChange={this.change} /&gt;
+              &lt;TPager
+                size={25}
+                items={ITEMS}
+                onChange={this.change}/&gt;
 
-                        &lt;/TGrid&gt;
+            &lt;/TGrid&gt;
 
-                    &lt;/TScroll&gt;
+          &lt;/TScroll&gt;
 
-                &lt;/TGroup&gt;
+        &lt;/TGroup&gt;
 
-            &lt;/div&gt;
+      &lt;/div&gt;
 
-        );
+    );
 
-    }
+  }
 
 }
 

@@ -66,6 +66,7 @@ export default {
     top: {
         display: "flex",
         justifyContent: "flex-start",
+        flexWrap: "wrap",
         fontWeight: "bold",
         padding: "0 0 8px 0"
     },

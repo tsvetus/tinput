@@ -310,7 +310,7 @@ TGrid.propTypes = {
 };
 
 TGrid.defaultProps = {
-    timeout: 1500,
+    timeout: 1000,
     options: {
         scrollHead: false,
         showSelected: true,

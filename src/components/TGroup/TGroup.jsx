@@ -7,7 +7,7 @@ import styles from '../../styles';
 
 /**
  * Groups components in a single block
- * */
+ */
 class TGroup extends React.Component {
 
     constructor(props, context) {

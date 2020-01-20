@@ -1,0 +1,40 @@
+<pre><code>import React from 'react';
+
+import {TPanel, TGroup} from 'tinput';
+
+class TPanelExample extends React.Component {
+
+  render() {
+
+    return (
+
+      &lt;div&gt;
+
+        &lt;TGroup
+          style={{
+            container: {margin: "0 0 16px 0"},
+            content: {justifyContent: "space-around"}
+          }}&gt;
+
+          &lt;TPanel
+            style={{
+              container: {
+                width: "100%",
+                padding: "16px",
+                textAlign: "center"
+              },
+            }} &gt;
+            &lt;div&gt;Panel content&lt;/div&gt;
+          &lt;/TPanel&gt;
+
+        &lt;/TGroup&gt;
+
+      &lt;/div&gt;
+
+    );
+
+  }
+
+}
+
+export default TPanelExample;</code></pre>

@@ -76,6 +76,11 @@ module.exports = {
             name: "TGroupExample"
         }
     }, {
+        name: "TPanel",
+        example: {
+            name: "TPanelExample"
+        }
+    }, {
         name: "TScroll",
         example: {
             name: "TScrollExample"
@@ -94,6 +99,11 @@ module.exports = {
         name: "TGrid",
         example: {
             name: "TGridExample"
+        }
+    }, {
+        name: "TRibbon",
+        example: {
+            name: "TRibbonExample"
         }
     }, {
         name: "TPager",

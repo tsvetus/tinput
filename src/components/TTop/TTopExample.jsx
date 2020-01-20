@@ -4,70 +4,71 @@ import {TTop, TGroup, TMemo} from 'tinput';
 
 class TTopExample extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            event: ''
-        };
-        this.click = this.click.bind(this);
-        this.clear = this.clear.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      event: ''
+    };
+    this.click = this.click.bind(this);
+    this.clear = this.clear.bind(this);
+  }
 
-    click(event) {
-        this.setState({
-            event: this.state.event + ' ' +
-                JSON.stringify(event)
-        });
-    }
+  click(event) {
+    this.setState({
+      event: this.state.event + ' ' +
+        JSON.stringify(event)
+    });
+  }
 
-    clear() {
-        this.setState({event: null});
-    }
+  clear() {
+    this.setState({event: null});
+  }
 
-    render () {
+  render() {
 
-        return (
+    return (
 
-            <div>
+      <div>
 
-                <TGroup style={{
-                    container: {margin: "0 0 16px 0"}
-                }}>
+        <TGroup style={{
+          container: {margin: "0 0 16px 0"}
+        }}>
 
-                    <TTop
-                        style={{
-                            container: {
-                                width: "100%",
-                                padding: "8px"}
-                        }
-                        }
-                        name={'top'}
-                        caption={'Menu caption'}
-                        tools={[{
-                            icon: 'tinput',
-                            onClick: (event) => {
-                                alert(JSON.stringify(event))
-                            }
-                        }]}
-                        onClick={this.click} />
+          <TTop
+            style={{
+              container: {
+                width: "100%",
+                padding: "8px"
+              }
+            }
+            }
+            name={'top'}
+            caption={'Menu caption'}
+            tools={[{
+              icon: 'tinput',
+              onClick: (event) => {
+                alert(JSON.stringify(event))
+              }
+            }]}
+            onClick={this.click}/>
 
-                </TGroup>
+        </TGroup>
 
-                <TMemo
-                    style={{
-                        edit: {minHeight: "48px"}
-                    }}
-                    label={'onChange events:'}
-                    icon={'refresh'}
-                    wrap={true}
-                    value={this.state.event}
-                    onIcon={this.clear} />
+        <TMemo
+          style={{
+            edit: {minHeight: "48px"}
+          }}
+          label={'onChange events:'}
+          icon={'refresh'}
+          wrap={true}
+          value={this.state.event}
+          onIcon={this.clear}/>
 
-            </div>
+      </div>
 
-        );
+    );
 
-    }
+  }
 
 }
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {
     TGrid,
-    TFilm,
+    TRibbon,
     Sizer,
     merge
 } from 'tinput';
@@ -86,7 +86,7 @@ class Props extends React.Component {
                     style={style.subGrid}
                     columns={{
                         name: {caption: 'name', width: '120px'},
-                        type: {caption: 'type', width: '100px'},
+                        type: {caption: 'type', width: '80px'},
                         description: {caption: 'description'}
                     }}
                     items={items}
@@ -141,14 +141,14 @@ class Props extends React.Component {
 
         let columns = {
             name: {caption: 'name', width: '120px'},
-            type: {caption: 'type', width: '100px'},
+            type: {caption: 'type', width: '80px'},
             defaultValue: {caption: 'default', width: '120px'},
             required: {caption: 'req', width: '40px'},
             description: {caption: 'description'}
         };
 
         if (this.state.width < 980) {
-            return <TFilm
+            return <TRibbon
                 style={style}
                 columns={columns}
                 items={items}
