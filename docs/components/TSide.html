@@ -51,7 +51,17 @@ class TSideExample extends React.Component {
                             {name: 'second', caption: 'Second item'}
                         ]}
                         item={this.state.item}
-                        onClick={this.menuClick} /&gt;
+                        onClick={this.menuClick}
+                    &gt;
+                        &lt;div style={{
+                            border: "2px solid #aaa",
+                            margin: "16px",
+                            padding: "8px",
+                            textAlign: "center"
+                        }}&gt;
+                            Any other menu content as children elements
+                        &lt;/div&gt;
+                    &lt;/TSide&gt;
 
                     &lt;TTop
                         style={{container: {width: "100%", padding: "8px"}}}

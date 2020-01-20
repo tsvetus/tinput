@@ -5,6 +5,9 @@ import {merge, clone, contain, replace, TIMEOUT} from '../../util';
 
 import styles from '../../styles';
 
+/**
+ * Represents data grid
+ */
 class TGrid extends React.Component {
 
     constructor(props) {
@@ -114,8 +117,8 @@ class TGrid extends React.Component {
             let title = this.props.children ? (<div style={style.title}>{this.props.children}</div>) : null;
 
             let hs = style.head;
-            if (!options.scroll) {
-                hs = merge(hs, style.noScroll);
+            if (options.scrollHead) {
+                hs = merge(hs, style.scrollHead);
             }
             if (!options.showHead) {
                 hs = merge(hs, style.hideHead);
@@ -136,8 +139,8 @@ class TGrid extends React.Component {
 
             this.props.items.forEach((v, i) => {
                 let cs = style.cell;
-                if (options.select) {
-                    cs = i === this.state.index ? merge(style.cell, style.current) : style.cell;
+                if (options.showSelected) {
+                    cs = i === this.state.index ? merge(style.cell, style.selected) : style.cell;
                 } else {
                     cs = merge(cs, style.noSelect);
                 }
@@ -202,20 +205,62 @@ class TGrid extends React.Component {
 }
 
 TGrid.propTypes = {
-    style: PropTypes.object,
+    /** Component style: */
+    style: PropTypes.shape({
+        /** Style for outer component container */
+        container: PropTypes.object,
+        /** Style for component title */
+        title: PropTypes.object,
+        /** Style for grid header row */
+        head: PropTypes.object,
+        /** Style for grid header cells */
+        caption: PropTypes.object,
+        /** Style for grid body */
+        body: PropTypes.object,
+        /** Style for grid body cells */
+        cell:  PropTypes.object,
+        /** Style for selected row */
+        selected: PropTypes.object
+    }),
+    /**
+     * Any component name that associated with component and returned in "onChange" event in "event.name" field.
+     * In addition component name can be used in global styles registered by "registerStyles" function to
+     * associate particular style with this component
+     */
     name: PropTypes.string,
+    /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
-    items: PropTypes.array,
-    columns: PropTypes.object,
+    /** Grid columns description */
+    columns: PropTypes.shape({
+        /**  */
+        columnName: PropTypes.shape({
+            /** Column caption */
+            caption: PropTypes.any,
+            /** Column width */
+            width: PropTypes.string,
+            /** Column style (optional) */
+            style: PropTypes.object
+        })
+    }),
+    /** Grid cell data */
+    items: PropTypes.arrayOf(PropTypes.shape({
+        columnName: PropTypes.any
+    })),
+    /** Current selected row index */
     index: PropTypes.number,
+    /** Grid options */
     options: PropTypes.shape({
-        scroll: PropTypes.any,
-        select: PropTypes.any,
+        /** If "true" head is scrollable */
+        scrollHead: PropTypes.any,
+        /** If "true" then current row is shown using "current" style  */
+        showSelected: PropTypes.any,
+        /** Indicates whether to show grid head or not */
+        showHead: PropTypes.any,
+        /** Border width in pixels */
         borderWidth: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.number
         ]),
-        showHead: PropTypes.any
     }),
     onChange: PropTypes.func,
     onRowStyle: PropTypes.func,
@@ -224,10 +269,10 @@ TGrid.propTypes = {
 
 TGrid.defaultProps = {
     options: {
-        scroll: true,
-        select: true,
-        borderWidth: "1px",
-        showHead: true
+        scrollHead: false,
+        showSelected: true,
+        showHead: true,
+        borderWidth: "1px"
     }
 };
 

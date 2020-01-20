@@ -1,0 +1,80 @@
+<pre><code>import React from 'react';
+
+import {TGrid, TMemo, TGroup} from 'tinput';
+
+const ITEMS = [];
+for (let i=0; i&lt;20; i++) {
+    ITEMS.push({
+        column1: 'value ' + i + 1,
+        column2: 'value ' + i + 2,
+        column3: &lt;p style={{textAlign: "right"}}&gt;{'value ' + i + 3}&lt;/p&gt;
+    });
+}
+
+class TGridExample extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: 2,
+            event: ''
+        };
+        this.change = this.change.bind(this);
+        this.onRowStyle = this.onRowStyle.bind(this);
+        this.clear = this.clear.bind(this);
+    }
+
+    change(event) {
+        this.setState({
+            value: event.value,
+            event: this.state.event + ' ' + JSON.stringify(event)
+        });
+    }
+
+    clear() {
+        this.setState({event: null});
+    }
+
+    onRowStyle(event) {
+    }
+
+    render () {
+
+        return (
+
+            &lt;div&gt;
+
+                &lt;TGroup style={{container: {margin: "0 0 16px 0"}}}&gt;
+
+                    &lt;TGrid
+                        style={{
+                            container: {width: "100%"},
+                            caption: {backgroundColor: "#ddd"}
+                        }}
+                        name={'myGrid'}
+                        columns={{
+                            column1: {caption: "Column 1", width: "1fr"},
+                            column2: {caption: "Column 2", width: "2fr"},
+                            column3: {caption: "Column 3", width: "2fr"}
+                        }}
+                        items={ITEMS}
+                        onRowStyle={this.onRowStyle} /&gt;
+
+                &lt;/TGroup&gt;
+
+                &lt;TMemo
+                    style={{edit: {minHeight: "48px"}}}
+                    label={'onChange events:'}
+                    icon={'refresh'}
+                    value={this.state.event}
+                    onIcon={this.clear} /&gt;
+
+            &lt;/div&gt;
+
+        );
+
+    }
+
+}
+
+export default TGridExample;</code></pre>

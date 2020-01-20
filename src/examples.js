@@ -13,6 +13,7 @@ import TGroupExample from './components/TGroup/TGroupExample.jsx';
 import TScrollExample from './components/TScroll/TScrollExample.jsx';
 import TTopExample from './components/TTop/TTopExample.jsx';
 import TSideExample from './components/TSide/TSideExample.jsx';
+import TGridExample from './components/TGrid/TGridExample.jsx';
 
 export {
     TDateExample,
@@ -29,5 +30,6 @@ export {
     TGroupExample,
     TScrollExample,
     TTopExample,
-    TSideExample
+    TSideExample,
+    TGridExample
 }

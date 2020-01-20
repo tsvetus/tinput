@@ -53,10 +53,10 @@ class Props extends React.Component {
                     }}
                     items={items}
                     options={{
-                        select: false,
-                        scroll: false,
-                        borderWidth: 0,
-                        showHead: false
+                        showSelected: false,
+                        scrollHead: true,
+                        showHead: false,
+                        borderWidth: 0
                     }} />
             }
 
@@ -78,10 +78,10 @@ class Props extends React.Component {
                     }}
                     items={items}
                     options={{
-                        select: false,
-                        scroll: false,
-                        borderWidth: 0,
-                        showHead: false
+                        showSelected: false,
+                        scrollHead: true,
+                        showHead: false,
+                        borderWidth: 0
                     }} />
             }
 
@@ -113,8 +113,8 @@ class Props extends React.Component {
                 }}
                 items={items}
                 options={{
-                    select: false,
-                    scroll: false,
+                    showSelected: false,
+                    scrollHead: false,
                     borderWidth: '1px'
                 }} />
         );

@@ -90,6 +90,11 @@ module.exports = {
         example: {
             name: "TSideExample"
         }
+    }, {
+        name: "TGrid",
+        example: {
+            name: "TGridExample"
+        }
     }]
 
 };

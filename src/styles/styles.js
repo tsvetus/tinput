@@ -474,7 +474,7 @@ export default function defaultStyles(template) {
                 cursor: "pointer"
             },
 
-            current: {
+            selected: {
                 backgroundColor: template.colors.panel,
                 fontWeight: "bold"
             }

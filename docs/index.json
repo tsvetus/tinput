@@ -853,11 +853,6 @@
           "description": "Label caption. Default is undefined and label is hidden",
           "required": false
         },
-        "timeout": {
-          "type": "number",
-          "description": "Icon name to show. Default is undefined and icon is hidden",
-          "required": false
-        },
         "placeholder": {
           "type": "string",
           "description": "Text to show when editor is empty",
@@ -2399,6 +2394,180 @@
               "description": "Clicked menu item"
             }
           },
+          "required": false
+        }
+      }
+    },
+    "TGrid": {
+      "description": "Represents data grid",
+      "displayName": "TGrid",
+      "methods": [
+        {
+          "name": "change",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "index",
+              "type": null
+            },
+            {
+              "name": "item",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "scroll",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "index",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TGridExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "title": {
+              "type": "object",
+              "description": "Style for component title"
+            },
+            "head": {
+              "type": "object",
+              "description": "Style for grid header row"
+            },
+            "caption": {
+              "type": "object",
+              "description": "Style for grid header cells"
+            },
+            "body": {
+              "type": "object",
+              "description": "Style for grid body"
+            },
+            "cell": {
+              "type": "object",
+              "description": "Style for grid body cells"
+            },
+            "selected": {
+              "type": "object",
+              "description": "Style for selected row"
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "columns": {
+          "type": "shape",
+          "description": "Grid columns description",
+          "required": false,
+          "structure": {
+            "columnName": {
+              "type": "shape",
+              "structure": {
+                "caption": {
+                  "type": "any",
+                  "description": "Column caption"
+                },
+                "width": {
+                  "type": "string",
+                  "description": "Column width"
+                },
+                "style": {
+                  "type": "object",
+                  "description": "Column style (optional)"
+                }
+              }
+            }
+          }
+        },
+        "items": {
+          "type": "arrayOf",
+          "description": "Grid cell data",
+          "required": false,
+          "structure": {
+            "columnName": {
+              "type": "any"
+            }
+          }
+        },
+        "index": {
+          "type": "number",
+          "description": "Current selected row index",
+          "required": false
+        },
+        "options": {
+          "type": "shape",
+          "description": "Grid options",
+          "required": false,
+          "defaultValue": "{\r\n    scrollHead: false,\r\n    showSelected: true,\r\n    showHead: true,\r\n    borderWidth: \"1px\"\r\n}",
+          "structure": {
+            "scrollHead": {
+              "type": "any",
+              "description": "If \"true\" head is scrollable"
+            },
+            "showSelected": {
+              "type": "any",
+              "description": "If \"true\" then current row is shown using \"current\" style"
+            },
+            "showHead": {
+              "type": "any",
+              "description": "Indicates whether to show grid head or not"
+            },
+            "borderWidth": {
+              "type": "union",
+              "description": "Border width in pixels"
+            }
+          }
+        },
+        "onChange": {
+          "type": "func",
+          "description": "",
+          "required": false
+        },
+        "onRowStyle": {
+          "type": "func",
+          "description": "",
+          "required": false
+        },
+        "onClick": {
+          "type": "func",
+          "description": "",
           "required": false
         }
       }

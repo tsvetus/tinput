@@ -321,7 +321,7 @@ export default {
             zIndex: "1"
         },
 
-        noScroll: {
+        scrollHead: {
             position: "relative"
         },
 

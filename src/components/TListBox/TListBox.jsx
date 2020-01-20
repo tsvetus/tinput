@@ -79,8 +79,6 @@ TListBox.propTypes = {
     data: PropTypes.any,
     /** Label caption. Default is undefined and label is hidden */
     label: PropTypes.string,
-    /** Icon name to show. Default is undefined and icon is hidden */
-    timeout: PropTypes.number,
     /** Text to show when editor is empty */
     placeholder: PropTypes.string,
     /** Label position towards text editor. Can be one of: */
