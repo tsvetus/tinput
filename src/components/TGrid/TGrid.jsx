@@ -279,13 +279,27 @@ TGrid.propTypes = {
      * Happens when cell style is needed. Returns object containing cell style
      * @param {object} cell Current cell content
      * @param {object} column Current column name
-     * @param {object} cell Current row in form of name/value pairs where names coincide with column names
+     * @param {object} row Current row in form of name/value pairs where names coincide with column names
      * described in "columns" property
      */
     onCellStyle: PropTypes.func,
-    /** Happens when user clicks on row */
+    /**
+     * Happens when user clicks on row
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {string} event.index Selected item index
+     * @param {string} event.item Selected item
+     */
     onClick: PropTypes.func,
-    /** Happens when selected row index is changed or new items set loaded in grid */
+    /**
+     * Happens when selected row index is changed or new items set loaded in grid
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {string} event.index Selected item index
+     * @param {string} event.item Selected item
+     */
     onChange: PropTypes.func
 };
 
