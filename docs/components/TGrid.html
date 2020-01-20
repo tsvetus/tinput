@@ -1,13 +1,13 @@
 <pre><code>import React from 'react';
 
-import {TGrid, TMemo, TGroup} from 'tinput';
+import {TGrid, TMemo, TGroup, merge} from 'tinput';
 
 const ITEMS = [];
 for (let i=0; i&lt;20; i++) {
     ITEMS.push({
         column1: 'value ' + i + 1,
         column2: 'value ' + i + 2,
-        column3: &lt;p style={{textAlign: "right"}}&gt;{'value ' + i + 3}&lt;/p&gt;
+        column3: &lt;div style={{textAlign: "right"}}&gt;{'value ' + i + 3}&lt;/div&gt;
     });
 }
 
@@ -21,6 +21,7 @@ class TGridExample extends React.Component {
         };
         this.change = this.change.bind(this);
         this.onRowStyle = this.onRowStyle.bind(this);
+        this.onCellStyle = this.onCellStyle.bind(this);
         this.clear = this.clear.bind(this);
     }
 
@@ -36,6 +37,17 @@ class TGridExample extends React.Component {
     }
 
     onRowStyle(event) {
+    }
+
+    onCellStyle(event) {
+        let style = {};
+        if (event.index % 2 &gt; 0) {
+            style = merge(style, {backgroundColor: "#d8d7ff"});
+        }
+        if (typeof(event.cell) === 'string' && event.cell.indexOf('11') &gt;= 0) {
+            style = merge(style, {backgroundColor: "#ffb0b5"});
+        }
+        return style;
     }
 
     render () {
@@ -58,7 +70,8 @@ class TGridExample extends React.Component {
                             column3: {caption: "Column 3", width: "2fr"}
                         }}
                         items={ITEMS}
-                        onRowStyle={this.onRowStyle} /&gt;
+                        onRowStyle={this.onRowStyle}
+                        onCellStyle={this.onCellStyle} /&gt;
 
                 &lt;/TGroup&gt;
 

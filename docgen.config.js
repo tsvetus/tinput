@@ -95,6 +95,11 @@ module.exports = {
         example: {
             name: "TGridExample"
         }
+    }, {
+        name: "TPager",
+        example: {
+            name: "TPagerExample"
+        }
     }]
 
 };

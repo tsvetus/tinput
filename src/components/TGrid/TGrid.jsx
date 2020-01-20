@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, clone, contain, replace, TIMEOUT} from '../../util';
+import {merge, clone, contain, replace} from '../../util';
 
 import styles from '../../styles';
 
@@ -48,7 +48,7 @@ class TGrid extends React.Component {
                         item: item
                     });
                 }
-            }, TIMEOUT*3);
+            }, this.props.timeout);
         }
     }
 
@@ -157,7 +157,7 @@ class TGrid extends React.Component {
                         css = merge(css, this.props.columns[key].style(v[key], key, v));
                     }
                     if (this.props.onCellStyle) {
-                        css = merge(css, this.props.onCellStyle(v[key], key, v));
+                        css = merge(css, this.props.onCellStyle({cell: v[key], column: key, index: i, row: v}));
                     }
                     if (v[key] === undefined) {
                         if (this.props.columns[key].value === undefined) {
@@ -220,6 +220,8 @@ TGrid.propTypes = {
         caption: PropTypes.object,
         /** Style for grid body */
         body: PropTypes.object,
+        /** Style for grid body rows */
+        row:  PropTypes.object,
         /** Style for grid body cells */
         cell:  PropTypes.object,
         /** Style for selected row */
@@ -252,9 +254,11 @@ TGrid.propTypes = {
      * Grid cell data. Each element of array contains name/value pairs where names coincide with column names
      * described in "columns" property
      */
-    items: PropTypes.arrayOf(PropTypes.array),
+    items: PropTypes.arrayOf(PropTypes.object),
     /** Selected row index */
     index: PropTypes.number,
+    /** Timeout between user clicks row and "onChange" event in milliseconds */
+    timeout: PropTypes.number,
     /** Grid options */
     options: PropTypes.shape({
         /** If "true" then head is scrollable */
@@ -277,9 +281,11 @@ TGrid.propTypes = {
     onRowStyle: PropTypes.func,
     /**
      * Happens when cell style is needed. Returns object containing cell style
-     * @param {object} cell Current cell content
-     * @param {object} column Current column name
-     * @param {object} row Current row in form of name/value pairs where names coincide with column names
+     * @param {object} event Event object with the following structure
+     * @param {any} event.cell Current cell content
+     * @param {string} event.column Current column name
+     * @param {number} event.index Current row index
+     * @param {object} event.row Current row in form of name/value pairs where names coincide with column names
      * described in "columns" property
      */
     onCellStyle: PropTypes.func,
@@ -304,6 +310,7 @@ TGrid.propTypes = {
 };
 
 TGrid.defaultProps = {
+    timeout: 1500,
     options: {
         scrollHead: false,
         showSelected: true,

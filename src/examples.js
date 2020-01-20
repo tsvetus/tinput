@@ -14,6 +14,7 @@ import TScrollExample from './components/TScroll/TScrollExample.jsx';
 import TTopExample from './components/TTop/TTopExample.jsx';
 import TSideExample from './components/TSide/TSideExample.jsx';
 import TGridExample from './components/TGrid/TGridExample.jsx';
+import TPagerExample from './components/TPager/TPagerExample.jsx';
 
 export {
     TDateExample,
@@ -31,5 +32,6 @@ export {
     TScrollExample,
     TTopExample,
     TSideExample,
-    TGridExample
+    TGridExample,
+    TPagerExample
 }

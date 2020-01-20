@@ -2472,6 +2472,10 @@
               "type": "object",
               "description": "Style for grid body"
             },
+            "row": {
+              "type": "object",
+              "description": "Style for grid body rows"
+            },
             "cell": {
               "type": "object",
               "description": "Style for grid body cells"
@@ -2529,6 +2533,12 @@
           "description": "Selected row index",
           "required": false
         },
+        "timeout": {
+          "type": "number",
+          "description": "Timeout between user clicks row and \"onChange\" event in milliseconds",
+          "required": false,
+          "defaultValue": "1500"
+        },
         "options": {
           "type": "shape",
           "description": "Grid options",
@@ -2569,27 +2579,254 @@
           "type": "func",
           "description": "Happens when cell style is needed. Returns object containing cell style ",
           "arguments": {
-            "cell": {
-              "name": "cell",
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with the following structure"
+            },
+            "event.cell": {
+              "name": "event.cell",
+              "type": "any",
+              "description": "Current cell content"
+            },
+            "event.column": {
+              "name": "event.column",
+              "type": "string",
+              "description": "Current column name"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "number",
+              "description": "Current row index"
+            },
+            "event.row": {
+              "name": "event.row",
               "type": "object",
               "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
-            },
-            "column": {
-              "name": "column",
-              "type": "object",
-              "description": "Current column name"
             }
           },
           "required": false
         },
         "onClick": {
           "type": "func",
-          "description": "Happens when user clicks on row",
+          "description": "Happens when user clicks on row ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "string",
+              "description": "Selected item index"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "string",
+              "description": "Selected item"
+            }
+          },
           "required": false
         },
         "onChange": {
           "type": "func",
-          "description": "Happens when selected row index is changed or new items set loaded in grid",
+          "description": "Happens when selected row index is changed or new items set loaded in grid ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "string",
+              "description": "Selected item index"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "string",
+              "description": "Selected item"
+            }
+          },
+          "required": false
+        }
+      }
+    },
+    "TPager": {
+      "description": "Splits up grid item list to pages and shows page navigation bar",
+      "displayName": "TPager",
+      "methods": [
+        {
+          "name": "change",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "handleClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TPagerExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label showing items count"
+            },
+            "edit": {
+              "type": "object",
+              "description": "Style for page navigation bar"
+            },
+            "page": {
+              "type": "object",
+              "description": "Style page buttons"
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "size": {
+          "type": "number",
+          "description": "Maximum items count per page",
+          "required": false,
+          "defaultValue": "100"
+        },
+        "items": {
+          "type": "array",
+          "description": "Initial items list",
+          "required": false
+        },
+        "hide": {
+          "type": "any",
+          "description": "Automatically hide label and navigator when items count less than \"size\"",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Delay between page button is clicked and \"onChange\" event",
+          "required": false,
+          "defaultValue": "1000"
+        },
+        "onChange": {
+          "type": "func",
+          "description": "Happens when result item list is generated ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.items": {
+              "name": "event.items",
+              "type": "object",
+              "description": "Generated item list"
+            },
+            "event.size": {
+              "name": "event.size",
+              "type": "number",
+              "description": "Current page size"
+            },
+            "event.length": {
+              "name": "event.length",
+              "type": "number",
+              "description": "Current page length"
+            },
+            "event.page": {
+              "name": "event.page",
+              "type": "number",
+              "description": "Current page index"
+            },
+            "event.pageFrom": {
+              "name": "event.pageFrom",
+              "type": "number",
+              "description": "First page index"
+            },
+            "event.pageTo": {
+              "name": "event.pageTo",
+              "type": "number",
+              "description": "Last page index"
+            },
+            "event.from": {
+              "name": "event.from",
+              "type": "number",
+              "description": "First item index on current page"
+            },
+            "event.to": {
+              "name": "event.to",
+              "type": "number",
+              "description": "Last item index on current page"
+            },
+            "event.first": {
+              "name": "event.first",
+              "type": "number",
+              "description": "First item index"
+            },
+            "event.last": {
+              "name": "event.last",
+              "type": "number",
+              "description": "Last item index"
+            }
+          },
           "required": false
         }
       }

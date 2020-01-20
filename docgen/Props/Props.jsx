@@ -48,7 +48,7 @@ class Props extends React.Component {
                     style={style.subGrid}
                     columns={{
                         name: {caption: 'name', width: '100px'},
-                        type: {caption: 'type', width: '80px'},
+                        type: {caption: 'type', width: '100px'},
                         description: {caption: 'description'}
                     }}
                     items={items}
@@ -106,7 +106,7 @@ class Props extends React.Component {
                 style={style.grid}
                 columns={{
                     name: {caption: 'name', width: '120px'},
-                    type: {caption: 'type', width: '80px'},
+                    type: {caption: 'type', width: '100px'},
                     defaultValue: {caption: 'default', width: '120px'},
                     required: {caption: 'req', width: '40px'},
                     description: {caption: 'description'}

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Pager, merge, clone} from '../../util';
+import {Pager, merge, clone, contain} from '../../util';
 
 import styles from '../../styles';
 
+/**
+ * Splits up grid item list to pages and shows page navigation bar
+ */
 class TPager extends React.Component {
 
     constructor (props) {
@@ -31,6 +34,12 @@ class TPager extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.setState({page: this.pager.page}, () => {
+            this.change();
+        });
+    }
+
     change() {
         if (this.props.onChange) {
             clearTimeout(this.timer);
@@ -45,7 +54,7 @@ class TPager extends React.Component {
                     items: items,
                     ...this.pager.getParams()
                 });
-            }, 700);
+            }, this.props.timeout);
         }
     }
 
@@ -69,9 +78,9 @@ class TPager extends React.Component {
     render() {
 
         let style = merge(
-            styles.TPager,
-            styles[this.props.name],
-            this.props.style
+            contain(styles.TPager),
+            contain(styles[this.props.name]),
+            contain(this.props.style)
         );
 
         let params = this.pager.getParams();
@@ -114,19 +123,56 @@ class TPager extends React.Component {
 }
 
 TPager.propTypes = {
-    style: PropTypes.object,
+    /** Component style: */
+    style: PropTypes.shape({
+        /** Style for outer component container */
+        container: PropTypes.object,
+        /** Style for component label showing items count */
+        label: PropTypes.object,
+        /** Style for page navigation bar */
+        edit: PropTypes.object,
+        /** Style page buttons */
+        page: PropTypes.object
+    }),
+    /**
+     * Any component name that associated with component and returned in "onChange" event in "event.name" field.
+     * In addition component name can be used in global styles registered by "registerStyles" function to
+     * associate particular style with this component
+     */
     name: PropTypes.string,
-    date: PropTypes.any,
+    /** Any data that associated with component and returned in "onChange" event in "event.data" field */
+    data: PropTypes.any,
+    /** Maximum items count per page */
     size: PropTypes.number,
+    /** Initial items list */
     items: PropTypes.array,
+    /** Automatically hide label and navigator when items count less than "size" */
     hide: PropTypes.any,
+    /** Delay between page button is clicked and "onChange" event */
+    timeout: PropTypes.number,
+    /**
+     * Happens when result item list is generated
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {object} event.items Generated item list
+     * @param {number} event.size Current page size
+     * @param {number} event.length Current page length
+     * @param {number} event.page Current page index
+     * @param {number} event.pageFrom First page index
+     * @param {number} event.pageTo Last page index
+     * @param {number} event.from First item index on current page
+     * @param {number} event.to Last item index on current page
+     * @param {number} event.first First item index
+     * @param {number} event.last Last item index
+     */
     onChange: PropTypes.func
 };
 
 TPager.defaultProps = {
     size: 100,
-    length: 0,
-    hide: false
+    hide: false,
+    timeout: 1000
 };
 
 export default TPager;
