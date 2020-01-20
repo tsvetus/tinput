@@ -453,7 +453,7 @@ export default function defaultStyles(template) {
 
             caption: {
                 backgroundColor: template.colors.window,
-                border: "${width} solid " + template.colors.border,
+                border: "${width} solid " + template.colors.frame,
                 marginLeft: "-${width}",
                 marginTop: "-${width}",
                 overflowX: "hidden",
@@ -466,7 +466,7 @@ export default function defaultStyles(template) {
 
             cell: {
                 backgroundColor: template.colors.window,
-                border: "${width} solid " + template.colors.border,
+                border: "${width} solid " + template.colors.frame,
                 marginLeft: "-${width}",
                 marginTop: "-${width}",
                 overflowX: "hidden",
