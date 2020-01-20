@@ -156,6 +156,9 @@ class TGrid extends React.Component {
                     if (this.props.columns[key].style !== undefined) {
                         css = merge(css, this.props.columns[key].style(v[key], key, v));
                     }
+                    if (this.props.onCellStyle) {
+                        css = merge(css, this.props.onCellStyle(v[key], key, v));
+                    }
                     if (v[key] === undefined) {
                         if (this.props.columns[key].value === undefined) {
                             row.push(
@@ -230,7 +233,10 @@ TGrid.propTypes = {
     name: PropTypes.string,
     /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
-    /** Grid columns description */
+    /**
+     * Grid columns description. An object containing set of fields representing column names with parameters
+     * "caption", "width" and "style":
+     */
     columns: PropTypes.shape({
         /**  */
         columnName: PropTypes.shape({
@@ -242,17 +248,18 @@ TGrid.propTypes = {
             style: PropTypes.object
         })
     }),
-    /** Grid cell data */
-    items: PropTypes.arrayOf(PropTypes.shape({
-        columnName: PropTypes.any
-    })),
-    /** Current selected row index */
+    /**
+     * Grid cell data. Each element of array contains name/value pairs where names coincide with column names
+     * described in "columns" property
+     */
+    items: PropTypes.arrayOf(PropTypes.array),
+    /** Selected row index */
     index: PropTypes.number,
     /** Grid options */
     options: PropTypes.shape({
-        /** If "true" head is scrollable */
+        /** If "true" then head is scrollable */
         scrollHead: PropTypes.any,
-        /** If "true" then current row is shown using "current" style  */
+        /** If "true" then selected row is shown using "selected" style  */
         showSelected: PropTypes.any,
         /** Indicates whether to show grid head or not */
         showHead: PropTypes.any,
@@ -262,9 +269,24 @@ TGrid.propTypes = {
             PropTypes.number
         ]),
     }),
-    onChange: PropTypes.func,
+    /**
+     * Happens when row style is needed. Returns object containing row style
+     * @param {object} row Current row in form of name/value pairs where names coincide with column names
+     * described in "columns" property
+     */
     onRowStyle: PropTypes.func,
-    onClick: PropTypes.func
+    /**
+     * Happens when cell style is needed. Returns object containing cell style
+     * @param {object} cell Current cell content
+     * @param {object} column Current column name
+     * @param {object} cell Current row in form of name/value pairs where names coincide with column names
+     * described in "columns" property
+     */
+    onCellStyle: PropTypes.func,
+    /** Happens when user clicks on row */
+    onClick: PropTypes.func,
+    /** Happens when selected row index is changed or new items set loaded in grid */
+    onChange: PropTypes.func
 };
 
 TGrid.defaultProps = {

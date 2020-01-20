@@ -2494,7 +2494,7 @@
         },
         "columns": {
           "type": "shape",
-          "description": "Grid columns description",
+          "description": "Grid columns description. An object containing set of fields representing column names with parameters\r\n\"caption\", \"width\" and \"style\":",
           "required": false,
           "structure": {
             "columnName": {
@@ -2518,17 +2518,15 @@
         },
         "items": {
           "type": "arrayOf",
-          "description": "Grid cell data",
+          "description": "Grid cell data. Each element of array contains name/value pairs where names coincide with column names\r\ndescribed in \"columns\" property",
           "required": false,
           "structure": {
-            "columnName": {
-              "type": "any"
-            }
+            "name": {}
           }
         },
         "index": {
           "type": "number",
-          "description": "Current selected row index",
+          "description": "Selected row index",
           "required": false
         },
         "options": {
@@ -2539,11 +2537,11 @@
           "structure": {
             "scrollHead": {
               "type": "any",
-              "description": "If \"true\" head is scrollable"
+              "description": "If \"true\" then head is scrollable"
             },
             "showSelected": {
               "type": "any",
-              "description": "If \"true\" then current row is shown using \"current\" style"
+              "description": "If \"true\" then selected row is shown using \"selected\" style"
             },
             "showHead": {
               "type": "any",
@@ -2555,19 +2553,43 @@
             }
           }
         },
-        "onChange": {
-          "type": "func",
-          "description": "",
-          "required": false
-        },
         "onRowStyle": {
           "type": "func",
-          "description": "",
+          "description": "Happens when row style is needed. Returns object containing row style ",
+          "arguments": {
+            "row": {
+              "name": "row",
+              "type": "object",
+              "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
+            }
+          },
+          "required": false
+        },
+        "onCellStyle": {
+          "type": "func",
+          "description": "Happens when cell style is needed. Returns object containing cell style ",
+          "arguments": {
+            "cell": {
+              "name": "cell",
+              "type": "object",
+              "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
+            },
+            "column": {
+              "name": "column",
+              "type": "object",
+              "description": "Current column name"
+            }
+          },
           "required": false
         },
         "onClick": {
           "type": "func",
-          "description": "",
+          "description": "Happens when user clicks on row",
+          "required": false
+        },
+        "onChange": {
+          "type": "func",
+          "description": "Happens when selected row index is changed or new items set loaded in grid",
           "required": false
         }
       }
