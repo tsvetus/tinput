@@ -16,27 +16,21 @@ class TGridExample extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 2,
             event: ''
         };
         this.change = this.change.bind(this);
-        this.onRowStyle = this.onRowStyle.bind(this);
         this.onCellStyle = this.onCellStyle.bind(this);
         this.clear = this.clear.bind(this);
     }
 
     change(event) {
         this.setState({
-            value: event.value,
             event: this.state.event + ' ' + JSON.stringify(event)
         });
     }
 
     clear() {
         this.setState({event: null});
-    }
-
-    onRowStyle(event) {
     }
 
     onCellStyle(event) {
@@ -70,7 +64,7 @@ class TGridExample extends React.Component {
                             column3: {caption: "Column 3", width: "2fr"}
                         }}
                         items={ITEMS}
-                        onRowStyle={this.onRowStyle}
+                        onChange={this.change}
                         onCellStyle={this.onCellStyle} />
 
                 </TGroup>
