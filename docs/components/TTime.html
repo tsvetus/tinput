@@ -17,7 +17,8 @@ class TTimeExample extends React.Component {
     change(event) {
         this.setState({
             value: event.value,
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -31,20 +32,34 @@ class TTimeExample extends React.Component {
 
             &lt;div&gt;
 
-                &lt;TGroup style={{container: {margin: "0 0 16px 0"}}}&gt;
+                &lt;TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }}&gt;
 
                     &lt;TTime
-                        style={{container: {width: "280px", margin: "8px 0 8px 0"}}}
+                        style={{
+                            container: {
+                                width: "280px",
+                                margin: "8px 0 8px 0"
+                            }
+                        }}
                         name={'myTimeEdit'}
                         value={this.state.value}
                         label={'Enter valid time:'}
-                        format={{mask: 'hh:mm', empty: '_', full: true, type: 'iso'}}
+                        format={{
+                            mask: 'hh:mm',
+                            empty: '_',
+                            full: true,
+                            type: 'iso'
+                        }}
                         onChange={this.change} /&gt;
 
                 &lt;/TGroup&gt;
 
                 &lt;TMemo
-                    style={{edit: {minHeight: "48px"}}}
+                    style={{
+                        edit: {minHeight: "48px"}
+                    }}
                     label={'onChange events:'}
                     icon={'refresh'}
                     value={this.state.event}

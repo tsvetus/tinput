@@ -15,7 +15,8 @@ class TIconExample extends React.Component {
 
     click(event) {
         this.setState({
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -37,7 +38,9 @@ class TIconExample extends React.Component {
                         margin: "16px"
                     }}&gt;
                     &lt;TIcon
-                        style={{container: {margin: "0 0 16px 0"}}}
+                        style={{
+                            container: {margin: "0 0 16px 0"}
+                        }}
                         name={key}
                         onClick={this.click} /&gt;
                     &lt;div&gt;{key}&lt;/div&gt;

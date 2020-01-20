@@ -17,7 +17,8 @@ class TMailExample extends React.Component {
     change(event) {
         this.setState({
             value: event.value,
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -31,10 +32,17 @@ class TMailExample extends React.Component {
 
             <div>
 
-                <TGroup style={{container: {margin: "0 0 16px 0"}}}>
+                <TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }}>
 
                     <TMail
-                        style={{container: {maxWidth: "300px", margin: "8px"}}}
+                        style={{
+                            container: {
+                                maxWidth: "300px",
+                                margin: "8px"
+                            }
+                        }}
                         value={this.state.value}
                         label={'Email:'}
                         name={'email'}

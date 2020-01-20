@@ -54,6 +54,29 @@ export default {
 
     row: {
         display: "flex"
-    }
+    },
+
+
+    box: {
+        border: '1px solid ' + styles.colors.frame,
+        padding: "8px",
+        margin: "4px 0 4px 0"
+    },
+
+    top: {
+        display: "flex",
+        justifyContent: "flex-start",
+        fontWeight: "bold",
+        padding: "0 0 8px 0"
+    },
+
+    text: {
+        margin: "0 4px 0 0",
+        color: styles.colors.border,
+        fontSize: "16px",
+        fontWeight: "normal",
+        whiteSpace: "nowrap"
+    },
+
 
 }

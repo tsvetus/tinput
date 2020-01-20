@@ -17,7 +17,8 @@ class TListBoxExample extends React.Component {
     change(event) {
         this.setState({
             value: event.value,
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -31,10 +32,17 @@ class TListBoxExample extends React.Component {
 
             &lt;div&gt;
 
-                &lt;TGroup style={{container: {margin: "0 0 16px 0"}}}&gt;
+                &lt;TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }}&gt;
 
                     &lt;TListBox
-                        style={{container: {width: "380px", margin: "8px 0 8px 0"}}}
+                        style={{
+                            container: {
+                                width: "380px",
+                                margin: "8px 0 8px 0"
+                            }
+                        }}
                         name={'myListBox'}
                         empty={{key: 0, value: '-'}}
                         items={[

@@ -17,7 +17,8 @@ class TMemoExample extends React.Component {
     change(event) {
         this.setState({
             value: event.value,
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -31,10 +32,14 @@ class TMemoExample extends React.Component {
 
             <div>
 
-                <TGroup style={{container: {margin: "0 0 16px 0"}}}>
+                <TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }}>
 
                     <TMemo
-                        style={{edit: {minHeight: "48px"}}}
+                        style={{
+                            edit: {minHeight: "48px"}
+                        }}
                         label={'Enter long text:'}
                         wrap={true}
                         value={this.state.value}
@@ -43,7 +48,9 @@ class TMemoExample extends React.Component {
                 </TGroup>
 
                 <TMemo
-                    style={{edit: {minHeight: "48px"}}}
+                    style={{
+                        edit: {minHeight: "48px"}
+                    }}
                     label={'onChange events:'}
                     icon={'refresh'}
                     wrap={true}

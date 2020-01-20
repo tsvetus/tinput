@@ -15,7 +15,8 @@ class TTopExample extends React.Component {
 
     click(event) {
         this.setState({
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -29,21 +30,33 @@ class TTopExample extends React.Component {
 
             <div>
 
-                <TGroup style={{container: {margin: "0 0 16px 0"}}}>
+                <TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }}>
 
                     <TTop
-                        style={{container: {width: "100%", padding: "8px"}}}
+                        style={{
+                            container: {
+                                width: "100%",
+                                padding: "8px"}
+                        }
+                        }
                         name={'top'}
                         caption={'Menu caption'}
-                        tools={[
-                            {icon: 'tinput', onClick: (event) => {alert(JSON.stringify(event))}}
-                        ]}
+                        tools={[{
+                            icon: 'tinput',
+                            onClick: (event) => {
+                                alert(JSON.stringify(event))
+                            }
+                        }]}
                         onClick={this.click} />
 
                 </TGroup>
 
                 <TMemo
-                    style={{edit: {minHeight: "48px"}}}
+                    style={{
+                        edit: {minHeight: "48px"}
+                    }}
                     label={'onChange events:'}
                     icon={'refresh'}
                     wrap={true}

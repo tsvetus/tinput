@@ -7,7 +7,10 @@ for (let i=0; i<120; i++) {
     ITEMS.push({
         column1: 'value ' + i + 1,
         column2: 'value ' + i + 2,
-        column3: <div style={{textAlign: "right"}}>{'value ' + i + 3}</div>
+        column3:
+            <div style={{textAlign: "right"}}>
+                {'value ' + i + 3}
+            </div>
     });
 }
 
@@ -33,7 +36,9 @@ class TPagerExample extends React.Component {
 
             <div>
 
-                <TGroup style={{container: {margin: "0 0 16px 0"}}}>
+                <TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }}>
 
                     <TScroll
                         style={{
@@ -48,9 +53,18 @@ class TPagerExample extends React.Component {
                             }}
                             name={'myGrid'}
                             columns={{
-                                column1: {caption: "Column 1", width: "1fr"},
-                                column2: {caption: "Column 2", width: "2fr"},
-                                column3: {caption: "Column 3", width: "2fr"}
+                                column1: {
+                                    caption: "Column 1",
+                                    width: "1fr"
+                                },
+                                column2: {
+                                    caption: "Column 2",
+                                    width: "2fr"
+                                },
+                                column3: {
+                                    caption: "Column 3",
+                                    width: "2fr"
+                                }
                             }}
                             items={this.state.items}>
 

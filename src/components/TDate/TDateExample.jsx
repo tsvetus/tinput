@@ -17,7 +17,8 @@ class TDateExample extends React.Component {
     change(event) {
         this.setState({
             value: event.value,
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -31,20 +32,34 @@ class TDateExample extends React.Component {
 
             <div>
 
-                <TGroup style={{container: {margin: "0 0 16px 0"}}}>
+                <TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }}>
 
                     <TDate
-                        style={{container: {width: "280px", margin: "8px 0 8px 0"}}}
+                        style={{
+                            container: {
+                                width: "280px",
+                                margin: "8px 0 8px 0"
+                            }
+                        }}
                         name={'myDateEdit'}
                         value={this.state.value}
                         label={'Enter valid date:'}
-                        format={{mask: 'DD/MM/YYYY', empty: '_', full: true, type: 'iso'}}
+                        format={{
+                            mask: 'DD/MM/YYYY',
+                            empty: '_',
+                            full: true,
+                            type: 'iso'
+                        }}
                         onChange={this.change} />
 
                 </TGroup>
 
                 <TMemo
-                    style={{edit: {minHeight: "48px"}}}
+                    style={{
+                        edit: {minHeight: "48px"}
+                    }}
                     label={'onChange events:'}
                     icon={'refresh'}
                     value={this.state.event}

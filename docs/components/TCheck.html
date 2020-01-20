@@ -17,7 +17,8 @@ class TCheckExample extends React.Component {
     change(event) {
         this.setState({
             value: event.value,
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -31,10 +32,14 @@ class TCheckExample extends React.Component {
 
             &lt;div&gt;
 
-                &lt;TGroup style={{container: {margin: "0 0 16px 0"}}}&gt;
+                &lt;TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }}&gt;
 
                     &lt;TCheck
-                        style={{container: {width: "120px"}}}
+                        style={{
+                            container: {width: "120px"}
+                        }}
                         label={'Check me:'}
                         value={this.state.value}
                         checked={1}

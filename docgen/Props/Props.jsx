@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import {
     TGrid,
+    TFilm,
+    Sizer,
     merge
 } from 'tinput';
 
@@ -23,6 +25,42 @@ function iterate(data, callback, level) {
 }
 
 class Props extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {};
+        this.sizer = new Sizer(this);
+        this.handleFrame = this.handleFrame.bind(this);
+    }
+
+    componentWillUnmount() {
+        this.sizer.free();
+        delete this.sizer;
+    }
+
+    handleFrame(event) {
+        return (
+            <div key={event.index} style={event.style.box}>
+                <div style={event.style.top}>
+                    <div style={event.style.text}>Property: </div>
+                    <div style={event.style.name}>
+                        {event.item.name}
+                    </div>
+                    <div style={event.style.text}>of type: </div>
+                    <div style={event.style.type}>
+                        {event.item.type}
+                    </div>
+                    <div style={event.style.text}>default:</div>
+                    <div style={event.style.defaultValue}>
+                        {event.item.defaultValue}
+                    </div>
+                </div>
+                <div style={event.style.description}>
+                    {event.item.description}
+                </div>
+            </div>
+        );
+    }
 
     render () {
 
@@ -47,7 +85,7 @@ class Props extends React.Component {
                 args = <TGrid
                     style={style.subGrid}
                     columns={{
-                        name: {caption: 'name', width: '100px'},
+                        name: {caption: 'name', width: '120px'},
                         type: {caption: 'type', width: '100px'},
                         description: {caption: 'description'}
                     }}
@@ -73,7 +111,7 @@ class Props extends React.Component {
                 struct = <TGrid
                     style={style.subGrid}
                     columns={{
-                        name: {caption: 'name', width: '100px'},
+                        name: {caption: 'name', width: '120px'},
                         description: {caption: 'description'}
                     }}
                     items={items}
@@ -90,7 +128,7 @@ class Props extends React.Component {
             items.push({
                 name: <div style={style.name}>{key}</div>,
                 type: <div style={style.type}>{props[key].type}</div>,
-                defaultValue: <div style={style.defaultValue}><code>{def}</code></div>,
+                defaultValue: <div style={style.defaultValue}>{def}</div>,
                 required: <div style={style.required}>{props[key].required ? '*' : ''}</div>,
                 description: <div>
                     <div style={style.description}>{props[key].description}</div>
@@ -101,23 +139,33 @@ class Props extends React.Component {
 
         }
 
-        return (
-            <TGrid
+        let columns = {
+            name: {caption: 'name', width: '120px'},
+            type: {caption: 'type', width: '100px'},
+            defaultValue: {caption: 'default', width: '120px'},
+            required: {caption: 'req', width: '40px'},
+            description: {caption: 'description'}
+        };
+
+        if (this.state.width < 980) {
+            return <TFilm
+                style={style}
+                columns={columns}
+                items={items}
+                onFrame={this.handleFrame}
+            />
+        } else {
+            return <TGrid
                 style={style.grid}
-                columns={{
-                    name: {caption: 'name', width: '120px'},
-                    type: {caption: 'type', width: '100px'},
-                    defaultValue: {caption: 'default', width: '120px'},
-                    required: {caption: 'req', width: '40px'},
-                    description: {caption: 'description'}
-                }}
+                columns={columns}
                 items={items}
                 options={{
                     showSelected: false,
-                    scrollHead: false,
-                    borderWidth: '1px'
-                }} />
-        );
+                        scrollHead: false,
+                        borderWidth: '1px'
+                }}
+            />
+        }
 
     }
 

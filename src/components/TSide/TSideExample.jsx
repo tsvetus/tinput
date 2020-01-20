@@ -20,14 +20,16 @@ class TSideExample extends React.Component {
         this.setState({
             item: event.item.name,
             side: false,
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
     click(event) {
         this.setState({
             side: true,
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -41,7 +43,9 @@ class TSideExample extends React.Component {
 
             <div>
 
-                <TGroup style={{container: {margin: "0 0 16px 0"}}}>
+                <TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }} >
 
                     <TSide
                         show={this.state.side}
@@ -59,14 +63,18 @@ class TSideExample extends React.Component {
                             padding: "8px",
                             textAlign: "center"
                         }}>
-                            Any other menu content as children elements
+                            Any other menu content as
+                            children elements
                         </div>
                     </TSide>
 
                     <TTop
-                        style={{container: {width: "100%", padding: "8px"}}}
+                        style={{
+                            container: {width: "100%", padding: "8px"}
+                        }}
                         name={'top'}
-                        caption={'Click menu icon or touch/move from left side of screen to the right'}
+                        caption={'Click menu icon or touch/move ' +
+                            'from left side of screen to the right'}
                         tools={[
                             {icon: 'tinput'}
                         ]}

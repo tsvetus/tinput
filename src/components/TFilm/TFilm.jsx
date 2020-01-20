@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, clone, TIMEOUT} from '../../util';
+import {merge, clone, contain, TIMEOUT} from '../../util';
 
 import styles from '../../styles';
 
@@ -81,22 +81,19 @@ class TFilm extends React.Component {
     render () {
 
         let style = merge(
-            styles.TFilm,
-            styles[this.props.name],
-            this.props.style
+            contain(styles.TFilm),
+            contain(styles[this.props.name]),
+            contain(this.props.style)
         );
 
         let items = [];
-
         if (this.props.items) {
-
             this.props.items.forEach((v, i) => {
                 if (this.props.onFrame) {
-                    let frame = this.props.onFrame(v, i, this.handleClick);
+                    let frame = this.props.onFrame({item: v, index: i, onClick: this.handleClick, style: style});
                     items.push(frame);
                 }
             });
-
         }
 
         return (
@@ -118,8 +115,8 @@ TFilm.propTypes = {
     style: PropTypes.object,
     name: PropTypes.string,
     data: PropTypes.any,
-    items: PropTypes.string,
-    columns: PropTypes.string,
+    items: PropTypes.array,
+    columns: PropTypes.object,
     index: PropTypes.number,
     onClick: PropTypes.func,
     onFrame: PropTypes.func

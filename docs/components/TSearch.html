@@ -1,6 +1,6 @@
 <pre><code>import React from 'react';
 
-import {TSearch, TMemo, TGroup, TListBox} from 'tinput';
+import {TSearch, TMemo, TGroup} from 'tinput';
 
 const ITEMS = [
     {key: 'key1', value: 'First item'},
@@ -39,7 +39,8 @@ class TSearchExample extends React.Component {
     change(event) {
         this.setState({
             [event.name]: event.value,
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -53,10 +54,17 @@ class TSearchExample extends React.Component {
 
             &lt;div&gt;
 
-                &lt;TGroup style={{container: {margin: "0 0 16px 0"}}}&gt;
+                &lt;TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }} &gt;
 
                     &lt;TSearch
-                        style={{container: {width: "380px", margin: "8px 0 8px 0"}}}
+                        style={{
+                            container: {
+                                width: "380px",
+                                margin: "8px 0 8px 0"
+                            }
+                        }}
                         name={'mySearch1'}
                         value={this.state.mySearch1}
                         label={'Choose item:'}
@@ -66,7 +74,12 @@ class TSearchExample extends React.Component {
                         onChange={this.change} /&gt;
 
                     &lt;TSearch
-                        style={{container: {width: "380px", margin: "8px 0 8px 0"}}}
+                        style={{
+                            container: {
+                                width: "380px",
+                                margin: "8px 0 8px 0"
+                            }
+                        }}
                         name={'mySearch2'}
                         value={this.state.mySearch2}
                         label={'Choose item:'}

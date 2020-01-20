@@ -15,7 +15,8 @@ class TButtonExample extends React.Component {
 
     click(event) {
         this.setState({
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -29,10 +30,18 @@ class TButtonExample extends React.Component {
 
             <div>
 
-                <TGroup style={{container: {margin: "0 0 16px 0"}}}>
+                <TGroup
+                    style={{
+                        container: {margin: "0 0 16px 0"}
+                    }}>
 
                     <TButton
-                        style={{container: {width: "180px", margin: "8px 0 8px 0"}}}
+                        style={{
+                            container: {
+                                width: "180px",
+                                margin: "8px 0 8px 0"
+                            }
+                        }}
                         name={'myButton'}
                         onClick={this.click}>
                         Click me!

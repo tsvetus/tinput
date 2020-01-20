@@ -7,7 +7,10 @@ for (let i=0; i<20; i++) {
     ITEMS.push({
         column1: 'value ' + i + 1,
         column2: 'value ' + i + 2,
-        column3: <div style={{textAlign: "right"}}>{'value ' + i + 3}</div>
+        column3:
+            <div style={{textAlign: "right"}}>
+                {'value ' + i + 3}
+            </div>
     });
 }
 
@@ -25,7 +28,8 @@ class TGridExample extends React.Component {
 
     change(event) {
         this.setState({
-            event: this.state.event + ' ' + JSON.stringify(event)
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
         });
     }
 
@@ -36,10 +40,15 @@ class TGridExample extends React.Component {
     onCellStyle(event) {
         let style = {};
         if (event.index % 2 > 0) {
-            style = merge(style, {backgroundColor: "#d8d7ff"});
+            style = merge(style,
+                {backgroundColor: "#d8d7ff"});
         }
-        if (typeof(event.cell) === 'string' && event.cell.indexOf('11') >= 0) {
-            style = merge(style, {backgroundColor: "#ffb0b5"});
+        if (typeof(event.cell) === 'string' &&
+            event.cell.indexOf('11') >= 0) {
+            style = merge(
+                style,
+                {backgroundColor: "#ffb0b5"}
+            );
         }
         return style;
     }
@@ -50,7 +59,9 @@ class TGridExample extends React.Component {
 
             <div>
 
-                <TGroup style={{container: {margin: "0 0 16px 0"}}}>
+                <TGroup style={{
+                    container: {margin: "0 0 16px 0"}
+                }}>
 
                     <TGrid
                         style={{
@@ -59,9 +70,18 @@ class TGridExample extends React.Component {
                         }}
                         name={'myGrid'}
                         columns={{
-                            column1: {caption: "Column 1", width: "1fr"},
-                            column2: {caption: "Column 2", width: "2fr"},
-                            column3: {caption: "Column 3", width: "2fr"}
+                            column1: {
+                                caption: "Column 1",
+                                width: "1fr"
+                            },
+                            column2: {
+                                caption: "Column 2",
+                                width: "2fr"
+                            },
+                            column3: {
+                                caption: "Column 3",
+                                width: "2fr"
+                            }
                         }}
                         items={ITEMS}
                         onChange={this.change}
