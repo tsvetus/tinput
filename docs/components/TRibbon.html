@@ -1,9 +1,9 @@
 <pre><code>import React from 'react';
 
-import {TRibbon, TScroll, TMemo, TGroup} from 'tinput';
+import {TRibbon, TPager, TScroll, TMemo, TGroup} from 'tinput';
 
 const ITEMS = [];
-for (let i = 0; i &lt; 20; i++) {
+for (let i = 0; i &lt; 122; i++) {
   ITEMS.push({
     column1: 'value ' + i + 1,
     column2: 'value ' + i + 2,
@@ -16,17 +16,25 @@ class TRibbonExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      items: [],
       event: ''
     };
     this.change = this.change.bind(this);
     this.onFrame = this.onFrame.bind(this);
     this.clear = this.clear.bind(this);
+    this.onPage = this.onPage.bind(this);
   }
 
   change(event) {
     this.setState({
       event: this.state.event + ' ' +
         JSON.stringify(event)
+    });
+  }
+
+  onPage(event) {
+    this.setState({
+      items: event.items
     });
   }
 
@@ -61,23 +69,30 @@ class TRibbonExample extends React.Component {
         }}&gt;
 
           &lt;TScroll style={{
-            container: {height: "300px"},
+            container: {
+              height: "300px"
+            },
             content: {
-              padding: "16px",
-              display: "flex",
-              justifyContent: "center"
+              padding: "16px"
             }
           }}&gt;
 
             &lt;TRibbon
               style={{
-                container: {width: "300px"},
-                caption: {backgroundColor: "#ddd"},
+                container: {
+                  width: "100%"
+                },
+                content: {
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "space-around"
+                },
                 frame: {
+                  width: "200px",
                   display: "flex",
                   flexDirection: "column",
                   border: "1px solid #aaa",
-                  margin: "4px 0 4px 0",
+                  margin: "8px",
                   padding: "16px"
                 },
                 column1: {width: "100%", textAlign: "left"},
@@ -99,9 +114,17 @@ class TRibbonExample extends React.Component {
                   width: "2fr"
                 }
               }}
-              items={ITEMS}
+              items={this.state.items}
               onChange={this.change}
-              onFrame={this.onFrame}/&gt;
+              onFrame={this.onFrame}&gt;
+
+              &lt;TPager
+                  size={25}
+                  items={ITEMS}
+                  name={'pgGrid'}
+                  onChange={this.onPage}/&gt;
+
+            &lt;/TRibbon&gt;
 
           &lt;/TScroll&gt;
 

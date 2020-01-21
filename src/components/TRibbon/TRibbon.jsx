@@ -84,7 +84,7 @@ class TRibbon extends React.Component {
     render () {
 
         let style = merge(
-            contain(styles.TFilm),
+            contain(styles.TRibbon),
             contain(styles[this.props.name]),
             contain(this.props.style)
         );

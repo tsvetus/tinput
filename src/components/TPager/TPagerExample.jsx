@@ -71,6 +71,7 @@ class TPagerExample extends React.Component {
               <TPager
                 size={25}
                 items={ITEMS}
+                name={'pgGrid'}
                 onChange={this.change}/>
 
             </TGrid>
