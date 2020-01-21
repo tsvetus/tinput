@@ -42,8 +42,7 @@ class TPagerExample extends React.Component {
 
           <TScroll
             style={{
-              container: {maxHeight: "400px"},
-              content: {padding: "8px"}
+              container: {maxHeight: "400px"}
             }}>
 
             <TGrid

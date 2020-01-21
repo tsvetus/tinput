@@ -104,12 +104,18 @@ class TGrid extends React.Component {
             let captions = [];
             let widths = '';
 
+            let count = 0;
             for (let key in this.props.columns) {
                 let column = this.props.columns[key];
+                let cs = clone(style.caption);
+                if (count === 0) {
+                    cs.marginLeft = undefined;
+                }
                 captions.push(
-                    <div key={key} style={style.caption}>{column.caption ? column.caption : ''}</div>
+                    <div key={key} style={cs}>{column.caption ? column.caption : ''}</div>
                 );
                 widths += ' ' + (column.width ? column.width : '1fr');
+                count++;
             }
 
             rowStyle = merge(rowStyle, {gridTemplateColumns: widths});
@@ -151,13 +157,17 @@ class TGrid extends React.Component {
                         cs = merge(cs, rs);
                     }
                 }
+                let count = 0;
                 for (let key in this.props.columns) {
-                    let css = cs;
+                    let css = clone(cs);
                     if (this.props.columns[key].style !== undefined) {
                         css = merge(css, this.props.columns[key].style(v[key], key, v));
                     }
                     if (this.props.onCellStyle) {
                         css = merge(css, this.props.onCellStyle({cell: v[key], column: key, index: i, row: v}));
+                    }
+                    if (count === 0) {
+                        css.marginLeft = undefined;
                     }
                     if (v[key] === undefined) {
                         if (this.props.columns[key].value === undefined) {
@@ -180,6 +190,7 @@ class TGrid extends React.Component {
                             );
                         }
                     }
+                    count++;
                 }
                 items.push(
                     <div key={i} style={rowStyle} index={i} onClick={this.handleClick}>

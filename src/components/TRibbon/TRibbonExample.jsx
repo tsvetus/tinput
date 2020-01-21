@@ -71,9 +71,6 @@ class TRibbonExample extends React.Component {
           <TScroll style={{
             container: {
               height: "300px"
-            },
-            content: {
-              padding: "16px"
             }
           }}>
 
