@@ -3090,6 +3090,299 @@
           "required": false
         }
       }
+    },
+    "TModal": {
+      "description": "Shows modal dialog",
+      "displayName": "TModal",
+      "methods": [
+        {
+          "name": "close",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "setTimer",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "stopTimer",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "handleCancel",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TModalExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "content": {
+              "type": "object",
+              "description": "Style for modal content. By default content is a flex box with column justify mode"
+            },
+            "header": {
+              "type": "object",
+              "description": "Style for header box. Header is a flex box containing \"timer\", \"caption\" and \"close\" elements"
+            },
+            "timer": {
+              "type": "object",
+              "description": "Style for timer box"
+            },
+            "caption": {
+              "type": "object",
+              "description": "Style for caption box"
+            },
+            "close": {
+              "type": "object",
+              "description": "Style for close icon"
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "show": {
+          "type": "any",
+          "description": "Indicates whether to show dialog or not",
+          "required": false
+        },
+        "countdown": {
+          "type": "any",
+          "description": "Contain number of seconds before dialog automatically closes",
+          "required": false
+        },
+        "caption": {
+          "type": "string",
+          "description": "Caption content",
+          "required": false
+        },
+        "showHeader": {
+          "type": "any",
+          "description": "Indicates whether to show header or not",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "onClose": {
+          "type": "func",
+          "description": "On dialog close event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.button": {
+              "name": "event.button",
+              "type": "string",
+              "description": "Clicked button name"
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "TForm": {
+      "description": "Extends TModal component. Adds buttons panel at the bottom and on button click events. In addition TForm has\r\n\"message\" and \"error\" props. If \"message\" or \"error\" assigned then they are shown in content area with \"OK\" button",
+      "displayName": "TForm",
+      "methods": [
+        {
+          "name": "handleButtonClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleCancel",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TFormExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "content": {
+              "type": "object",
+              "description": "Style for modal content. By default content is a flex box with column justify mode"
+            },
+            "header": {
+              "type": "object",
+              "description": "Style for header box. Header is a flex box containing \"timer\", \"caption\" and \"close\" elements"
+            },
+            "timer": {
+              "type": "object",
+              "description": "Style for timer box"
+            },
+            "caption": {
+              "type": "object",
+              "description": "Style for caption box"
+            },
+            "close": {
+              "type": "object",
+              "description": "Style for close icon"
+            },
+            "footer": {
+              "type": "object",
+              "description": "Style for footer box (buttons container)"
+            },
+            "error": {
+              "type": "object",
+              "description": "Style for error text"
+            },
+            "message": {
+              "type": "object",
+              "description": "Style for message text"
+            },
+            "button": {
+              "type": "object",
+              "description": "Style for all buttons in footer area"
+            },
+            "buttonName": {
+              "type": "object",
+              "description": "Style for button. Replace \"buttonName\" with your button name. There are predefined styles for\r\n\"ok\", \"close\", \"cancel\", \"add\", \"delete\", \"submit\", \"wait\", \"open\" and \"save\" buttons"
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "show": {
+          "type": "any",
+          "description": "Indicates whether to show dialog or not",
+          "required": false
+        },
+        "countdown": {
+          "type": "any",
+          "description": "Contain number of seconds before dialog automatically closes",
+          "required": false
+        },
+        "caption": {
+          "type": "string",
+          "description": "Caption content",
+          "required": false
+        },
+        "showHeader": {
+          "type": "any",
+          "description": "Indicates whether to show header or not",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "wait": {
+          "type": "any",
+          "description": "If \"true\" tells TForm to leave button greyscale and don't react on \"onClick\" events",
+          "required": false
+        },
+        "buttons": {
+          "type": "object",
+          "description": "List of buttons to show in footer area. Represents object of the following structure\r\n\"{buttonName: 'Button caption', ...}\"",
+          "required": false,
+          "defaultValue": "{ok: 'OK'}"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error text to show in content area",
+          "required": false
+        },
+        "message": {
+          "type": "string",
+          "description": "Message text to show in content area",
+          "required": false
+        },
+        "onClose": {
+          "type": "func",
+          "description": "On form close event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.button": {
+              "name": "event.button",
+              "type": "string",
+              "description": "Clicked button name"
+            }
+          },
+          "required": true
+        }
+      }
     }
   }
 }

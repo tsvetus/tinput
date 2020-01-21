@@ -84,7 +84,7 @@ class TRibbonExample extends React.Component {
                 column2: {width: "100%", textAlign: "center"},
                 column3: {width: "100%", textAlign: "right"}
               }}
-              name={'myGrid'}
+              name={'myRibbon'}
               columns={{
                 column1: {
                   caption: "Column 1",

@@ -481,7 +481,7 @@ export default function defaultStyles(template) {
 
         },
 
-        TFilm: {
+        TRibbon: {
 
             title: {
                 backgroundColor: template.colors.window,

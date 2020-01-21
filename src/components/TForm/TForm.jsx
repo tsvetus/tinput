@@ -8,6 +8,10 @@ import TButton from '../TButton';
 
 import styles from '../../styles';
 
+/**
+ * Extends TModal component. Adds buttons panel at the bottom and on button click events. In addition TForm has
+ * "message" and "error" props. If "message" or "error" assigned then they are shown in content area with "OK" button
+ */
 class TForm extends React.Component {
 
     constructor(props, context) {
@@ -51,7 +55,7 @@ class TForm extends React.Component {
         let buttons = [];
         if (propButtons) {
             for (let key in propButtons) {
-                let buttonStyle = style.buttons[key];
+                let buttonStyle = merge(style.button, style.buttons[key]);
                 if (this.props.wait) {
                     buttonStyle = style.buttons.wait;
                 }
@@ -97,22 +101,77 @@ class TForm extends React.Component {
 }
 
 TForm.propTypes = {
-    style: PropTypes.object,
+
+    /** Component style: */
+    style: PropTypes.shape({
+        /** Style for outer component container */
+        container: PropTypes.object,
+        /**
+         * Style for modal content. By default content is a flex box with column justify mode
+         */
+        content: PropTypes.object,
+        /** Style for header box. Header is a flex box containing "timer", "caption" and "close" elements */
+        header: PropTypes.object,
+        /** Style for timer box */
+        timer: PropTypes.object,
+        /** Style for caption box */
+        caption: PropTypes.object,
+        /** Style for close icon */
+        close: PropTypes.object,
+        /** Style for footer box (buttons container) */
+        footer: PropTypes.object,
+        /** Style for error text */
+        error: PropTypes.object,
+        /** Style for message text */
+        message: PropTypes.object,
+        /** Style for all buttons in footer area */
+        button: PropTypes.object,
+        /**
+         * Style for button. Replace "buttonName" with your button name. There are predefined styles for
+         * "ok", "close", "cancel", "add", "delete", "submit", "wait", "open" and "save" buttons
+         */
+        buttonName: PropTypes.object
+    }),
+    /**
+     * Any component name that associated with component and returned in "onChange" event in "event.name" field.
+     * In addition component name can be used in global styles registered by "registerStyles" function to
+     * associate particular style with this component
+     */
     name: PropTypes.string,
+    /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
+    /** Indicates whether to show dialog or not */
     show: PropTypes.any,
+    /** Contain number of seconds before dialog automatically closes */
     countdown: PropTypes.any,
+    /** Caption content */
     caption: PropTypes.string,
+    /** Indicates whether to show header or not */
+    showHeader: PropTypes.any,
+    /** If "true" tells TForm to leave button greyscale and don't react on "onClick" events */
     wait: PropTypes.any,
-    onClose: PropTypes.func,
+    /**
+     * List of buttons to show in footer area. Represents object of the following structure
+     * "{buttonName: 'Button caption', ...}"
+     */
     buttons: PropTypes.object,
+    /** Error text to show in content area */
     error: PropTypes.string,
+    /** Message text to show in content area*/
     message: PropTypes.string,
-    showHeader: PropTypes.any
+    /**
+     * On form close event
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {string} event.button Clicked button name
+     */
+    onClose: PropTypes.func.isRequired
 };
 
 TForm.defaultProps = {
-    buttons: {'ok': 'OK'}
+    showHeader: true,
+    buttons: {ok: 'OK'}
 };
 
 export default TForm;

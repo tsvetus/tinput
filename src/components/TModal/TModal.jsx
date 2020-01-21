@@ -8,6 +8,9 @@ import styles from '../../styles';
 
 const ICON_CLOSE = 'close';
 
+/**
+ * Shows modal dialog
+ */
 class TModal extends React.Component {
 
     constructor(props, context) {
@@ -123,13 +126,46 @@ class TModal extends React.Component {
 }
 
 TModal.propTypes = {
-    style: PropTypes.object,
+    /** Component style: */
+    style: PropTypes.shape({
+        /** Style for outer component container */
+        container: PropTypes.object,
+        /**
+         * Style for modal content. By default content is a flex box with column justify mode
+         */
+        content: PropTypes.object,
+        /** Style for header box. Header is a flex box containing "timer", "caption" and "close" elements */
+        header: PropTypes.object,
+        /** Style for timer box */
+        timer: PropTypes.object,
+        /** Style for caption box */
+        caption: PropTypes.object,
+        /** Style for close icon */
+        close: PropTypes.object
+    }),
+    /**
+     * Any component name that associated with component and returned in "onChange" event in "event.name" field.
+     * In addition component name can be used in global styles registered by "registerStyles" function to
+     * associate particular style with this component
+     */
     name: PropTypes.string,
+    /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
+    /** Indicates whether to show dialog or not */
     show: PropTypes.any,
+    /** Contain number of seconds before dialog automatically closes */
     countdown: PropTypes.any,
+    /** Caption content */
     caption: PropTypes.string,
+    /** Indicates whether to show header or not */
     showHeader: PropTypes.any,
+    /**
+     * On dialog close event
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {string} event.button Clicked button name
+     */
     onClose: PropTypes.func.isRequired
 };
 

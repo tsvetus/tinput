@@ -110,6 +110,16 @@ module.exports = {
         example: {
             name: "TPagerExample"
         }
+    }, {
+        name: "TModal",
+        example: {
+            name: "TModalExample"
+        }
+    }, {
+        name: "TForm",
+        example: {
+            name: "TFormExample"
+        }
     }]
 
 };

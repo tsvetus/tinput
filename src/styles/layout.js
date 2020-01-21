@@ -343,7 +343,7 @@ export default {
 
     },
 
-    TFilm: {
+    TRibbon: {
 
         title: {
             position: "sticky",

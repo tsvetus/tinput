@@ -17,6 +17,8 @@ import TSideExample from './components/TSide/TSideExample.jsx';
 import TGridExample from './components/TGrid/TGridExample.jsx';
 import TRibbonExample from './components/TRibbon/TRibbonExample.jsx';
 import TPagerExample from './components/TPager/TPagerExample.jsx';
+import TModalExample from './components/TModal/TModalExample.jsx';
+import TFormExample from './components/TForm/TFormExample.jsx';
 
 export {
     TDateExample,
@@ -37,5 +39,7 @@ export {
     TSideExample,
     TGridExample,
     TRibbonExample,
-    TPagerExample
+    TPagerExample,
+    TModalExample,
+    TFormExample
 }
