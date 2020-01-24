@@ -9,7 +9,8 @@ class TModalExample extends React.Component {
     this.state = {
       show: false,
       event: '',
-      error: null
+      error: null,
+      message: null
     };
     this.click = this.click.bind(this);
     this.clear = this.clear.bind(this);
@@ -22,7 +23,13 @@ class TModalExample extends React.Component {
             event: this.state.event + ' ' +
                 JSON.stringify(event)
         });
-    } else if (event.button === 'ok') {
+    } else if (event.button === 'message') {
+        this.setState({
+            message: 'Press "Ok" to close!',
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
+        });
+    } else if (event.button === 'continue') {
         this.setState({
             error: null,
             event: this.state.event + ' ' +
@@ -32,6 +39,7 @@ class TModalExample extends React.Component {
         this.setState({
             show: !this.state.show,
             error: null,
+            message: null,
             event: this.state.event + ' ' +
                 JSON.stringify(event)
         });
@@ -51,18 +59,30 @@ class TModalExample extends React.Component {
         <TForm
             style={{
               container: {
-                maxWidth: "360px"
+                maxWidth: "400px"
               },
               content: {
                   padding: "16px"
+              },
+              buttons: {
+                  message: {color: "#1e4c0f"},
+                  continue: {color: "#131868"}
               }
             }}
             name={'myForm'}
             show={this.state.show}
-            error={this.state.error}
             buttons={{
                 save: "Save",
+                message: "Message",
                 cancel: "Cancel"
+            }}
+            error={this.state.error}
+            errorButtons={{
+                continue: 'Continue'
+            }}
+            message={this.state.message}
+            messageButtons={{
+                ok: 'Ok'
             }}
             caption={'Form caption'}
             countdown={25}

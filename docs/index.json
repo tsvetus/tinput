@@ -3384,6 +3384,18 @@
           "description": "Message text to show in content area",
           "required": false
         },
+        "errorButtons": {
+          "type": "object",
+          "description": "List of buttons to show if \"error\" property is assigned",
+          "required": false,
+          "defaultValue": "{ok: 'OK'}"
+        },
+        "messageButtons": {
+          "type": "object",
+          "description": "List of buttons to show if \"message\" property is assigned",
+          "required": false,
+          "defaultValue": "{ok: 'OK'}"
+        },
         "onClose": {
           "type": "func",
           "description": "On form close event ",

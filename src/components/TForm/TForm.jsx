@@ -46,7 +46,12 @@ class TForm extends React.Component {
         let content = null;
         let propButtons = null;
         if (this.props.message || this.props.error) {
-            propButtons = {'ok': 'ОК'}
+            if (this.props.message) {
+                propButtons = merge(propButtons, this.props.messageButtons);
+            }
+            if (this.props.error) {
+                propButtons = merge(propButtons, this.props.errorButtons);
+            }
         } else {
             propButtons = this.props.buttons;
             content = this.props.children;
@@ -160,6 +165,14 @@ TForm.propTypes = {
     /** Message text to show in content area*/
     message: PropTypes.string,
     /**
+     * List of buttons to show if "error" property is assigned
+     */
+    errorButtons: PropTypes.object,
+    /**
+     * List of buttons to show if "message" property is assigned
+     */
+    messageButtons: PropTypes.object,
+    /**
      * On form close event
      * @param {object} event Event object with following structure:
      * @param {string} event.name Component name from "name" property
@@ -171,7 +184,9 @@ TForm.propTypes = {
 
 TForm.defaultProps = {
     showHeader: true,
-    buttons: {ok: 'OK'}
+    buttons: {ok: 'OK'},
+    errorButtons: {ok: 'OK'},
+    messageButtons: {ok: 'OK'}
 };
 
 export default TForm;

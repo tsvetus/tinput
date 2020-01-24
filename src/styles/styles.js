@@ -1,11 +1,5 @@
 export default function defaultStyles(template) {
 
-    let button = {
-        ...template.fonts.common,
-        margin: "4px",
-        textAlign: "center"
-    };
-
     return {
 
         colors: template.colors,
@@ -196,50 +190,48 @@ export default function defaultStyles(template) {
                 textAlign: "center"
             },
 
+            button: {
+                ...template.fonts.common,
+                margin: "4px",
+                textAlign: "center"
+            },
+
             buttons: {
 
                 cancel: {
-                    ...button,
                     fontWeight: "bold",
                     color: "#2a2975"
                 },
 
                 ok: {
-                    ...button,
                     color: "#3f943f"
                 },
 
                 submit: {
-                    ...button,
                     color: "#3f943f"
                 },
 
                 save: {
-                    ...button,
                     fontWeight: "bold",
                     color: "#3f943f"
                 },
 
                 open: {
-                    ...button,
                     fontWeight: "bold",
                     color: "#ff9838"
                 },
 
                 edit: {
-                    ...button,
                     fontWeight: "bold",
                     color: "#3f943f"
                 },
 
                 add: {
-                    ...button,
                     fontWeight: "bold",
                     color: "#3f943f"
                 },
 
                 wait: {
-                    ...button,
                     fontWeight: "bold",
                     color: "#ddd",
                     border: "1px solid #ddd",
@@ -247,7 +239,6 @@ export default function defaultStyles(template) {
                 },
 
                 delete: {
-                    ...button,
                     fontWeight: "bold",
                     color: "#a13b3b"
                 }
