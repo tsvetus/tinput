@@ -8,18 +8,34 @@ class TModalExample extends React.Component {
     super(props);
     this.state = {
       show: false,
-      event: ''
+      event: '',
+      error: null
     };
     this.click = this.click.bind(this);
     this.clear = this.clear.bind(this);
   }
 
   click(event) {
-    this.setState({
-      show: !this.state.show,
-      event: this.state.event + ' ' +
-        JSON.stringify(event)
-    });
+    if (event.button === 'save') {
+        this.setState({
+            error: 'Nothing to save!',
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
+        });
+    } else if (event.button === 'ok') {
+        this.setState({
+            error: null,
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
+        });
+    } else {
+        this.setState({
+            show: !this.state.show,
+            error: null,
+            event: this.state.event + ' ' +
+                JSON.stringify(event)
+        });
+    }
   }
 
   clear() {
@@ -43,12 +59,13 @@ class TModalExample extends React.Component {
             }}
             name={'myForm'}
             show={this.state.show}
+            error={this.state.error}
             buttons={{
-                ok: "OK",
+                save: "Save",
                 cancel: "Cancel"
             }}
             caption={'Form caption'}
-            countdown={10}
+            countdown={25}
             onClose={this.click}&gt;
 
           &lt;div
