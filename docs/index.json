@@ -1260,6 +1260,20 @@
           "modifiers": [],
           "params": [],
           "returns": null
+        },
+        {
+          "name": "handleDown",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "handleUp",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
         }
       ],
       "example": {
@@ -1274,6 +1288,14 @@
             "container": {
               "type": "object",
               "description": "Style for outer component container"
+            },
+            "wait": {
+              "type": "object",
+              "description": "Style for waiting button state"
+            },
+            "down": {
+              "type": "object",
+              "description": "Style for pressed button state"
             }
           }
         },
@@ -1290,7 +1312,14 @@
         "wait": {
           "type": "any",
           "description": "Component wait state. When \"true\" component appears in grey color and doesn't respond\r\non \"onClick\" event",
-          "required": false
+          "required": false,
+          "defaultValue": "false"
+        },
+        "down": {
+          "type": "any",
+          "description": "If \"true\" button preserves pressed state",
+          "required": false,
+          "defaultValue": "false"
         },
         "onClick": {
           "type": "func",

@@ -22,15 +22,25 @@ export default function defaultStyles(template) {
         TButton: {
             container: {
                 padding: "8px 16px 8px 16px",
-                border: "1px solid " + template.colors.frame,
                 backgroundColor: template.colors.face,
                 color: template.colors.text,
                 borderRadius: "8px",
                 textAlign: "center",
+                borderLeft: "1px solid " + template.colors.frame,
+                borderTop: "1px solid " + template.colors.frame,
+                borderBottom: "1px solid " + template.colors.frame,
+                borderRight: "1px solid " + template.colors.frame,
                 ...template.fonts.common
             },
             wait: {
                 color: "#ddd"
+            },
+            down: {
+                backgroundColor: template.colors.shadow,
+                borderLeft: "1px solid " + template.colors.border,
+                borderTop: "1px solid " + template.colors.border,
+                borderBottom: "1px solid " + template.colors.window,
+                borderRight: "1px solid " + template.colors.window
             }
         },
 

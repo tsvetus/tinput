@@ -4,6 +4,7 @@ export default {
         border: "rgba(42,41,117,0.89)",
         face: "#eee",
         frame: "#bfbbff",
+        shadow: "#ddd",
         control: "#777",
         placeholder: "#777",
         text: "#000",

@@ -7,6 +7,7 @@ class TButtonExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      down: false,
       event: ''
     };
     this.click = this.click.bind(this);
@@ -14,7 +15,10 @@ class TButtonExample extends React.Component {
   }
 
   click(event) {
+    let down = event.name === 'myDownButton' ?
+        !this.state.down : this.state.down;
     this.setState({
+      down: down,
       event: this.state.event + ' ' +
         JSON.stringify(event)
     });
@@ -32,7 +36,8 @@ class TButtonExample extends React.Component {
 
         <TGroup
           style={{
-            container: {margin: "0 0 16px 0"}
+            container: {margin: "0 0 16px 0"},
+            content: {justifyContent: "space-around"}
           }}>
 
           <TButton
@@ -45,6 +50,19 @@ class TButtonExample extends React.Component {
             name={'myButton'}
             onClick={this.click}>
             Click me!
+          </TButton>
+
+          <TButton
+              style={{
+                container: {
+                  width: "180px",
+                  margin: "8px 0 8px 0"
+                }
+              }}
+              name={'myDownButton'}
+              down={this.state.down}
+              onClick={this.click}>
+            Click me too!
           </TButton>
 
         </TGroup>
