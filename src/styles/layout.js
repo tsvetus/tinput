@@ -159,6 +159,10 @@ export default {
             display: "flex",
             justifyContent: "space-between",
             flexWrap: "nowrap"
+        },
+
+        right: {
+            textAlign: "right"
         }
 
     },

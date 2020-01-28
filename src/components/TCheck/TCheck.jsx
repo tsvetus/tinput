@@ -18,6 +18,7 @@ class TCheck extends React.Component {
         this.handleIcon = this.handleIcon.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.updateChecked = this.updateChecked.bind(this);
+        this.isRight = this.isRight.bind(this);
     }
 
     componentDidMount() {
@@ -53,6 +54,10 @@ class TCheck extends React.Component {
         });
     }
 
+    isRight() {
+        return this.props.layout && this.props.layout.indexOf('right') >= 0;
+    }
+
     render () {
 
         let style = merge(
@@ -64,24 +69,35 @@ class TCheck extends React.Component {
 
         let label = null;
         if (this.props.label) {
+            let ls = this.isRight() ? merge(style.right, style.label) : style.label;
             label =
-                <div style={style.label}>
+                <div style={ls}>
                     {this.props.label}
                 </div>
         }
 
+        let iconName = this.props.radio ?
+            (this.state.checked ? 'selected' : 'unselected') :
+            (this.state.checked ? 'checked' : 'unchecked');
         let icon =
             <Icon
                 style={style.icon}
-                name={this.state.checked ? 'checked' : 'unchecked'}
+                name={iconName}
                 onClick={this.handleIcon} />;
+
+        let content = this.isRight() ?
+            <div style={style.frame} onClick={this.handleIcon} >
+                {icon}
+                {label}
+            </div> :
+            <div style={style.frame} onClick={this.handleIcon} >
+                {label}
+                {icon}
+            </div>;
 
         return (
             <div style={style.container}>
-                <div style={style.frame} onClick={this.handleIcon} >
-                    {label}
-                    {icon}
-                </div>
+                {content}
             </div>
         );
 
@@ -114,6 +130,13 @@ TCheck.propTypes = {
     checked: PropTypes.any,
     /** Unchecked state value */
     unchecked: PropTypes.any,
+    /** Shows component icons as radio buttons */
+    radio: PropTypes.any,
+    /** Label position towards icon. Can be one of: */
+    layout: PropTypes.oneOf([
+        'left',
+        'right'
+    ]),
     /**
      * On click event
      * @param {object} event event object with following structure:
@@ -127,7 +150,9 @@ TCheck.propTypes = {
 
 TCheck.defaultProps = {
     checked: true,
-    unchecked: false
+    unchecked: false,
+    radio: false,
+    layout: 'left'
 };
 
 export default TCheck;

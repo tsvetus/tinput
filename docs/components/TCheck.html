@@ -7,7 +7,8 @@ class TCheckExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 1,
+      check: 1,
+      radio: 0,
       event: ''
     };
     this.change = this.change.bind(this);
@@ -16,7 +17,7 @@ class TCheckExample extends React.Component {
 
   change(event) {
     this.setState({
-      value: event.value,
+      [event.name]: event.value,
       event: this.state.event + ' ' +
         JSON.stringify(event)
     });
@@ -33,18 +34,33 @@ class TCheckExample extends React.Component {
       &lt;div&gt;
 
         &lt;TGroup style={{
-          container: {margin: "0 0 16px 0"}
+          container: {margin: "0 0 16px 0"},
+          content: {justifyContent: "space-around"}
         }}&gt;
 
           &lt;TCheck
             style={{
               container: {width: "120px"}
             }}
+            name={'check'}
             label={'Check me:'}
-            value={this.state.value}
+            value={this.state.check}
             checked={1}
             unchecked={0}
             onChange={this.change}/&gt;
+
+          &lt;TCheck
+              style={{
+                container: {width: "120px"}
+              }}
+              name={'radio'}
+              label={'Select me'}
+              value={this.state.radio}
+              radio={true}
+              layout={'right'}
+              checked={1}
+              unchecked={0}
+              onChange={this.change}/&gt;
 
         &lt;/TGroup&gt;
 

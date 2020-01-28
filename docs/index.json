@@ -1876,6 +1876,13 @@
             }
           ],
           "returns": null
+        },
+        {
+          "name": "isRight",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
         }
       ],
       "example": {
@@ -1932,6 +1939,22 @@
           "description": "Unchecked state value",
           "required": false,
           "defaultValue": "false"
+        },
+        "radio": {
+          "type": "any",
+          "description": "Shows component icons as radio buttons",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "layout": {
+          "type": "enum",
+          "description": "Label position towards icon. Can be one of:",
+          "required": false,
+          "defaultValue": "'left'",
+          "structure": {
+            "'left'": {},
+            "'right'": {}
+          }
         },
         "onChange": {
           "type": "func",
