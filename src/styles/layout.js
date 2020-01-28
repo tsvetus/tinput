@@ -333,16 +333,20 @@ export default {
             display: "none"
         },
 
-        body: {
-            display: "grid"
-        },
-
         row: {
             display: "grid"
         },
 
         noSelect: {
             cursor: "default"
+        }
+
+    },
+
+    TMSGrid: {
+
+        row: {
+            display: "-ms-grid"
         }
 
     },

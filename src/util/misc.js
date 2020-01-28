@@ -232,3 +232,8 @@ export function replace(source, name, value) {
     }
 }
 
+export function isMS() {
+    let ua = window.navigator.userAgent;
+    return /MSIE|Trident|Edge/.test(ua);
+}
+

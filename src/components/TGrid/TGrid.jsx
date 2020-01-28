@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, clone, contain, replace} from '../../util';
+import {merge, clone, contain, replace, isMS} from '../../util';
 
 import styles from '../../styles';
 
@@ -18,6 +18,7 @@ class TGrid extends React.Component {
         this.scroll = this.scroll.bind(this);
         this.change = this.change.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.ms = isMS();
     }
 
     componentDidMount() {
@@ -85,7 +86,9 @@ class TGrid extends React.Component {
 
         let options = merge(TGrid.defaultProps.options, this.props.options);
 
-        let columns = {row: {gridTemplateColumns: this.props.columns}};
+        let columns = this.ms ?
+            {row: {msGridColumns: this.props.columns}} :
+            {row: {gridTemplateColumns: this.props.columns}};
 
         let style = merge(
             contain(styles.TGrid),
@@ -94,6 +97,9 @@ class TGrid extends React.Component {
             contain(this.props.style)
         );
         style = replace(style, 'width', options.borderWidth);
+        if (this.ms) {
+            style = merge(style, styles.TMSGrid);
+        }
 
         let body = null;
         let head = null;
@@ -111,6 +117,10 @@ class TGrid extends React.Component {
                 if (count === 0) {
                     cs.marginLeft = undefined;
                 }
+                if (this.ms) {
+                    cs.msGridRow = 1;
+                    cs.msGridColumn = count + 1;
+                }
                 captions.push(
                     <div key={key} style={cs}>{column.caption ? column.caption : ''}</div>
                 );
@@ -118,7 +128,9 @@ class TGrid extends React.Component {
                 count++;
             }
 
-            rowStyle = merge(rowStyle, {gridTemplateColumns: widths});
+            rowStyle = this.ms ?
+                merge(rowStyle, {msGridColumns: widths}) :
+                merge(rowStyle, {gridTemplateColumns: widths});
 
             let title = this.props.children ? (<div style={style.title}>{this.props.children}</div>) : null;
 
@@ -168,6 +180,10 @@ class TGrid extends React.Component {
                     }
                     if (count === 0) {
                         css.marginLeft = undefined;
+                    }
+                    if (this.ms) {
+                        css.msGridRow = 1;
+                        css.msGridColumn = count + 1;
                     }
                     if (v[key] === undefined) {
                         if (this.props.columns[key].value === undefined) {

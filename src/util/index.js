@@ -12,7 +12,8 @@ import {
     contain,
     getFile,
     compare,
-    replace
+    replace,
+    isMS
 } from './misc.js';
 
 import Format from './format.js';
@@ -52,6 +53,7 @@ export {
     getFile,
     compare,
     replace,
+    isMS,
 
     Format,
     Pager,
