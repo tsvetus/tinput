@@ -6,7 +6,7 @@ module.exports = {
         tinput: [
             path.resolve(__dirname, './src/index.js')
         ],
-        exammples: [
+        examples: [
             path.resolve(__dirname, './src/examples.js')
         ]
     },
