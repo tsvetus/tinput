@@ -140,7 +140,7 @@ class Props extends React.Component {
         }
 
         let columns = {
-            name: {caption: 'name', width: '140px'},
+            name: {caption: 'name', width: 'auto'},
             type: {caption: 'type', width: '80px'},
             defaultValue: {caption: 'default', width: '120px'},
             required: {caption: 'req', width: '40px', style: {textAlign: 'center'}},

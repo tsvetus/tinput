@@ -105,6 +105,9 @@ class TGrid extends React.Component {
         let head = null;
         let rowStyle = style.row;
 
+        let items = [];
+        let index = 0;
+
         if (this.props.columns) {
 
             let captions = [];
@@ -120,12 +123,19 @@ class TGrid extends React.Component {
                 if (this.ms) {
                     cs.msGridRow = 1;
                     cs.msGridColumn = count + 1;
+                } else {
+                    cs.gridRow = 1;
+                    cs.gridColumn = count + 1;
                 }
                 captions.push(
                     <div key={key} style={cs}>{column.caption ? column.caption : ''}</div>
                 );
                 widths += ' ' + (column.width ? column.width : '1fr');
+                items.push(
+                    <div key={index} style={cs}>{column.caption ? column.caption : ''}</div>
+                );
                 count++;
+                index++;
             }
 
             rowStyle = this.ms ?
@@ -153,8 +163,6 @@ class TGrid extends React.Component {
 
         if (this.props.items && this.props.columns) {
 
-            let items = [];
-
             this.props.items.forEach((v, i) => {
                 let cs = style.cell;
                 if (options.showSelected) {
@@ -162,13 +170,13 @@ class TGrid extends React.Component {
                 } else {
                     cs = merge(cs, style.noSelect);
                 }
-                let row = [];
-                if (this.props.onRowStyle) {
-                    let rs = this.props.onRowStyle(v);
-                    if (rs) {
-                        cs = merge(cs, rs);
-                    }
-                }
+                // let row = [];
+                // if (this.props.onRowStyle) {
+                //     let rs = this.props.onRowStyle(v);
+                //     if (rs) {
+                //         cs = merge(cs, rs);
+                //     }
+                // }
                 let count = 0;
                 for (let key in this.props.columns) {
                     let css = clone(cs);
@@ -186,42 +194,53 @@ class TGrid extends React.Component {
                     if (count === 0) {
                         css.marginLeft = undefined;
                     }
+                    // if (this.ms) {
+                    //     css.msGridRow = 1;
+                    //     css.msGridColumn = count + 1;
+                    // } else {
+                    //     css.gridRow = 1;
+                    //     css.gridColumn = count + 1;
+                    // }
                     if (this.ms) {
-                        css.msGridRow = 1;
+                        css.msGridRow = i + 2;
                         css.msGridColumn = count + 1;
+                    } else {
+                        css.gridRow = i + 2;
+                        css.gridColumn = count + 1;
                     }
                     if (v[key] === undefined) {
                         if (this.props.columns[key].value === undefined) {
-                            row.push(
-                                <div style={css} key={key}></div>
+                            items.push(
+                                <div style={css} key={index}></div>
                             );
                         } else {
-                            row.push(
-                                <div style={css} key={key}>{this.props.columns[key].value(undefined, key, v)}</div>
+                            items.push(
+                                <div style={css} key={index}>{this.props.columns[key].value(undefined, key, v)}</div>
                             );
                         }
                     } else {
                         if (this.props.columns[key].value === undefined) {
-                            row.push(
-                                <div style={css} key={key}>{v[key]}</div>
+                            items.push(
+                                <div style={css} key={index}>{v[key]}</div>
                             );
                         } else {
-                            row.push(
-                                <div style={css} key={key}>{this.props.columns[key].value(v[key], key, v)}</div>
+                            items.push(
+                                <div style={css} key={index}>{this.props.columns[key].value(v[key], key, v)}</div>
                             );
                         }
                     }
                     count++;
+                    index++;
                 }
-                items.push(
-                    <div key={i} style={rowStyle} index={i} onClick={this.handleClick}>
-                        {row}
-                    </div>
-                );
+                // items.push(
+                //     <div key={i} style={rowStyle} index={i} onClick={this.handleClick}>
+                //         {row}
+                //     </div>
+                // );
             });
 
             body = (
-                <div style={style.body}>
+                <div style={merge(style.body, rowStyle)}>
                     {items}
                 </div>
             );
@@ -230,7 +249,7 @@ class TGrid extends React.Component {
 
         return (
             <div style={style.container}>
-                {head}
+                {/*{head}*/}
                 {body}
             </div>
         );
