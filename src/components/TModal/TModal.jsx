@@ -104,26 +104,30 @@ class TModal extends React.Component {
     }
 
     setTimer() {
-        let countdown = this.props.countdown;
-        if (countdown) {
-            if (isNaN(countdown)) {
-                countdown = seconds(countdown);
+        if (this.props.show) {
+            let countdown = this.props.countdown;
+            if (countdown) {
+                if (isNaN(countdown)) {
+                    countdown = seconds(countdown);
+                }
+                if (countdown > 0) {
+                    clearInterval(this.state.timer);
+                    this.setState({
+                        countdown: countdown,
+                        timer: setInterval(
+                            () => {
+                                this.setState({countdown: this.state.countdown - 1});
+                                if (this.state.countdown <= 0) {
+                                    this.close();
+                                }
+                            },
+                            1000
+                        )
+                    });
+                }
             }
-            if (countdown > 0) {
-                clearInterval(this.state.timer);
-                this.setState({
-                    countdown: countdown,
-                    timer: setInterval(
-                        () => {
-                            this.setState({countdown: this.state.countdown - 1});
-                            if (this.state.countdown <= 0) {
-                                this.close();
-                            }
-                        },
-                        1000
-                    )
-                });
-            }
+        } else {
+            clearInterval(this.state.timer);
         }
     }
 
