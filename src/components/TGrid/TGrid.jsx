@@ -173,7 +173,12 @@ class TGrid extends React.Component {
                 for (let key in this.props.columns) {
                     let css = clone(cs);
                     if (this.props.columns[key].style !== undefined) {
-                        css = merge(css, this.props.columns[key].style(v[key], key, v));
+                        let s = this.props.columns[key].style;
+                        if (typeof s === "function") {
+                            css = merge(css, s(v[key], key, v));
+                        } else if (typeof s === "object") {
+                            css = merge(css, s);
+                        }
                     }
                     if (this.props.onCellStyle) {
                         css = merge(css, this.props.onCellStyle({cell: v[key], column: key, index: i, row: v}));
