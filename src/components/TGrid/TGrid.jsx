@@ -96,14 +96,29 @@ class TGrid extends React.Component {
             columns,
             contain(this.props.style)
         );
+
         style = replace(style, 'width', options.borderWidth);
+
         if (this.ms) {
             style = merge(style, styles.TMSGrid);
         }
 
-        let body = null;
         let head = null;
-        let rowStyle = style.row;
+        if (options.showHead) {
+            let hs = style.title;
+            // if (options.scrollHead) {
+            //     hs = merge(hs, style.scrollHead);
+            // }
+            head = this.props.children ? (<div style={style.title}>{this.props.children}</div>) : null;
+            // head = (
+            //     <div style={hs}>
+            //         {title}
+            //     </div>
+            // );
+        }
+
+        let body = null;
+        let bodyStyle = style.body;
 
         let items = [];
         let index = 0;
@@ -117,6 +132,7 @@ class TGrid extends React.Component {
             for (let key in this.props.columns) {
                 let column = this.props.columns[key];
                 let cs = clone(style.caption);
+                cs = merge(cs, style.head);
                 if (count === 0) {
                     cs.marginLeft = undefined;
                 }
@@ -138,26 +154,9 @@ class TGrid extends React.Component {
                 index++;
             }
 
-            rowStyle = this.ms ?
-                merge(rowStyle, {msGridColumns: widths}) :
-                merge(rowStyle, {gridTemplateColumns: widths});
-
-            let title = this.props.children ? (<div style={style.title}>{this.props.children}</div>) : null;
-
-            let hs = style.head;
-            if (options.scrollHead) {
-                hs = merge(hs, style.scrollHead);
-            }
-            if (!options.showHead) {
-                hs = merge(hs, style.hideHead);
-            }
-
-            head = (
-                <div style={hs}>
-                    {title}
-                    {options.showHead ? <div style={rowStyle}>{captions}</div> : null}
-                </div>
-            );
+            bodyStyle = this.ms ?
+                merge(bodyStyle, {msGridColumns: widths}) :
+                merge(bodyStyle, {gridTemplateColumns: widths});
 
         }
 
@@ -170,13 +169,6 @@ class TGrid extends React.Component {
                 } else {
                     cs = merge(cs, style.noSelect);
                 }
-                // let row = [];
-                // if (this.props.onRowStyle) {
-                //     let rs = this.props.onRowStyle(v);
-                //     if (rs) {
-                //         cs = merge(cs, rs);
-                //     }
-                // }
                 let count = 0;
                 for (let key in this.props.columns) {
                     let css = clone(cs);
@@ -194,13 +186,6 @@ class TGrid extends React.Component {
                     if (count === 0) {
                         css.marginLeft = undefined;
                     }
-                    // if (this.ms) {
-                    //     css.msGridRow = 1;
-                    //     css.msGridColumn = count + 1;
-                    // } else {
-                    //     css.gridRow = 1;
-                    //     css.gridColumn = count + 1;
-                    // }
                     if (this.ms) {
                         css.msGridRow = i + 2;
                         css.msGridColumn = count + 1;
@@ -240,7 +225,7 @@ class TGrid extends React.Component {
             });
 
             body = (
-                <div style={merge(style.body, rowStyle)}>
+                <div style={bodyStyle}>
                     {items}
                 </div>
             );
@@ -249,7 +234,7 @@ class TGrid extends React.Component {
 
         return (
             <div style={style.container}>
-                {/*{head}*/}
+                {head}
                 {body}
             </div>
         );

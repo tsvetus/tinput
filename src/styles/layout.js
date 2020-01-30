@@ -307,9 +307,18 @@ export default {
         head: {
             position: "sticky",
             top: "0",
-            left: "0",
-            right: "0",
-            display: "grid",
+            // left: "0",
+            // right: "0",
+            // display: "grid",
+            zIndex: "1"
+        },
+
+        title: {
+            position: "sticky",
+            top: "0",
+            // left: "0",
+            // right: "0",
+            // display: "grid",
             zIndex: "1"
         },
 
@@ -321,7 +330,7 @@ export default {
             display: "none"
         },
 
-        row: {
+        body: {
             display: "grid"
         },
 
