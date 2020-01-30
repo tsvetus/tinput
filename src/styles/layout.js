@@ -55,7 +55,6 @@ export default {
     TModal: {
 
         screen: {
-            display: "block",
             position: "fixed",
             zIndex: "10",
             left: "0",
@@ -63,22 +62,15 @@ export default {
             width: "100%",
             height: "100%",
             overflow: "auto",
-            backgroundColor: "rgba(0,0,0,0.4)",
             backdrop: "static",
-            keyboard: "false",
-            transitionProperty: "width",
-            transitionDuration: "4s",
-            transitionDelay: "2s"
+            keyboard: "false"
         },
 
         container: {
             position: "relative",
             margin: "auto",
             top: "20%",
-            // left: "50%",
-            // transform: "translate(-50%, -50%)",
             zIndex: "11",
-            backgroundColor: "#fff",
             cursor: "default"
         },
 
@@ -91,10 +83,6 @@ export default {
 
         close: {
             cursor: "pointer"
-        },
-
-        timer: {
-            width: "48px"
         },
 
         content: {

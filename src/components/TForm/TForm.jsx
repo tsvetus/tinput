@@ -93,6 +93,8 @@ class TForm extends React.Component {
                     countdown={this.props.countdown}
                     caption={this.props.caption}
                     showHeader={this.props.showHeader}
+                    escape={this.props.escape}
+                    transition={this.props.transition}
                     onClose={this.handleCancel}>
                 {message}
                 {content}
@@ -172,6 +174,10 @@ TForm.propTypes = {
      * List of buttons to show if "message" property is assigned
      */
     messageButtons: PropTypes.object,
+    /** Indicates whether to close dialog when "Escape" key is pressed */
+    escape: PropTypes.any,
+    /** Transition time in milliseconds */
+    transition: PropTypes.number,
     /**
      * On form close event
      * @param {object} event Event object with following structure:
@@ -186,7 +192,9 @@ TForm.defaultProps = {
     showHeader: true,
     buttons: {ok: 'OK'},
     errorButtons: {ok: 'OK'},
-    messageButtons: {ok: 'OK'}
+    messageButtons: {ok: 'OK'},
+    escape: false,
+    transition: 250
 };
 
 export default TForm;

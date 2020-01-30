@@ -129,12 +129,29 @@ export default function defaultStyles(template) {
 
         TModal: {
 
+            screen: {
+                backgroundColor: "rgba(0,0,0,0.4)",
+                transitionProperty: "background-color",
+                transitionDuration: "${transition}ms"
+            },
+
+            screenHidden: {
+                backgroundColor: "rgba(0,0,0,0)"
+            },
+
             container: {
+                opacity: "1",
+                transitionProperty: "opacity",
+                transitionDuration: "${transition}ms",
                 backgroundColor: template.colors.window,
                 borderRadius: "16px",
                 maxWidth: "600px",
                 width: "55%",
                 padding: "4px"
+            },
+
+            containerHidden: {
+                opacity: "0"
             },
 
             header: {
@@ -152,7 +169,8 @@ export default function defaultStyles(template) {
             timer: {
                 ...template.fonts.common,
                 color: template.colors.signal,
-                fontSize: "24px"
+                fontSize: "24px",
+                width: "48px"
             },
 
             caption: {
@@ -166,6 +184,18 @@ export default function defaultStyles(template) {
                 color: template.colors.text,
                 margin: "16px",
                 ...template.fonts.common
+            },
+
+            hidden: {
+
+                screen: {
+                    backgroundColor: "rgba(0,0,0,0)"
+                },
+
+                container: {
+                    opacity: "0"
+                }
+
             }
 
         },
