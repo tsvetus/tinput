@@ -467,16 +467,15 @@ export default function defaultStyles(template) {
 
         TGrid: {
 
-            head: {
-                padding: "${width}px 0 0 0",
-                textAlign: "center",
-                fontWeight: "bold",
-                color: template.colors.border
+            container: {
+            },
+
+            body: {
+                // Deprecated!
             },
 
             title: {
                 backgroundColor: template.colors.window,
-//                marginTop: "-${width}px",
                 padding: "0 0 4px 0",
                 fontWeight: "normal"
             },
@@ -486,12 +485,14 @@ export default function defaultStyles(template) {
                 border: "${width}px solid " + template.colors.frame,
                 marginLeft: "-${width}px",
                 marginTop: "-${width}px",
-//                overflowX: "hidden",
                 padding: "4px",
+                textAlign: "center",
+                fontWeight: "bold",
+                color: template.colors.border
             },
 
-            body: {
-                padding: "0 0 16px 0",
+            head: {
+                // Deprecated!
             },
 
             cell: {
@@ -499,9 +500,12 @@ export default function defaultStyles(template) {
                 border: "${width}px solid " + template.colors.frame,
                 marginLeft: "-${width}px",
                 marginTop: "-${width}px",
-//                overflowX: "hidden",
                 padding: "4px",
                 cursor: "pointer"
+            },
+
+            row: {
+                // Deprecated!
             },
 
             selected: {

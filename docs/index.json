@@ -2514,6 +2514,13 @@
           "returns": null
         },
         {
+          "name": "adjust",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
           "name": "handleClick",
           "docblock": null,
           "modifiers": [],
@@ -2543,25 +2550,13 @@
               "type": "object",
               "description": "Style for component title"
             },
-            "head": {
-              "type": "object",
-              "description": "Style for grid header row"
-            },
             "caption": {
               "type": "object",
               "description": "Style for grid header cells"
             },
-            "body": {
-              "type": "object",
-              "description": "Style for grid body"
-            },
-            "row": {
-              "type": "object",
-              "description": "Style for grid body rows"
-            },
             "cell": {
               "type": "object",
-              "description": "Style for grid body cells"
+              "description": "Style for grid body rows"
             },
             "selected": {
               "type": "object",
@@ -2626,7 +2621,7 @@
           "type": "shape",
           "description": "Grid options",
           "required": false,
-          "defaultValue": "{\r\n    scrollHead: false,\r\n    showSelected: true,\r\n    showHead: true,\r\n    borderWidth: \"1px\"\r\n}",
+          "defaultValue": "{\r\n    scrollHead: false,\r\n    showSelected: true,\r\n    showHead: true,\r\n    borderWidth: 1\r\n}",
           "structure": {
             "scrollHead": {
               "type": "any",
@@ -2650,8 +2645,23 @@
           "type": "func",
           "description": "Happens when row style is needed. Returns object containing row style ",
           "arguments": {
-            "row": {
-              "name": "row",
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with the following structure"
+            },
+            "event.cell": {
+              "name": "event.cell",
+              "type": "any",
+              "description": "Current cell content"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "number",
+              "description": "Current row index"
+            },
+            "event.row": {
+              "name": "event.row",
               "type": "object",
               "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
             }

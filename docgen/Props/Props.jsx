@@ -85,8 +85,8 @@ class Props extends React.Component {
                 args = <TGrid
                     style={style.subGrid}
                     columns={{
-                        name: {caption: 'name', width: '120px'},
-                        type: {caption: 'type', width: '80px'},
+                        name: {caption: 'name'},
+                        type: {caption: 'type'},
                         description: {caption: 'description'}
                     }}
                     items={items}
@@ -111,7 +111,7 @@ class Props extends React.Component {
                 struct = <TGrid
                     style={style.subGrid}
                     columns={{
-                        name: {caption: 'name', width: '120px'},
+                        name: {caption: 'name'},
                         description: {caption: 'description'}
                     }}
                     items={items}
@@ -140,10 +140,10 @@ class Props extends React.Component {
         }
 
         let columns = {
-            name: {caption: 'name', width: 'auto'},
-            type: {caption: 'type', width: '80px'},
-            defaultValue: {caption: 'default', width: '120px'},
-            required: {caption: 'req', width: '40px', style: {textAlign: 'center'}},
+            name: {caption: 'name'},
+            type: {caption: 'type'},
+            defaultValue: {caption: 'default'},
+            required: {caption: 'req', style: {textAlign: 'center'}},
             description: {caption: 'description'}
         };
 
@@ -161,8 +161,7 @@ class Props extends React.Component {
                 items={items}
                 options={{
                     showSelected: false,
-                        scrollHead: false,
-                        borderWidth: '1px'
+                    scrollHead: false
                 }}
             />
         }

@@ -304,41 +304,20 @@ export default {
 
     TGrid: {
 
-        head: {
-            position: "sticky",
-            top: "0",
-            zIndex: "1"
-        },
-
         title: {
             position: "sticky",
             top: "0",
             zIndex: "1"
         },
 
-        scrollHead: {
-            position: "relative"
-        },
-
-        hideHead: {
-            display: "none"
-        },
-
-        body: {
-            display: "grid",
-            position: "relative"
+        caption: {
+            position: "sticky",
+            top: "0",
+            zIndex: "1"
         },
 
         noSelect: {
             cursor: "default"
-        }
-
-    },
-
-    TMSGrid: {
-
-        body: {
-            display: "-ms-grid"
         }
 
     },

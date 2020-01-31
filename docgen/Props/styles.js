@@ -8,6 +8,9 @@ export default {
     },
 
     grid: {
+        caption: {
+            zIndex: "2"
+        }
     },
 
     subGrid: {

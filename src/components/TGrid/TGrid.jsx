@@ -75,8 +75,7 @@ class TGrid extends React.Component {
         if (this.title.current) {
             let rect = this.title.current.getBoundingClientRect();
             if (rect && rect.height) {
-                let options = merge(TGrid.defaultProps.options, this.props.options);
-                this.setState({top: rect.height - options.borderWidth});
+                this.setState({top: rect.height});
             }
         }
     }
@@ -108,16 +107,11 @@ class TGrid extends React.Component {
 
         style = replace(style, 'width', options.borderWidth);
 
-        console.log('ms=' + this.ms);
-        if (this.ms) {
-            style = merge(style, styles.TMSGrid);
-        }
-
         let items = [];
         let cell = 0;
         let row = 0;
 
-        let bodyStyle = style.body;
+        let containerStyle = merge(style.container, style.body);
 
         if (this.props.columns) {
 
@@ -135,9 +129,8 @@ class TGrid extends React.Component {
                     hs.gridColumnEnd = Object.keys(this.props.columns).length + 1;
                 }
                 if (options.scrollHead) {
-                    hs = merge(hs, style.scrollHead);
+                    hs = merge(hs, {position: 'relative'});
                 }
-                console.log(hs);
                 items.push(<div key={++cell} style={hs} ref={this.title}>{this.props.children}</div>);
             }
 
@@ -153,9 +146,12 @@ class TGrid extends React.Component {
 
                 let column = this.props.columns[key];
 
-                let cs = merge(style.head, style.caption);
+                let cs = clone(merge(style.caption, style.head));
                 if (col === 1) {
                     cs.marginLeft = undefined;
+                }
+                if (options.scrollHead) {
+                    cs = merge(cs, {position: 'relative'});
                 }
                 if (this.ms) {
                     cs.msGridRow = row;
@@ -164,9 +160,10 @@ class TGrid extends React.Component {
                     cs.gridRow = row;
                     cs.gridColumn = col;
                 }
-                cs.top = this.state.top + 'px';
-
-                widths += ' ' + (column.width ? column.width : '1fr');
+                if (!options.scrollHead) {
+                    cs.top = this.state.top + 'px';
+                }
+                widths += ' ' + (column.width ? column.width : 'auto');
 
                 items.push(
                     <div key={++cell} style={cs}>{column.caption ? column.caption : ''}</div>
@@ -174,11 +171,9 @@ class TGrid extends React.Component {
 
             }
 
-            bodyStyle = this.ms ?
-                 merge(bodyStyle, {msGridColumns: widths}) :
-                 merge(bodyStyle, {gridTemplateColumns: widths});
-
-//            console.log(bodyStyle);
+            containerStyle = this.ms ?
+                 merge(containerStyle, {display: '-ms-grid', msGridColumns: widths}) :
+                 merge(containerStyle, {display: 'grid', gridTemplateColumns: widths});
 
         }
 
@@ -188,7 +183,7 @@ class TGrid extends React.Component {
 
                 ++row;
 
-                let cs = merge(style.row, style.cell);
+                let cs = clone(merge(style.cell, style.row));
                 if (this.props.onRowStyle) {
                     let s = this.props.onRowStyle({index: i, row: v});
                     if (s) {
@@ -259,10 +254,8 @@ class TGrid extends React.Component {
         }
 
         return (
-            <div style={style.container}>
-                <div style={bodyStyle}>
-                    {items}
-                </div>
+            <div style={containerStyle}>
+                {items}
             </div>
         );
 
@@ -277,15 +270,9 @@ TGrid.propTypes = {
         container: PropTypes.object,
         /** Style for component title */
         title: PropTypes.object,
-        /** Style for grid header row */
-        head: PropTypes.object,
         /** Style for grid header cells */
         caption: PropTypes.object,
-        /** Style for grid body */
-        body: PropTypes.object,
         /** Style for grid body rows */
-        row:  PropTypes.object,
-        /** Style for grid body cells */
         cell:  PropTypes.object,
         /** Style for selected row */
         selected: PropTypes.object
