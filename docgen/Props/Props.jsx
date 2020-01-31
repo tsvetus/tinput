@@ -142,7 +142,7 @@ class Props extends React.Component {
         let columns = {
             name: {caption: 'name'},
             type: {caption: 'type'},
-            defaultValue: {caption: 'default'},
+            defaultValue: {caption: 'default', width: 'minmax(auto, 160px)'},
             required: {caption: 'req', style: {textAlign: 'center'}},
             description: {caption: 'description'}
         };

@@ -14,8 +14,12 @@ export default {
     },
 
     subGrid: {
+        caption: {
+            textAlign: "left",
+            padding: '8px 8px 0 0'
+        },
         cell: {
-            padding: '8px 4px 0 0'
+            padding: '8px 8px 0 0'
         }
     },
 
@@ -58,7 +62,6 @@ export default {
     row: {
         display: "flex"
     },
-
 
     box: {
         border: '1px solid ' + styles.colors.frame,
