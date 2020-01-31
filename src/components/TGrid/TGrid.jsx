@@ -86,14 +86,9 @@ class TGrid extends React.Component {
 
         let options = merge(TGrid.defaultProps.options, this.props.options);
 
-        let columns = this.ms ?
-            {row: {msGridColumns: this.props.columns}} :
-            {row: {gridTemplateColumns: this.props.columns}};
-
         let style = merge(
             contain(styles.TGrid),
             contain(styles[this.props.name]),
-            columns,
             contain(this.props.style)
         );
 
@@ -104,54 +99,54 @@ class TGrid extends React.Component {
         }
 
         let head = null;
-        if (options.showHead) {
-            let hs = style.title;
-            // if (options.scrollHead) {
-            //     hs = merge(hs, style.scrollHead);
-            // }
-            head = this.props.children ? (<div style={style.title}>{this.props.children}</div>) : null;
-            // head = (
-            //     <div style={hs}>
-            //         {title}
-            //     </div>
-            // );
+        if (options.showHead && this.props.children) {
+            let hs = clone(style.title);
+            if (options.scrollHead) {
+                hs = merge(hs, style.scrollHead);
+            }
+            head = <div style={hs}>{this.props.children}</div>;
         }
 
         let body = null;
         let bodyStyle = style.body;
 
         let items = [];
-        let index = 0;
+        let cell = 0;
+        let row = 0;
 
         if (this.props.columns) {
 
-            let captions = [];
+            cell++;
+            row++;
+
             let widths = '';
 
-            let count = 0;
+            let col = 0;
+
             for (let key in this.props.columns) {
+
+                col++;
+
                 let column = this.props.columns[key];
-                let cs = clone(style.caption);
-                cs = merge(cs, style.head);
-                if (count === 0) {
+
+                let cs = merge(style.head, style.caption);
+                if (col === 1) {
                     cs.marginLeft = undefined;
                 }
                 if (this.ms) {
-                    cs.msGridRow = 1;
-                    cs.msGridColumn = count + 1;
+                    cs.msGridRow = row;
+                    cs.msGridColumn = col;
                 } else {
-                    cs.gridRow = 1;
-                    cs.gridColumn = count + 1;
+                    cs.gridRow = row;
+                    cs.gridColumn = col;
                 }
-                captions.push(
-                    <div key={key} style={cs}>{column.caption ? column.caption : ''}</div>
-                );
+
                 widths += ' ' + (column.width ? column.width : '1fr');
+
                 items.push(
-                    <div key={index} style={cs}>{column.caption ? column.caption : ''}</div>
+                    <div key={cell} style={cs}>{column.caption ? column.caption : ''}</div>
                 );
-                count++;
-                index++;
+
             }
 
             bodyStyle = this.ms ?
@@ -163,14 +158,23 @@ class TGrid extends React.Component {
         if (this.props.items && this.props.columns) {
 
             this.props.items.forEach((v, i) => {
-                let cs = style.cell;
+
+                row++;
+
+                let cs = merge(style.row, style.cell);
                 if (options.showSelected) {
-                    cs = i === this.state.index ? merge(style.cell, style.selected) : style.cell;
+                    cs = i === this.state.index ? merge(cs, style.selected) : cs;
                 } else {
                     cs = merge(cs, style.noSelect);
                 }
-                let count = 0;
+
+                let col = 0;
+
                 for (let key in this.props.columns) {
+
+                    cell++;
+                    col++;
+
                     let css = clone(cs);
                     if (this.props.columns[key].style !== undefined) {
                         let s = this.props.columns[key].style;
@@ -183,45 +187,37 @@ class TGrid extends React.Component {
                     if (this.props.onCellStyle) {
                         css = merge(css, this.props.onCellStyle({cell: v[key], column: key, index: i, row: v}));
                     }
-                    if (count === 0) {
+                    if (col === 1) {
                         css.marginLeft = undefined;
                     }
                     if (this.ms) {
-                        css.msGridRow = i + 2;
-                        css.msGridColumn = count + 1;
+                        css.msGridRow = row;
+                        css.msGridColumn = col;
                     } else {
-                        css.gridRow = i + 2;
-                        css.gridColumn = count + 1;
+                        css.gridRow = row;
+                        css.gridColumn = col;
                     }
+
+                    let value = null;
+
                     if (v[key] === undefined) {
                         if (this.props.columns[key].value === undefined) {
-                            items.push(
-                                <div style={css} key={index}></div>
-                            );
+                            value = null;
                         } else {
-                            items.push(
-                                <div style={css} key={index}>{this.props.columns[key].value(undefined, key, v)}</div>
-                            );
+                            value = this.props.columns[key].value(undefined, key, v);
                         }
                     } else {
                         if (this.props.columns[key].value === undefined) {
-                            items.push(
-                                <div style={css} key={index}>{v[key]}</div>
-                            );
+                            value = v[key];
                         } else {
-                            items.push(
-                                <div style={css} key={index}>{this.props.columns[key].value(v[key], key, v)}</div>
-                            );
+                            value = this.props.columns[key].value(v[key], key, v);
                         }
                     }
-                    count++;
-                    index++;
+
+                    items.push(<div style={css} key={cell}>{value}</div>);
+
                 }
-                // items.push(
-                //     <div key={i} style={rowStyle} index={i} onClick={this.handleClick}>
-                //         {row}
-                //     </div>
-                // );
+
             });
 
             body = (
