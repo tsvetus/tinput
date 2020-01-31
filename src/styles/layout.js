@@ -325,7 +325,8 @@ export default {
         },
 
         body: {
-            display: "grid"
+            display: "grid",
+            position: "relative"
         },
 
         noSelect: {

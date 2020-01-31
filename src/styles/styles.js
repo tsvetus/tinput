@@ -476,7 +476,7 @@ export default function defaultStyles(template) {
 
             title: {
                 backgroundColor: template.colors.window,
-                marginTop: "-${width}px",
+//                marginTop: "-${width}px",
                 padding: "0 0 4px 0",
                 fontWeight: "normal"
             },
