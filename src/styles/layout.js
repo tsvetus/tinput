@@ -336,7 +336,7 @@ export default {
 
     TMSGrid: {
 
-        row: {
+        body: {
             display: "-ms-grid"
         }
 

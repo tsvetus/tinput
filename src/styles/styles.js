@@ -486,7 +486,7 @@ export default function defaultStyles(template) {
                 border: "${width}px solid " + template.colors.frame,
                 marginLeft: "-${width}px",
                 marginTop: "-${width}px",
-                overflowX: "hidden",
+//                overflowX: "hidden",
                 padding: "4px",
             },
 
@@ -499,7 +499,7 @@ export default function defaultStyles(template) {
                 border: "${width}px solid " + template.colors.frame,
                 marginLeft: "-${width}px",
                 marginTop: "-${width}px",
-                overflowX: "hidden",
+//                overflowX: "hidden",
                 padding: "4px",
                 cursor: "pointer"
             },

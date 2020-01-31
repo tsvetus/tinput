@@ -65,6 +65,11 @@ class TPagerExample extends React.Component {
                   width: "2fr"
                 }
               }}
+              onRowStyle={(event) => {
+                if (event.index % 2 > 0) {
+                  return {color: "#1b7a2e"}
+                }
+              }}
               items={this.state.items}>
 
               <TPager

@@ -108,6 +108,7 @@ class TGrid extends React.Component {
 
         style = replace(style, 'width', options.borderWidth);
 
+        console.log('ms=' + this.ms);
         if (this.ms) {
             style = merge(style, styles.TMSGrid);
         }
@@ -116,7 +117,6 @@ class TGrid extends React.Component {
         let cell = 0;
         let row = 0;
 
-        let body = null;
         let bodyStyle = style.body;
 
         if (this.props.columns) {
@@ -148,10 +148,13 @@ class TGrid extends React.Component {
                 if (col === 1) {
                     cs.marginLeft = undefined;
                 }
-                cs.msGridRow = row;
-                cs.msGridColumn = col;
-                cs.gridRow = row;
-                cs.gridColumn = col;
+                if (this.ms) {
+                    cs.msGridRow = row;
+                    cs.msGridColumn = col;
+                } else {
+                    cs.gridRow = row;
+                    cs.gridColumn = col;
+                }
                 cs.top = this.state.top + 'px';
 
                 widths += ' ' + (column.width ? column.width : '1fr');
@@ -163,18 +166,26 @@ class TGrid extends React.Component {
             }
 
             bodyStyle = this.ms ?
-                merge(bodyStyle, {msGridColumns: widths}) :
-                merge(bodyStyle, {gridTemplateColumns: widths});
+                 merge(bodyStyle, {msGridColumns: widths}) :
+                 merge(bodyStyle, {gridTemplateColumns: widths});
+
+//            bodyStyle = merge(bodyStyle, {gridTemplateColumns: widths});
 
         }
 
-        if (this.props.items && this.props.columns) {
+        if (false && this.props.items && this.props.columns) {
 
             this.props.items.forEach((v, i) => {
 
                 ++row;
 
                 let cs = merge(style.row, style.cell);
+                if (this.props.onRowStyle) {
+                    let s = this.props.onRowStyle({index: i, row: v});
+                    if (s) {
+                        cs = merge(cs, s);
+                    }
+                }
                 let click = null;
                 if (options.showSelected) {
                     click = this.handleClick;
@@ -206,10 +217,13 @@ class TGrid extends React.Component {
                     if (col === 1) {
                         css.marginLeft = undefined;
                     }
-                    css.msGridRow = row;
-                    css.msGridColumn = col;
-                    css.gridRow = row;
-                    css.gridColumn = col;
+                    if (this.ms) {
+                        css.msGridRow = row;
+                        css.msGridColumn = col;
+                    } else {
+                        css.gridRow = row;
+                        css.gridColumn = col;
+                    }
 
                     let value = null;
 
@@ -233,17 +247,13 @@ class TGrid extends React.Component {
 
             });
 
-            body = (
-                <div style={bodyStyle}>
-                    {items}
-                </div>
-            );
-
         }
 
         return (
             <div style={style.container}>
-                {body}
+                <div style={bodyStyle}>
+                    {items}
+                </div>
             </div>
         );
 
@@ -319,7 +329,10 @@ TGrid.propTypes = {
     }),
     /**
      * Happens when row style is needed. Returns object containing row style
-     * @param {object} row Current row in form of name/value pairs where names coincide with column names
+     * @param {object} event Event object with the following structure
+     * @param {any} event.cell Current cell content
+     * @param {number} event.index Current row index
+     * @param {object} event.row Current row in form of name/value pairs where names coincide with column names
      * described in "columns" property
      */
     onRowStyle: PropTypes.func,
