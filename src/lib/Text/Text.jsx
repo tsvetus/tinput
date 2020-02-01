@@ -153,7 +153,7 @@ class Text extends React.Component {
                         iStyle={this.iStyle.edit}
                         data={this.props.data}
                         name={this.props.name}
-                        value={this.props.value}
+                        value={this.value}
                         timeout={this.props.timeout}
                         placeholder={this.props.placeholder}
                         wrap={false}
