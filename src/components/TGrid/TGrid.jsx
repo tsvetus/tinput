@@ -129,7 +129,7 @@ class TGrid extends React.Component {
                     hs.gridColumnEnd = Object.keys(this.props.columns).length + 1;
                 }
                 if (options.scrollHead) {
-                    hs = merge(hs, {position: 'relative'});
+                    hs.position = 'relative';
                 }
                 items.push(<div key={++cell} style={hs} ref={this.title}>{this.props.children}</div>);
             }
@@ -146,12 +146,12 @@ class TGrid extends React.Component {
 
                 let column = this.props.columns[key];
 
-                let cs = clone(merge(style.caption, style.head));
+                let cs = merge(style.caption, style.head);
                 if (col === 1) {
                     cs.marginLeft = undefined;
                 }
                 if (options.scrollHead) {
-                    cs = merge(cs, {position: 'relative'});
+                    cs.position = 'relative';
                 }
                 if (this.ms) {
                     cs.msGridRow = row;
@@ -183,7 +183,7 @@ class TGrid extends React.Component {
 
                 ++row;
 
-                let cs = clone(merge(style.cell, style.row));
+                let cs = merge(style.cell, style.row);
                 if (this.props.onRowStyle) {
                     let s = this.props.onRowStyle({index: i, row: v});
                     if (s) {

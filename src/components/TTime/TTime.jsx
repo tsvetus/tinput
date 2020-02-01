@@ -31,9 +31,7 @@ class TTime extends React.Component {
             } else {
                 value = strTime(this.format.mask, this.format.empty, this.props.value);
             }
-            if (this.props.value !== value) {
-                this.setState({value: value});
-            }
+            this.setState({value: value});
         }
     }
 

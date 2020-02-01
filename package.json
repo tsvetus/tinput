@@ -1,12 +1,13 @@
 {
   "name": "tinput",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Set of visual React components",
   "main": "./index.js",
   "scripts": {
     "dev": "webpack-dev-server --color --hot --inline --watch --config webpack.config.dev.js",
     "docs": "webpack --display-error-details --config webpack.config.docs.js",
     "prod": "webpack --display-error-details --config webpack.config.prod.js",
+    "watch": "webpack --display-error-details --watch --config webpack.config.prod.js",
     "build": "(node docgen/docgen.js) && webpack --config webpack.config.prod.js && webpack --config webpack.config.docs.js"
   },
   "repository": {

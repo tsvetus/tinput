@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Mask, Icon} from '../../lib';
 
-import {merge, apply} from '../../util';
+import {merge, apply, compare} from '../../util';
 
 /**
  * Component representing icons.
@@ -36,7 +36,7 @@ class Text extends React.Component {
     }
 
     componentDidUpdate(old) {
-        if (old.style !== this.props.style) {
+        if (!compare(old.style, this.props.style)) {
             this.vStyle = this.props.style ? this.props.style : {};
             this.iStyle = merge(this.vStyle, this.vStyle.invalid);
             this.updateStyle(this.valid);

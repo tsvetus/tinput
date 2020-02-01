@@ -264,6 +264,8 @@ class Edit extends React.Component {
             this.value = this.props.empty;
         }
 
+        let res = this.parseValue(this.value);
+
         if (this.props.onInput) {
             this.props.onInput({
                 data: this.props.data,
@@ -271,8 +273,6 @@ class Edit extends React.Component {
                 value: this.value
             });
         }
-
-        let res = this.parseValue(this.value);
 
         if (!this.props.wrap) {
             this.setText(res.value);
