@@ -477,8 +477,7 @@ export default function defaultStyles(template) {
             title: {
                 backgroundColor: template.colors.window,
                 padding: "0 0 4px 0",
-                fontWeight: "normal",
-                border: "1px solid red"
+                fontWeight: "normal"
             },
 
             caption: {

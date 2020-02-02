@@ -3,7 +3,7 @@ import React from 'react';
 import {TPager, TScroll, TGrid, TGroup} from 'tinput';
 
 const ITEMS = [];
-for (let i = 0; i < 1120; i++) {
+for (let i = 0; i < 200; i++) {
   ITEMS.push({
     column1: 'value ' + i + 1,
     column2: 'value ' + i + 2,
