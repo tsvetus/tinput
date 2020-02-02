@@ -71,6 +71,7 @@ class TRibbon extends React.Component {
                 index={this.props.index}
                 timeout={this.props.timeout}
                 options={options}
+                onClick={this.props.onClick}
                 onChange={this.props.onChange}
                 onRender={this.handleRender} />
 

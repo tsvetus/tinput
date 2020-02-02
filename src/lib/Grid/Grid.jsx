@@ -98,6 +98,7 @@ Grid.propTypes = {
     index: PropTypes.number,
     timeout: PropTypes.number,
     options: PropTypes.object,
+    onClick: PropTypes.func,
     onChange: PropTypes.func,
     onRender: PropTypes.func.isRequired
 };
