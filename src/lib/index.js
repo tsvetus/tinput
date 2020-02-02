@@ -5,6 +5,7 @@ import List from './List';
 import ListBox from './ListBox';
 import Input from './Input';
 import Text from './Text';
+import Grid from './Grid';
 
 export {
     Icon,
@@ -13,5 +14,6 @@ export {
     List,
     ListBox,
     Input,
-    Text
+    Text,
+    Grid
 }

@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/**
- * Represents data grid
- */
 class Grid extends React.Component {
 
     constructor(props) {
@@ -79,7 +76,13 @@ class Grid extends React.Component {
 
     render () {
         if (this.props.onRender) {
-            return this.props.onRender({style: this.props.style, onClick: this.handleClick});
+            return this.props.onRender({
+                style: this.props.style,
+                options: this.props.options,
+                index: this.state.index,
+                items: this.props.items,
+                onClick: this.handleClick
+            });
         } else {
             return <div></div>;
         }
@@ -94,6 +97,8 @@ Grid.propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
     index: PropTypes.number,
     timeout: PropTypes.number,
+    options: PropTypes.object,
+    onChange: PropTypes.func,
     onRender: PropTypes.func.isRequired
 };
 

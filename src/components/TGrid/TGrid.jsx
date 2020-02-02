@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import {merge, clone, contain, replace, isMS} from '../../util';
 
+import {Grid} from '../../lib';
+
 import styles from '../../styles';
 
 /**
@@ -13,62 +15,16 @@ class TGrid extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            index: -1,
             top: 0
         };
-        this.scroll = this.scroll.bind(this);
-        this.change = this.change.bind(this);
-        this.handleClick = this.handleClick.bind(this);
         this.adjust = this.adjust.bind(this);
+        this.handleRender = this.handleRender.bind(this);
         this.title = React.createRef();
         this.ms = isMS();
     }
 
     componentDidMount() {
-        this.mounted = true;
-        this.scroll(0);
         this.adjust();
-    }
-
-    componentDidUpdate(old) {
-        if (old.index !== this.props.index || old.items !== this.props.items) {
-            this.scroll(this.state.index);
-        }
-    }
-
-    componentWillUnmount() {
-        this.mounted = false;
-    }
-
-    change(index, item) {
-        this.setState({index: index});
-        clearTimeout(this.timer);
-        if (this.props.onChange) {
-            this.timer = setTimeout(() => {
-                if (this.mounted) {
-                    this.props.onChange({
-                        name: this.props.name,
-                        data: this.props.data,
-                        index: index,
-                        item: item
-                    });
-                }
-            }, this.props.timeout);
-        }
-    }
-
-    scroll(index) {
-        let newIndex = (index === null || index === undefined) ? -1 : index;
-        let item = null;
-        if (this.props.items) {
-            if (newIndex < 0 || newIndex >= this.props.items.length) {
-                newIndex = 0;
-            }
-            item = clone(this.props.items[newIndex]);
-        } else {
-            newIndex = -1;
-        }
-        this.change(newIndex, item);
     }
 
     adjust() {
@@ -80,32 +36,10 @@ class TGrid extends React.Component {
         }
     }
 
-    handleClick(event) {
-        let index = Number(event.currentTarget.getAttribute('index'));
-        if (this.props.onClick) {
-            this.props.onClick({
-                name: this.props.name,
-                data: this.props.data,
-                index: index,
-                item: this.props.items[index]
-            });
-        }
-        if (index !== this.state.index) {
-            this.scroll(index);
-        }
-    }
+    handleRender (event) {
 
-    render () {
-
-        let options = merge(TGrid.defaultProps.options, this.props.options);
-
-        let style = merge(
-            contain(styles.TGrid),
-            contain(styles[this.props.name]),
-            contain(this.props.style)
-        );
-
-        style = replace(style, 'width', options.borderWidth);
+        let style = event.style;
+        let options = event.options;
 
         let items = [];
         let cell = 0;
@@ -192,8 +126,8 @@ class TGrid extends React.Component {
                 }
                 let click = null;
                 if (options.showSelected) {
-                    click = this.handleClick;
-                    if (i === this.state.index) {
+                    click = event.onClick;
+                    if (i === event.index) {
                         cs = merge(cs, style.selected);
                     }
                 } else {
@@ -257,6 +191,34 @@ class TGrid extends React.Component {
             <div style={containerStyle}>
                 {items}
             </div>
+        );
+
+    }
+
+    render () {
+
+        let options = merge(TGrid.defaultProps.options, this.props.options);
+
+        let style = merge(
+            contain(styles.TGrid),
+            contain(styles[this.props.name]),
+            contain(this.props.style)
+        );
+
+        style = replace(style, 'width', options.borderWidth);
+
+        return (
+
+            <Grid
+                style={style}
+                name={this.props.name}
+                data={this.props.data}
+                items={this.props.items}
+                index={this.props.index}
+                timeout={this.props.timeout}
+                onChange={this.props.onChange}
+                onRender={this.handleRender} />
+
         );
 
     }
