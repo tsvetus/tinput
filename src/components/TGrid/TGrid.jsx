@@ -119,7 +119,7 @@ class TGrid extends React.Component {
 
                 let cs = merge(style.cell, style.row);
                 if (this.props.onRowStyle) {
-                    let s = this.props.onRowStyle({index: i, row: v});
+                    let s = this.props.onRowStyle({index: i, row: v, style: style});
                     if (s) {
                         cs = merge(cs, s);
                     }
@@ -150,7 +150,16 @@ class TGrid extends React.Component {
                         }
                     }
                     if (this.props.onCellStyle) {
-                        css = merge(css, this.props.onCellStyle({cell: v[key], column: key, index: i, row: v}));
+                        let s = this.props.onCellStyle({
+                            cell: v[key],
+                            column: key,
+                            index: i,
+                            row: v,
+                            style: style
+                        });
+                        if (s) {
+                            css = merge(css, s);
+                        }
                     }
                     if (col === 1) {
                         css.marginLeft = undefined;
@@ -294,6 +303,7 @@ TGrid.propTypes = {
      * @param {number} event.index Current row index
      * @param {object} event.row Current row in form of name/value pairs where names coincide with column names
      * described in "columns" property
+     * @param {object} event.style Current component style from "props.style" property
      */
     onRowStyle: PropTypes.func,
     /**
@@ -304,6 +314,7 @@ TGrid.propTypes = {
      * @param {number} event.index Current row index
      * @param {object} event.row Current row in form of name/value pairs where names coincide with column names
      * described in "columns" property
+     * @param {object} event.style Current component style from "props.style" property
      */
     onCellStyle: PropTypes.func,
     /**

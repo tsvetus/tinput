@@ -2636,6 +2636,11 @@
               "name": "event.row",
               "type": "object",
               "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
+            },
+            "event.style": {
+              "name": "event.style",
+              "type": "object",
+              "description": "Current component style from \"props.style\" property"
             }
           },
           "required": false
@@ -2668,6 +2673,11 @@
               "name": "event.row",
               "type": "object",
               "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
+            },
+            "event.style": {
+              "name": "event.style",
+              "type": "object",
+              "description": "Current component style from \"props.style\" property"
             }
           },
           "required": false
@@ -2739,7 +2749,7 @@
       }
     },
     "TTable": {
-      "description": "Represents data table. TTable is similar to TGrid component but designed using \"table\" layout.\r\nIn case large amount of data items TTable demonstrates better performance than TGrid",
+      "description": "Represents data table. TTable is similar to TGrid component but designed using \"table\" layout.\r\nIn case of large amount of data items TTable demonstrates better performance than TGrid",
       "displayName": "TTable",
       "methods": [
         {
@@ -2893,6 +2903,11 @@
               "name": "event.row",
               "type": "object",
               "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
+            },
+            "event.style": {
+              "name": "event.style",
+              "type": "object",
+              "description": "Current component style from \"props.style\" property"
             }
           },
           "required": false
@@ -2925,6 +2940,11 @@
               "name": "event.row",
               "type": "object",
               "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
+            },
+            "event.style": {
+              "name": "event.style",
+              "type": "object",
+              "description": "Current component style from \"props.style\" property"
             }
           },
           "required": false
