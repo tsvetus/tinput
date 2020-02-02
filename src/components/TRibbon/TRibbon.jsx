@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, clone, contain, TIMEOUT} from '../../util';
+import {merge, contain} from '../../util';
+
+import {Grid} from '../../lib';
 
 import styles from '../../styles';
 
@@ -12,82 +14,12 @@ class TRibbon extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            index: -1
-        };
-        this.scroll = this.scroll.bind(this);
-        this.change = this.change.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleRender = this.handleRender.bind(this);
     }
 
-    componentDidMount() {
-        this.mounted = true;
-        this.scroll(0);
-    }
+    handleRender (event) {
 
-    componentDidUpdate(old) {
-        if (old.index !== this.props.index || old.items !== this.props.items) {
-            this.scroll(this.state.index);
-        }
-    }
-
-    componentWillUnmount() {
-        this.mounted = false;
-    }
-
-    change(index, item) {
-        this.setState({index: index});
-        clearTimeout(this.timer);
-        if (this.props.onChange) {
-            this.timer = setTimeout(() => {
-                if (this.mounted) {
-                    this.props.onChange({
-                        name: this.props.name,
-                        data: this.props.data,
-                        index: index,
-                        item: item
-                    });
-                }
-            }, this.props.timeout);
-        }
-    }
-
-    scroll(index) {
-        let newIndex = (index === null || index === undefined) ? -1 : index;
-        let item = null;
-        if (this.props.items) {
-            if (newIndex < 0 || newIndex >= this.props.items.length) {
-                newIndex = 0;
-            }
-            item = clone(this.props.items[newIndex]);
-        } else {
-            newIndex = -1;
-        }
-        this.change(newIndex, item);
-    }
-
-    handleClick(event) {
-        let index = Number(event.currentTarget.getAttribute('index'));
-        if (this.props.onClick) {
-            this.props.onClick({
-                name: this.props.name,
-                data: this.props.data,
-                index: index,
-                item: this.props.items[index]
-            });
-        }
-        if (index !== this.state.index) {
-            this.scroll(index);
-        }
-    }
-
-    render () {
-
-        let style = merge(
-            contain(styles.TRibbon),
-            contain(styles[this.props.name]),
-            contain(this.props.style)
-        );
+        let style = event.style;
 
         let items = [];
         if (this.props.items) {
@@ -99,7 +31,7 @@ class TRibbon extends React.Component {
                         item: v,
                         index: i,
                         style: style,
-                        onClick: this.handleClick
+                        onClick: event.onClick
                     });
                     items.push(frame);
                 }
@@ -115,6 +47,33 @@ class TRibbon extends React.Component {
                     {items}
                 </div>
             </div>
+        );
+
+    }
+
+    render() {
+
+        let options = merge(TRibbon.defaultProps.options, this.props.options);
+
+        let style = merge(
+            contain(styles.TRibbon),
+            contain(styles[this.props.name]),
+            contain(this.props.style)
+        );
+
+        return (
+
+            <Grid
+                style={style}
+                name={this.props.name}
+                data={this.props.data}
+                items={this.props.items}
+                index={this.props.index}
+                timeout={this.props.timeout}
+                options={options}
+                onChange={this.props.onChange}
+                onRender={this.handleRender} />
+
         );
 
     }

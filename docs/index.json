@@ -2486,34 +2486,6 @@
       "displayName": "TGrid",
       "methods": [
         {
-          "name": "change",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "index",
-              "type": null
-            },
-            {
-              "name": "item",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "scroll",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "index",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
           "name": "adjust",
           "docblock": null,
           "modifiers": [],
@@ -2521,7 +2493,7 @@
           "returns": null
         },
         {
-          "name": "handleClick",
+          "name": "handleRender",
           "docblock": null,
           "modifiers": [],
           "params": [
@@ -2771,35 +2743,7 @@
       "displayName": "TRibbon",
       "methods": [
         {
-          "name": "change",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "index",
-              "type": null
-            },
-            {
-              "name": "item",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "scroll",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "index",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "handleClick",
+          "name": "handleRender",
           "docblock": null,
           "modifiers": [],
           "params": [

@@ -216,6 +216,7 @@ class TGrid extends React.Component {
                 items={this.props.items}
                 index={this.props.index}
                 timeout={this.props.timeout}
+                options={options}
                 onChange={this.props.onChange}
                 onRender={this.handleRender} />
 
