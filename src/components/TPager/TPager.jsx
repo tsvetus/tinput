@@ -87,7 +87,7 @@ class TPager extends React.Component {
 
         let pages = [];
         for (let i=params.pageFrom; i<=params.pageTo; i++) {
-            let st = i === this.state.page ? style.current : style.page;
+            let st = i === this.state.page ? merge(style.page, style.current) : style.page;
             pages.push(<div key={i} style={st} data={i} onClick={this.handleClick}>{i + 1}</div>);
         }
 

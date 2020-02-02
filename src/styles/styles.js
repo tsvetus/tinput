@@ -445,9 +445,6 @@ export default function defaultStyles(template) {
             },
 
             current: {
-                margin: "0 1px 0 1px",
-                padding: "1px 6px 0 6px",
-                border: "1px solid " + template.colors.frame,
                 backgroundColor: template.colors.face,
                 fontWeight: "bold"
             }

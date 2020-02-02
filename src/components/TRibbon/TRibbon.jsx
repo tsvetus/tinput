@@ -100,21 +100,6 @@ TRibbon.propTypes = {
     /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
     /**
-     * Grid columns description. An object containing set of fields representing column names with parameters
-     * "caption", "width" and "style":
-     */
-    columns: PropTypes.shape({
-        /**  */
-        columnName: PropTypes.shape({
-            /** Column caption */
-            caption: PropTypes.any,
-            /** Column width */
-            width: PropTypes.string,
-            /** Column style (optional) */
-            style: PropTypes.object
-        })
-    }),
-    /**
      * Grid cell data. Each element of array contains name/value pairs where names coincide with column names
      * described in "columns" property
      */

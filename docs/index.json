@@ -3065,30 +3065,6 @@
           "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
           "required": false
         },
-        "columns": {
-          "type": "shape",
-          "description": "Grid columns description. An object containing set of fields representing column names with parameters\r\n\"caption\", \"width\" and \"style\":",
-          "required": false,
-          "structure": {
-            "columnName": {
-              "type": "shape",
-              "structure": {
-                "caption": {
-                  "type": "any",
-                  "description": "Column caption"
-                },
-                "width": {
-                  "type": "string",
-                  "description": "Column width"
-                },
-                "style": {
-                  "type": "object",
-                  "description": "Column style (optional)"
-                }
-              }
-            }
-          }
-        },
         "items": {
           "type": "arrayOf",
           "description": "Grid cell data. Each element of array contains name/value pairs where names coincide with column names\r\ndescribed in \"columns\" property",
