@@ -15,6 +15,7 @@ import TScrollExample from './components/TScroll/TScrollExample.jsx';
 import TTopExample from './components/TTop/TTopExample.jsx';
 import TSideExample from './components/TSide/TSideExample.jsx';
 import TGridExample from './components/TGrid/TGridExample.jsx';
+import TTableExample from './components/TTable/TTableExample.jsx';
 import TRibbonExample from './components/TRibbon/TRibbonExample.jsx';
 import TPagerExample from './components/TPager/TPagerExample.jsx';
 import TModalExample from './components/TModal/TModalExample.jsx';
@@ -38,6 +39,7 @@ export {
     TTopExample,
     TSideExample,
     TGridExample,
+    TTableExample,
     TRibbonExample,
     TPagerExample,
     TModalExample,

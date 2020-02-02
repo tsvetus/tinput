@@ -477,7 +477,8 @@ export default function defaultStyles(template) {
             title: {
                 backgroundColor: template.colors.window,
                 padding: "0 0 4px 0",
-                fontWeight: "normal"
+                fontWeight: "normal",
+                border: "1px solid red"
             },
 
             caption: {
@@ -506,6 +507,60 @@ export default function defaultStyles(template) {
 
             row: {
                 // Deprecated!
+            },
+
+            selected: {
+                backgroundColor: template.colors.panel,
+                fontWeight: "bold"
+            }
+
+        },
+
+        TTable: {
+
+            container: {
+                position: "relative",
+                borderCollapse: "collapse",
+                width: "100%"
+            },
+
+            body: {
+            },
+
+            title: {
+                position: "sticky",
+                backgroundColor: template.colors.window,
+                padding: "0 0 4px 0",
+                fontWeight: "normal",
+                textAlign: "center",
+                boxShadow: "-${width}px 0 " + template.colors.window + ", ${width}px 0 " + template.colors.window
+            },
+
+            caption: {
+                position: "sticky",
+                backgroundColor: template.colors.window,
+                backgroundClip: "padding-box",
+//                border: "${width}px solid " + template.colors.frame,
+                borderLeft: "${width}px solid " + template.colors.frame,
+                borderRight: "${width}px solid " + template.colors.frame,
+                padding: "4px",
+                textAlign: "center",
+                fontWeight: "bold",
+                color: template.colors.border,
+                boxShadow: "inset 0 ${width}px " + template.colors.frame + ", 0 ${width}px " + template.colors.frame
+            },
+
+            head: {
+            },
+
+            cell: {
+                backgroundColor: template.colors.window,
+                border: "${width}px solid " + template.colors.frame,
+                padding: "4px",
+                cursor: "pointer",
+            },
+
+            row: {
             },
 
             selected: {

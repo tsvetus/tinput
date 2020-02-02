@@ -23,6 +23,7 @@ import TInput from './TInput';
 import TPager from './TPager';
 import TLoad from './TLoad';
 import TGrid from './TGrid';
+import TTable from './TTable';
 import TRibbon from './TRibbon';
 import TMenu from './TMenu';
 
@@ -52,6 +53,7 @@ export {
     TPager,
     TLoad,
     TGrid,
+    TTable,
     TRibbon,
     TMenu
 }

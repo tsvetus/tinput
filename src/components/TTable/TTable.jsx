@@ -8,11 +8,10 @@ import {Grid} from '../../lib';
 import styles from '../../styles';
 
 /**
- * Represents data grid designed on CSS Grid layout. Some browsers experience performance
- * issues while rendering large amount of cells in CSS Grids. In that case we recommend
- * to use TTable component instead of TGrid
+ * Represents data table. TTable is similar to TGrid component but designed using "table" layout.
+ * In case large amount of data items TTable demonstrates better performance than TGrid
  */
-class TGrid extends React.Component {
+class TTable extends React.Component {
 
     constructor(props) {
         super(props);
@@ -20,7 +19,6 @@ class TGrid extends React.Component {
         this.adjust = this.adjust.bind(this);
         this.handleRender = this.handleRender.bind(this);
         this.title = React.createRef();
-        this.ms = isMS();
     }
 
     componentDidMount() {
@@ -41,81 +39,58 @@ class TGrid extends React.Component {
         let style = event.style;
         let options = event.options;
 
-        let items = [];
-        let cell = 0;
-        let row = 0;
+        let head = null;
 
-        let containerStyle = merge(style.container, style.body);
+        let items = [];
 
         if (this.props.columns) {
 
+            let title = null;
             if (options.showHead && this.props.children) {
-                ++row;
-                let hs = clone(style.title);
-                if (this.ms) {
-                    hs.msGridRow = row;
-                    hs.msGridColumn = 1;
-                    hs.msGridColumnSpan = Object.keys(this.props.columns).length;
-                } else {
-                    hs.gridRow = row;
-                    hs.gridColumn = 1;
-                    hs.gridColumnStart = 1;
-                    hs.gridColumnEnd = Object.keys(this.props.columns).length + 1;
-                }
-                if (options.scrollHead) {
-                    hs.position = 'relative';
-                }
-                items.push(<div key={++cell} style={hs} ref={this.title}>{this.props.children}</div>);
+                title = <tr>
+                    <th
+                        style={style.title}
+                        ref={this.title}
+                        colSpan={Object.keys(this.props.columns).length}>
+                        {this.props.children}
+                    </th>
+                </tr>;
             }
 
-            ++row;
-
-            let widths = '';
-
+            let columns = [];
             let col = 0;
 
             for (let key in this.props.columns) {
 
-                ++col;
-
                 let column = this.props.columns[key];
 
-                let cs = merge(style.caption, style.head);
-                if (col === 1) {
-                    cs.marginLeft = undefined;
-                }
+                let cs = merge(style.caption, {width: column.width ? column.width : 'auto'});
                 if (options.scrollHead) {
                     cs.position = 'relative';
-                }
-                if (this.ms) {
-                    cs.msGridRow = row;
-                    cs.msGridColumn = col;
-                } else {
-                    cs.gridRow = row;
-                    cs.gridColumn = col;
                 }
                 if (!options.scrollHead) {
                     cs.top = this.state.top + 'px';
                 }
-                widths += ' ' + (column.width ? column.width : 'auto');
-
-                items.push(
-                    <div key={++cell} style={cs}>{column.caption ? column.caption : ''}</div>
+                columns.push(
+                    <th key={++col} style={cs}>{column.caption ? column.caption : ''}</th>
                 );
 
             }
 
-            containerStyle = this.ms ?
-                 merge(containerStyle, {display: '-ms-grid', msGridColumns: widths}) :
-                 merge(containerStyle, {display: 'grid', gridTemplateColumns: widths});
+            head = (
+                <thead style={style.head}>
+                    {title}
+                    <tr>
+                        {columns}
+                    </tr>
+                </thead>
+            );
 
         }
 
         if (this.props.items && this.props.columns) {
 
             this.props.items.forEach((v, i) => {
-
-                ++row;
 
                 let cs = merge(style.cell, style.row);
                 if (this.props.onRowStyle) {
@@ -134,11 +109,11 @@ class TGrid extends React.Component {
                     cs = merge(cs, style.noSelect);
                 }
 
+                let columns = [];
+
                 let col = 0;
 
                 for (let key in this.props.columns) {
-
-                    ++col;
 
                     let css = clone(cs);
                     if (this.props.columns[key].style !== undefined) {
@@ -152,17 +127,6 @@ class TGrid extends React.Component {
                     if (this.props.onCellStyle) {
                         css = merge(css, this.props.onCellStyle({cell: v[key], column: key, index: i, row: v}));
                     }
-                    if (col === 1) {
-                        css.marginLeft = undefined;
-                    }
-                    if (this.ms) {
-                        css.msGridRow = row;
-                        css.msGridColumn = col;
-                    } else {
-                        css.gridRow = row;
-                        css.gridColumn = col;
-                    }
-
                     let value = null;
 
                     if (v[key] === undefined) {
@@ -179,28 +143,33 @@ class TGrid extends React.Component {
                         }
                     }
 
-                    items.push(<div key={++cell} style={css} index={i} onClick={click}>{value}</div>);
+                    columns.push(<td key={++col} style={css} index={i} onClick={click}>{value}</td>);
 
                 }
+
+                items.push(<tr key={i}>{columns}</tr>);
 
             });
 
         }
 
         return (
-            <div style={containerStyle}>
-                {items}
-            </div>
+            <table style={style.container}>
+                {head}
+                <tbody style={style.body}>
+                    {items}
+                </tbody>
+            </table>
         );
 
     }
 
     render () {
 
-        let options = merge(TGrid.defaultProps.options, this.props.options);
+        let options = merge(TTable.defaultProps.options, this.props.options);
 
         let style = merge(
-            contain(styles.TGrid),
+            contain(styles.TTable),
             contain(styles[this.props.name]),
             contain(this.props.style)
         );
@@ -227,7 +196,7 @@ class TGrid extends React.Component {
 
 }
 
-TGrid.propTypes = {
+TTable.propTypes = {
     /** Component style: */
     style: PropTypes.shape({
         /** Style for outer component container */
@@ -326,7 +295,7 @@ TGrid.propTypes = {
     onChange: PropTypes.func
 };
 
-TGrid.defaultProps = {
+TTable.defaultProps = {
     timeout: 1000,
     options: {
         scrollHead: false,
@@ -336,4 +305,4 @@ TGrid.defaultProps = {
     }
 };
 
-export default TGrid;
+export default TTable;

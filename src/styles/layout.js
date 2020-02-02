@@ -322,6 +322,26 @@ export default {
 
     },
 
+    TTable: {
+
+        title: {
+            position: "sticky",
+            top: "0",
+            zIndex: "1"
+        },
+
+        caption: {
+            position: "sticky",
+            top: "0",
+            zIndex: "1"
+        },
+
+        noSelect: {
+            cursor: "default"
+        }
+
+    },
+
     TRibbon: {
 
         title: {

@@ -101,6 +101,11 @@ module.exports = {
             name: "TGridExample"
         }
     }, {
+        name: "TTable",
+        example: {
+            name: "TTableExample"
+        }
+    }, {
         name: "TRibbon",
         example: {
             name: "TRibbonExample"
