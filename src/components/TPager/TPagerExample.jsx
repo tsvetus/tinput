@@ -3,7 +3,7 @@ import React from 'react';
 import {TPager, TScroll, TGrid, TGroup} from 'tinput';
 
 const ITEMS = [];
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 450; i++) {
   ITEMS.push({
     column1: 'value ' + i + 1,
     column2: 'value ' + i + 2,
@@ -73,7 +73,7 @@ class TPagerExample extends React.Component {
               items={this.state.items}>
 
               <TPager
-                size={300}
+                size={100}
                 items={ITEMS}
                 name={'pgGrid'}
                 onChange={this.change}/>
