@@ -10,6 +10,7 @@ import TCheckExample from './components/TCheck/TCheckExample.jsx';
 import TListBoxExample from './components/TListBox/TListBoxExample.jsx';
 import TSearchExample from './components/TSearch/TSearchExample.jsx';
 import TGroupExample from './components/TGroup/TGroupExample.jsx';
+import TItemGroupExample from './components/TItemGroup/TItemGroupExample.jsx';
 import TPanelExample from './components/TPanel/TPanelExample.jsx';
 import TScrollExample from './components/TScroll/TScrollExample.jsx';
 import TTopExample from './components/TTop/TTopExample.jsx';
@@ -34,6 +35,7 @@ export {
     TListBoxExample,
     TSearchExample,
     TGroupExample,
+    TItemGroupExample,
     TPanelExample,
     TScrollExample,
     TTopExample,

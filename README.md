@@ -19,10 +19,12 @@ Buttons and icons:
 
 Grids and lists:
 * `TGrid`
+* `TTable`
 * `TRibbon`
 
 Control organizers:
 * `TGroup`
+* `TItemGroup`
 * `TPanel`
 * `TScroll`
 * `TPager`

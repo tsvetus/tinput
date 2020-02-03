@@ -76,6 +76,11 @@ module.exports = {
             name: "TGroupExample"
         }
     }, {
+        name: "TItemGroup",
+        example: {
+            name: "TItemGroupExample"
+        }
+    }, {
         name: "TPanel",
         example: {
             name: "TPanelExample"

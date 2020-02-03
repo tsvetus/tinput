@@ -4,6 +4,7 @@ import TMask from './TMask';
 import TMail from './TMail';
 import TMemo from './TMemo';
 import TGroup from './TGroup';
+import TItemGroup from './TItemGroup';
 import TListBox from './TListBox';
 import TCheck from './TCheck';
 import TSearch from './TSearch';
@@ -34,6 +35,7 @@ export {
     TMail,
     TMemo,
     TGroup,
+    TItemGroup,
     TListBox,
     TCheck,
     TSearch,

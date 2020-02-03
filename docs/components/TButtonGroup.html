@@ -1,0 +1,64 @@
+<pre><code>import React from 'react';
+
+import {TItemGroup, TMemo} from 'tinput';
+
+class TItemGroupExample extends React.Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        items: [],
+        event: ''
+      };
+      this.change = this.change.bind(this);
+      this.clear = this.clear.bind(this);
+    }
+
+    change(event) {
+      this.setState({
+        event: this.state.event + ' ' +
+          JSON.stringify(event)
+      });
+    }
+
+    clear() {
+      this.setState({event: null});
+    }
+
+    render() {
+
+      return (
+
+      &lt;div&gt;
+
+        &lt;TItemGroup
+          style={{
+            container: {margin: "0 0 16px 0"},
+            content: {justifyContent: "space-around"}
+          }}
+          grouped={true}
+          indexes={[2]}
+          items={[
+            {key: 1, value: 'Button1', group: 0},
+            {key: 2, value: 'Button2', group: 0},
+            {key: 3, value: 'Button3', group: 1},
+            {key: 4, value: 'Button4', group: 1}
+          ]}
+          onChange={this.change} /&gt;
+
+          &lt;TMemo
+            style={{edit: {minHeight: "48px"}}}
+            label={'onChange events:'}
+            icon={'refresh'}
+            value={this.state.event}
+            onIcon={this.clear} /&gt;
+
+      &lt;/div&gt;
+
+    );
+
+  }
+
+}
+
+export default TItemGroupExample;</code></pre>

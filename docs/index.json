@@ -1300,7 +1300,7 @@
           }
         },
         "name": {
-          "type": "string",
+          "type": "any",
           "description": "Component name",
           "required": false
         },
@@ -1914,7 +1914,7 @@
           "required": false
         },
         "name": {
-          "type": "string",
+          "type": "any",
           "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
           "required": false
         },
@@ -2015,6 +2015,175 @@
         "label": {
           "type": "string",
           "description": "Label caption. Default is undefined and label is hidden",
+          "required": false
+        }
+      }
+    },
+    "TItemGroup": {
+      "description": "Groups items in a single block. Items represented as buttons? radio buttons or\r\ncheck boxes depending on \"control\" property",
+      "displayName": "TItemGroup",
+      "methods": [
+        {
+          "name": "handleClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TItemGroupExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label"
+            },
+            "content": {
+              "type": "object",
+              "description": "Style for group content. By default content is a \"flex box\" so it is possible to use\r\n\"flex\" styles without specifying \"display: 'flex'\" in \"content\" section"
+            },
+            "control": {
+              "type": "object",
+              "description": "Item control style"
+            }
+          }
+        },
+        "label": {
+          "type": "string",
+          "description": "Label caption. Default is undefined and label is hidden",
+          "required": false
+        },
+        "grouped": {
+          "type": "any",
+          "description": "If true only one button in group may have down state",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "indexes": {
+          "type": "arrayOf",
+          "description": "List of indexes of controls in \"down/checked\" state",
+          "required": false,
+          "defaultValue": "[]",
+          "structure": {
+            "name": {}
+          }
+        },
+        "items": {
+          "type": "arrayOf",
+          "description": "Button list. It is possible to use another names instead of \"key\", \"value\" and \"group\". In that case\r\nkey, value and group will be first, second and third items respectively",
+          "required": false,
+          "structure": {
+            "key": {
+              "type": "any",
+              "description": "Item key. May have any value and used as a control \"name\""
+            },
+            "value": {
+              "type": "any",
+              "description": "Control label/caption"
+            },
+            "group": {
+              "type": "number",
+              "description": "Control group. If \"grouped = true\" then only one control in the same group can be in checked/down state"
+            }
+          }
+        },
+        "control": {
+          "type": "enum",
+          "description": "Control type used in group. Can be one of:",
+          "required": false,
+          "defaultValue": "'button'",
+          "structure": {
+            "'button'": {},
+            "'check'": {},
+            "'radio'": {}
+          }
+        },
+        "checked": {
+          "type": "any",
+          "description": "Checked/Down value",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "unchecked": {
+          "type": "any",
+          "description": "Unchecked/Up value",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "layout": {
+          "type": "enum",
+          "description": "Label position towards icon (for control equals to \"check\" or \"radio\")",
+          "required": false,
+          "structure": {
+            "'left'": {},
+            "'right'": {}
+          }
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.control": {
+              "name": "event.control",
+              "type": "string",
+              "description": "Pressed/Checked control name"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "number",
+              "description": "Pressed control down/checked state"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "number",
+              "description": "Pressed item index"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "object",
+              "description": "Pressed item"
+            },
+            "event.indexes": {
+              "name": "event.indexes",
+              "type": "array",
+              "description": "Array of item indexes in \"down/checked\" state"
+            },
+            "event.items": {
+              "name": "event.items",
+              "type": "array",
+              "description": "Array of items in \"down/checked\" state"
+            }
+          },
           "required": false
         }
       }
@@ -3240,6 +3409,14 @@
             "page": {
               "type": "object",
               "description": "Style page buttons"
+            },
+            "current": {
+              "type": "object",
+              "description": "Style for current page button"
+            },
+            "wait": {
+              "type": "object",
+              "description": "Style for waiting state of current page button"
             }
           }
         },

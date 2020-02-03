@@ -12,6 +12,7 @@ class TPager extends React.Component {
 
     constructor (props) {
         super(props);
+        this.state = {wait: false};
         this.items = props.items ? props.items : [];
         this.pager = new Pager(props.size, this.items.length);
         this.state = {page: this.pager.page};
@@ -35,25 +36,34 @@ class TPager extends React.Component {
     }
 
     componentDidMount() {
+        this.mounted = true;
         this.setState({page: this.pager.page}, () => {
             this.change();
         });
     }
 
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+
     change() {
         if (this.props.onChange) {
             clearTimeout(this.timer);
+            this.setState({wait: true});
             this.timer = setTimeout(() => {
-                let items = [];
-                for (let i=this.pager.from; i<=this.pager.to; i++) {
-                    items.push(clone(this.items[i]));
+                if (this.mounted) {
+                    let items = [];
+                    for (let i=this.pager.from; i<=this.pager.to; i++) {
+                        items.push(clone(this.items[i]));
+                    }
+                    this.setState({wait: false});
+                    this.props.onChange({
+                        name: this.props.name,
+                        data: this.props.data,
+                        items: items,
+                        ...this.pager.getParams()
+                    });
                 }
-                this.props.onChange({
-                    name: this.props.name,
-                    data: this.props.data,
-                    items: items,
-                    ...this.pager.getParams()
-                });
             }, this.props.timeout);
         }
     }
@@ -87,7 +97,13 @@ class TPager extends React.Component {
 
         let pages = [];
         for (let i=params.pageFrom; i<=params.pageTo; i++) {
-            let st = i === this.state.page ? merge(style.page, style.current) : style.page;
+            let st = style.page;
+            if (i === this.state.page) {
+                st = merge(st, style.current);
+                if (this.state.wait) {
+                    st = merge(st, style.wait);
+                }
+            }
             pages.push(<div key={i} style={st} data={i} onClick={this.handleClick}>{i + 1}</div>);
         }
 
@@ -132,7 +148,11 @@ TPager.propTypes = {
         /** Style for page navigation bar */
         edit: PropTypes.object,
         /** Style page buttons */
-        page: PropTypes.object
+        page: PropTypes.object,
+        /** Style for current page button */
+        current: PropTypes.object,
+        /** Style for waiting state of current page button */
+        wait: PropTypes.object
     }),
     /**
      * Any component name that associated with component and returned in "onChange" event in "event.name" field.

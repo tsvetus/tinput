@@ -83,7 +83,7 @@ TButton.propTypes = {
         down: PropTypes.object
     }),
     /** Component name */
-    name: PropTypes.string,
+    name: PropTypes.any,
     /** Component data */
     data: PropTypes.any,
     /**

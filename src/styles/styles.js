@@ -127,6 +127,12 @@ export default function defaultStyles(template) {
 
         },
 
+        TCheck: {
+            right: {
+                padding: "4px 0 0 8px"
+            }
+        },
+
         TModal: {
 
             screen: {
@@ -301,6 +307,10 @@ export default function defaultStyles(template) {
 
         },
 
+        TButtonGroup: {
+
+        },
+
         TPanel: {
             backgroundImage: "linear-gradient(" + template.colors.panel + ", " + template.colors.window + ")",
             backgroundColor: template.colors.panel,
@@ -450,6 +460,11 @@ export default function defaultStyles(template) {
             current: {
                 backgroundColor: template.colors.face,
                 fontWeight: "bold"
+            },
+
+            wait: {
+                backgroundColor: template.colors.window,
+                color: "#ddd"
             }
 
         },

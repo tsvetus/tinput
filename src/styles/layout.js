@@ -33,6 +33,11 @@ export default {
             overflow: "hidden"
         },
 
+        icon: {
+            flexShrink: "0",
+            flexGrow: "0"
+        },
+
         list: {
 
             container: {

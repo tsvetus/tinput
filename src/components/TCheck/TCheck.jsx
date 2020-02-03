@@ -69,7 +69,7 @@ class TCheck extends React.Component {
 
         let label = null;
         if (this.props.label) {
-            let ls = this.isRight() ? merge(style.right, style.label) : style.label;
+            let ls = this.isRight() ? merge(style.label, style.right) : style.label;
             label =
                 <div style={ls}>
                     {this.props.label}
@@ -121,7 +121,7 @@ TCheck.propTypes = {
      * In addition component name can be used in global styles registered by "registerStyles" function to
      * associate particular style with this component
      */
-    name: PropTypes.string,
+    name: PropTypes.any,
     /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
     /** Label caption. Default is undefined and label is hidden */
