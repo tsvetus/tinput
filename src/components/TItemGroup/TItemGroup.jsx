@@ -55,7 +55,7 @@ function getGroups(buttons, indexes, grouped) {
 }
 
 /**
- * Groups items in a single block. Items represented as buttons? radio buttons or
+ * Groups items in a single block. Items represented as buttons, radio buttons or
  * check boxes depending on "control" property
  */
 class TItemGroup extends React.Component {

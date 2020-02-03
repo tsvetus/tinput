@@ -2020,7 +2020,7 @@
       }
     },
     "TItemGroup": {
-      "description": "Groups items in a single block. Items represented as buttons? radio buttons or\r\ncheck boxes depending on \"control\" property",
+      "description": "Groups items in a single block. Items represented as buttons, radio buttons or\r\ncheck boxes depending on \"control\" property",
       "displayName": "TItemGroup",
       "methods": [
         {
