@@ -31,6 +31,7 @@ import {
 } from './components';
 
 import {
+
     download,
     clone,
     nvl,
@@ -42,8 +43,14 @@ import {
     strDate,
     params,
     getFile,
+
+    getCookie,
+    setCookie,
+    deleteCookie,
+
     Sizer,
     Uploader
+
 } from './util';
 
 import {styles, registerStyles} from './styles/const.js';
@@ -91,6 +98,10 @@ export {
     strDate,
     params,
     getFile,
+
+    getCookie,
+    setCookie,
+    deleteCookie,
 
     Sizer,
     Uploader,

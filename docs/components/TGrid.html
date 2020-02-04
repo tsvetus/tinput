@@ -24,12 +24,20 @@ class TGridExample extends React.Component {
     this.change = this.change.bind(this);
     this.onCellStyle = this.onCellStyle.bind(this);
     this.clear = this.clear.bind(this);
+    this.click = this.click.bind(this);
   }
 
   change(event) {
     this.setState({
       event: this.state.event + ' ' +
         JSON.stringify(event)
+    });
+  }
+
+  click(event) {
+    this.setState({
+      event: this.state.event + ' ' +
+          JSON.stringify(event)
     });
   }
 
@@ -85,6 +93,7 @@ class TGridExample extends React.Component {
             }}
             items={ITEMS}
             onChange={this.change}
+            onClick={this.click}
             onCellStyle={this.onCellStyle}/&gt;
 
         &lt;/TGroup&gt;

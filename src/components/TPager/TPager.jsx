@@ -23,11 +23,11 @@ class TPager extends React.Component {
     componentDidUpdate(old) {
         if (old.size !== this.props.size || old.items !== this.props.items) {
             if (old.size !== this.props.size) {
-                this.pager.setSize(this.props.size);
+                this.pager.setSize(this.props.size, this.state.page);
             }
             if (old.items !== this.props.items) {
                 this.items = this.props.items ? this.props.items : [];
-                this.pager.setLength(this.items.length);
+                this.pager.setLength(this.items.length, this.state.page);
             }
             this.setState({page: this.pager.page}, () => {
                 this.change();

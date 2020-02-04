@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {TPager, TScroll, TGrid, TGroup} from 'tinput';
+import {TPager, TScroll, TGrid, TGroup, TMemo} from 'tinput';
 
 const ITEMS = [];
 for (let i = 0; i < 450; i++) {
@@ -19,15 +19,31 @@ class TPagerExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      events: ''
     };
     this.change = this.change.bind(this);
+    this.click = this.click.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   change(event) {
     this.setState({
-      items: event.items
+      items: event.items,
+      event: this.state.event + ' ' +
+          JSON.stringify(event)
     });
+  }
+
+  click(event) {
+    this.setState({
+      event: this.state.event + ' ' +
+          JSON.stringify(event)
+    });
+  }
+
+  clear() {
+    this.setState({event: null});
   }
 
   render() {
@@ -70,6 +86,7 @@ class TPagerExample extends React.Component {
                   return {color: "#1b7a2e"}
                 }
               }}
+              onClick={this.click}
               items={this.state.items}>
 
               <TPager
@@ -83,6 +100,13 @@ class TPagerExample extends React.Component {
           </TScroll>
 
         </TGroup>
+
+        <TMemo
+          style={{edit: {minHeight: "48px"}}}
+          label={'Events:'}
+          icon={'refresh'}
+          value={this.state.event}
+          onIcon={this.clear}/>
 
       </div>
 

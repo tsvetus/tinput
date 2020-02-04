@@ -12,14 +12,14 @@ class Pager {
         this.setLength(length);
     }
 
-    setSize(size) {
+    setSize(size, page) {
         this.size = size ? size : 100;
-        this.setPage(0);
+        this.setPage(page);
     }
 
-    setLength(length) {
+    setLength(length, page) {
         this.length = length ? length : 0;
-        this.setPage(0);
+        this.setPage(page);
     }
 
     setPage(page) {
@@ -34,12 +34,13 @@ class Pager {
             if (this.length > 0) {
                 this.pageTo = Math.ceil(this.length/this.size) - 1;
             }
-            if (page < 0) {
+            let p = page === undefined || page === null ? 0 : page;
+            if (p < 0) {
                 this.page = 0;
-            } else if (page > this.pageTo) {
+            } else if (p > this.pageTo) {
                 this.page = this.pageTo;
             } else {
-                this.page = page;
+                this.page = p;
             }
             if (this.page >= 0) {
                 this.from = this.page * this.size;

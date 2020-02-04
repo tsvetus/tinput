@@ -37,6 +37,12 @@ import {
     cutTime
 } from './date.js';
 
+import {
+    getCookie,
+    setCookie,
+    deleteCookie
+} from './cookie.js';
+
 export {
 
     download,
@@ -68,6 +74,10 @@ export {
     testIsoTime,
     cutDate,
     cutTime,
+
+    getCookie,
+    setCookie,
+    deleteCookie,
 
     TIMEOUT,
     REGEXP

@@ -22,6 +22,7 @@ class TTableExample extends React.Component {
       event: ''
     };
     this.change = this.change.bind(this);
+    this.click = this.click.bind(this);
     this.onCellStyle = this.onCellStyle.bind(this);
     this.clear = this.clear.bind(this);
   }
@@ -30,6 +31,13 @@ class TTableExample extends React.Component {
     this.setState({
       event: this.state.event + ' ' +
         JSON.stringify(event)
+    });
+  }
+
+  click(event) {
+    this.setState({
+      event: this.state.event + ' ' +
+          JSON.stringify(event)
     });
   }
 
@@ -85,6 +93,7 @@ class TTableExample extends React.Component {
             }}
             items={ITEMS}
             onChange={this.change}
+            onClick={this.click}
             options={{borderWidth: 1}}
             onCellStyle={this.onCellStyle}&gt;
               Title content
