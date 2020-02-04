@@ -111,18 +111,31 @@ const templates = {
     
   /** Global color palette */
   colors: {
+    /** Main borders and fonts color */  
     border: "rgba(42,41,117,0.89)",
+    /** Button faces */
     face: "#eee",
+    /** Control and grid frames */
     frame: "#bfbbff",
+    /** Control faces */
     control: "#777",
+    /** Placeholder font color */
     placeholder: "#777",
+    /** Window text color */
     text: "#000",
+    /** Invalid frame color */
     invalid: "#a31",
-    window: "#fff",
-    panel: "#eee",
-    error: "#a31",
-    message: "#31a",
+    /** Invalid text */
     signal: "#f55",
+    /** Control content background */
+    window: "#fff",
+    /** Panel content background */
+    panel: "#eee",
+    /** Error text font color */
+    error: "#a31",
+    /** Message text font color */
+    message: "#31a",
+    /** Indicator text color */
     indicator: "#a31"
   },
     
@@ -144,6 +157,12 @@ registerStyles(styles, templates);
 ```
 New `styles` make all controls appeared on grey background then all editable controls have `red` border except `green` 
 border for `TMemo` and with yellow list items in `TListBox` component with `name="MyListBox"`.
+
+All default and registered styles are merged into global `style` object accessible in code as follows:
+
+```
+import {styles} from 'tinput'; 
+``` 
 
 ## Properties
 

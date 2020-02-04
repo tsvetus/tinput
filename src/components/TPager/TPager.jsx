@@ -109,7 +109,7 @@ class TPager extends React.Component {
 
         if (params.pageTo < 1 && this.props.hide) {
 
-            return (<div style={style.container}></div>);
+            return null;
 
         } else {
 
