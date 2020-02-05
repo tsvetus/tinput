@@ -16,6 +16,8 @@ module.exports = {
     components: [{
         name: "Readme"
     }, {
+        name: 'separator'
+    }, {
         name: "TText",
         example: {
             name: "TTextExample"
@@ -36,6 +38,21 @@ module.exports = {
             name: "TMemoExample"
         }
     }, {
+        name: "TTime",
+        example: {
+            name: "TTimeExample"
+        }
+    }, {
+        name: "TDate",
+        example: {
+            name: "TDateExample"
+        }
+    }, {
+        name: "TCheck",
+        example: {
+            name: "TCheckExample"
+        }
+    }, {
         name: "TListBox",
         example: {
             name: "TListBoxExample"
@@ -45,6 +62,8 @@ module.exports = {
         example: {
             name: "TSearchExample"
         }
+    }, {
+        name: 'separator'
     }, {
         name: "TButton",
         example: {
@@ -61,20 +80,7 @@ module.exports = {
             name: "TIconExample"
         }
     }, {
-        name: "TDate",
-        example: {
-            name: "TDateExample"
-        }
-    }, {
-        name: "TTime",
-        example: {
-            name: "TTimeExample"
-        }
-    }, {
-        name: "TCheck",
-        example: {
-            name: "TCheckExample"
-        }
+        name: 'separator'
     }, {
         name: "TGroup",
         example: {
@@ -96,6 +102,8 @@ module.exports = {
             name: "TScrollExample"
         }
     }, {
+        name: 'separator'
+    }, {
         name: "TTop",
         example: {
             name: "TTopExample"
@@ -105,6 +113,8 @@ module.exports = {
         example: {
             name: "TSideExample"
         }
+    }, {
+        name: 'separator'
     }, {
         name: "TGrid",
         example: {
@@ -125,6 +135,8 @@ module.exports = {
         example: {
             name: "TPagerExample"
         }
+    }, {
+        name: 'separator'
     }, {
         name: "TModal",
         example: {

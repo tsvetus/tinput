@@ -72,10 +72,15 @@ class Main extends React.Component {
         let items = [];
         if (this.state.data && this.state.data.components) {
             for (let key in this.state.data.components) {
-                items.push({
-                    name: this.state.data.components[key].displayName,
-                    caption: this.state.data.components[key].displayName,
-                });
+                let name = this.state.data.components[key].displayName;
+                if (name === 'separator') {
+                    items.push({});
+                } else {
+                    items.push({
+                        name: name,
+                        caption: name,
+                    });
+                }
             }
         }
 

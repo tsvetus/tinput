@@ -120,6 +120,7 @@ function run() {
     console.log('Start processing components:');
 
     let count = 0;
+    let separator = 0;
     if (config && config.components && config.components instanceof Array) {
         config.components.forEach((v) => {
             let compName = v.name;
@@ -147,10 +148,16 @@ function run() {
                     count++;
                 }
             } else {
-                console.log('    ' + compName);
-                data.components[compName] = {
-                    displayName: compName
-                };
+                if (compName === 'separator') {
+                    data.components[compName + (++separator)] = {
+                        displayName: compName
+                    };
+                } else {
+                    console.log('    ' + compName);
+                    data.components[compName] = {
+                        displayName: compName
+                    };
+                }
             }
         });
         let docPath = path.resolve(outputPath, 'index.json');

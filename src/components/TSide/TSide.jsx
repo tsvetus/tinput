@@ -129,28 +129,32 @@ class TSide extends React.Component {
         let items = [];
         if (this.props.items) {
             this.props.items.forEach((v, i) => {
-                let st = style.item;
-                if (this.props.item && this.props.item === v.name) {
-                    st = merge(
-                        st,
-                        style.current
+                if (v.name || v.caption) {
+                    let st = merge(style.item, style[v.name], v.style);
+                    if (this.props.item && this.props.item === v.name) {
+                        st = merge(st, style.current);
+                    }
+                    items.push(
+                        <div
+                            onTouchMove={this.handleMove}
+                            key={i}
+                            index={i}
+                            style={st}
+                            onClick={this.handleClick}
+                            name={v.name}>
+                            {v.caption}
+                        </div>
+                    );
+                } else {
+                    let st = merge(style.separator, v.style);
+                    items.push(
+                        <div
+                            key={i}
+                            index={i}
+                            style={st}>
+                        </div>
                     );
                 }
-                items.push(
-                    <div
-                        onTouchMove={this.handleMove}
-                        key={i}
-                        index={i}
-                        style={merge(
-                            st,
-                            style[v.name],
-                            v.style
-                         )}
-                        onClick={this.handleClick}
-                        name={v.name}>
-                        {v.caption}
-                    </div>
-                );
             });
         }
 

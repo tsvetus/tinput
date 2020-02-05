@@ -52,7 +52,11 @@ class TSideExample extends React.Component {
             name={'side'}
             items={[
               {name: 'first', caption: 'First item'},
-              {name: 'second', caption: 'Second item'}
+              {name: 'second', caption: 'Second item'},
+              {},
+              {name: 'third', caption: 'Third item'},
+              {name: 'forth', caption: 'Forth item'},
+              {}
             ]}
             item={this.state.item}
             onClick={this.menuClick}

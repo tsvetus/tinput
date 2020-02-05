@@ -418,6 +418,38 @@ export default function defaultStyles(template) {
             current: {
                 fontWeight: "bold",
                 marginLeft: "8px"
+            },
+
+            separator: {
+                padding: "0",
+                margin: "0 32px 0 32px",
+                borderTop: "1px solid " + template.colors.frame
+            }
+
+        },
+
+        TMenu: {
+
+            content: {
+                paddingTop: "8px"
+            },
+
+            item: {
+                ...template.fonts.common,
+                padding: "8px 8px 8px 32px",
+                fontSize: "24px",
+                color: template.colors.text
+            },
+
+            current: {
+                fontWeight: "bold",
+                marginLeft: "8px"
+            },
+
+            separator: {
+                padding: "0",
+                margin: "0 32px 0 32px",
+                borderTop: "1px solid " + template.colors.frame
             }
 
         },
@@ -460,9 +492,11 @@ export default function defaultStyles(template) {
         },
 
         TDate: {
+
             container: {
                 width: "220px"
             }
+
         },
 
         TScroll: {
@@ -471,10 +505,13 @@ export default function defaultStyles(template) {
                 backgroundColor: template.colors.window,
                 width: "100%"
             },
+
             content: {
             },
+
             close: {
             }
+
         },
 
         TPager: {
@@ -631,22 +668,6 @@ export default function defaultStyles(template) {
                 padding: "0 0 4px 0"
             }
 
-        },
-
-        TMenu: {
-            content: {
-                paddingTop: "8px"
-            },
-            item: {
-                ...template.fonts.common,
-                padding: "8px 8px 8px 32px",
-                fontSize: "24px",
-                color: template.colors.text
-            },
-            current: {
-                fontWeight: "bold",
-                marginLeft: "8px"
-            }
         }
 
     }

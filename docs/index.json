@@ -7,6 +7,9 @@
     "Readme": {
       "displayName": "Readme"
     },
+    "separator1": {
+      "displayName": "separator"
+    },
     "TText": {
       "description": "Component representing single line text editor",
       "displayName": "TText",
@@ -784,6 +787,593 @@
         }
       }
     },
+    "TTime": {
+      "description": "Time editor with time value validation",
+      "displayName": "TTime",
+      "methods": [
+        {
+          "name": "handleValidate",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleChange",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TTimeExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label"
+            },
+            "edit": {
+              "type": "object",
+              "description": "Style for component editor"
+            },
+            "icon": {
+              "type": "object",
+              "description": "Style for component icon"
+            },
+            "invalid": {
+              "type": "shape",
+              "description": "Style for invalid component state. Contains all listed above fields:",
+              "structure": {
+                "container": {
+                  "type": "object"
+                },
+                "label": {
+                  "type": "object"
+                },
+                "edit": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "value": {
+          "type": "union",
+          "description": "Component initial value. Can be one of:",
+          "required": false,
+          "structure": {
+            "string": {
+              "description": "Time in \"iso\" format (\"hh:mm:ss\")"
+            },
+            "Date": {
+              "description": "Native JavaScript Date"
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "label": {
+          "type": "string",
+          "description": "Label caption. Default is undefined and label is hidden",
+          "required": false
+        },
+        "layout": {
+          "type": "enum",
+          "description": "Label position towards text editor. Can be one of:",
+          "required": false,
+          "defaultValue": "'left'",
+          "structure": {
+            "'top'": {},
+            "'left'": {}
+          }
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon name to show. Default is undefined and icon is hidden",
+          "required": false
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
+          "required": false
+        },
+        "format": {
+          "type": "shape",
+          "description": "Time format:",
+          "required": false,
+          "defaultValue": "{mask: 'hh:mm', empty: '_', full: true, type: 'iso'}",
+          "structure": {
+            "mask": {
+              "type": "string",
+              "description": "Date mask. Default is \"hh:mm\""
+            },
+            "empty": {
+              "type": "string",
+              "description": "Empty char. If length of empty char is grate than 1 then only first character is used. Default is \"_\""
+            },
+            "full": {
+              "type": "bool",
+              "description": "If true then onChange event fires only if date is completely entered or completely cleared.\r\nDefault is \"true\""
+            },
+            "type": {
+              "type": "enum of ['iso', 'native']",
+              "description": "Time format appeared in onChange event. Default is \"iso\" (\"hh:mm:ss\")"
+            }
+          }
+        },
+        "empty": {
+          "type": "any",
+          "description": "Value appeared in onChange event then date is not completely entered or invalid. Default is \"null\"",
+          "required": false,
+          "defaultValue": "null"
+        },
+        "required": {
+          "type": "any",
+          "description": "Indicates if necessary to change component color when entered time is invalid or incomplete.\r\nDefault is \"true\"",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "readOnly": {
+          "type": "any",
+          "description": "Prevents from changing component value from user input, Default is \"false\"",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On date change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "any",
+              "description": "Component date value. Time value format is determined by \"format.type\" property."
+            }
+          },
+          "required": false
+        },
+        "onIcon": {
+          "type": "func",
+          "description": "On icon click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.icon": {
+              "name": "event.icon",
+              "type": "string",
+              "description": "Clicked icon name"
+            }
+          },
+          "required": false
+        }
+      }
+    },
+    "TDate": {
+      "description": "Date editor with masked input and date value validation",
+      "displayName": "TDate",
+      "methods": [
+        {
+          "name": "handleValidate",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleChange",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TDateExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label"
+            },
+            "edit": {
+              "type": "object",
+              "description": "Style for component editor"
+            },
+            "icon": {
+              "type": "object",
+              "description": "Style for component icon"
+            },
+            "invalid": {
+              "type": "shape",
+              "description": "Style for invalid component state. Contains all listed above fields:",
+              "structure": {
+                "container": {
+                  "type": "object"
+                },
+                "label": {
+                  "type": "object"
+                },
+                "edit": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "value": {
+          "type": "union",
+          "description": "Component initial value. Can be one of:",
+          "required": false,
+          "structure": {
+            "string": {
+              "description": "Date in \"iso\" format (\"YYYY-MM-DD\")"
+            },
+            "Date": {
+              "description": "Native JavaScript Date"
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "label": {
+          "type": "string",
+          "description": "Label caption. Default is undefined and label is hidden",
+          "required": false
+        },
+        "layout": {
+          "type": "enum",
+          "description": "Label position towards text editor. Can be one of:",
+          "required": false,
+          "defaultValue": "'left'",
+          "structure": {
+            "'top'": {},
+            "'left'": {}
+          }
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon name to show. Default is undefined and icon is hidden",
+          "required": false
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
+          "required": false
+        },
+        "format": {
+          "type": "shape",
+          "description": "Date format:",
+          "required": false,
+          "defaultValue": "{mask: 'DD.MM.YYYY', empty: '_', full: true, type: 'iso'}",
+          "structure": {
+            "mask": {
+              "type": "string",
+              "description": "Date mask. Default is \"DD.MM.YYYY\""
+            },
+            "empty": {
+              "type": "string",
+              "description": "Empty char. If length of empty char is grate than 1 then only first character is used. Default is \"_\""
+            },
+            "full": {
+              "type": "bool",
+              "description": "If true then onChange event fires only if date is completely entered or completely cleared.\r\nDefault is \"true\""
+            },
+            "type": {
+              "type": "enum of ['iso', 'native']",
+              "description": "Date format appeared in onChange event. Default is \"iso\" (\"YYYY-MM-DD\")"
+            }
+          }
+        },
+        "empty": {
+          "type": "any",
+          "description": "Value appeared in onChange event then date is not completely entered or invalid. Default is \"null\"",
+          "required": false,
+          "defaultValue": "null"
+        },
+        "required": {
+          "type": "any",
+          "description": "Indicates if necessary to change component color when entered date is invalid or incomplete.\r\nDefault is \"true\"",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "readOnly": {
+          "type": "any",
+          "description": "Prevents from changing component value from user input, Default is \"false\"",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On date change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "any",
+              "description": "Component date value. Date value format is determined by \"format.type\" property."
+            }
+          },
+          "required": false
+        },
+        "onIcon": {
+          "type": "func",
+          "description": "On icon click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.icon": {
+              "name": "event.icon",
+              "type": "string",
+              "description": "Clicked icon name"
+            }
+          },
+          "required": false
+        }
+      }
+    },
+    "TCheck": {
+      "description": "Represents checkbox with label",
+      "displayName": "TCheck",
+      "methods": [
+        {
+          "name": "handleIcon",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "handleChange",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "updateChecked",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "value",
+              "type": null
+            },
+            {
+              "name": "change",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "isRight",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TCheckExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label"
+            },
+            "icon": {
+              "type": "object",
+              "description": "Style for component icon"
+            }
+          }
+        },
+        "value": {
+          "type": "any",
+          "description": "Component initial value",
+          "required": false
+        },
+        "name": {
+          "type": "any",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "label": {
+          "type": "string",
+          "description": "Label caption. Default is undefined and label is hidden",
+          "required": false
+        },
+        "checked": {
+          "type": "any",
+          "description": "Checked state value",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "unchecked": {
+          "type": "any",
+          "description": "Unchecked state value",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "radio": {
+          "type": "any",
+          "description": "Shows component icons as radio buttons",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "layout": {
+          "type": "enum",
+          "description": "Label position towards icon. Can be one of:",
+          "required": false,
+          "defaultValue": "'left'",
+          "structure": {
+            "'left'": {},
+            "'right'": {}
+          }
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "object",
+              "description": "component value. If component state is checked then \"value\" equals to \"checked\" property. Otherwise it equals to \"unchecked\" property"
+            }
+          },
+          "required": false
+        }
+      }
+    },
     "TListBox": {
       "description": "Represents list box",
       "displayName": "TListBox",
@@ -1250,6 +1840,9 @@
         }
       }
     },
+    "separator2": {
+      "displayName": "separator"
+    },
     "TButton": {
       "description": "Clickable button with text caption",
       "displayName": "TButton",
@@ -1499,592 +2092,8 @@
         }
       }
     },
-    "TDate": {
-      "description": "Date editor with masked input and date value validation",
-      "displayName": "TDate",
-      "methods": [
-        {
-          "name": "handleValidate",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "event",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "handleChange",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "event",
-              "type": null
-            }
-          ],
-          "returns": null
-        }
-      ],
-      "example": {
-        "name": "TDateExample"
-      },
-      "props": {
-        "style": {
-          "type": "shape",
-          "description": "Component style:",
-          "required": false,
-          "structure": {
-            "container": {
-              "type": "object",
-              "description": "Style for outer component container"
-            },
-            "label": {
-              "type": "object",
-              "description": "Style for component label"
-            },
-            "edit": {
-              "type": "object",
-              "description": "Style for component editor"
-            },
-            "icon": {
-              "type": "object",
-              "description": "Style for component icon"
-            },
-            "invalid": {
-              "type": "shape",
-              "description": "Style for invalid component state. Contains all listed above fields:",
-              "structure": {
-                "container": {
-                  "type": "object"
-                },
-                "label": {
-                  "type": "object"
-                },
-                "edit": {
-                  "type": "object"
-                },
-                "icon": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "value": {
-          "type": "union",
-          "description": "Component initial value. Can be one of:",
-          "required": false,
-          "structure": {
-            "string": {
-              "description": "Date in \"iso\" format (\"YYYY-MM-DD\")"
-            },
-            "Date": {
-              "description": "Native JavaScript Date"
-            }
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
-          "required": false
-        },
-        "data": {
-          "type": "any",
-          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
-          "required": false
-        },
-        "label": {
-          "type": "string",
-          "description": "Label caption. Default is undefined and label is hidden",
-          "required": false
-        },
-        "layout": {
-          "type": "enum",
-          "description": "Label position towards text editor. Can be one of:",
-          "required": false,
-          "defaultValue": "'left'",
-          "structure": {
-            "'top'": {},
-            "'left'": {}
-          }
-        },
-        "icon": {
-          "type": "string",
-          "description": "Icon name to show. Default is undefined and icon is hidden",
-          "required": false
-        },
-        "timeout": {
-          "type": "number",
-          "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
-          "required": false
-        },
-        "format": {
-          "type": "shape",
-          "description": "Date format:",
-          "required": false,
-          "defaultValue": "{mask: 'DD.MM.YYYY', empty: '_', full: true, type: 'iso'}",
-          "structure": {
-            "mask": {
-              "type": "string",
-              "description": "Date mask. Default is \"DD.MM.YYYY\""
-            },
-            "empty": {
-              "type": "string",
-              "description": "Empty char. If length of empty char is grate than 1 then only first character is used. Default is \"_\""
-            },
-            "full": {
-              "type": "bool",
-              "description": "If true then onChange event fires only if date is completely entered or completely cleared.\r\nDefault is \"true\""
-            },
-            "type": {
-              "type": "enum of ['iso', 'native']",
-              "description": "Date format appeared in onChange event. Default is \"iso\" (\"YYYY-MM-DD\")"
-            }
-          }
-        },
-        "empty": {
-          "type": "any",
-          "description": "Value appeared in onChange event then date is not completely entered or invalid. Default is \"null\"",
-          "required": false,
-          "defaultValue": "null"
-        },
-        "required": {
-          "type": "any",
-          "description": "Indicates if necessary to change component color when entered date is invalid or incomplete.\r\nDefault is \"true\"",
-          "required": false,
-          "defaultValue": "true"
-        },
-        "readOnly": {
-          "type": "any",
-          "description": "Prevents from changing component value from user input, Default is \"false\"",
-          "required": false,
-          "defaultValue": "false"
-        },
-        "onChange": {
-          "type": "func",
-          "description": "On date change event ",
-          "arguments": {
-            "event": {
-              "name": "event",
-              "type": "object",
-              "description": "Event object with following structure:"
-            },
-            "event.name": {
-              "name": "event.name",
-              "type": "string",
-              "description": "Component name from \"name\" property"
-            },
-            "event.data": {
-              "name": "event.data",
-              "type": "object",
-              "description": "Component data from \"data\" property"
-            },
-            "event.value": {
-              "name": "event.value",
-              "type": "any",
-              "description": "Component date value. Date value format is determined by \"format.type\" property."
-            }
-          },
-          "required": false
-        },
-        "onIcon": {
-          "type": "func",
-          "description": "On icon click event ",
-          "arguments": {
-            "event": {
-              "name": "event",
-              "type": "object",
-              "description": "Event object with following structure:"
-            },
-            "event.name": {
-              "name": "event.name",
-              "type": "string",
-              "description": "Component name from \"name\" property"
-            },
-            "event.data": {
-              "name": "event.data",
-              "type": "object",
-              "description": "Component data from \"data\" property"
-            },
-            "event.icon": {
-              "name": "event.icon",
-              "type": "string",
-              "description": "Clicked icon name"
-            }
-          },
-          "required": false
-        }
-      }
-    },
-    "TTime": {
-      "description": "Time editor with time value validation",
-      "displayName": "TTime",
-      "methods": [
-        {
-          "name": "handleValidate",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "event",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "handleChange",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "event",
-              "type": null
-            }
-          ],
-          "returns": null
-        }
-      ],
-      "example": {
-        "name": "TTimeExample"
-      },
-      "props": {
-        "style": {
-          "type": "shape",
-          "description": "Component style:",
-          "required": false,
-          "structure": {
-            "container": {
-              "type": "object",
-              "description": "Style for outer component container"
-            },
-            "label": {
-              "type": "object",
-              "description": "Style for component label"
-            },
-            "edit": {
-              "type": "object",
-              "description": "Style for component editor"
-            },
-            "icon": {
-              "type": "object",
-              "description": "Style for component icon"
-            },
-            "invalid": {
-              "type": "shape",
-              "description": "Style for invalid component state. Contains all listed above fields:",
-              "structure": {
-                "container": {
-                  "type": "object"
-                },
-                "label": {
-                  "type": "object"
-                },
-                "edit": {
-                  "type": "object"
-                },
-                "icon": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "value": {
-          "type": "union",
-          "description": "Component initial value. Can be one of:",
-          "required": false,
-          "structure": {
-            "string": {
-              "description": "Time in \"iso\" format (\"hh:mm:ss\")"
-            },
-            "Date": {
-              "description": "Native JavaScript Date"
-            }
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
-          "required": false
-        },
-        "data": {
-          "type": "any",
-          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
-          "required": false
-        },
-        "label": {
-          "type": "string",
-          "description": "Label caption. Default is undefined and label is hidden",
-          "required": false
-        },
-        "layout": {
-          "type": "enum",
-          "description": "Label position towards text editor. Can be one of:",
-          "required": false,
-          "defaultValue": "'left'",
-          "structure": {
-            "'top'": {},
-            "'left'": {}
-          }
-        },
-        "icon": {
-          "type": "string",
-          "description": "Icon name to show. Default is undefined and icon is hidden",
-          "required": false
-        },
-        "timeout": {
-          "type": "number",
-          "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
-          "required": false
-        },
-        "format": {
-          "type": "shape",
-          "description": "Time format:",
-          "required": false,
-          "defaultValue": "{mask: 'hh:mm', empty: '_', full: true, type: 'iso'}",
-          "structure": {
-            "mask": {
-              "type": "string",
-              "description": "Date mask. Default is \"hh:mm\""
-            },
-            "empty": {
-              "type": "string",
-              "description": "Empty char. If length of empty char is grate than 1 then only first character is used. Default is \"_\""
-            },
-            "full": {
-              "type": "bool",
-              "description": "If true then onChange event fires only if date is completely entered or completely cleared.\r\nDefault is \"true\""
-            },
-            "type": {
-              "type": "enum of ['iso', 'native']",
-              "description": "Time format appeared in onChange event. Default is \"iso\" (\"hh:mm:ss\")"
-            }
-          }
-        },
-        "empty": {
-          "type": "any",
-          "description": "Value appeared in onChange event then date is not completely entered or invalid. Default is \"null\"",
-          "required": false,
-          "defaultValue": "null"
-        },
-        "required": {
-          "type": "any",
-          "description": "Indicates if necessary to change component color when entered time is invalid or incomplete.\r\nDefault is \"true\"",
-          "required": false,
-          "defaultValue": "true"
-        },
-        "readOnly": {
-          "type": "any",
-          "description": "Prevents from changing component value from user input, Default is \"false\"",
-          "required": false,
-          "defaultValue": "false"
-        },
-        "onChange": {
-          "type": "func",
-          "description": "On date change event ",
-          "arguments": {
-            "event": {
-              "name": "event",
-              "type": "object",
-              "description": "Event object with following structure:"
-            },
-            "event.name": {
-              "name": "event.name",
-              "type": "string",
-              "description": "Component name from \"name\" property"
-            },
-            "event.data": {
-              "name": "event.data",
-              "type": "object",
-              "description": "Component data from \"data\" property"
-            },
-            "event.value": {
-              "name": "event.value",
-              "type": "any",
-              "description": "Component date value. Time value format is determined by \"format.type\" property."
-            }
-          },
-          "required": false
-        },
-        "onIcon": {
-          "type": "func",
-          "description": "On icon click event ",
-          "arguments": {
-            "event": {
-              "name": "event",
-              "type": "object",
-              "description": "Event object with following structure:"
-            },
-            "event.name": {
-              "name": "event.name",
-              "type": "string",
-              "description": "Component name from \"name\" property"
-            },
-            "event.data": {
-              "name": "event.data",
-              "type": "object",
-              "description": "Component data from \"data\" property"
-            },
-            "event.icon": {
-              "name": "event.icon",
-              "type": "string",
-              "description": "Clicked icon name"
-            }
-          },
-          "required": false
-        }
-      }
-    },
-    "TCheck": {
-      "description": "Represents checkbox with label",
-      "displayName": "TCheck",
-      "methods": [
-        {
-          "name": "handleIcon",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        },
-        {
-          "name": "handleChange",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "event",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "updateChecked",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "value",
-              "type": null
-            },
-            {
-              "name": "change",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "isRight",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        }
-      ],
-      "example": {
-        "name": "TCheckExample"
-      },
-      "props": {
-        "style": {
-          "type": "shape",
-          "description": "Component style:",
-          "required": false,
-          "structure": {
-            "container": {
-              "type": "object",
-              "description": "Style for outer component container"
-            },
-            "label": {
-              "type": "object",
-              "description": "Style for component label"
-            },
-            "icon": {
-              "type": "object",
-              "description": "Style for component icon"
-            }
-          }
-        },
-        "value": {
-          "type": "any",
-          "description": "Component initial value",
-          "required": false
-        },
-        "name": {
-          "type": "any",
-          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
-          "required": false
-        },
-        "data": {
-          "type": "any",
-          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
-          "required": false
-        },
-        "label": {
-          "type": "string",
-          "description": "Label caption. Default is undefined and label is hidden",
-          "required": false
-        },
-        "checked": {
-          "type": "any",
-          "description": "Checked state value",
-          "required": false,
-          "defaultValue": "true"
-        },
-        "unchecked": {
-          "type": "any",
-          "description": "Unchecked state value",
-          "required": false,
-          "defaultValue": "false"
-        },
-        "radio": {
-          "type": "any",
-          "description": "Shows component icons as radio buttons",
-          "required": false,
-          "defaultValue": "false"
-        },
-        "layout": {
-          "type": "enum",
-          "description": "Label position towards icon. Can be one of:",
-          "required": false,
-          "defaultValue": "'left'",
-          "structure": {
-            "'left'": {},
-            "'right'": {}
-          }
-        },
-        "onChange": {
-          "type": "func",
-          "description": "On click event ",
-          "arguments": {
-            "event": {
-              "name": "event",
-              "type": "object",
-              "description": "event object with following structure:"
-            },
-            "event.name": {
-              "name": "event.name",
-              "type": "string",
-              "description": "component name from \"name\" property"
-            },
-            "event.data": {
-              "name": "event.data",
-              "type": "object",
-              "description": "component data from \"data\" property"
-            },
-            "event.value": {
-              "name": "event.value",
-              "type": "object",
-              "description": "component value. If component state is checked then \"value\" equals to \"checked\" property. Otherwise it equals to \"unchecked\" property"
-            }
-          },
-          "required": false
-        }
-      }
+    "separator3": {
+      "displayName": "separator"
     },
     "TGroup": {
       "description": "Groups components in a single block",
@@ -2396,6 +2405,9 @@
           }
         }
       }
+    },
+    "separator4": {
+      "displayName": "separator"
     },
     "TTop": {
       "description": "Component represents top menu",
@@ -2750,6 +2762,9 @@
           "required": false
         }
       }
+    },
+    "separator5": {
+      "displayName": "separator"
     },
     "TGrid": {
       "description": "Represents data grid designed on CSS Grid layout. Some browsers experience performance\r\nissues while rendering large amount of cells in CSS Grids. In that case we recommend\r\nto use TTable component instead of TGrid",
@@ -3627,6 +3642,9 @@
           "required": false
         }
       }
+    },
+    "separator6": {
+      "displayName": "separator"
     },
     "TModal": {
       "description": "Shows modal dialog",

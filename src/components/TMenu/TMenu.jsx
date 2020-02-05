@@ -56,24 +56,31 @@ class TMenu extends React.Component {
         let items = [];
         if (this.props.items) {
             this.props.items.forEach((v, i) => {
-                let st = merge(
-                    style.item,
-                    style[v.name],
-                    v.style
-                );
-                if (i === index) {
-                    st = merge(st, style.current);
+                if (v.name || v.caption) {
+                    let st = merge(style.item, style[v.name], v.style);
+                    if (i === index) {
+                        st = merge(st, style.current);
+                    }
+                    items.push(
+                        <div
+                            key={i}
+                            index={i}
+                            style={st}
+                            onClick={this.handleClick}
+                            name={v.name}>
+                            {v.caption}
+                        </div>
+                    );
+                } else {
+                    let st = merge(style.separator, v.style);
+                    items.push(
+                        <div
+                            key={i}
+                            index={i}
+                            style={st}>
+                        </div>
+                    );
                 }
-                items.push(
-                    <div
-                        key={i}
-                        index={i}
-                        style={st}
-                        onClick={this.handleClick}
-                        name={v.name}>
-                        {v.caption}
-                    </div>
-                );
             });
         }
 
