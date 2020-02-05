@@ -56,6 +56,10 @@ class TButton extends React.Component {
             cst = merge(cst, style.down);
         }
 
+        if (this.props.next) {
+            cst.borderLeft = 'none'
+        }
+
         return (
             <div
                 style={cst}

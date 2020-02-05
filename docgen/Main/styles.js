@@ -14,7 +14,7 @@ export default {
 
     menu: {
         container: {
-            flex: "0 0 220px",
+            flex: "0 0 260px",
             backgroundColor: styles.colors.face,
             borderRight: "1px solid " + styles.colors.frame
         },

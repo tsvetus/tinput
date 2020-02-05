@@ -1,5 +1,6 @@
 import TDateExample from './components/TDate/TDateExample.jsx';
 import TButtonExample from './components/TButton/TButtonExample.jsx';
+import TGroupButtonExample from './components/TGroupButton/TGroupButtonExample.jsx';
 import TIconExample from './components/TIcon/TIconExample.jsx';
 import TTimeExample from './components/TTime/TTimeExample.jsx';
 import TTextExample from './components/TText/TTextExample.jsx';
@@ -25,6 +26,7 @@ import TFormExample from './components/TForm/TFormExample.jsx';
 export {
     TDateExample,
     TButtonExample,
+    TGroupButtonExample,
     TIconExample,
     TTimeExample,
     TTextExample,

@@ -7,6 +7,24 @@ export default {
         }
     },
 
+    TComboButton: {
+
+        container: {
+            display: "flex",
+            flexWrap: "nowrap",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "stretch"
+        },
+
+        button: {
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+        }
+
+    },
+
     TIndicator: {
     },
 

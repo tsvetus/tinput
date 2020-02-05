@@ -51,6 +51,11 @@ module.exports = {
             name: "TButtonExample"
         }
     }, {
+        name: "TGroupButton",
+        example: {
+            name: "TGroupButtonExample"
+        }
+    }, {
         name: "TIcon",
         example: {
             name: "TIconExample"

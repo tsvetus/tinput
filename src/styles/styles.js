@@ -38,6 +38,46 @@ export default function defaultStyles(template) {
             }
         },
 
+        TComboButton: {
+
+            container: {
+
+            },
+
+            icon: {
+                width: "21px",
+                height: "21px",
+                textAlign: "right",
+                color: template.colors.border
+            },
+
+            button: {
+                cursor: "pointer",
+                padding: "8px 8px 8px 8px"
+            },
+
+            caption: {
+                padding: "0 8px 0 8px"
+            },
+
+            placeholder: {
+                color: template.colors.placeholder
+            },
+
+            left: {
+                borderRadius: "8px 0 0 8px"
+            },
+
+            right: {
+                borderRadius: "0 8px 8px 0"
+            },
+
+            middle: {
+                borderRadius: "0 0 0 0"
+            }
+
+        },
+
         TIndicator: {
             container: {
                 color: template.colors.indicator,

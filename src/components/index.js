@@ -9,6 +9,7 @@ import TListBox from './TListBox';
 import TCheck from './TCheck';
 import TSearch from './TSearch';
 import TButton from './TButton';
+import TGroupButton from './TGroupButton';
 import TIndicator from './TIndicator';
 import TLogin from './TLogin';
 import TModal from './TModal';
@@ -40,6 +41,7 @@ export {
     TCheck,
     TSearch,
     TButton,
+    TGroupButton,
     TIndicator,
     TLogin,
     TModal,

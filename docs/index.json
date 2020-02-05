@@ -1345,6 +1345,107 @@
         }
       }
     },
+    "TGroupButton": {
+      "description": "Clickable button with text caption and icon",
+      "displayName": "TGroupButton",
+      "methods": [
+        {
+          "name": "handleClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleDown",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "handleUp",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TGroupButtonExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "button": {
+              "type": "object",
+              "description": "Style for buttons"
+            },
+            "icon": {
+              "type": "object",
+              "description": "Style for icon"
+            },
+            "wait": {
+              "type": "object",
+              "description": "Style for waiting button state"
+            },
+            "down": {
+              "type": "object",
+              "description": "Style for pressed button state"
+            }
+          }
+        },
+        "name": {
+          "type": "any",
+          "description": "Component name",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Component data",
+          "required": false
+        },
+        "items": {
+          "type": "array",
+          "description": "Component wait state. When \"true\" component appears in grey color and doesn't respond\r\non \"onClick\" event",
+          "required": false
+        },
+        "onClick": {
+          "type": "func",
+          "description": "On click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            }
+          },
+          "required": false
+        }
+      }
+    },
     "TIcon": {
       "description": "Clickable icon",
       "displayName": "TIcon",
