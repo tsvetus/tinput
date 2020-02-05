@@ -40,7 +40,7 @@ class TGroupButtonExample extends React.Component {
             content: {justifyContent: "space-around"}
           }}&gt;
 
-          &lt;TComboButton
+          &lt;TGroupButton
             style={{
               container: {
                 margin: "8px 0 8px 0"
@@ -48,10 +48,8 @@ class TGroupButtonExample extends React.Component {
             }}
             name={'comboButton'}
             items={[
-                {icon: 'selected', name: 'selected'},
                 {caption: 'Button1', name: 'btn1'},
                 {caption: 'Button2', name: 'btn2'},
-                {placeholder: 'Click me', name: 'btn3'},
                 {icon: 'close', name: 'close'}
             ]}
             onClick={this.click} /&gt;

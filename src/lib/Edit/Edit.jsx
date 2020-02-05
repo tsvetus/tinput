@@ -73,7 +73,7 @@ class Edit extends React.Component {
             this.iStyle = merge(this.props.vStyle, this.props.iStyle);
             this.updateStyle(this.valid);
         }
-        if (!this.sending && this.props.value !== undefined &&
+        if (!this.sending /* && this.props.value !== undefined */ &&
             this.value !== this.props.value && (this.full || this.empty)) {
             this.value = this.props.value === undefined ? null : this.props.value;
             this.validate(this.value);
