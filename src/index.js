@@ -28,6 +28,7 @@ import {
     TGrid,
     TTable,
     TRibbon,
+    TFlexList,
     TMenu
 } from './components';
 
@@ -87,6 +88,7 @@ export {
     TGrid,
     TTable,
     TRibbon,
+    TFlexList,
     TMenu,
 
     download,

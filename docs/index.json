@@ -3643,6 +3643,349 @@
         }
       }
     },
+    "TFlexList": {
+      "description": "Represents data table",
+      "displayName": "TFlexList",
+      "methods": [
+        {
+          "name": "onPage",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TFlexListExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "content": {
+              "type": "object",
+              "description": "Style for ribbon content"
+            },
+            "title": {
+              "type": "object",
+              "description": "Style for component title"
+            },
+            "caption": {
+              "type": "object",
+              "description": "Style for grid header cells"
+            },
+            "cell": {
+              "type": "object",
+              "description": "Style for grid body rows"
+            },
+            "selected": {
+              "type": "object",
+              "description": "Style for selected row"
+            },
+            "pager": {
+              "type": "object",
+              "description": "Style for pager"
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "columns": {
+          "type": "shape",
+          "description": "Grid columns description. An object containing set of fields representing column names with parameters\r\n\"caption\", \"width\" and \"style\":",
+          "required": false,
+          "structure": {
+            "columnName": {
+              "type": "shape",
+              "structure": {
+                "caption": {
+                  "type": "any",
+                  "description": "Column caption"
+                },
+                "width": {
+                  "type": "string",
+                  "description": "Column width"
+                },
+                "style": {
+                  "type": "object",
+                  "description": "Column style (optional)"
+                }
+              }
+            }
+          }
+        },
+        "items": {
+          "type": "arrayOf",
+          "description": "Grid cell data. Each element of array contains name/value pairs where names coincide with column names\r\ndescribed in \"columns\" property",
+          "required": false,
+          "structure": {
+            "name": {}
+          }
+        },
+        "index": {
+          "type": "number",
+          "description": "Selected row index",
+          "required": false
+        },
+        "flexWidth": {
+          "type": "number",
+          "description": "Width in pixels",
+          "required": false,
+          "defaultValue": "600"
+        },
+        "pager": {
+          "type": "shape",
+          "description": "Pager properties",
+          "required": false,
+          "structure": {
+            "style": {
+              "type": "object",
+              "description": "Pager style"
+            },
+            "size": {
+              "type": "number",
+              "description": "Maximum items count per page"
+            },
+            "hide": {
+              "type": "any",
+              "description": "Automatically hide label and navigator when items count less than \"size\""
+            },
+            "timeout": {
+              "type": "number",
+              "description": "Delay between page button is clicked and \"onChange\" event"
+            }
+          }
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Timeout between user clicks row and \"onChange\" event in milliseconds",
+          "required": false,
+          "defaultValue": "1000"
+        },
+        "options": {
+          "type": "shape",
+          "description": "Grid options",
+          "required": false,
+          "defaultValue": "{\r\n    scrollHead: false,\r\n    showSelected: true,\r\n    showHead: true,\r\n    borderWidth: 1\r\n}",
+          "structure": {
+            "scrollHead": {
+              "type": "any",
+              "description": "If \"true\" then head is scrollable"
+            },
+            "showSelected": {
+              "type": "any",
+              "description": "If \"true\" then selected row is shown using \"selected\" style"
+            },
+            "showHead": {
+              "type": "any",
+              "description": "Indicates whether to show grid head or not"
+            },
+            "borderWidth": {
+              "type": "union",
+              "description": "Border width in pixels"
+            }
+          }
+        },
+        "onRowStyle": {
+          "type": "func",
+          "description": "Happens when row style is needed. Returns object containing row style ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with the following structure"
+            },
+            "event.cell": {
+              "name": "event.cell",
+              "type": "any",
+              "description": "Current cell content"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "number",
+              "description": "Current row index"
+            },
+            "event.row": {
+              "name": "event.row",
+              "type": "object",
+              "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
+            },
+            "event.style": {
+              "name": "event.style",
+              "type": "object",
+              "description": "Current component style from \"props.style\" property"
+            }
+          },
+          "required": false
+        },
+        "onCellStyle": {
+          "type": "func",
+          "description": "Happens when cell style is needed. Returns object containing cell style ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with the following structure"
+            },
+            "event.cell": {
+              "name": "event.cell",
+              "type": "any",
+              "description": "Current cell content"
+            },
+            "event.column": {
+              "name": "event.column",
+              "type": "string",
+              "description": "Current column name"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "number",
+              "description": "Current row index"
+            },
+            "event.row": {
+              "name": "event.row",
+              "type": "object",
+              "description": "Current row in form of name/value pairs where names coincide with column names described in \"columns\" property"
+            },
+            "event.style": {
+              "name": "event.style",
+              "type": "object",
+              "description": "Current component style from \"props.style\" property"
+            }
+          },
+          "required": false
+        },
+        "onClick": {
+          "type": "func",
+          "description": "Happens when user clicks on row ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "string",
+              "description": "Selected item index"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "string",
+              "description": "Selected item"
+            }
+          },
+          "required": false
+        },
+        "onChange": {
+          "type": "func",
+          "description": "Happens when selected row index is changed or new items set loaded in grid ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "string",
+              "description": "Selected item index"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "string",
+              "description": "Selected item"
+            }
+          },
+          "required": false
+        },
+        "onFrame": {
+          "type": "func",
+          "description": "Happens when frame generation is needed. Mast return html element representing current item ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "object",
+              "description": "Current row"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "number",
+              "description": "Current row item"
+            },
+            "event.style": {
+              "name": "event.style",
+              "type": "object",
+              "description": "Component style"
+            },
+            "event.onClick": {
+              "name": "event.onClick",
+              "type": "func",
+              "description": "Reference to \"onClick\" event"
+            }
+          },
+          "required": false
+        },
+        "page": {
+          "required": false,
+          "defaultValue": "false"
+        }
+      }
+    },
     "separator6": {
       "displayName": "separator"
     },

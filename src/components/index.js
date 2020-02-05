@@ -27,6 +27,7 @@ import TLoad from './TLoad';
 import TGrid from './TGrid';
 import TTable from './TTable';
 import TRibbon from './TRibbon';
+import TFlexList from './TFlexList';
 import TMenu from './TMenu';
 
 export {
@@ -59,5 +60,6 @@ export {
     TGrid,
     TTable,
     TRibbon,
+    TFlexList,
     TMenu
 }

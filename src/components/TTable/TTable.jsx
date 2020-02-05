@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, clone, contain, replace, isMS} from '../../util';
+import {merge, clone, contain, replace} from '../../util';
 
 import {Grid} from '../../lib';
 

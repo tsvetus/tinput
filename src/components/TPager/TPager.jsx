@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Pager, merge, clone, contain} from '../../util';
+import {Pager, merge, clone, contain, compare} from '../../util';
 
 import styles from '../../styles';
 
@@ -21,11 +21,13 @@ class TPager extends React.Component {
     }
 
     componentDidUpdate(old) {
-        if (old.size !== this.props.size || old.items !== this.props.items) {
-            if (old.size !== this.props.size) {
+        let bSize = compare(old.size, this.props.size);
+        let bItems = compare(old.items, this.props.items);
+        if (!bSize || !bItems) {
+            if (!bSize) {
                 this.pager.setSize(this.props.size, this.state.page);
             }
-            if (old.items !== this.props.items) {
+            if (!bItems) {
                 this.items = this.props.items ? this.props.items : [];
                 this.pager.setLength(this.items.length, this.state.page);
             }

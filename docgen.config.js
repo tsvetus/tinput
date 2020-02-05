@@ -136,6 +136,11 @@ module.exports = {
             name: "TPagerExample"
         }
     }, {
+        name: "TFlexList",
+        example: {
+            name: "TFlexListExample"
+        }
+    }, {
         name: 'separator'
     }, {
         name: "TModal",
