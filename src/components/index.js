@@ -6,6 +6,7 @@ import TMemo from './TMemo';
 import TGroup from './TGroup';
 import TItemGroup from './TItemGroup';
 import TListBox from './TListBox';
+import TSelectBox from './TSelectBox';
 import TCheck from './TCheck';
 import TSearch from './TSearch';
 import TButton from './TButton';
@@ -39,6 +40,7 @@ export {
     TGroup,
     TItemGroup,
     TListBox,
+    TSelectBox,
     TCheck,
     TSearch,
     TButton,

@@ -84,6 +84,10 @@ class TForm extends React.Component {
             (<div style={style.message}>{this.props.message}</div>) :
             null;
 
+        let footer = this.props.showFooter ?
+            <div style={style.footer}>{buttons}</div> :
+            null;
+
         return (
             <TModal
                     style={style}
@@ -94,12 +98,13 @@ class TForm extends React.Component {
                     caption={this.props.caption}
                     showHeader={this.props.showHeader}
                     escape={this.props.escape}
+                    outerClick={this.props.outerClick}
                     transition={this.props.transition}
                     onClose={this.handleCancel}>
                 {message}
                 {content}
                 {error}
-                <div style={style.footer}>{buttons}</div>
+                {footer}
             </TModal>
         );
 
@@ -155,6 +160,8 @@ TForm.propTypes = {
     caption: PropTypes.string,
     /** Indicates whether to show header or not */
     showHeader: PropTypes.any,
+    /** Indicates whether to show footer or not */
+    showFooter: PropTypes.any,
     /** If "true" tells TForm to leave button greyscale and don't react on "onClick" events */
     wait: PropTypes.any,
     /**
@@ -176,6 +183,8 @@ TForm.propTypes = {
     messageButtons: PropTypes.object,
     /** Indicates whether to close dialog when "Escape" key is pressed */
     escape: PropTypes.any,
+    /** Indicates whether to close dialog when outer region is clicked */
+    outerClick: PropTypes.any,
     /** Transition time in milliseconds */
     transition: PropTypes.number,
     /**
@@ -190,10 +199,12 @@ TForm.propTypes = {
 
 TForm.defaultProps = {
     showHeader: true,
+    showFooter: true,
     buttons: {ok: 'OK'},
     errorButtons: {ok: 'OK'},
     messageButtons: {ok: 'OK'},
     escape: false,
+    outerClick: false,
     transition: 250
 };
 

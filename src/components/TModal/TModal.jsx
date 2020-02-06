@@ -165,8 +165,22 @@ class TModal extends React.Component {
         }
 
         return (
-            <div style={style.screen} ref={this.screenRef}>
-                <div style={style.container} ref={this.containerRef}>
+            <div
+                style={style.screen}
+                ref={this.screenRef}
+                onClick={() => {
+                    if (this.props.show && this.props.outerClick) {
+                        this.close()
+                    }
+                }}>
+                <div
+                    style={style.container}
+                    ref={this.containerRef}
+                    onClick={(e) => {
+                        if (this.props.show && this.props.outerClick) {
+                            e.stopPropagation()
+                        }
+                    }}>
                     {header}
                     <div style={style.content}>
                         {this.props.children}
@@ -215,6 +229,8 @@ TModal.propTypes = {
     showHeader: PropTypes.any,
     /** Indicates whether to close dialog when "Escape" key is pressed */
     escape: PropTypes.any,
+    /** Indicates whether to close dialog when outer region is clicked */
+    outerClick: PropTypes.any,
     /** Transition time in milliseconds */
     transition: PropTypes.number,
     /**
@@ -230,6 +246,7 @@ TModal.propTypes = {
 TModal.defaultProps = {
     showHeader: true,
     escape: false,
+    outerClick: false,
     transition: 250
 };
 

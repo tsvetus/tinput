@@ -63,6 +63,11 @@ module.exports = {
             name: "TSearchExample"
         }
     }, {
+        name: "TSelectBox",
+        example: {
+            name: "TSelectBoxExample"
+        }
+    }, {
         name: 'separator'
     }, {
         name: "TButton",

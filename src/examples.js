@@ -9,6 +9,7 @@ import TMailExample from './components/TMail/TMailExample.jsx';
 import TMemoExample from './components/TMemo/TMemoExample.jsx';
 import TCheckExample from './components/TCheck/TCheckExample.jsx';
 import TListBoxExample from './components/TListBox/TListBoxExample.jsx';
+import TSelectBoxExample from './components/TSelectBox/TSelectBoxExample.jsx';
 import TSearchExample from './components/TSearch/TSearchExample.jsx';
 import TGroupExample from './components/TGroup/TGroupExample.jsx';
 import TItemGroupExample from './components/TItemGroup/TItemGroupExample.jsx';
@@ -36,6 +37,7 @@ export {
     TMemoExample,
     TCheckExample,
     TListBoxExample,
+    TSelectBoxExample,
     TSearchExample,
     TGroupExample,
     TItemGroupExample,

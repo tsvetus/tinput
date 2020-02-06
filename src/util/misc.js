@@ -237,3 +237,37 @@ export function isMS() {
     return /MSIE|Trident|Edge/.test(ua);
 }
 
+export function parseItem(item, index, grouped) {
+    let i = index === undefined ? 0 : index;
+    let res = {
+        key: 'key' + i,
+        value: 'value' + i,
+        group: 0
+    };
+    Object.keys(item).forEach((k, j) => {
+        if (k === 'key' || k === 'id' || k === 'value' || k === 'name' || k === 'group') {
+            if (k === 'key' || k === 'id') {
+                res.key = item[k];
+            } else if (k === 'value' || k === 'name') {
+                res.value = item[k];
+            } else if (k === 'group') {
+                res.group = item[k];
+            }
+        } else {
+            if (j === 0) {
+                res.key = item[k];
+            } else if (j === 1) {
+                res.value = item[k];
+            } else if (j === 2) {
+                res.group = item[k];
+            }
+        }
+    });
+    if (grouped === undefined) {
+        delete res.group;
+    } else if (!grouped) {
+        res.group = i;
+    }
+    return res;
+}
+

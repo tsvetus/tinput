@@ -1840,6 +1840,129 @@
         }
       }
     },
+    "TSelectBox": {
+      "description": "Combobox with select list",
+      "displayName": "TSelectBox",
+      "methods": [
+        {
+          "name": "handleClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleClose",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TSelectBoxExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            }
+          }
+        },
+        "name": {
+          "type": "any",
+          "description": "Component name",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Component data",
+          "required": false
+        },
+        "items": {
+          "type": "array",
+          "description": "",
+          "required": false
+        },
+        "placeholder": {
+          "type": "any",
+          "description": "",
+          "required": false
+        },
+        "onFrame": {
+          "type": "func",
+          "description": "",
+          "required": false
+        },
+        "onButtonClick": {
+          "type": "func",
+          "description": "On button click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            }
+          },
+          "required": false
+        },
+        "onCaptionClick": {
+          "type": "func",
+          "description": "On caption click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            }
+          },
+          "required": false
+        },
+        "wait": {
+          "required": false,
+          "defaultValue": "false"
+        },
+        "down": {
+          "required": false,
+          "defaultValue": "false"
+        }
+      }
+    },
     "separator2": {
       "displayName": "separator"
     },
@@ -3524,7 +3647,7 @@
             },
             "page": {
               "type": "object",
-              "description": "Style page buttons"
+              "description": "Style for page buttons"
             },
             "current": {
               "type": "object",
@@ -4125,6 +4248,12 @@
           "required": false,
           "defaultValue": "false"
         },
+        "outerClick": {
+          "type": "any",
+          "description": "Indicates whether to close dialog when outer region is clicked",
+          "required": false,
+          "defaultValue": "false"
+        },
         "transition": {
           "type": "number",
           "description": "Transition time in milliseconds",
@@ -4275,6 +4404,12 @@
           "required": false,
           "defaultValue": "true"
         },
+        "showFooter": {
+          "type": "any",
+          "description": "Indicates whether to show footer or not",
+          "required": false,
+          "defaultValue": "true"
+        },
         "wait": {
           "type": "any",
           "description": "If \"true\" tells TForm to leave button greyscale and don't react on \"onClick\" events",
@@ -4311,6 +4446,12 @@
         "escape": {
           "type": "any",
           "description": "Indicates whether to close dialog when \"Escape\" key is pressed",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "outerClick": {
+          "type": "any",
+          "description": "Indicates whether to close dialog when outer region is clicked",
           "required": false,
           "defaultValue": "false"
         },

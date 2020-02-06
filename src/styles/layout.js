@@ -7,7 +7,7 @@ export default {
         }
     },
 
-    TComboButton: {
+    TGroupButton: {
 
         container: {
             display: "flex",

@@ -45,7 +45,7 @@ class TGroupButton extends React.Component {
     render () {
 
         let style = merge(
-            contain(styles.TComboButton),
+            contain(styles.TGroupButton),
             contain(styles[this.props.name]),
             contain(this.props.style)
         );
@@ -76,6 +76,7 @@ class TGroupButton extends React.Component {
                         onClick={this.handleClick}>
                             {caption}
                             {placeholder}
+                            {this.props.children}
                             {icon}
                     </TButton>
                 );
