@@ -61,7 +61,7 @@ class TScroll extends React.Component {
         for (let key in this.style.container) {
             if (key.indexOf('padding') === 0) {
                 this.style.content[key] = this.style.container[key].slice();
-                this.style.container[key] = undefined;
+                delete this.style.container[key];
             }
         }
 

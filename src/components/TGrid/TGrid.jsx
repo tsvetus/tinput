@@ -82,7 +82,7 @@ class TGrid extends React.Component {
 
                 let cs = merge(style.caption, style.head);
                 if (col === 1) {
-                    cs.marginLeft = undefined;
+                    delete cs.marginLeft;
                 }
                 if (options.scrollHead) {
                     cs.position = 'relative';
@@ -162,7 +162,7 @@ class TGrid extends React.Component {
                         }
                     }
                     if (col === 1) {
-                        css.marginLeft = undefined;
+                        delete css.marginLeft;
                     }
                     if (this.ms) {
                         css.msGridRow = row;

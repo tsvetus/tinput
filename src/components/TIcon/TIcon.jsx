@@ -22,6 +22,7 @@ class TIcon extends React.Component {
             <Icon
                 style={style}
                 name={this.props.name}
+                icon={this.props.icon}
                 data={this.props.data}
                 onClick={this.props.onClick} />
         );
@@ -38,7 +39,7 @@ TIcon.propTypes = {
         container: PropTypes.object
     }),
     /** Component name */
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     /** Component data */
     data: PropTypes.any,
     /**

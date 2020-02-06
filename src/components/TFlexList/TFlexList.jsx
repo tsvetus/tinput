@@ -10,7 +10,7 @@ import TPager from '../TPager';
 import styles from '../../styles';
 
 /**
- * Represents data table
+ * Represents data items as TTable or TRibbon depending on component client width and "flexWidth" property value
  */
 class TFlexList extends React.Component {
 
@@ -166,7 +166,10 @@ TFlexList.propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
     /** Selected row index */
     index: PropTypes.number,
-    /** Width in pixels */
+    /**
+     * If component client width is less than value of "flexWidth" than items are shown as ribbon and
+     * as table otherwise
+     */
     flexWidth: PropTypes.number,
     /** Pager properties */
     pager: PropTypes.shape({

@@ -171,7 +171,7 @@ export function contain(source) {
         for (let key in source) {
             if (!(source[key] instanceof Object)) {
                 res.container[key] = source[key];
-                res[key] = undefined;
+                delete res[key];
             }
         }
         return res;

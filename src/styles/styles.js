@@ -9,7 +9,8 @@ export default function defaultStyles(template) {
             container: {
                 width: "32px",
                 height: "32px",
-                color: template.colors.border
+                color: template.colors.border,
+                flexShrink: "0"
             }
         },
 

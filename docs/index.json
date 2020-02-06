@@ -2061,7 +2061,7 @@
         "name": {
           "type": "string",
           "description": "Component name",
-          "required": true
+          "required": false
         },
         "data": {
           "type": "any",
@@ -3644,7 +3644,7 @@
       }
     },
     "TFlexList": {
-      "description": "Represents data table",
+      "description": "Represents data items as TTable or TRibbon depending on component client width and \"flexWidth\" property value",
       "displayName": "TFlexList",
       "methods": [
         {
@@ -3748,7 +3748,7 @@
         },
         "flexWidth": {
           "type": "number",
-          "description": "Width in pixels",
+          "description": "If component client width is less than value of \"flexWidth\" than items are shown as ribbon and\r\nas table otherwise",
           "required": false,
           "defaultValue": "600"
         },

@@ -24,7 +24,7 @@ class Icon extends React.Component {
 
     render () {
 
-        let icon = icons[this.props.name];
+        let icon = this.props.icon ? this.props.icon : icons[this.props.name];
 
         let style = merge({container: {}}, contain(this.props.style));
 
@@ -54,7 +54,8 @@ Icon.icons = icons;
 
 Icon.propTypes = {
     style: PropTypes.object,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    icon: PropTypes.object,
     data: PropTypes.any,
     onClick: PropTypes.func
 };
