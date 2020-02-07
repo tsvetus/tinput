@@ -226,7 +226,7 @@ export default function defaultStyles(template) {
             },
 
             header: {
-                margin: "16px 16px 0 16px",
+                margin: "16px 16px 8px 16px",
                 ...template.fonts.common
             },
 
@@ -253,7 +253,7 @@ export default function defaultStyles(template) {
 
             content: {
                 color: template.colors.text,
-                margin: "16px",
+                margin: "8px 16px 8px 16px",
                 ...template.fonts.common
             },
 
@@ -274,7 +274,7 @@ export default function defaultStyles(template) {
         TForm: {
 
             footer: {
-                margin: "24px 16px 8px 16px"
+                margin: "8px 16px 16px 16px"
             },
 
             message: {
@@ -692,26 +692,6 @@ export default function defaultStyles(template) {
         },
 
         TFlexList: {
-
-        },
-
-        TListForm: {
-
-            form: {
-
-            },
-
-            ribbon: {
-
-                content: {
-
-                }
-
-            },
-
-            pager: {
-
-            }
 
         }
 

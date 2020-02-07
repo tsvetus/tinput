@@ -57,6 +57,11 @@ class TSelectBoxExample extends React.Component {
               container: {
                 margin: "8px 0 8px 0"
               },
+              form: {
+                container: {
+                    height: "600px"
+                }
+              },
               item: {
                 container: {
                   display: "flex",
@@ -78,7 +83,7 @@ class TSelectBoxExample extends React.Component {
             item={this.state.item}
             onFrame={this.frame}
             onButtonClick={this.click}
-            onCaptionClick={this.click}>
+            onCaptionClick={this.click} >
               <div>Click me to show items selection form</div>
           </TSelectBox>
 

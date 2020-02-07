@@ -76,7 +76,6 @@ class TGroupButton extends React.Component {
                         onClick={this.handleClick}>
                             {caption}
                             {placeholder}
-                            {this.props.children}
                             {icon}
                     </TButton>
                 );
@@ -87,6 +86,7 @@ class TGroupButton extends React.Component {
             <div
                 style={style.container}>
                 {items}
+                {this.props.children}
             </div>
         );
 

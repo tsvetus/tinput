@@ -4455,6 +4455,11 @@
           "required": false,
           "defaultValue": "false"
         },
+        "footerContent": {
+          "type": "any",
+          "description": "",
+          "required": false
+        },
         "transition": {
           "type": "number",
           "description": "Transition time in milliseconds",

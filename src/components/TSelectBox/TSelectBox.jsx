@@ -25,20 +25,24 @@ class TSelectBox extends React.Component {
 
     handleClick(event) {
         let control = event.item.name;
-        if (control === 'caption' && this.props.onCaptionClick) {
+        if (control === 'caption') {
             this.setState({show: true});
-            this.props.onCaptionClick({
-                name: this.props.name,
-                data: this.props.data,
-                control: control
-            });
-        } else if (control === 'button' && this.props.onButtonClick) {
+            if (this.props.onCaptionClick) {
+                this.props.onCaptionClick({
+                    name: this.props.name,
+                    data: this.props.data,
+                    control: control
+                });
+            }
+        } else if (control === 'button') {
             this.setState({item: null});
-            this.props.onButtonClick({
-                name: this.props.name,
-                data: this.props.data,
-                control: control
-            });
+            if (this.props.onButtonClick) {
+                this.props.onButtonClick({
+                    name: this.props.name,
+                    data: this.props.data,
+                    control: control
+                });
+            }
         }
     }
 
@@ -61,15 +65,26 @@ class TSelectBox extends React.Component {
             contain(this.props.style)
         );
 
+        let ribbonStyle = merge(
+            {},
+            contain(style.ribbon),
+            {item: merge({}, contain(style.item))}
+        );
+
         let formStyle = {
-            item: contain(style.item),
-            pager: contain(style.pager)
+            pager: contain(style.pager),
+            form: contain(style.form),
+            scroll: contain(style.scroll),
+            ribbon: ribbonStyle
         };
 
         let content = null;
         if (this.state.item) {
             if (this.props.onFrame) {
-                content = this.props.onFrame({item: this.state.item, style: formStyle.item});
+                content = this.props.onFrame({
+                    item: this.state.item,
+                    style: formStyle.ribbon.item
+                });
             } else {
                 let item = parseItem(this.state.item);
                 content = item.value;

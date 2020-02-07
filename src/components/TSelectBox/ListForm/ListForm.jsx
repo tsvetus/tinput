@@ -6,6 +6,7 @@ import {merge, parseItem} from '../../../util';
 import styles from '../../../styles';
 
 import TForm from '../../TForm';
+import TScroll from '../../TScroll';
 import TRibbon from '../../TRibbon';
 import TPager from '../../TPager';
 import TButton from '../../TButton';
@@ -64,6 +65,15 @@ class ListForm extends React.Component {
 
         let style = merge(styles.TListForm, this.props.style);
 
+        let pager =
+            <TPager
+                style={style.pager}
+                size={this.props.size}
+                items={this.props.items}
+                timeout={300}
+                layout={'middle'}
+                onChange={this.handlePage} />;
+
         return (
 
             <TForm
@@ -71,20 +81,13 @@ class ListForm extends React.Component {
                 show={this.props.show}
                 escape={true}
                 outerClick={true}
-                showFooter={false}
+                footerContent={pager}
                 onClose={this.props.onClose}>
 
-                <TRibbon
-                    style={style}
-                    items={this.state.items}
-                    onFrame={this.handleFrame} />
-
-                <TPager
-                    style={style.pager}
-                    size={this.props.size}
-                    items={this.props.items}
-                    layout={'middle'}
-                    onChange={this.handlePage} />
+                    <TRibbon
+                        style={style.ribbon}
+                        items={this.state.items}
+                        onFrame={this.handleFrame} />
 
             </TForm>
 

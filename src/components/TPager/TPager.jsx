@@ -111,22 +111,41 @@ class TPager extends React.Component {
         if (this.state.wait) {
             ls = merge(ls, style.wait);
         }
-        let label = params.to >= params.from ?
-            <div style={ls}>
-                <div>{params.from + 1}</div>
-                <div>{'-'}</div>
-                <div>{params.to + 1}</div>
-                <div>&#47;</div>
-                <div>{params.length}</div>
-            </div> :
-            <div style={ls}></div>;
 
-        let edit =
-            <div style={style.edit}>
-                <div style={style.page} data={'left'} onClick={this.handleClick}>&lt;</div>
-                {pages}
-                <div style={style.page} data={'right'} onClick={this.handleClick}>&gt;</div>
-            </div>;
+        let label = null;
+        let edit = null;
+
+        if (this.props.layout === 'middle') {
+
+            label = params.to >= params.from ?
+                <div style={ls}>
+                    <div>{this.state.page + 1}</div>
+                    <div>&#47;</div>
+                    <div>{params.pageTo + 1}</div>
+                </div> :
+                <div style={ls}></div>;
+
+            edit = null;
+
+        } else {
+
+            label = params.to >= params.from ?
+                <div style={ls}>
+                    <div>{params.from + 1}</div>
+                    <div>{'-'}</div>
+                    <div>{params.to + 1}</div>
+                    <div>&#47;</div>
+                    <div>{params.length}</div>
+                </div> :
+                <div style={ls}></div>;
+
+            edit =
+                <div style={style.edit}>
+                    <div style={style.page} data={'left'} onClick={this.handleClick}>&lt;</div>
+                    {pages}
+                    <div style={style.page} data={'right'} onClick={this.handleClick}>&gt;</div>
+                </div>;
+        }
 
         let content = null;
         if (this.props.layout === 'left') {

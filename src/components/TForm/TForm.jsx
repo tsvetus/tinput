@@ -84,9 +84,14 @@ class TForm extends React.Component {
             (<div style={style.message}>{this.props.message}</div>) :
             null;
 
-        let footer = this.props.showFooter ?
-            <div style={style.footer}>{buttons}</div> :
-            null;
+        let footer = null;
+        if (this.props.footerContent) {
+            footer = this.props.footerContent;
+        } else {
+            footer = this.props.showFooter ?
+                buttons :
+                null;
+        }
 
         return (
             <TModal
@@ -100,11 +105,11 @@ class TForm extends React.Component {
                     escape={this.props.escape}
                     outerClick={this.props.outerClick}
                     transition={this.props.transition}
+                    footerContent={footer}
                     onClose={this.handleCancel}>
                 {message}
                 {content}
                 {error}
-                {footer}
             </TModal>
         );
 
@@ -185,6 +190,7 @@ TForm.propTypes = {
     escape: PropTypes.any,
     /** Indicates whether to close dialog when outer region is clicked */
     outerClick: PropTypes.any,
+    footerContent: PropTypes.any,
     /** Transition time in milliseconds */
     transition: PropTypes.number,
     /**

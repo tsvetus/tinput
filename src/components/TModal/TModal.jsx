@@ -18,7 +18,8 @@ class TModal extends React.Component {
         this.state = {
             show: this.props.show,
             timer: null,
-            countdown: 0
+            countdown: 0,
+            height: 0
         };
         this.close = this.close.bind(this);
         this.setTimer = this.setTimer.bind(this);
@@ -61,7 +62,7 @@ class TModal extends React.Component {
 
     componentWillUnmount() {
         this.mounted = false;
-        document.removeEventListener('keydown', this.handleKeyDown);
+        this.containerRef.current.removeEventListener('resize', this.handleResize);
         this.stopTimer();
     }
 
@@ -164,6 +165,8 @@ class TModal extends React.Component {
                 </div>
         }
 
+        let containerStyle = style.container;
+
         return (
             <div
                 style={style.screen}
@@ -174,7 +177,7 @@ class TModal extends React.Component {
                     }
                 }}>
                 <div
-                    style={style.container}
+                    style={containerStyle}
                     ref={this.containerRef}
                     onClick={(e) => {
                         if (this.props.show && this.props.outerClick) {
@@ -184,6 +187,9 @@ class TModal extends React.Component {
                     {header}
                     <div style={style.content}>
                         {this.props.children}
+                    </div>
+                    <div style={style.footer}>
+                        {this.props.footerContent}
                     </div>
                 </div>
             </div>
