@@ -111,33 +111,45 @@ export function find(node, parent) {
 }
 
 export function strip(source) {
-    return source
-        .replace(/<br>/gm, '\r')
-        .replace(/<[^>]*>?/gm, '')
-        .replace(/&(.*?);+/gm, ' ');
+    if (source && typeof source === 'string') {
+        return source
+            .replace(/<br>/gm, '\r')
+            .replace(/<[^>]*>?/gm, '')
+            .replace(/&(.*?);+/gm, ' ');
+    } else {
+        return source;
+    }
 }
 
 export function flood(source) {
 
-    let arr = source
-        .replace(/\r/gm, '<br>')
-        .replace(/<[^>]*>?/gm, '')
-        .split(' ');
+    if (source && typeof source === 'string') {
 
-    let res = '';
+        let arr = source
+            .replace(/\r/gm, '<br>')
+            .replace(/<[^>]*>?/gm, '')
+            .split(' ');
 
-    if (arr.length > 0) {
-        res = arr[0];
-        for (let i=1; i<arr.length; i++) {
-            if (arr[i - 1] !== '' && arr[i] !== '') {
-                res += ' ' + arr[i];
-            } else {
-                res += '&nbsp;' + arr[i];
+        let res = '';
+
+        if (arr.length > 0) {
+            res = arr[0];
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i - 1] !== '' && arr[i] !== '') {
+                    res += ' ' + arr[i];
+                } else {
+                    res += '&nbsp;' + arr[i];
+                }
             }
         }
-    }
 
-    return res;
+        return res;
+
+    } else {
+
+        return source;
+
+    }
 
 }
 
