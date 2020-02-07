@@ -46,10 +46,12 @@ class TListBoxExample extends React.Component {
             name={'myListBox'}
             empty={{key: 0, value: '-'}}
             items={[
-              {key: 1, value: 'First item'},
-              {key: 2, value: 'Second item'},
-              {key: 3, value: 'Third item'}
+              {id: 1, code: 'code1', name: 'First item'},
+              {id: 2, code: 'code2', name: 'Second item'},
+              {id: 3, code: 'code3', name: 'Third item'}
             ]}
+            keyField={'id'}
+            valueField={'name'}
             value={this.state.value}
             placeholder={'Select item from list ...'}
             showMode={'value'}

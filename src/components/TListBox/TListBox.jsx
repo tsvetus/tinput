@@ -38,6 +38,8 @@ class TListBox extends React.Component {
                 clickable={this.props.clickable}
                 readOnly={this.props.readOnly}
                 layout={this.props.layout}
+                keyField={this.props.keyField}
+                valueField={this.props.valueField}
                 onChange={this.props.onChange}
                 onValidate={this.props.onValidate} />
         );
@@ -104,6 +106,10 @@ TListBox.propTypes = {
         /** Item name */
         value: PropTypes.string
     })),
+    /** Specifies key field name if it is other than "key" */
+    keyField: PropTypes.string,
+    /** Specifies value field name if it is other than "value" */
+    valueField: PropTypes.string,
     /** Determines what part of "item" should be shown in dropdown list */
     listMode: PropTypes.string,
     /** Determines what part of "item" should be shown in editor */

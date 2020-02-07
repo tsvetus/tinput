@@ -15,7 +15,7 @@ class Helper {
         this.load = this.load.bind(this);
     }
 
-    getStruct(items, empty) {
+    getStruct(items, empty, keyField, valueField) {
 
         if (items === undefined && empty === undefined) {
             return this.struct;
@@ -30,9 +30,12 @@ class Helper {
         }
 
         if (item) {
+
             if (item instanceof Object) {
+
                 let key = null;
                 let value = null;
+
                 let i = 0;
                 for (let field in item) {
                     if (i === 0) {
@@ -44,10 +47,21 @@ class Helper {
                     }
                     i++;
                 }
+
+                if (keyField && item.hasOwnProperty(keyField)) {
+                    key = keyField;
+                }
+
+                if (valueField && item.hasOwnProperty(valueField)) {
+                    value = valueField;
+                }
+
                 if (key !== null && value !== null) {
                     return {key: key, value: value}
                 }
+
             }
+
         }
 
         return null;
@@ -77,12 +91,12 @@ class Helper {
         return value;
     }
 
-    load(items, empty, listMode, showMode) {
+    load(items, empty, listMode, showMode, keyField, valueField) {
 
         this.items = [];
         this.listMode = this.getMode(listMode);
         this.showMode = this.getMode(showMode);
-        this.struct = this.getStruct(items, empty);
+        this.struct = this.getStruct(items, empty, keyField, valueField);
         this.count = items ? items.length : 0;
 
         if (this.struct) {
