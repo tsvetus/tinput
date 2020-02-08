@@ -1967,6 +1967,12 @@
           "description": "Placeholder text",
           "required": false
         },
+        "timeout": {
+          "type": "number",
+          "description": "Page change delay in milliseconds",
+          "required": false,
+          "defaultValue": "500"
+        },
         "onFrame": {
           "type": "func",
           "description": "Happens when item is rendering. Mast return html element representing current item ",

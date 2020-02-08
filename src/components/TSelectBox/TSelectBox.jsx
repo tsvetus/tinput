@@ -133,6 +133,7 @@ class TSelectBox extends React.Component {
                     show={this.state.show}
                     items={this.props.items}
                     size={this.props.size}
+                    timeout={this.props.timeout}
                     onFrame={this.props.onFrame}
                     onClose={this.handleClose} />
 
@@ -168,6 +169,8 @@ TSelectBox.propTypes = {
     size: PropTypes.number,
     /** Placeholder text  */
     placeholder: PropTypes.any,
+    /** Page change delay in milliseconds */
+    timeout: PropTypes.number,
     /**
      * Happens when item is rendering. Mast return html element representing current item
      * @param {object} event Event object with following structure:
@@ -204,7 +207,8 @@ TSelectBox.propTypes = {
 };
 
 TSelectBox.defaultProps = {
-    size: 10
+    size: 10,
+    timeout: 500
 };
 
 export default TSelectBox;

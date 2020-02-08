@@ -70,7 +70,7 @@ class ListForm extends React.Component {
                 style={style.pager}
                 size={this.props.size}
                 items={this.props.items}
-                timeout={300}
+                timeout={this.props.timeout}
                 layout={'middle'}
                 onChange={this.handlePage} />;
 
@@ -104,6 +104,7 @@ ListForm.propTypes = {
     show: PropTypes.any,
     items: PropTypes.array,
     size: PropTypes.number,
+    timeout: PropTypes.number,
     onClose: PropTypes.func,
     onFrame: PropTypes.func
 };
