@@ -43,6 +43,8 @@ class TSearch extends React.Component {
                 onChange={this.props.onChange}
                 value={this.props.value}
                 empty={this.props.empty}
+                keyField={this.props.keyField}
+                valueField={this.props.valueField}
                 readOnly={false}
                 clickable={this.props.clickable}
                 onSearch={this.search} />
@@ -101,6 +103,16 @@ TSearch.propTypes = {
         /** Empty item value */
         value: PropTypes.string
     }),
+    /** Specifies key field name if it is other than "key" */
+    keyField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
+    /** Specifies value field name if it is other than "value" */
+    valueField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     /** Prevents from changing component value from user input */
     readOnly: PropTypes.any,
     /** If "true" drop up/down indicator is shown */
@@ -154,8 +166,10 @@ TSearch.defaultProps = {
     listMode: 'value',
     showMode: 'value',
     showIcon: true,
+    chars: 3,
     clickable: 'label edit',
-    chars: 3
+    keyField: ['key', 'id'],
+    valueField: ['value', 'name']
 };
 
 export default TSearch;

@@ -39,7 +39,7 @@ export default function defaultStyles(template) {
             }
         },
 
-        TComboButton: {
+        TGroupButton: {
 
             container: {
 
@@ -75,6 +75,30 @@ export default function defaultStyles(template) {
 
             middle: {
                 borderRadius: "0 0 0 0"
+            }
+
+        },
+
+        TSelectBox: {
+
+            caption: {
+                backgroundColor: template.colors.window
+            },
+
+            item: {
+                margin: "4px 8px 4px 8px"
+            },
+
+            pager: {
+                container: {
+                    margin: "4px 8px 4px 8px",
+                    fontSize: "22px"
+                },
+                page: {
+                    width: "64px",
+                    height: "38px",
+                    borderRadius: "8px"
+                }
             }
 
         },
@@ -202,7 +226,7 @@ export default function defaultStyles(template) {
             },
 
             header: {
-                margin: "16px 16px 0 16px",
+                margin: "16px 16px 8px 16px",
                 ...template.fonts.common
             },
 
@@ -229,7 +253,7 @@ export default function defaultStyles(template) {
 
             content: {
                 color: template.colors.text,
-                margin: "16px",
+                margin: "8px 16px 8px 16px",
                 ...template.fonts.common
             },
 
@@ -250,7 +274,7 @@ export default function defaultStyles(template) {
         TForm: {
 
             footer: {
-                margin: "24px 16px 8px 16px"
+                margin: "8px 16px 16px 16px"
             },
 
             message: {
@@ -345,10 +369,6 @@ export default function defaultStyles(template) {
                 padding: "0 4px 0 4px",
                 backgroundColor: template.colors.window
             }
-
-        },
-
-        TButtonGroup: {
 
         },
 

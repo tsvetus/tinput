@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Pager, merge, clone, contain, compare} from '../../util';
+import {Pager, merge, clone, contain} from '../../util';
 
 import styles from '../../styles';
 
@@ -21,13 +21,11 @@ class TPager extends React.Component {
     }
 
     componentDidUpdate(old) {
-        let bSize = compare(old.size, this.props.size);
-        let bItems = compare(old.items, this.props.items);
-        if (!bSize || !bItems) {
-            if (!bSize) {
+        if (old.size !== this.props.size || old.items !== this.props.items) {
+            if (old.size !== this.props.size) {
                 this.pager.setSize(this.props.size, this.state.page);
             }
-            if (!bItems) {
+            if (old.items !== this.props.items) {
                 this.items = this.props.items ? this.props.items : [];
                 this.pager.setLength(this.items.length, this.state.page);
             }
@@ -109,31 +107,72 @@ class TPager extends React.Component {
             pages.push(<div key={i} style={st} data={i} onClick={this.handleClick}>{i + 1}</div>);
         }
 
-        if (params.pageTo < 1 && this.props.hide) {
+        let ls = style.label;
+        if (this.state.wait) {
+            ls = merge(ls, style.wait);
+        }
 
-            return null;
+        let label = null;
+        let edit = null;
+
+        if (this.props.layout === 'middle') {
+
+            label = params.to >= params.from ?
+                <div style={ls}>
+                    <div>{this.state.page + 1}</div>
+                    <div>&#47;</div>
+                    <div>{params.pageTo + 1}</div>
+                </div> :
+                <div style={ls}></div>;
+
+            edit = null;
 
         } else {
 
-            return (
-                <div style={style.container}>
-                    {params.to >= params.from ?
-                        <div style={style.label}>
-                            <div>{params.from + 1}</div>
-                            <div>{'-'}</div>
-                            <div>{params.to + 1}</div>
-                            <div>&#47;</div>
-                            <div>{params.length}</div>
-                        </div>
-                        : <div style={style.label}></div>}
-                    <div style={style.edit}>
-                        <div style={style.page} data={'left'} onClick={this.handleClick}>&lt;</div>
-                        {pages}
-                        <div style={style.page} data={'right'} onClick={this.handleClick}>&gt;</div>
-                    </div>
-                </div>
-            );
+            label = params.to >= params.from ?
+                <div style={ls}>
+                    <div>{params.from + 1}</div>
+                    <div>{'-'}</div>
+                    <div>{params.to + 1}</div>
+                    <div>&#47;</div>
+                    <div>{params.length}</div>
+                </div> :
+                <div style={ls}></div>;
 
+            edit =
+                <div style={style.edit}>
+                    <div style={style.page} data={'left'} onClick={this.handleClick}>&lt;</div>
+                    {pages}
+                    <div style={style.page} data={'right'} onClick={this.handleClick}>&gt;</div>
+                </div>;
+        }
+
+        let content = null;
+        if (this.props.layout === 'left') {
+            content =
+                <div style={style.container}>
+                    {edit}
+                    {label}
+                </div>;
+        } else if (this.props.layout === 'middle') {
+            content =
+                <div style={style.container}>
+                    <div style={style.page} data={'left'} onClick={this.handleClick}>&lt;</div>
+                    {label}
+                    <div style={style.page} data={'right'} onClick={this.handleClick}>&gt;</div>
+                </div>;
+        } else {
+            content =
+                <div style={style.container}>
+                    {label}
+                    {edit}
+                </div>;
+        }
+
+        if (params.pageTo < 1 && this.props.hide) {
+            return null;
+        } else {
+            return content;
         }
 
     }
@@ -149,7 +188,7 @@ TPager.propTypes = {
         label: PropTypes.object,
         /** Style for page navigation bar */
         edit: PropTypes.object,
-        /** Style page buttons */
+        /** Style for page buttons */
         page: PropTypes.object,
         /** Style for current page button */
         current: PropTypes.object,

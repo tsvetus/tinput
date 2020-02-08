@@ -7,7 +7,7 @@ export default {
         }
     },
 
-    TComboButton: {
+    TGroupButton: {
 
         container: {
             display: "flex",
@@ -18,11 +18,18 @@ export default {
         },
 
         button: {
+            flex: "1",
             display: "flex",
             justifyContent: "center",
             alignItems: "center"
         }
 
+    },
+
+    TSelectBox: {
+        button: {
+            flex: "0"
+        }
     },
 
     TIndicator: {
@@ -91,6 +98,9 @@ export default {
         },
 
         container: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
             position: "relative",
             margin: "auto",
             top: "20%",
@@ -110,8 +120,7 @@ export default {
         },
 
         content: {
-            display: "flex",
-            flexDirection: "column"
+            flex: "1"
         }
 
     },
@@ -122,6 +131,28 @@ export default {
             display: "flex",
             justifyContent: "space-around",
             flexWrap: "wrap"
+        }
+
+    },
+
+    TListForm: {
+
+        form: {
+            container: {
+                top: "10%"
+            },
+            content: {
+                overflowY: "auto"
+            }
+        },
+
+        ribbon: {
+        },
+
+        pager: {
+            container: {
+                width: "100%"
+            }
         }
 
     },

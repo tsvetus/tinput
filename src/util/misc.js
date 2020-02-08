@@ -111,33 +111,45 @@ export function find(node, parent) {
 }
 
 export function strip(source) {
-    return source
-        .replace(/<br>/gm, '\r')
-        .replace(/<[^>]*>?/gm, '')
-        .replace(/&(.*?);+/gm, ' ');
+    if (source && typeof source === 'string') {
+        return source
+            .replace(/<br>/gm, '\r')
+            .replace(/<[^>]*>?/gm, '')
+            .replace(/&(.*?);+/gm, ' ');
+    } else {
+        return source;
+    }
 }
 
 export function flood(source) {
 
-    let arr = source
-        .replace(/\r/gm, '<br>')
-        .replace(/<[^>]*>?/gm, '')
-        .split(' ');
+    if (source && typeof source === 'string') {
 
-    let res = '';
+        let arr = source
+            .replace(/\r/gm, '<br>')
+            .replace(/<[^>]*>?/gm, '')
+            .split(' ');
 
-    if (arr.length > 0) {
-        res = arr[0];
-        for (let i=1; i<arr.length; i++) {
-            if (arr[i - 1] !== '' && arr[i] !== '') {
-                res += ' ' + arr[i];
-            } else {
-                res += '&nbsp;' + arr[i];
+        let res = '';
+
+        if (arr.length > 0) {
+            res = arr[0];
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i - 1] !== '' && arr[i] !== '') {
+                    res += ' ' + arr[i];
+                } else {
+                    res += '&nbsp;' + arr[i];
+                }
             }
         }
-    }
 
-    return res;
+        return res;
+
+    } else {
+
+        return source;
+
+    }
 
 }
 
@@ -235,5 +247,39 @@ export function replace(source, name, value) {
 export function isMS() {
     let ua = window.navigator.userAgent;
     return /MSIE|Trident|Edge/.test(ua);
+}
+
+export function parseItem(item, index, grouped) {
+    let i = index === undefined ? 0 : index;
+    let res = {
+        key: 'key' + i,
+        value: 'value' + i,
+        group: 0
+    };
+    Object.keys(item).forEach((k, j) => {
+        if (k === 'key' || k === 'id' || k === 'value' || k === 'name' || k === 'group') {
+            if (k === 'key' || k === 'id') {
+                res.key = item[k];
+            } else if (k === 'value' || k === 'name') {
+                res.value = item[k];
+            } else if (k === 'group') {
+                res.group = item[k];
+            }
+        } else {
+            if (j === 0) {
+                res.key = item[k];
+            } else if (j === 1) {
+                res.value = item[k];
+            } else if (j === 2) {
+                res.group = item[k];
+            }
+        }
+    });
+    if (grouped === undefined) {
+        delete res.group;
+    } else if (!grouped) {
+        res.group = i;
+    }
+    return res;
 }
 

@@ -13,7 +13,8 @@ import {
     getFile,
     compare,
     replace,
-    isMS
+    isMS,
+    parseItem
 } from './misc.js';
 
 import Format from './format.js';
@@ -60,6 +61,7 @@ export {
     compare,
     replace,
     isMS,
+    parseItem,
 
     Format,
     Pager,

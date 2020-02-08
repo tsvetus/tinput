@@ -1,43 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, contain, compare, clone} from '../../util';
+import {merge, contain, compare, clone, parseItem} from '../../util';
 
 import styles from '../../styles';
 import TGroup from "../TGroup";
 import TButton from "../TButton";
 import TCheck from "../TCheck";
-
-function parseItem(item, index, grouped) {
-    let res = {
-        key: 'key' + index,
-        value: 'value' + index,
-        group: 0
-    };
-    Object.keys(item).forEach((k, j) => {
-        if (k === 'key' || k === 'value' || k === 'group') {
-            if (k === 'key') {
-                res.key = item[k];
-            } else if (k === 'value') {
-                res.value = item[k];
-            } else if (k === 'group') {
-                res.group = item[k];
-            }
-        } else {
-            if (j === 0) {
-                res.key = item[k];
-            } else if (j === 1) {
-                res.value = item[k];
-            } else if (j === 2) {
-                res.group = item[k];
-            }
-        }
-    });
-    if (!grouped) {
-        res.group = index;
-    }
-    return res;
-}
 
 function getGroups(buttons, indexes, grouped) {
     let groups = {};

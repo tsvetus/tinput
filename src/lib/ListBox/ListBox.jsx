@@ -76,7 +76,14 @@ class ListBox extends React.Component {
 
     updateItems(items) {
         if (this.mounted) {
-            this.helper.load(items, this.props.empty, this.props.listMode, this.props.showMode);
+            this.helper.load(
+                items,
+                this.props.empty,
+                this.props.listMode,
+                this.props.showMode,
+                this.props.keyField,
+                this.props.valueField
+            );
         }
     }
 
@@ -328,6 +335,14 @@ ListBox.propTypes = {
     placeholder: PropTypes.string,
     empty: PropTypes.object,
     items: PropTypes.array,
+    keyField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
+    valueField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     listMode: PropTypes.string,
     showMode: PropTypes.string,
     clickable: PropTypes.string,
