@@ -104,9 +104,15 @@ TSearch.propTypes = {
         value: PropTypes.string
     }),
     /** Specifies key field name if it is other than "key" */
-    keyField: PropTypes.string,
+    keyField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     /** Specifies value field name if it is other than "value" */
-    valueField: PropTypes.string,
+    valueField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     /** Prevents from changing component value from user input */
     readOnly: PropTypes.any,
     /** If "true" drop up/down indicator is shown */
@@ -160,8 +166,10 @@ TSearch.defaultProps = {
     listMode: 'value',
     showMode: 'value',
     showIcon: true,
+    chars: 3,
     clickable: 'label edit',
-    chars: 3
+    keyField: ['key', 'id'],
+    valueField: ['value', 'name']
 };
 
 export default TSearch;

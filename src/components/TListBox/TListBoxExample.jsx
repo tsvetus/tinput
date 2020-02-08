@@ -44,7 +44,7 @@ class TListBoxExample extends React.Component {
               }
             }}
             name={'myListBox'}
-            empty={{key: 0, value: '-'}}
+            empty={{id: 0, name: '-'}}
             items={[
               {id: 1, code: 'code1', name: 'First item'},
               {id: 2, code: 'code2', name: 'Second item'},

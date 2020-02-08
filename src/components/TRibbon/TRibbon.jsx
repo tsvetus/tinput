@@ -127,7 +127,7 @@ TRibbon.propTypes = {
      */
     onChange: PropTypes.func,
     /**
-     * Happens when frame generation is needed. Mast return html element representing current item
+     * Happens when frame is rendering. Mast return html element representing current item
      * @param {object} event Event object with following structure:
      * @param {string} event.name Component name from "name" property
      * @param {object} event.data Component data from "data" property

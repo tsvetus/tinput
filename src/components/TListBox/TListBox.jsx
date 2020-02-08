@@ -107,9 +107,15 @@ TListBox.propTypes = {
         value: PropTypes.string
     })),
     /** Specifies key field name if it is other than "key" */
-    keyField: PropTypes.string,
+    keyField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     /** Specifies value field name if it is other than "value" */
-    valueField: PropTypes.string,
+    valueField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     /** Determines what part of "item" should be shown in dropdown list */
     listMode: PropTypes.string,
     /** Determines what part of "item" should be shown in editor */
@@ -141,7 +147,9 @@ TListBox.defaultProps = {
     listMode: 'value',
     showMode: 'value',
     showIcon: true,
-    clickable: 'label edit'
+    clickable: 'label edit',
+    keyField: ['key', 'id'],
+    valueField: ['value', 'name']
 };
 
 export default TListBox;

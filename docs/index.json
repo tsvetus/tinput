@@ -1498,6 +1498,26 @@
             }
           }
         },
+        "keyField": {
+          "type": "union",
+          "description": "Specifies key field name if it is other than \"key\"",
+          "required": false,
+          "defaultValue": "['key', 'id']",
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
+        "valueField": {
+          "type": "union",
+          "description": "Specifies value field name if it is other than \"value\"",
+          "required": false,
+          "defaultValue": "['value', 'name']",
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
         "listMode": {
           "type": "string",
           "description": "Determines what part of \"item\" should be shown in dropdown list",
@@ -1702,6 +1722,26 @@
             }
           }
         },
+        "keyField": {
+          "type": "union",
+          "description": "Specifies key field name if it is other than \"key\"",
+          "required": false,
+          "defaultValue": "['key', 'id']",
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
+        "valueField": {
+          "type": "union",
+          "description": "Specifies value field name if it is other than \"value\"",
+          "required": false,
+          "defaultValue": "['value', 'name']",
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
         "readOnly": {
           "type": "any",
           "description": "Prevents from changing component value from user input",
@@ -1881,6 +1921,18 @@
             "container": {
               "type": "object",
               "description": "Style for outer component container"
+            },
+            "form": {
+              "type": "object",
+              "description": "Items for style. See \"TForm\" component"
+            },
+            "pager": {
+              "type": "object",
+              "description": "Items page navigation bar style. See \"TPager\" component"
+            },
+            "item": {
+              "type": "object",
+              "description": "List item style"
             }
           }
         },
@@ -1896,17 +1948,92 @@
         },
         "items": {
           "type": "array",
-          "description": "",
+          "description": "Items list",
           "required": false
+        },
+        "item": {
+          "type": "object",
+          "description": "Current item",
+          "required": false
+        },
+        "size": {
+          "type": "number",
+          "description": "Items page size",
+          "required": false,
+          "defaultValue": "10"
         },
         "placeholder": {
           "type": "any",
-          "description": "",
+          "description": "Placeholder text",
           "required": false
         },
         "onFrame": {
           "type": "func",
-          "description": "",
+          "description": "Happens when item is rendering. Mast return html element representing current item ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "object",
+              "description": "Current row"
+            },
+            "event.index": {
+              "name": "event.index",
+              "type": "number",
+              "description": "Current row item"
+            },
+            "event.style": {
+              "name": "event.style",
+              "type": "object",
+              "description": "Item style"
+            },
+            "event.onClick": {
+              "name": "event.onClick",
+              "type": "func",
+              "description": "Reference to \"onClick\" event"
+            }
+          },
+          "required": false
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.item": {
+              "name": "event.item",
+              "type": "object",
+              "description": "Selected item or \"null\" if component is cleared"
+            }
+          },
           "required": false
         },
         "onButtonClick": {
@@ -1952,14 +2079,6 @@
             }
           },
           "required": false
-        },
-        "wait": {
-          "required": false,
-          "defaultValue": "false"
-        },
-        "down": {
-          "required": false,
-          "defaultValue": "false"
         }
       }
     },
@@ -3558,7 +3677,7 @@
         },
         "onFrame": {
           "type": "func",
-          "description": "Happens when frame generation is needed. Mast return html element representing current item ",
+          "description": "Happens when frame is rendering. Mast return html element representing current item ",
           "arguments": {
             "event": {
               "name": "event",

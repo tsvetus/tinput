@@ -17,10 +17,16 @@ class TSelectBox extends React.Component {
         super(props, context);
         this.state = {
             show: false,
-            item: null
+            item: props.item
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
+    }
+
+    componentDidUpdate(old) {
+        if (old.item !== this.props.item) {
+            this.setState({item: this.props.item});
+        }
     }
 
     handleClick(event) {
@@ -43,6 +49,13 @@ class TSelectBox extends React.Component {
                     control: control
                 });
             }
+            if (this.props.onChange) {
+                this.props.onChange({
+                    name: this.props.name,
+                    data: this.props.data,
+                    item: null
+                });
+            }
         }
     }
 
@@ -52,6 +65,13 @@ class TSelectBox extends React.Component {
                 show: false,
                 item: event.item
             });
+            if (this.props.onChange) {
+                this.props.onChange({
+                    name: this.props.name,
+                    data: this.props.data,
+                    item: event.item
+                });
+            }
         } else {
             this.setState({show: false});
         }
@@ -112,6 +132,7 @@ class TSelectBox extends React.Component {
                     style={formStyle}
                     show={this.state.show}
                     items={this.props.items}
+                    size={this.props.size}
                     onFrame={this.props.onFrame}
                     onClose={this.handleClose} />
 
@@ -128,14 +149,44 @@ TSelectBox.propTypes = {
     style: PropTypes.shape({
         /** Style for outer component container */
         container: PropTypes.object,
+        /** Items for style. See "TForm" component */
+        form: PropTypes.object,
+        /** Items page navigation bar style. See "TPager" component */
+        pager: PropTypes.object,
+        /** List item style */
+        item: PropTypes.object
     }),
     /** Component name */
     name: PropTypes.any,
     /** Component data */
     data: PropTypes.any,
+    /** Items list */
     items: PropTypes.array,
+    /** Current item */
+    item: PropTypes.object,
+    /** Items page size */
+    size: PropTypes.number,
+    /** Placeholder text  */
     placeholder: PropTypes.any,
+    /**
+     * Happens when item is rendering. Mast return html element representing current item
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {object} event.item Current row
+     * @param {number} event.index Current row item
+     * @param {object} event.style Item style
+     * @param {func} event.onClick Reference to "onClick" event
+     */
     onFrame: PropTypes.func,
+    /**
+     * On change event
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {object} event.item Selected item or "null" if component is cleared
+     */
+    onChange: PropTypes.func,
     /**
      * On button click event
      * @param {object} event Event object with following structure:
@@ -153,8 +204,7 @@ TSelectBox.propTypes = {
 };
 
 TSelectBox.defaultProps = {
-    wait: false,
-    down: false
+    size: 10
 };
 
 export default TSelectBox;

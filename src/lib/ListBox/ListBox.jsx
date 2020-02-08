@@ -335,8 +335,14 @@ ListBox.propTypes = {
     placeholder: PropTypes.string,
     empty: PropTypes.object,
     items: PropTypes.array,
-    keyField: PropTypes.string,
-    valueField: PropTypes.string,
+    keyField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
+    valueField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     listMode: PropTypes.string,
     showMode: PropTypes.string,
     clickable: PropTypes.string,

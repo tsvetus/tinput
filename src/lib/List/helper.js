@@ -1,3 +1,20 @@
+function parseField(item, field) {
+    if (field) {
+        if (field instanceof Array) {
+            for (let key in field) {
+                if (item.hasOwnProperty(field)) {
+                    return key;
+                }
+            }
+        } else if (typeof field === 'string') {
+            if (item.hasOwnProperty(field)) {
+                return field;
+            }
+        }
+    }
+    return key;
+}
+
 class Helper {
 
     constructor () {
@@ -48,13 +65,8 @@ class Helper {
                     i++;
                 }
 
-                if (keyField && item.hasOwnProperty(keyField)) {
-                    key = keyField;
-                }
-
-                if (valueField && item.hasOwnProperty(valueField)) {
-                    value = valueField;
-                }
+                key = parseField(item, keyField);
+                value = parseField(item, valueField);
 
                 if (key !== null && value !== null) {
                     return {key: key, value: value}

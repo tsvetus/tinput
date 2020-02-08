@@ -15,13 +15,14 @@ class TSelectBoxExample extends React.Component {
       event: '',
       item: null
     };
-    this.click = this.click.bind(this);
+    this.change = this.change.bind(this);
     this.clear = this.clear.bind(this);
     this.frame = this.frame.bind(this);
   }
 
-  click(event) {
+  change(event) {
     this.setState({
+      item: event.item,
       event: this.state.event + ' ' +
         JSON.stringify(event)
     });
@@ -82,8 +83,7 @@ class TSelectBoxExample extends React.Component {
             items={ITEMS}
             item={this.state.item}
             onFrame={this.frame}
-            onButtonClick={this.click}
-            onCaptionClick={this.click} &gt;
+            onChange={this.change} &gt;
               &lt;div&gt;Click me to show items selection form&lt;/div&gt;
           &lt;/TSelectBox&gt;
 
