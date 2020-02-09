@@ -52,10 +52,17 @@ class TTop extends React.Component {
 
         let icon = null;
         if (this.props.icon) {
-            icon = <Icon
-                name={this.props.icon}
-                style={style.button}
-                onClick={this.handleClick} />;
+            if (typeof this.props.icon === 'string') {
+                icon = <Icon
+                    name={this.props.icon}
+                    style={style.button}
+                    onClick={this.handleClick} />;
+            } else if (typeof this.props.icon === 'object') {
+                icon = <Icon
+                    icon={this.props.icon}
+                    style={style.button}
+                    onClick={this.handleClick} />;
+            }
         }
 
         let tools = [];
@@ -111,7 +118,10 @@ TTop.propTypes = {
     /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
     /** Name of the main menu icon appeared in the left corner of component */
-    icon: PropTypes.string,
+    icon: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]),
     /** Component caption */
     caption: PropTypes.any,
     /** Array of component tools */

@@ -2728,10 +2728,14 @@
           "required": false
         },
         "icon": {
-          "type": "string",
+          "type": "union",
           "description": "Name of the main menu icon appeared in the left corner of component",
           "required": false,
-          "defaultValue": "'menu'"
+          "defaultValue": "'menu'",
+          "structure": {
+            "string": {},
+            "object": {}
+          }
         },
         "caption": {
           "type": "any",

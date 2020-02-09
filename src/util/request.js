@@ -1,3 +1,5 @@
+import {clone} from './misc.js';
+
 export const INITIAL_STATE = {
     wait: false,
     user: null,
@@ -202,7 +204,7 @@ export function reducer(state = null, action = null) {
     if (state === null) {
         return state;
     }
-    let newState = Object.assign({}, state);
+    let newState = clone(state);
     newState.wait = waitReducer(state.wait, action);
     newState.user = userReducer(state.user, action);
     newState.error = errorReducer(state.error, action);

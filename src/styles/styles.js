@@ -389,8 +389,7 @@ export default function defaultStyles(template) {
                 flexShrink: "0",
                 color: template.colors.border,
                 height: "32px",
-                width: "32px",
-                margin: "4px"
+                width: "32px"
             },
 
             caption: {
