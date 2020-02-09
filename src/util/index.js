@@ -44,6 +44,18 @@ import {
     deleteCookie
 } from './cookie.js';
 
+import {
+    post,
+    request,
+    login,
+    logout,
+    check,
+    clear,
+    reducer,
+    hasAuth,
+    INITIAL_STATE
+} from './request.js';
+
 export {
 
     download,
@@ -82,6 +94,16 @@ export {
     deleteCookie,
 
     TIMEOUT,
-    REGEXP
+    REGEXP,
+
+    post,
+    request,
+    login,
+    logout,
+    check,
+    clear,
+    reducer,
+    hasAuth,
+    INITIAL_STATE
 
 }

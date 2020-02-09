@@ -52,7 +52,17 @@ import {
     deleteCookie,
 
     Sizer,
-    Uploader
+    Uploader,
+
+    post,
+    request,
+    login,
+    logout,
+    check,
+    clear,
+    reducer,
+    hasAuth,
+    INITIAL_STATE
 
 } from './util';
 
@@ -111,6 +121,16 @@ export {
 
     Sizer,
     Uploader,
+
+    post,
+    request,
+    login,
+    logout,
+    check,
+    clear,
+    reducer,
+    hasAuth,
+    INITIAL_STATE,
 
     styles,
     registerStyles
