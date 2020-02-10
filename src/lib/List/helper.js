@@ -12,7 +12,7 @@ function parseField(item, field) {
             }
         }
     }
-    return key;
+    return field;
 }
 
 class Helper {
