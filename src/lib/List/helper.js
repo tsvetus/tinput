@@ -1,4 +1,4 @@
-function parseField(item, field) {
+function parseField(item, field, value) {
     if (field) {
         if (field instanceof Array) {
             for (let key in field) {
@@ -12,7 +12,7 @@ function parseField(item, field) {
             }
         }
     }
-    return field;
+    return value;
 }
 
 class Helper {
@@ -65,8 +65,8 @@ class Helper {
                     i++;
                 }
 
-                key = parseField(item, keyField);
-                value = parseField(item, valueField);
+                key = parseField(item, keyField, key);
+                value = parseField(item, valueField, value);
 
                 if (key !== null && value !== null) {
                     return {key: key, value: value}
