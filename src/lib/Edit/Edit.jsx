@@ -150,14 +150,15 @@ class Edit extends React.Component {
     }
 
     showPlaceholder() {
-        if (this.props.placeholder && this.getText() === '' && this.getHtml().indexOf('<span') < 0) {
+        if (this.props.placeholder && nvl(this.getText(), '') === '' &&
+            nvl(this.getHtml(), '').indexOf('<span') < 0) {
              this.setHtml('<span style="pointer-events: none; color: ' + styles.colors.placeholder + ';">' +
                  this.props.placeholder + '</span>');
         }
     }
 
     hidePlaceholder() {
-        let html = this.getHtml();
+        let html = nvl(this.getHtml(), '');
         if (html.indexOf('<span') >= 0) {
             this.setHtml(html.replace(/<span.*<\/span>/, ''));
         }
@@ -177,7 +178,7 @@ class Edit extends React.Component {
     }
 
     getText() {
-        let text = this.getHtml();
+        let text = nvl(this.getHtml(), '');
         if (text.indexOf('<span') < 0) {
             if (this.props.wrap) {
                 return text;
@@ -213,14 +214,12 @@ class Edit extends React.Component {
 
     setCaret(caret) {
         if (this.ref.current === document.activeElement) {
-            let text = this.getText();
-            if (text) {
-                let length = this.getText().length;
-                if (caret > length) {
-                    document.getSelection().collapse(this.ref.current.firstChild, length);
-                } else {
-                    document.getSelection().collapse(this.ref.current.firstChild, caret);
-                }
+            let text = nvl(this.getText(), );
+            let length = text.length;
+            if (caret > length) {
+                document.getSelection().collapse(this.ref.current.firstChild, length);
+            } else {
+                document.getSelection().collapse(this.ref.current.firstChild, caret);
             }
         }
     }
@@ -247,7 +246,7 @@ class Edit extends React.Component {
         try {
             let text = (event.clipboardData || window.clipboardData).getData('text');
             if (text) {
-                let old = this.getText();
+                let old = nvl(this.getText(), '');
                 let caret = this.getCaret();
                 this.setText(old.substring(0, caret) + text + old.substring(caret));
                 this.value = this.getText();
