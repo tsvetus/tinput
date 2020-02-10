@@ -692,6 +692,10 @@ export default function defaultStyles(template) {
 
         TFlexList: {
 
+        },
+
+        TItemGroup: {
+
         }
 
     }

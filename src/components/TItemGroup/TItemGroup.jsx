@@ -94,7 +94,7 @@ class TItemGroup extends React.Component {
         let style = merge(
             contain(styles.TComponent),
             contain(styles.TGroup),
-            contain(styles.TButtonGroup),
+            contain(styles.TItemGroup),
             contain(styles[this.props.name]),
             contain(this.props.style)
         );

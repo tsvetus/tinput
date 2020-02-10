@@ -101,9 +101,6 @@ class TPager extends React.Component {
         let pages = [];
         for (let i=params.pageFrom; i<=params.pageTo; i++) {
             let st = style.page;
-            if (this.state.wait) {
-                st = merge(st, style.wait);
-            }
             if (i === this.state.page) {
                 st = merge(st, style.current);
                 if (this.state.wait) {
@@ -114,9 +111,6 @@ class TPager extends React.Component {
         }
 
         let ls = style.label;
-        if (this.state.wait) {
-            ls = merge(ls, style.wait);
-        }
 
         let label = null;
         let edit = null;

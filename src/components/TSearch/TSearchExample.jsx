@@ -24,6 +24,7 @@ class TSearchExample extends React.Component {
   }
 
   search(event, callback) {
+    console.log(event);
     let items = ITEMS.filter(v => {
       return (
         v.name.indexOf(event.value) >= 0 ||

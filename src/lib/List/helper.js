@@ -1,4 +1,4 @@
-import {clone} from '../../util';
+import {clone, merge} from '../../util';
 
 function parseField(item, field, value) {
     if (field) {
@@ -33,6 +33,8 @@ class Helper {
         this.getShowItem = this.getShowItem.bind(this);
         this.hasItems = this.hasItems.bind(this);
         this.load = this.load.bind(this);
+        this.getOriginal = this.getOriginal.bind(this);
+        this.getQuery = this.getQuery.bind(this);
     }
 
     getStruct(items, empty, keyField, valueField) {
@@ -182,11 +184,22 @@ class Helper {
     }
 
     getOriginal(index) {
-        console.log(this.original);
         if (this.original) {
             return this.original[index];
         } else {
             return null;
+        }
+    }
+
+    getQuery(query, key, value) {
+        if (this.struct) {
+            let result = merge(query, {
+                [this.struct.key]: key,
+                [this.struct.value]: value
+            });
+            return result;
+        } else {
+            return query;
         }
     }
 

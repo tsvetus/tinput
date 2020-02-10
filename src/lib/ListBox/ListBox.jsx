@@ -211,12 +211,11 @@ class ListBox extends React.Component {
 
     handleTextChange(event) {
         if (this.props.onSearch && event.value && event.value.length >= this.props.chars) {
-            this.props.onSearch({
-                name: this.props.name,
-                data: this.props.data,
+            let query = this.helper.getQuery({
                 key: null,
                 value: event.value
-            }, (items) => {
+            }, null, event.value);
+            this.props.onSearch(query, (items) => {
                 this.updateItems(items);
                 this.setState({
                     showList: this.helper.hasItems(),
@@ -242,12 +241,11 @@ class ListBox extends React.Component {
 
     search(key) {
         if (this.props.onSearch && key) {
-            this.props.onSearch({
-                name: this.props.name,
-                data: this.props.data,
+            let query = this.helper.getQuery({
                 key: key,
                 value: null
-            }, (items) => {
+            }, key, null);
+            this.props.onSearch(query, (items) => {
                 this.updateItems(items);
                 this.updateValue(key);
             });

@@ -14,7 +14,7 @@ class TTime extends React.Component {
 
     constructor(props) {
         super(props);
-        this.format = merge(TTime.format, props.format);
+        this.format = merge(TTime.defaultProps.format, props.format);
         this.state = {
             value: strTime(this.format.mask, this.format.empty, props.value)
         };
@@ -24,7 +24,7 @@ class TTime extends React.Component {
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value || old.format !== this.props.format) {
-            this.format = merge(TTime.format, this.props.format);
+            this.format = merge(TTime.defaultProps.format, this.props.format);
             let value = null;
             if (this.props.value === this.props.empty) {
                 value = this.props.empty;
@@ -38,7 +38,7 @@ class TTime extends React.Component {
     }
 
     handleValidate(event) {
-        return event.empty || testIsoTime(isoTime(this.props.format.mask, event.value));
+        return event.empty || testIsoTime(isoTime(this.format.mask, event.value));
     }
 
     handleChange(event) {
