@@ -90,7 +90,7 @@ class TSearchExample extends React.Component {
             valueField={'name'}
             showMode={'key'}
             listMode={'key value'}
-            empty={{code: 0, name: '-'}}
+//            empty={{code: 0, name: '-'}}
             onSearch={this.search}
             onChange={this.change}/>
 
