@@ -70,6 +70,9 @@ class TPager extends React.Component {
 
     handleClick(event) {
         event.stopPropagation();
+        if (this.props.wait) {
+            return;
+        }
         let data = event.target.getAttribute('data');
         if (data === 'left') {
             this.pager.pageUp();
@@ -98,6 +101,9 @@ class TPager extends React.Component {
         let pages = [];
         for (let i=params.pageFrom; i<=params.pageTo; i++) {
             let st = style.page;
+            if (this.state.wait) {
+                st = merge(st, style.wait);
+            }
             if (i === this.state.page) {
                 st = merge(st, style.current);
                 if (this.state.wait) {
@@ -192,7 +198,7 @@ TPager.propTypes = {
         page: PropTypes.object,
         /** Style for current page button */
         current: PropTypes.object,
-        /** Style for waiting state of current page button */
+        /** Style for waiting state */
         wait: PropTypes.object
     }),
     /**
@@ -211,6 +217,7 @@ TPager.propTypes = {
     hide: PropTypes.any,
     /** Delay between page button is clicked and "onChange" event */
     timeout: PropTypes.number,
+    wait: PropTypes.any,
     /**
      * Happens when result item list is generated
      * @param {object} event Event object with following structure:
@@ -233,7 +240,8 @@ TPager.propTypes = {
 TPager.defaultProps = {
     size: 100,
     hide: false,
-    timeout: 1000
+    timeout: 1000,
+    wait: false
 };
 
 export default TPager;

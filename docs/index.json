@@ -3784,7 +3784,7 @@
             },
             "wait": {
               "type": "object",
-              "description": "Style for waiting state of current page button"
+              "description": "Style for waiting state"
             }
           }
         },
@@ -3820,6 +3820,12 @@
           "description": "Delay between page button is clicked and \"onChange\" event",
           "required": false,
           "defaultValue": "1000"
+        },
+        "wait": {
+          "type": "any",
+          "description": "",
+          "required": false,
+          "defaultValue": "false"
         },
         "onChange": {
           "type": "func",
