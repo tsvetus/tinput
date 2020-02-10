@@ -171,17 +171,29 @@ class ListBox extends React.Component {
         }
     }
 
-    handleItemClick(event, index) {
+    handleItemClick(event) {
         this.updateValue(event.key);
         this.handleShow(false);
-        if (this.props.onChange/* && this.key !== event.key*/) {
-            this.props.onChange({
-                name: this.props.name,
-                data: this.props.data,
-                value: event.key,
-                item: this.item,
-                index: index
-            });
+        if (this.props.onChange) {
+            if (this.item.index === -1) {
+                this.props.onChange({
+                    name: this.props.name,
+                    data: this.props.data,
+                    value: event.key,
+                    virtualItem: this.item,
+                    item: this.props.empty,
+                    index: this.item.index
+                });
+            } else {
+                this.props.onChange({
+                    name: this.props.name,
+                    data: this.props.data,
+                    value: event.key,
+                    virtualItem: this.item,
+                    item: this.helper.getOriginal(this.item.index),
+                    index: this.item.index
+                });
+            }
         }
         this.key = event.key;
     }

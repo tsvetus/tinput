@@ -1,3 +1,5 @@
+import {clone} from '../../util';
+
 function parseField(item, field, value) {
     if (field) {
         if (field instanceof Array) {
@@ -18,6 +20,7 @@ function parseField(item, field, value) {
 class Helper {
 
     constructor () {
+        this.original = [];
         this.items = [];
         this.struct = null;
         this.count = 0;
@@ -105,6 +108,7 @@ class Helper {
 
     load(items, empty, listMode, showMode, keyField, valueField) {
 
+        this.original = clone(items);
         this.items = [];
         this.listMode = this.getMode(listMode);
         this.showMode = this.getMode(showMode);
@@ -175,6 +179,15 @@ class Helper {
         return this.getListItems().find( v =>{
             return v.key == value;
         });
+    }
+
+    getOriginal(index) {
+        console.log(this.original);
+        if (this.original) {
+            return this.original[index];
+        } else {
+            return null;
+        }
     }
 
 }

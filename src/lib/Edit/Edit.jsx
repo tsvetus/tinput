@@ -214,7 +214,7 @@ class Edit extends React.Component {
 
     setCaret(caret) {
         if (this.ref.current === document.activeElement) {
-            let text = nvl(this.getText(), );
+            let text = nvl(this.getText(), '');
             let length = text.length;
             if (caret > length) {
                 document.getSelection().collapse(this.ref.current.firstChild, length);

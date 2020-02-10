@@ -42,6 +42,7 @@ class TSearch extends React.Component {
                 showMode={this.props.showMode}
                 onChange={this.props.onChange}
                 value={this.props.value}
+                chars={this.props.chars}
                 empty={this.props.empty}
                 keyField={this.props.keyField}
                 valueField={this.props.valueField}

@@ -3,10 +3,10 @@
 import {TSearch, TMemo, TGroup} from 'tinput';
 
 const ITEMS = [
-  {key: 'key1', value: 'First item'},
-  {key: 'key2', value: 'Second item'},
-  {key: 'key3', value: 'Third item'},
-  {key: 'key4', value: 'Forth item'}
+  {code: 'key1', name: 'First item'},
+  {code: 'key2', name: 'Second item'},
+  {code: 'key3', name: 'Third item'},
+  {code: 'key4', name: 'Forth item'}
 ];
 
 class TSearchExample extends React.Component {
@@ -26,9 +26,9 @@ class TSearchExample extends React.Component {
   search(event, callback) {
     let items = ITEMS.filter(v =&gt; {
       return (
-        v.value.indexOf(event.value) &gt;= 0 ||
-        v.key.indexOf(event.value) &gt;= 0 ||
-        v.key == event.key
+        v.name.indexOf(event.value) &gt;= 0 ||
+        v.code.indexOf(event.value) &gt;= 0 ||
+        v.code == event.key
       );
     });
     setTimeout(() =&gt; {
@@ -68,8 +68,10 @@ class TSearchExample extends React.Component {
             name={'mySearch1'}
             value={this.state.mySearch1}
             label={'Choose item:'}
+            keyField={'code'}
+            valueField={'name'}
             placeholder={'Type word "item" or "key"'}
-            empty={{key: 0, value: '-'}}
+            empty={{code: 0, name: '-'}}
             onSearch={this.search}
             onChange={this.change}/&gt;
 
@@ -84,9 +86,11 @@ class TSearchExample extends React.Component {
             value={this.state.mySearch2}
             label={'Choose item:'}
             placeholder={'Type word "item" or "key"'}
+            keyField={'code'}
+            valueField={'name'}
             showMode={'key'}
             listMode={'key value'}
-            empty={{key: 0, value: '-'}}
+            empty={{code: 0, name: '-'}}
             onSearch={this.search}
             onChange={this.change}/&gt;
 
