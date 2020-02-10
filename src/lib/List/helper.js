@@ -1,9 +1,9 @@
 function parseField(item, field, value) {
     if (field) {
         if (field instanceof Array) {
-            for (let key in field) {
-                if (item.hasOwnProperty(field)) {
-                    return key;
+            for (let i=0; i<field.length; i++) {
+                if (item.hasOwnProperty(field[i])) {
+                    return field[i];
                 }
             }
         } else if (typeof field === 'string') {
