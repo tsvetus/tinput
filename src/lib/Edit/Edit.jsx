@@ -213,11 +213,14 @@ class Edit extends React.Component {
 
     setCaret(caret) {
         if (this.ref.current === document.activeElement) {
-            let length = this.getText().length;
-            if (caret > length) {
-                document.getSelection().collapse(this.ref.current.firstChild, length);
-            } else {
-                document.getSelection().collapse(this.ref.current.firstChild, caret);
+            let text = this.getText();
+            if (text) {
+                let length = this.getText().length;
+                if (caret > length) {
+                    document.getSelection().collapse(this.ref.current.firstChild, length);
+                } else {
+                    document.getSelection().collapse(this.ref.current.firstChild, caret);
+                }
             }
         }
     }
