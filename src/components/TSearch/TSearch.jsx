@@ -47,6 +47,7 @@ class TSearch extends React.Component {
                 keyField={this.props.keyField}
                 valueField={this.props.valueField}
                 readOnly={false}
+                showEdit={true}
                 clickable={this.props.clickable}
                 onSearch={this.search} />
         );

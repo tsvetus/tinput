@@ -1483,6 +1483,12 @@
           "required": false,
           "defaultValue": "true"
         },
+        "showEdit": {
+          "type": "any",
+          "description": "If \"true\" drop up/down editor is shown",
+          "required": false,
+          "defaultValue": "true"
+        },
         "items": {
           "type": "arrayOf",
           "description": "List of dropdown items",
@@ -1535,6 +1541,11 @@
           "description": "Determines what components reacts on \"onClick\" events",
           "required": false,
           "defaultValue": "'label edit'"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon name",
+          "required": false
         },
         "onChange": {
           "type": "func",

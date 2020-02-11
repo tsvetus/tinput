@@ -291,11 +291,15 @@ class ListBox extends React.Component {
 
         let icon = null;
         if (this.props.showIcon) {
-            icon =
+            icon = this.props.icon ?
+                <Icon
+                    style={style.icon}
+                    name={this.props.icon}
+                    onClick={this.handleIconClick} /> :
                 <Icon
                     style={style.icon}
                     name={this.state.showList ? 'up' : 'down'}
-                    onClick={this.handleIconClick} />
+                    onClick={this.handleIconClick} />;
         }
 
         let list = null;
@@ -320,21 +324,22 @@ class ListBox extends React.Component {
                 {top ? label : null}
                 <div style={style.frame} ref={this.frame}>
                     {!top ? label : null}
-                    <Edit
-                        ref={this.edit}
-                        vStyle={style.edit}
-                        iStyle={style.edit}
-                        data={this.props.data}
-                        name={this.props.name}
-                        value={this.state.showText}
-                        timeout={this.props.timeout}
-                        placeholder={this.props.placeholder}
-                        wrap={false}
-                        readOnly={!this.props.onSearch || this.props.readOnly}
-                        onInput={this.handleInput}
-                        onClick={this.handleEditClick}
-                        onKeyDown={this.handleKeyDown}
-                        onChange={this.handleTextChange} />
+                    {this.props.showEdit ?
+                        <Edit
+                            ref={this.edit}
+                            vStyle={style.edit}
+                            iStyle={style.edit}
+                            data={this.props.data}
+                            name={this.props.name}
+                            value={this.state.showText}
+                            timeout={this.props.timeout}
+                            placeholder={this.props.placeholder}
+                            wrap={false}
+                            readOnly={!this.props.onSearch || this.props.readOnly}
+                            onInput={this.handleInput}
+                            onClick={this.handleEditClick}
+                            onKeyDown={this.handleKeyDown}
+                            onChange={this.handleTextChange} /> : null}
                     {icon}
                 </div>
                 {list}
@@ -352,10 +357,12 @@ ListBox.propTypes = {
     data: PropTypes.any,
     label: PropTypes.string,
     showIcon: PropTypes.any,
+    showEdit: PropTypes.any,
     timeout: PropTypes.number,
     placeholder: PropTypes.string,
     empty: PropTypes.object,
     items: PropTypes.array,
+    icon: PropTypes.string,
     keyField: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.array
@@ -379,6 +386,7 @@ ListBox.defaultProps = {
     listMode: 'val',
     showMode: 'val',
     showIcon: true,
+    showEdit: true,
     editable: false,
     clickable: 'label edit',
     chars: 3

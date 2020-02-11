@@ -77,7 +77,7 @@ export function cutDate(source) {
     return d + '.' + m;
 }
 
-export function isoTime(mask, source) {
+export function isoTime(source, mask) {
     if (source instanceof Date) {
         return source.toISOString().substr(11, 8);
     } else if (source && mask) {
@@ -89,7 +89,7 @@ export function isoTime(mask, source) {
     return null;
 }
 
-export function strTime(mask, empty, source) {
+export function strTime(source, mask, empty) {
 
     let str = null;
     if (source instanceof Date) {

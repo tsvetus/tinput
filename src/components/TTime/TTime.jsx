@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Text} from '../../lib';
 
-import {merge, contain, strTime, isoTime, testIsoTime, isoDate} from '../../util';
+import {merge, contain, strTime, isoTime, testIsoTime} from '../../util';
 
 import styles from '../../styles';
 
@@ -16,7 +16,7 @@ class TTime extends React.Component {
         super(props);
         this.format = merge(TTime.defaultProps.format, props.format);
         this.state = {
-            value: strTime(this.format.mask, this.format.empty, props.value)
+            value: strTime(props.value, this.format.mask, this.format.empty)
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
@@ -29,7 +29,7 @@ class TTime extends React.Component {
             if (this.props.value === this.props.empty) {
                 value = this.props.empty;
             } else {
-                value = strTime(this.format.mask, this.format.empty, this.props.value);
+                value = strTime(this.props.value, this.format.mask, this.format.empty);
             }
             if (value !== this.props.value) {
                 this.setState({value: value});
@@ -38,7 +38,7 @@ class TTime extends React.Component {
     }
 
     handleValidate(event) {
-        return event.empty || testIsoTime(isoTime(this.format.mask, event.value));
+        return event.empty || testIsoTime(isoTime(event.value, this.format.mask));
     }
 
     handleChange(event) {
@@ -47,11 +47,11 @@ class TTime extends React.Component {
             if (value) {
                 let format = this.format;
                 if (format && format.type && format.type.indexOf('nat') >= 0) {
-                    value = new Date(isoTime(format.mask, value));
+                    value = new Date(isoTime(value, format.mask));
                 } else if (format && format.type && format.type.indexOf('iso') >= 0) {
-                    value = isoTime(format.mask, value);
+                    value = isoTime(value, format.mask);
                 } else if (format && !format.type) {
-                    value = isoDate(value, format.mask);
+                    value = isoTime(value, format.mask);
                 }
             }
             this.props.onChange({

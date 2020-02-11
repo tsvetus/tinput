@@ -29,6 +29,7 @@ class TListBox extends React.Component {
                 data={this.props.data}
                 label={this.props.label}
                 showIcon={this.props.showIcon}
+                showEdit={this.props.showEdit}
                 timeout={this.props.timeout}
                 placeholder={this.props.placeholder}
                 empty={this.props.empty}
@@ -37,6 +38,7 @@ class TListBox extends React.Component {
                 showMode={this.props.showMode}
                 clickable={this.props.clickable}
                 readOnly={this.props.readOnly}
+                icon={this.props.icon}
                 layout={this.props.layout}
                 keyField={this.props.keyField}
                 valueField={this.props.valueField}
@@ -99,6 +101,8 @@ TListBox.propTypes = {
     readOnly: PropTypes.any,
     /** If "true" drop up/down indicator is shown */
     showIcon: PropTypes.any,
+    /** If "true" drop up/down editor is shown */
+    showEdit: PropTypes.any,
     /** List of dropdown items */
     items: PropTypes.arrayOf(PropTypes.shape({
         /** Item key field */
@@ -122,6 +126,8 @@ TListBox.propTypes = {
     showMode: PropTypes.string,
     /** Determines what components reacts on "onClick" events */
     clickable: PropTypes.string,
+    /** Icon name */
+    icon: PropTypes.string,
     /**
      * On text change event
      * @param {object} event Event object with following structure:
@@ -147,6 +153,7 @@ TListBox.defaultProps = {
     listMode: 'value',
     showMode: 'value',
     showIcon: true,
+    showEdit: true,
     clickable: 'label edit',
     keyField: ['key', 'id'],
     valueField: ['value', 'name']
