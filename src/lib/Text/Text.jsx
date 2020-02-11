@@ -43,6 +43,7 @@ class Text extends React.Component {
         }
         if (old.value !== this.props.value) {
             this.value = this.props.value;
+            console.log('Update: ' + this.props.value);
         }
     }
 

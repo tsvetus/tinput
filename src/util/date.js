@@ -108,7 +108,11 @@ export function strTime(source, mask, empty) {
     let m = str.substr(3, 2);
     let s = str.substr(6, 2);
 
-    return mask.replace('hh', h).replace('mm', m).replace('ss', s);
+    if (mask) {
+        return mask.replace('hh', h).replace('mm', m).replace('ss', s);
+    } else {
+        return 'hh:mm:ss'.replace('hh', h).replace('mm', m).replace('ss', s);
+    }
 
 }
 
