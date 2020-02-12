@@ -39,6 +39,12 @@ class List extends React.Component {
             if (i == this.props.hover) {
                 ist = merge(ist, style.hover);
             }
+            if (i === 0) {
+                ist = merge(ist, style.first);
+            }
+            if (i === this.props.items.length - 1) {
+                ist = merge(ist, style.last);
+            }
             return (
                 <div key={i} index={i} style={ist} onClick={this.handleClick}>
                     {v.value}

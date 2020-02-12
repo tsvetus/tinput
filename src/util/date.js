@@ -85,6 +85,10 @@ export function isoTime(source, mask) {
         let m = mask.indexOf('mm') >= 0 ? source.substr(mask.indexOf('mm'), 2) : '00';
         let s = mask.indexOf('ss') >= 0 ? source.substr(mask.indexOf('ss'), 2) : '00';
         return h + ':' + m + ':' + s;
+    } else if (source) {
+        if (testIsoTime(source)) {
+            return source;
+        }
     }
     return null;
 }
