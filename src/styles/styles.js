@@ -145,7 +145,8 @@ export default function defaultStyles(template) {
                 height: "21px",
                 textAlign: "right",
                 color: template.colors.border,
-                cursor: "pointer"
+                cursor: "pointer",
+                margin: "0 0 0 4px"
             },
 
             list: {

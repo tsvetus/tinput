@@ -28,9 +28,7 @@ class TTimeExample extends React.Component {
   }
 
   onIcon() {
-    let value = strTime(new Date());
-    console.log(value);
-    this.setState({value: value});
+    this.setState({value: new Date()});
   }
 
   render() {

@@ -20,7 +20,7 @@ class Text extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
         this.updateStyle = this.updateStyle.bind(this);
-        this.value = props.value;
+        this.state = {value: props.value};
         this.valid = true;
         this.vStyle = props.style ? props.style : {};
         this.iStyle = merge(this.vStyle, this.vStyle.invalid);
@@ -42,8 +42,7 @@ class Text extends React.Component {
             this.updateStyle(this.valid);
         }
         if (old.value !== this.props.value) {
-            this.value = this.props.value;
-            console.log('Update: ' + this.props.value);
+            this.setState({value: this.props.value});
         }
     }
 
@@ -85,19 +84,20 @@ class Text extends React.Component {
                 data: this.props.data,
                 name: this.props.name,
                 icon: this.props.icon,
-                value: this.value
+                value: this.state.value
             });
         }
     }
 
     handleChange(event) {
-        this.value = event.value;
-        if (this.mounted && this.props.onChange) {
-            this.props.onChange({
-                ...event,
-                icon: this.props.icon
-            })
-        }
+        this.setState({value: event.value}, () => {
+            if (this.mounted && this.props.onChange) {
+                this.props.onChange({
+                    ...event,
+                    icon: this.props.icon
+                })
+            }
+        });
     }
 
     updateStyle(valid) {
@@ -154,7 +154,7 @@ class Text extends React.Component {
                         iStyle={this.iStyle.edit}
                         data={this.props.data}
                         name={this.props.name}
-                        value={this.value}
+                        value={this.state.value}
                         timeout={this.props.timeout}
                         placeholder={this.props.placeholder}
                         wrap={false}

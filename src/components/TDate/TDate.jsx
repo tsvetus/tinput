@@ -54,10 +54,12 @@ class TDate extends React.Component {
                     value = isoDate(value, format.mask);
                 }
             }
-            this.props.onChange({
-                ...event,
-                value: value
-            });
+            this.setState({value: event.value}, () => {
+                this.props.onChange({
+                    ...event,
+                    value: value
+                });
+            })
         }
     }
 

@@ -54,9 +54,11 @@ class TTime extends React.Component {
                     value = isoTime(value, format.mask);
                 }
             }
-            this.props.onChange({
-                ...event,
-                value: value
+            this.setState({value: event.value},() => {
+                this.props.onChange({
+                    ...event,
+                    value: value
+                });
             });
         }
     }

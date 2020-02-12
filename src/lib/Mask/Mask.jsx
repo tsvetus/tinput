@@ -63,8 +63,6 @@ class Mask extends React.Component {
 
     render () {
 
-        console.log('Render: ' + this.props.value);
-
         let handleMask = null;
         if (this.props.onMask) {
             handleMask = this.props.onMask;
