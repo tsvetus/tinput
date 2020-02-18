@@ -563,6 +563,10 @@ export default function defaultStyles(template) {
             wait: {
                 backgroundColor: template.colors.window,
                 color: "#ddd"
+            },
+
+            ellipsis: {
+
             }
 
         },

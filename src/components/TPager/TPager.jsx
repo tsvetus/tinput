@@ -14,16 +14,19 @@ class TPager extends React.Component {
         super(props);
         this.state = {wait: false};
         this.items = props.items ? props.items : [];
-        this.pager = new Pager(props.size, this.items.length);
+        this.pager = new Pager(props.size, this.items.length, props.maxPages);
         this.state = {page: this.pager.page};
         this.handleClick = this.handleClick.bind(this);
         this.change = this.change.bind(this);
     }
 
     componentDidUpdate(old) {
-        if (old.size !== this.props.size || old.items !== this.props.items) {
+        if (old.size !== this.props.size || old.items !== this.props.items || old.maxPages !== this.props.maxPages) {
             if (old.size !== this.props.size) {
                 this.pager.setSize(this.props.size, this.state.page);
+            }
+            if (old.maxPages !== this.props.maxPages) {
+                this.pager.setMax(this.props.maxPages, this.state.page);
             }
             if (old.items !== this.props.items) {
                 this.items = this.props.items ? this.props.items : [];
@@ -211,7 +214,8 @@ TPager.propTypes = {
     hide: PropTypes.any,
     /** Delay between page button is clicked and "onChange" event */
     timeout: PropTypes.number,
-    wait: PropTypes.any,
+    /** Maximum number of pages to show in navigator bar */
+    maxPages: PropTypes.number,
     /**
      * Happens when result item list is generated
      * @param {object} event Event object with following structure:

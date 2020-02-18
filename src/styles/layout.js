@@ -336,6 +336,10 @@ export default {
 
         control: {
             cursor: "pointer"
+        },
+
+        ellipsis: {
+
         }
 
     },
