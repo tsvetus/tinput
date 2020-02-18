@@ -3832,11 +3832,10 @@
           "required": false,
           "defaultValue": "1000"
         },
-        "wait": {
-          "type": "any",
-          "description": "",
-          "required": false,
-          "defaultValue": "false"
+        "maxPages": {
+          "type": "number",
+          "description": "Maximum number of pages to show in navigator bar",
+          "required": false
         },
         "onChange": {
           "type": "func",
@@ -3909,6 +3908,10 @@
             }
           },
           "required": false
+        },
+        "wait": {
+          "required": false,
+          "defaultValue": "false"
         }
       }
     },
