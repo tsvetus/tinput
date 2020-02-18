@@ -141,14 +141,27 @@ export function post(params) {
         (params.contentType ? params.contentType : 'application/json') + '; charset=UTF-8'
     );
     xhr.withCredentials = true;
+    if (params.sender && params.sender.state) {
+        if (params.sender.state.wait) {
+            return;
+        } else {
+            params.sender.setState({wait: true});
+        }
+    }
     xhr.send(JSON.stringify(params.data));
     xhr.onreadystatechange = function() {
+        if (params.sender && params.sender.mounted === false) {
+            return;
+        }
         if (xhr.readyState !== 4) {
             return;
         }
         if (xhr.status !== 200) {
             if (params.fail) {
                 params.fail(xhr.status, {message: xhr.statusText});
+                if (params.sender && params.sender.state && params.sender.mounted) {
+                    params.sender.setState({error: xhr.statusText});
+                }
             }
             if (STORE && (xhr.status === 504 || xhr.status === 403)) {
                 STORE.dispatch(userAction(null));
@@ -157,12 +170,21 @@ export function post(params) {
             let response = JSON.parse(xhr.responseText);
             if (response.error && params.fail) {
                 params.fail(xhr.status, response.error);
+                if (params.sender && params.sender.state && params.sender.mounted) {
+                    params.sender.setState({error: response.error.message});
+                }
             } else if (params.success) {
                 params.success(response.data, response.message);
+                if (params.sender && params.sender.state && params.sender.mounted) {
+                    params.sender.setState({message: response.message});
+                }
             }
         }
         if (params.default) {
             params.default();
+        }
+        if (params.sender && params.sender.state && params.sender.mounted) {
+            params.sender.setState({wait: false});
         }
     };
 }
