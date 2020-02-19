@@ -8,11 +8,11 @@ import TGroup from "../TGroup";
 import TButton from "../TButton";
 import TCheck from "../TCheck";
 
-function getGroups(buttons, indexes, grouped) {
+function getGroups(buttons, indexes, grouped, keyField, valueField) {
     let groups = {};
     if (buttons) {
         buttons.forEach((v, i) => {
-            let res = parseItem(v, i, grouped);
+            let res = parseItem(v, i, grouped, keyField, valueField);
             if (indexes && indexes.indexOf(i) >= 0) {
                 if (groups[res.group] === undefined) {
                     groups[res.group] = i;
@@ -36,7 +36,9 @@ class TItemGroup extends React.Component {
             groups: getGroups(
                 props.items,
                 props.indexes,
-                props.grouped
+                props.grouped,
+                props.keyField,
+                props.valueField
             )
         };
         this.handleClick = this.handleClick.bind(this);
@@ -51,7 +53,9 @@ class TItemGroup extends React.Component {
                 groups: getGroups(
                     this.props.items,
                     this.props.indexes,
-                    this.props.grouped
+                    this.props.grouped,
+                    this.props.keyField,
+                    this.props.valueField
                 )
             });
         }
@@ -104,7 +108,7 @@ class TItemGroup extends React.Component {
         let controls = null;
         if (this.state.items) {
             controls = this.state.items.map((v, i) => {
-                let res = parseItem(v, i, this.props.grouped);
+                let res = parseItem(v, i, this.props.grouped, this.props.keyField, this.props.valueField);
                 if (this.props.control.indexOf('check') >= 0 || this.props.control.indexOf('radio') >= 0) {
                     let radio = this.props.control.indexOf('radio') >= 0;
                     return (
@@ -181,6 +185,16 @@ TItemGroup.propTypes = {
         /** Control group. If "grouped = true" then only one control in the same group can be in checked/down state */
         group: PropTypes.number
     })),
+    /** Specifies key field name if it is other than "key" */
+    keyField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
+    /** Specifies value field name if it is other than "value" */
+    valueField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     /** Control type used in group. Can be one of: */
     control: PropTypes.oneOf(['button', 'check', 'radio']),
     /** Checked/Down value */

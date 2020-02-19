@@ -5,23 +5,31 @@ const refs = {};
 class Ref {
 
     constructor (params) {
-        this.url = params.url;
-        if (this.url && !refs[this.url]) {
+        if (params.name) {
+            this.name = params.name;
+        } else {
+            this.name = params.url;
+        }
+        if (params.url && !refs[this.name]) {
             post({
-                url: this.url,
-                data: {},
+                url: params.url,
+                data: params.data ? params.data : {},
                 sender: params.sender,
                 target: params.target,
                 success: (items) => {
-                    refs[this.url] = items;
+                    refs[this.name] = items;
                 }
             });
         }
         this.getItems = this.getItems.bind(this);
     }
 
-    getItems() {
-        return refs[this.url];
+    getItems(name) {
+        if (name) {
+            return refs[name];
+        } else {
+            return refs[this.name];
+        }
     }
 
 }

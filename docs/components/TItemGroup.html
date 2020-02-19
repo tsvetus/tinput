@@ -3,13 +3,13 @@
 import {TItemGroup, TMemo} from 'tinput';
 
 const ITEMS = [
-  {key: 1, value: 'Item1', group: 0},
-  {key: 2, value: 'Item2', group: 0},
-  {key: 3, value: 'Item3', group: 0},
-  {key: 4, value: 'Item4', group: 0},
-  {key: 5, value: 'Item5', group: 1},
-  {key: 6, value: 'Item6', group: 1},
-  {key: 7, value: 'Item7', group: 1}
+  {code: 1, name: 'Item1', group: 0},
+  {code: 2, name: 'Item2', group: 0},
+  {code: 3, name: 'Item3', group: 0},
+  {code: 4, name: 'Item4', group: 0},
+  {code: 5, name: 'Item5', group: 1},
+  {code: 6, name: 'Item6', group: 1},
+  {code: 7, name: 'Item7', group: 1}
 ];
 
 class TItemGroupExample extends React.Component {
@@ -65,6 +65,8 @@ class TItemGroupExample extends React.Component {
           grouped={true}
           indexes={[2,4]}
           items={ITEMS}
+          keyField={'code'}
+          valueField={'name'}
           onChange={this.change} /&gt;
 
           &lt;TItemGroup
@@ -88,6 +90,8 @@ class TItemGroupExample extends React.Component {
             grouped={true}
             indexes={[2,4]}
             items={ITEMS}
+            keyField={'code'}
+            valueField={'name'}
             onChange={this.change} /&gt;
 
           &lt;TItemGroup
@@ -111,6 +115,8 @@ class TItemGroupExample extends React.Component {
               grouped={true}
               indexes={[2,4]}
               items={ITEMS}
+              keyField={'code'}
+              valueField={'name'}
               checked={1}
               unchecked={0}
               onChange={this.change} /&gt;

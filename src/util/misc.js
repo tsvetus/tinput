@@ -249,7 +249,7 @@ export function isMS() {
     return /MSIE|Trident|Edge/.test(ua);
 }
 
-export function parseItem(item, index, grouped) {
+export function parseItem(item, index, grouped, keyField, valueField) {
     let i = index === undefined ? 0 : index;
     let res = {
         key: 'key' + i,
@@ -275,6 +275,12 @@ export function parseItem(item, index, grouped) {
             }
         }
     });
+    if (keyField && item[keyField] !== undefined) {
+        res.key = item[keyField];
+    }
+    if (valueField && item[valueField] !== undefined) {
+        res.value = item[valueField];
+    }
     if (grouped === undefined) {
         delete res.group;
     } else if (!grouped) {

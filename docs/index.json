@@ -2471,6 +2471,24 @@
             }
           }
         },
+        "keyField": {
+          "type": "union",
+          "description": "Specifies key field name if it is other than \"key\"",
+          "required": false,
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
+        "valueField": {
+          "type": "union",
+          "description": "Specifies value field name if it is other than \"value\"",
+          "required": false,
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
         "control": {
           "type": "enum",
           "description": "Control type used in group. Can be one of:",
