@@ -55,6 +55,7 @@ import {
 
     Sizer,
     Uploader,
+    Ref,
 
     post,
     request,
@@ -125,6 +126,7 @@ export {
 
     Sizer,
     Uploader,
+    Ref,
 
     post,
     request,

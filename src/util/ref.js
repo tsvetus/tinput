@@ -1,4 +1,4 @@
-import {post} from 'request.js';
+import {post} from './request.js';
 
 const refs = {};
 
