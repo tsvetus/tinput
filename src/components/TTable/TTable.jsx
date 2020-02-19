@@ -135,6 +135,7 @@ class TTable extends React.Component {
                             column: key,
                             index: i,
                             row: v,
+                            item: v,
                             style: style
                         });
                         if (s) {
@@ -143,6 +144,7 @@ class TTable extends React.Component {
                     }
 
                     let value = null;
+
                     if (v[key] === undefined) {
                         if (this.props.columns[key].value === undefined) {
                             value = null;
@@ -154,6 +156,20 @@ class TTable extends React.Component {
                             value = v[key];
                         } else {
                             value = this.props.columns[key].value(v[key], key, v);
+                        }
+                    }
+
+                    if (this.props.onCellValue) {
+                        let val = this.props.onCellValue({
+                            cell: v[key],
+                            column: key,
+                            index: i,
+                            row: v,
+                            item: v,
+                            style: style
+                        });
+                        if (val) {
+                            value = val;
                         }
                     }
 

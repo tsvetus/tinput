@@ -32,6 +32,7 @@ class TItemGroup extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
+            items: props.items,
             groups: getGroups(
                 props.items,
                 props.indexes,
@@ -46,6 +47,7 @@ class TItemGroup extends React.Component {
             !compare(old.indexes, this.props.indexes) ||
             old.grouped !== this.props.grouped) {
             this.setState({
+                items: this.props.items,
                 groups: getGroups(
                     this.props.items,
                     this.props.indexes,
@@ -67,7 +69,7 @@ class TItemGroup extends React.Component {
                 Object.keys(this.state.groups).forEach((v) => {
                     let index = this.state.groups[v];
                     indexes.push(index);
-                    items.push(this.props.items[index]);
+                    items.push(this.state.items[index]);
                 });
                 let value = false;
                 if (event.down !== undefined) {
@@ -100,8 +102,8 @@ class TItemGroup extends React.Component {
         );
 
         let controls = null;
-        if (this.props.items) {
-            controls = this.props.items.map((v, i) => {
+        if (this.state.items) {
+            controls = this.state.items.map((v, i) => {
                 let res = parseItem(v, i, this.props.grouped);
                 if (this.props.control.indexOf('check') >= 0 || this.props.control.indexOf('radio') >= 0) {
                     let radio = this.props.control.indexOf('radio') >= 0;

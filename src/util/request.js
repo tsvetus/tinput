@@ -150,6 +150,7 @@ export function post(params) {
     }
     xhr.send(JSON.stringify(params.data));
     xhr.onreadystatechange = function() {
+        let state = {wait: false};
         if (params.sender && params.sender.mounted === false) {
             return;
         }
@@ -157,26 +158,29 @@ export function post(params) {
             return;
         }
         if (xhr.status !== 200) {
+            state.error = xhr.statusText;
             if (params.fail) {
                 params.fail(xhr.status, {message: xhr.statusText});
-                if (params.sender && params.sender.state && params.sender.mounted) {
-                    params.sender.setState({error: xhr.statusText});
-                }
             }
             if (STORE && (xhr.status === 504 || xhr.status === 403)) {
                 STORE.dispatch(userAction(null));
             }
         } else {
             let response = JSON.parse(xhr.responseText);
-            if (response.error && params.fail) {
-                params.fail(xhr.status, response.error);
-                if (params.sender && params.sender.state && params.sender.mounted) {
-                    params.sender.setState({error: response.error.message});
+            if (response.error) {
+                state.error = response.error.message;
+                if (params.fail) {
+                    params.fail(xhr.status, response.error);
                 }
-            } else if (params.success) {
-                params.success(response.data, response.message);
-                if (params.sender && params.sender.state && params.sender.mounted) {
-                    params.sender.setState({message: response.message});
+            } else {
+                if (params.target) {
+                    state[params.target] = response.data;
+                }
+                if (response.message) {
+                    state.message = response.message;
+                }
+                if (params.success) {
+                    params.success(response.data, response.message);
                 }
             }
         }
@@ -184,7 +188,7 @@ export function post(params) {
             params.default();
         }
         if (params.sender && params.sender.state && params.sender.mounted) {
-            params.sender.setState({wait: false});
+            params.sender.setState(state);
         }
     };
 }

@@ -112,10 +112,7 @@ TGroupButton.propTypes = {
     name: PropTypes.any,
     /** Component data */
     data: PropTypes.any,
-    /**
-     * Component wait state. When "true" component appears in grey color and doesn't respond
-     * on "onClick" event
-     */
+    /** Buttons list */
     items: PropTypes.array,
     /**
      * On click event

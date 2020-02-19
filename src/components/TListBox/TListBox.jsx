@@ -12,6 +12,17 @@ import styles from '../../styles';
  */
 class TListBox extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {items: props.items}
+    }
+
+    componentDidUpdate(old) {
+        if (old.items !== this.props.items) {
+            this.setState({items: this.props.items});
+        }
+    }
+
     render() {
 
         let style = merge(
@@ -33,7 +44,7 @@ class TListBox extends React.Component {
                 timeout={this.props.timeout}
                 placeholder={this.props.placeholder}
                 empty={this.props.empty}
-                items={this.props.items}
+                items={this.state.items}
                 listMode={this.props.listMode}
                 showMode={this.props.showMode}
                 clickable={this.props.clickable}

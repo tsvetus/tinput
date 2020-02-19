@@ -2271,7 +2271,7 @@
         },
         "items": {
           "type": "array",
-          "description": "Component wait state. When \"true\" component appears in grey color and doesn't respond\r\non \"onClick\" event",
+          "description": "Buttons list",
           "required": false
         },
         "onClick": {

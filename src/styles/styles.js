@@ -701,6 +701,10 @@ export default function defaultStyles(template) {
 
         TItemGroup: {
 
+        },
+
+        TRef: {
+
         }
 
     }

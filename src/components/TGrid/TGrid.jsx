@@ -155,6 +155,7 @@ class TGrid extends React.Component {
                             column: key,
                             index: i,
                             row: v,
+                            item: v,
                             style: style
                         });
                         if (s) {
@@ -185,6 +186,20 @@ class TGrid extends React.Component {
                             value = v[key];
                         } else {
                             value = this.props.columns[key].value(v[key], key, v);
+                        }
+                    }
+
+                    if (this.props.onCellValue) {
+                        let val = this.props.onCellValue({
+                            cell: v[key],
+                            column: key,
+                            index: i,
+                            row: v,
+                            item: v,
+                            style: style
+                        });
+                        if (val) {
+                            value = val;
                         }
                     }
 
