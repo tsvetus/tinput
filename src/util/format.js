@@ -57,6 +57,8 @@ class Format {
             // if (event.key === 46) {
             //     caret++;
             // }
+        } else if (value === '') {
+
         } else {
             value = this.value;
         }

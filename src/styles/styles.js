@@ -16,6 +16,8 @@ export default function defaultStyles(template) {
 
         TButton: {
             container: {
+                display: "flex",
+                alignItems: "center",
                 padding: "8px 16px 8px 16px",
                 backgroundColor: template.colors.face,
                 color: template.colors.text,

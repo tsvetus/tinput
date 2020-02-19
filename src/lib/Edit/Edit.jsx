@@ -73,7 +73,8 @@ class Edit extends React.Component {
             this.iStyle = merge(this.props.vStyle, this.props.iStyle);
             this.updateStyle(this.valid);
         }
-        if (!this.sending && this.value !== this.props.value && (this.full || this.empty)) {
+
+        if (!this.sending && this.value !== this.props.value && (this.ref.current !== document.activeElement)) {
             this.value = this.props.value === undefined ? null : this.props.value;
             this.validate(this.value);
             this.updateStyle(this.valid);
@@ -264,6 +265,8 @@ class Edit extends React.Component {
             return;
         }
 
+        clearTimeout(this.timer);
+
         this.value = this.getText();
         if (this.value === '') {
             this.value = this.props.empty;
@@ -293,25 +296,11 @@ class Edit extends React.Component {
             this.updateStyle(res.valid);
         }
 
-        if (res.valid && res.full) {
-            this.sendValue(res.value);
-        } else if (!res.valid && res.valid !== this.valid) {
+        if (!res.valid || !res.full) {
             res.value = this.props.empty;
-            this.sendValue(res.value);
-        } else if (!res.full && res.full !== this.full) {
-            res.value = this.props.empty;
-            this.sendValue(res.value);
-        } else if (res.valid && res.valid !== this.valid) {
-            if (!res.full) {
-                res.value = this.props.empty;
-            }
-            this.sendValue(res.value);
-        } else if (res.full && res.full !== this.full) {
-            if (!res.valid) {
-                res.value = this.props.empty;
-            }
-            this.sendValue(res.value);
         }
+
+        this.sendValue(res.value);
 
         this.value = res.value;
         this.valid = res.valid;

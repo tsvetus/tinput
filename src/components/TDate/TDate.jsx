@@ -31,7 +31,7 @@ class TDate extends React.Component {
             } else {
                 value = strDate(this.props.value, this.format.mask, this.format.empty);
             }
-            if (value !== this.props.value) {
+            if (value !== this.props.value || value !== this.state.value) {
                 this.setState({value: value});
             }
         }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {TDate, TMemo, TGroup} from 'tinput';
+import {TDate, TMemo, TGroup, TButton} from 'tinput';
 
 class TDateExample extends React.Component {
 
@@ -53,6 +53,13 @@ class TDateExample extends React.Component {
               type: 'iso'
             }}
             onChange={this.change}/>
+
+            <TButton
+              onClick={() => {
+                this.setState({value: null})
+              }}>
+              Clear
+            </TButton>
 
         </TGroup>
 
