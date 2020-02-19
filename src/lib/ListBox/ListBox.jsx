@@ -172,9 +172,15 @@ class ListBox extends React.Component {
     }
 
     handleItemClick(event) {
+
         this.updateValue(event.key);
+
         this.handleShow(false);
+
         if (this.props.onChange) {
+
+            document.activeElement.blur();
+
             if (this.item) {
                 if (this.item.index === -1) {
                     this.props.onChange({
@@ -205,8 +211,15 @@ class ListBox extends React.Component {
                     index: -1
                 });
             }
+
         }
+
+        if (this.edit.current) {
+            this.edit.current.focus();
+        }
+
         this.key = event.key;
+
     }
 
     handleTextChange(event) {

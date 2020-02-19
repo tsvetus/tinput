@@ -29,6 +29,7 @@ class Edit extends React.Component {
         this.sendValue = this.sendValue.bind(this);
         this.validate = this.validate.bind(this);
         this.parseValue = this.parseValue.bind(this);
+        this.focus = this.focus.bind(this);
         this.vStyle = props.vStyle;
         this.iStyle = merge(props.vStyle, props.iStyle);
         this.value = props.value === undefined ? null : props.value;
@@ -87,6 +88,13 @@ class Edit extends React.Component {
 
         this.sending = false;
 
+    }
+
+    focus() {
+        if (this.ref.current) {
+//            this.ref.current.focus();
+//            this.setCaret(this.caret);
+        }
     }
 
     validate(value) {
