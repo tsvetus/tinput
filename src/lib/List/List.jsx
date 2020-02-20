@@ -33,23 +33,32 @@ class List extends React.Component {
 
         let items = this.props.items.map((v, i) => {
             let ist = style.item;
+
             if (v.key == this.props.selected) {
                 ist = merge(ist, style.selected);
             }
+
             if (i == this.props.hover) {
                 ist = merge(ist, style.hover);
             }
-            if (i === 0) {
-                ist = merge(ist, style.first);
+
+            if (this.props.items.length === 1) {
+                ist = merge(ist, style.single);
+            } else {
+                if (i === 0) {
+                    ist = merge(ist, style.first);
+                }
+                if (i === this.props.items.length - 1) {
+                    ist = merge(ist, style.last);
+                }
             }
-            if (i === this.props.items.length - 1) {
-                ist = merge(ist, style.last);
-            }
+
             return (
                 <div key={i} index={i} style={ist} onClick={this.handleClick}>
                     {v.value}
                 </div>
             );
+
         });
 
         return (

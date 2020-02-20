@@ -27,9 +27,9 @@ class Edit extends React.Component {
         this.hidePlaceholder = this.hidePlaceholder.bind(this);
         this.updateStyle = this.updateStyle.bind(this);
         this.sendValue = this.sendValue.bind(this);
+        this.setValue = this.setValue.bind(this);
         this.validate = this.validate.bind(this);
         this.parseValue = this.parseValue.bind(this);
-        this.focus = this.focus.bind(this);
         this.vStyle = props.vStyle;
         this.iStyle = merge(props.vStyle, props.iStyle);
         this.value = props.value === undefined ? null : props.value;
@@ -76,25 +76,22 @@ class Edit extends React.Component {
         }
 
         if (!this.sending && this.value !== this.props.value && (this.ref.current !== document.activeElement)) {
-            this.value = this.props.value === undefined ? null : this.props.value;
-            this.validate(this.value);
-            this.updateStyle(this.valid);
-            this.setText(this.value);
-            if (!this.props.wrap) {
-                this.setCaret(this.caret);
-            }
-            this.showPlaceholder();
+            this.setValue(this.props.value);
         }
 
         this.sending = false;
 
     }
 
-    focus() {
-        if (this.ref.current) {
-//            this.ref.current.focus();
-//            this.setCaret(this.caret);
+    setValue(value) {
+        this.value = value === undefined ? null : value;
+        this.validate(this.value);
+        this.updateStyle(this.valid);
+        this.setText(this.value);
+        if (!this.props.wrap) {
+            this.setCaret(this.caret);
         }
+        this.showPlaceholder();
     }
 
     validate(value) {

@@ -22,6 +22,7 @@ class ListBox extends React.Component {
         };
         this.updateItems = this.updateItems.bind(this);
         this.updateValue = this.updateValue.bind(this);
+        this.setValue = this.setValue.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.handleIconClick = this.handleIconClick.bind(this);
         this.handleLabelClick = this.handleLabelClick.bind(this);
@@ -91,15 +92,22 @@ class ListBox extends React.Component {
     updateValue(value) {
         if (this.mounted) {
             this.item = this.helper.getShowItem(value);
-            if (this.item) {
-                if (this.item.index < 0) {
-                    this.setState({showText: '', value: value});
-                } else {
-                    this.setState({showText: this.item.value, value: value});
-                }
-            } else {
-                this.setState({showText: '', value: value});
+            let text = '';
+            if (this.item && this.item.index >= 0) {
+                text = this.item.value;
             }
+            this.setState({showText: text, value: value});
+        }
+    }
+
+    setValue(value) {
+        if (this.edit.current) {
+            this.item = this.helper.getShowItem(value);
+            let text = '';
+            if (this.item && this.item.index >= 0) {
+                text = this.item.value;
+            }
+            this.edit.current.setValue(text);
         }
     }
 
@@ -174,13 +182,11 @@ class ListBox extends React.Component {
 
     handleItemClick(event) {
 
-        this.updateValue(event.key);
+        this.setValue(event.key);
 
         this.handleShow(false);
 
         if (this.props.onChange) {
-
-            document.activeElement.blur();
 
             if (this.item) {
                 if (this.item.index === -1) {
@@ -213,10 +219,6 @@ class ListBox extends React.Component {
                 });
             }
 
-        }
-
-        if (this.edit.current) {
-            this.edit.current.focus();
         }
 
         this.key = event.key;
