@@ -66,7 +66,8 @@ class ListBox extends React.Component {
                 this.updateValue(this.props.value);
                 this.search(this.props.value);
             }
-        } else if (old.value !== this.props.value) {
+        } else if ((old.value !== this.props.value) ||
+            (this.state.value !== this.props.value)) {
             if (this.props.value !== undefined) {
                 this.updateValue(this.props.value);
                 this.search(this.props.value);
