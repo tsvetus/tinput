@@ -18,6 +18,7 @@ export default function defaultStyles(template) {
             container: {
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
                 padding: "8px 16px 8px 16px",
                 backgroundColor: template.colors.face,
                 color: template.colors.text,
