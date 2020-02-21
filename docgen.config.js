@@ -157,6 +157,11 @@ module.exports = {
         example: {
             name: "TFormExample"
         }
+    }, {
+        name: "TEdit",
+        example: {
+            name: "TEditExample"
+        }
     }]
 
 };

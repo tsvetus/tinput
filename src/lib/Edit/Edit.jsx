@@ -186,23 +186,31 @@ class Edit extends React.Component {
     getText() {
         let text = nvl(this.getHtml(), '');
         if (text.indexOf('<span') < 0) {
-            if (this.props.wrap) {
-                return text;
-            } else {
-                let st = strip(text);
-                if (st && typeof st === 'string') {
-                    return strip(text).replace(/<br>/gm, '');
+            if (this.props.html) {
+                if (this.props.wrap) {
+                    return text;
+                } else {
+                    let st = strip(text);
+                    if (st && typeof st === 'string') {
+                        return strip(text).replace(/<br>/gm, '');
+                    }
                 }
+            } else {
+                return this.ref.current.innerText;
             }
         }
         return this.props.empty;
     }
 
     setText(text) {
-        if (this.props.wrap) {
-            this.setHtml(nvl(text,''));
+        if (this.props.html) {
+            if (this.props.wrap) {
+                this.setHtml(nvl(text,''));
+            } else {
+                this.setHtml(flood(nvl(text,'')));
+            }
         } else {
-            this.setHtml(flood(nvl(text,'')));
+            this.ref.current.innerHTML = text;
         }
     }
 
@@ -247,21 +255,21 @@ class Edit extends React.Component {
     }
 
     handlePaste(event) {
-        event.preventDefault();
-        this.mute = true;
-        try {
-            let text = (event.clipboardData || window.clipboardData).getData('text');
-            if (text) {
-                let old = nvl(this.getText(), '');
-                let caret = this.getCaret();
-                this.setText(old.substring(0, caret) + text + old.substring(caret));
-                this.value = this.getText();
-                this.setCaret(this.value.length);
-                this.handleChange();
-            }
-        } finally {
-            this.mute = false;
-        }
+        // event.preventDefault();
+        // this.mute = true;
+        // try {
+        //     let text = (event.clipboardData || window.clipboardData).getData('text');
+        //     if (text) {
+        //         let old = nvl(this.getText(), '');
+        //         let caret = this.getCaret();
+        //         this.setText(old.substring(0, caret) + text + old.substring(caret));
+        //         this.value = this.getText();
+        //         this.setCaret(this.value.length);
+        //         this.handleChange();
+        //     }
+        // } finally {
+        //     this.mute = false;
+        // }
     }
 
     handleChange() {
@@ -387,6 +395,7 @@ Edit.propTypes = {
     name: PropTypes.string,
     data: PropTypes.any,
     wrap: PropTypes.any,
+    html: PropTypes.any,
     placeholder: PropTypes.string,
     timeout: PropTypes.number,
     readOnly: PropTypes.any,
@@ -406,6 +415,7 @@ Edit.defaultProps = {
     empty: null,
     readOnly: false,
     wrap: false,
+    html: false,
     timeout: TIMEOUT
 };
 

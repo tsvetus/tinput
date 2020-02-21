@@ -24,6 +24,7 @@ import TRibbonExample from './components/TRibbon/TRibbonExample.jsx';
 import TPagerExample from './components/TPager/TPagerExample.jsx';
 import TModalExample from './components/TModal/TModalExample.jsx';
 import TFormExample from './components/TForm/TFormExample.jsx';
+import TEditExample from './components/TEdit/TEditExample.jsx';
 
 export {
     TDateExample,
@@ -51,5 +52,6 @@ export {
     TFlexListExample,
     TPagerExample,
     TModalExample,
-    TFormExample
+    TFormExample,
+    TEditExample
 }

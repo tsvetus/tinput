@@ -30,7 +30,8 @@ import {
     TTable,
     TRibbon,
     TFlexList,
-    TMenu
+    TMenu,
+    TEdit
 } from './components';
 
 import {
@@ -105,6 +106,7 @@ export {
     TRibbon,
     TFlexList,
     TMenu,
+    TEdit,
 
     download,
     clone,

@@ -1,4 +1,4 @@
-import React from 'react';
+<pre><code>import React from 'react';
 
 import {TEdit, TGroup, TMemo} from 'tinput';
 
@@ -15,9 +15,8 @@ class TEditExample extends React.Component {
   }
 
   change(event) {
-    console.log(event);
     this.setState({
-      text: event.text,
+      value: event.value,
       event: this.state.event + ' ' +
         JSON.stringify(event)
     });
@@ -31,19 +30,19 @@ class TEditExample extends React.Component {
 
     return (
 
-      <div>
+      &lt;div&gt;
 
-        <TGroup style={{
+        &lt;TGroup style={{
           container: {margin: "0 0 16px 0"}
-        }}>
+        }}&gt;
 
-          <TEdit
-            value={this.state.text}
-            onChange={this.change}/>
+          &lt;TEdit
+            value={this.state.value}
+            onChange={this.change}/&gt;
 
-        </TGroup>
+        &lt;/TGroup&gt;
 
-        <TMemo
+        &lt;TMemo
           style={{
             edit: {minHeight: "48px"}
           }}
@@ -51,9 +50,9 @@ class TEditExample extends React.Component {
           icon={'refresh'}
           wrap={true}
           value={this.state.event}
-          onIcon={this.clear}/>
+          onIcon={this.clear}/&gt;
 
-      </div>
+      &lt;/div&gt;
 
     );
 
@@ -61,4 +60,4 @@ class TEditExample extends React.Component {
 
 }
 
-export default TEditExample;
+export default TEditExample;</code></pre>
