@@ -705,7 +705,7 @@ export default function defaultStyles(template) {
 
         },
 
-        TRef: {
+        TEdit: {
 
         }
 
