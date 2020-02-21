@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {TEdit, TGroup} from 'tinput';
+import {TEdit, TGroup, TMemo} from 'tinput';
 
 class TEditExample extends React.Component {
 
@@ -36,12 +36,7 @@ class TEditExample extends React.Component {
           container: {margin: "0 0 16px 0"}
         }}>
 
-          <TMemo
-            style={{
-              edit: {minHeight: "48px"}
-            }}
-            label={'Enter long text:'}
-            wrap={true}
+          <TEdit
             value={this.state.value}
             onChange={this.change}/>
 

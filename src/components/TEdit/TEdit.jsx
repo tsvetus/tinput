@@ -39,7 +39,7 @@ class TEdit extends React.Component {
 
 }
 
-TMemo.propTypes = {
+TEdit.propTypes = {
     /** Component style: */
     style: PropTypes.object,
     /** Component initial value */
