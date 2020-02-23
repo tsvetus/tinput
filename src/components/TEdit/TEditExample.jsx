@@ -39,6 +39,8 @@ class TEditExample extends React.Component {
 
           <TEdit
             value={this.state.text}
+            content={'text'}
+            wrap={true}
             onChange={this.change}/>
 
         </TGroup>

@@ -797,6 +797,101 @@
         }
       }
     },
+    "TEdit": {
+      "description": "Component representing simple text editor",
+      "displayName": "TEdit",
+      "methods": [],
+      "example": {
+        "name": "TEditExample"
+      },
+      "props": {
+        "style": {
+          "type": "object",
+          "description": "Component style:",
+          "required": false
+        },
+        "value": {
+          "type": "string",
+          "description": "Component initial value",
+          "required": false
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
+          "required": false
+        },
+        "placeholder": {
+          "type": "string",
+          "description": "Text to show when editor is empty",
+          "required": false
+        },
+        "empty": {
+          "type": "any",
+          "description": "Value appeared in onChange event when editor is empty. Default is \"null\"",
+          "required": false,
+          "defaultValue": "null"
+        },
+        "wrap": {
+          "type": "any",
+          "description": "If \"true\" editor preserves end of line characters in text and allows to wrap text when Enter key is pressed.\r\nOtherwise (by default) it ignores new line characters and entered text treated as single string",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "content": {
+          "type": "enum",
+          "description": "Value type returned by \"onChange\" event. Can be one of:",
+          "required": false,
+          "defaultValue": "'text'",
+          "structure": {
+            "'text'": {},
+            "'html'": {}
+          }
+        },
+        "readOnly": {
+          "type": "any",
+          "description": "Prevents from changing component value from user input, Default is \"false\"",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On text change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "string",
+              "description": "Entered text."
+            }
+          },
+          "required": false
+        }
+      }
+    },
     "TTime": {
       "description": "Time editor with time value validation",
       "displayName": "TTime",
@@ -4669,101 +4764,6 @@
             }
           },
           "required": true
-        }
-      }
-    },
-    "TEdit": {
-      "description": "Component representing inline text editor",
-      "displayName": "TEdit",
-      "methods": [],
-      "example": {
-        "name": "TEditExample"
-      },
-      "props": {
-        "style": {
-          "type": "object",
-          "description": "Component style:",
-          "required": false
-        },
-        "value": {
-          "type": "string",
-          "description": "Component initial value",
-          "required": false
-        },
-        "name": {
-          "type": "string",
-          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
-          "required": false
-        },
-        "data": {
-          "type": "any",
-          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
-          "required": false
-        },
-        "timeout": {
-          "type": "number",
-          "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
-          "required": false
-        },
-        "placeholder": {
-          "type": "string",
-          "description": "Text to show when editor is empty",
-          "required": false
-        },
-        "empty": {
-          "type": "any",
-          "description": "Value appeared in onChange event when editor is empty. Default is \"null\"",
-          "required": false,
-          "defaultValue": "null"
-        },
-        "wrap": {
-          "type": "any",
-          "description": "If \"true\" editor preserves end of line characters in text and allows to wrap text when Enter key is pressed.\r\nOtherwise (by default) it ignores new line characters and entered text treated as single string",
-          "required": false,
-          "defaultValue": "true"
-        },
-        "content": {
-          "type": "enum",
-          "description": "Value type returned by \"onChange\" event. Can be one of:",
-          "required": false,
-          "defaultValue": "'text'",
-          "structure": {
-            "'text'": {},
-            "'html'": {}
-          }
-        },
-        "readOnly": {
-          "type": "any",
-          "description": "Prevents from changing component value from user input, Default is \"false\"",
-          "required": false,
-          "defaultValue": "false"
-        },
-        "onChange": {
-          "type": "func",
-          "description": "On text change event ",
-          "arguments": {
-            "event": {
-              "name": "event",
-              "type": "object",
-              "description": "Event object with following structure:"
-            },
-            "event.name": {
-              "name": "event.name",
-              "type": "string",
-              "description": "Component name from \"name\" property"
-            },
-            "event.data": {
-              "name": "event.data",
-              "type": "object",
-              "description": "Component data from \"data\" property"
-            },
-            "event.value": {
-              "name": "event.value",
-              "type": "string",
-              "description": "Entered text."
-            }
-          },
-          "required": false
         }
       }
     }

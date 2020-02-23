@@ -38,6 +38,11 @@ module.exports = {
             name: "TMemoExample"
         }
     }, {
+        name: "TEdit",
+        example: {
+            name: "TEditExample"
+        }
+    }, {
         name: "TTime",
         example: {
             name: "TTimeExample"
@@ -156,11 +161,6 @@ module.exports = {
         name: "TForm",
         example: {
             name: "TFormExample"
-        }
-    }, {
-        name: "TEdit",
-        example: {
-            name: "TEditExample"
         }
     }]
 

@@ -8,7 +8,7 @@ import {merge} from '../../util';
 import styles from '../../styles';
 
 /**
- * Component representing inline text editor
+ * Component representing simple text editor
  */
 class TEdit extends React.Component {
 
@@ -31,6 +31,7 @@ class TEdit extends React.Component {
                     name={this.props.name}
                     empty={this.props.empty}
                     placeholder={this.props.placeholder}
+                    readOnly={this.props.readOnly}
                     timeout={this.props.timeout}
                     onChange={this.props.onChange} />
         );
