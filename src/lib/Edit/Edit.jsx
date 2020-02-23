@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {TIMEOUT, nvl, apply, merge, strip, flood} from '../../util';
+import {TIMEOUT, nvl, apply, merge, strip} from '../../util';
 
 import styles from '../../styles';
 
@@ -37,7 +37,6 @@ class Edit extends React.Component {
         this.valid = true;
         this.full = true;
         this.empty = false;
-        this.sending = false;
     }
 
     componentDidMount() {
@@ -75,11 +74,9 @@ class Edit extends React.Component {
             this.updateStyle(this.valid);
         }
 
-        if (!this.sending && this.value !== this.props.value && (this.ref.current !== document.activeElement)) {
+        if (this.value !== this.props.value && (this.ref.current !== document.activeElement)) {
             this.setValue(this.props.value);
         }
-
-        this.sending = false;
 
     }
 
@@ -186,15 +183,8 @@ class Edit extends React.Component {
     getText() {
         let text = nvl(this.getHtml(), '');
         if (text.indexOf('<span') < 0) {
-            if (this.props.html) {
-                if (this.props.wrap) {
-                    return text;
-                } else {
-                    let st = strip(text);
-                    if (st && typeof st === 'string') {
-                        return strip(text).replace(/<br>/gm, '');
-                    }
-                }
+            if (this.props.content === 'html') {
+                return text;
             } else {
                 return this.ref.current.innerText;
             }
@@ -203,14 +193,15 @@ class Edit extends React.Component {
     }
 
     setText(text) {
-        if (this.props.html) {
-            if (this.props.wrap) {
-                this.setHtml(nvl(text,''));
-            } else {
-                this.setHtml(flood(nvl(text,'')));
-            }
+        if (this.props.content === 'html') {
+            this.setHtml(nvl(text,''));
         } else {
-            this.ref.current.innerHTML = text;
+            this.mute = true;
+            try {
+                this.ref.current.innerText = text;
+            } finally {
+                this.mute = false;
+            }
         }
     }
 
@@ -243,7 +234,6 @@ class Edit extends React.Component {
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 if (this.mounted) {
-                    this.sending = true;
                     this.props.onChange({
                         data: this.props.data,
                         name: this.props.name,
@@ -255,21 +245,16 @@ class Edit extends React.Component {
     }
 
     handlePaste(event) {
-        // event.preventDefault();
-        // this.mute = true;
-        // try {
-        //     let text = (event.clipboardData || window.clipboardData).getData('text');
-        //     if (text) {
-        //         let old = nvl(this.getText(), '');
-        //         let caret = this.getCaret();
-        //         this.setText(old.substring(0, caret) + text + old.substring(caret));
-        //         this.value = this.getText();
-        //         this.setCaret(this.value.length);
-        //         this.handleChange();
-        //     }
-        // } finally {
-        //     this.mute = false;
-        // }
+        event.preventDefault();
+        let clipboardData = event.clipboardData || window.clipboardData;
+        let text = clipboardData.getData('Text');
+        if (this.props.content !== 'html') {
+            text = strip(text);
+            if (text && !this.props.wrap) {
+                text = text.replace(/\n/gm, ' ').replace(/\r/gm, ' ');
+            }
+        }
+        document.execCommand('insertText', false, text);
     }
 
     handleChange() {
@@ -395,7 +380,7 @@ Edit.propTypes = {
     name: PropTypes.string,
     data: PropTypes.any,
     wrap: PropTypes.any,
-    html: PropTypes.any,
+    content: PropTypes.string,
     placeholder: PropTypes.string,
     timeout: PropTypes.number,
     readOnly: PropTypes.any,
@@ -415,7 +400,7 @@ Edit.defaultProps = {
     empty: null,
     readOnly: false,
     wrap: false,
-    html: false,
+    content: 'text',
     timeout: TIMEOUT
 };
 

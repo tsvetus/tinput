@@ -719,6 +719,16 @@
           "required": false,
           "defaultValue": "false"
         },
+        "content": {
+          "type": "enum",
+          "description": "Value type returned by \"onChange\" event. Can be one of:",
+          "required": false,
+          "defaultValue": "'text'",
+          "structure": {
+            "'text'": {},
+            "'html'": {}
+          }
+        },
         "empty": {
           "type": "any",
           "description": "Value appeared in onChange event when editor is empty. Default is \"null\"",
@@ -4705,6 +4715,22 @@
           "description": "Value appeared in onChange event when editor is empty. Default is \"null\"",
           "required": false,
           "defaultValue": "null"
+        },
+        "wrap": {
+          "type": "any",
+          "description": "If \"true\" editor preserves end of line characters in text and allows to wrap text when Enter key is pressed.\r\nOtherwise (by default) it ignores new line characters and entered text treated as single string",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "content": {
+          "type": "enum",
+          "description": "Value type returned by \"onChange\" event. Can be one of:",
+          "required": false,
+          "defaultValue": "'text'",
+          "structure": {
+            "'text'": {},
+            "'html'": {}
+          }
         },
         "readOnly": {
           "type": "any",

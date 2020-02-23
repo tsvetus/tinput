@@ -15,6 +15,7 @@ class TMemoExample extends React.Component {
   }
 
   change(event) {
+    console.log(event);
     this.setState({
       value: event.value,
       event: this.state.event + ' ' +
@@ -41,7 +42,8 @@ class TMemoExample extends React.Component {
               edit: {minHeight: "48px"}
             }}
             label={'Enter long text:'}
-            wrap={true}
+            content={'text'}
+            wrap={false}
             value={this.state.value}
             onChange={this.change}/&gt;
 

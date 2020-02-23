@@ -15,8 +15,9 @@ class TEditExample extends React.Component {
   }
 
   change(event) {
+    console.log(event);
     this.setState({
-      value: event.value,
+      text: event.text,
       event: this.state.event + ' ' +
         JSON.stringify(event)
     });
@@ -37,7 +38,7 @@ class TEditExample extends React.Component {
         }}&gt;
 
           &lt;TEdit
-            value={this.state.value}
+            value={this.state.text}
             onChange={this.change}/&gt;
 
         &lt;/TGroup&gt;

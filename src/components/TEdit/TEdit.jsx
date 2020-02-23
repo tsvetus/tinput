@@ -58,6 +58,16 @@ TEdit.propTypes = {
     placeholder: PropTypes.string,
     /** Value appeared in onChange event when editor is empty. Default is "null" */
     empty: PropTypes.any,
+    /**
+     * If "true" editor preserves end of line characters in text and allows to wrap text when Enter key is pressed.
+     * Otherwise (by default) it ignores new line characters and entered text treated as single string
+     */
+    wrap: PropTypes.any,
+    /** Value type returned by "onChange" event. Can be one of: */
+    content: PropTypes.oneOf([
+        'text',
+        'html'
+    ]),
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,
     /**
@@ -72,7 +82,9 @@ TEdit.propTypes = {
 
 TEdit.defaultProps = {
     empty: null,
-    readOnly: false
+    readOnly: false,
+    wrap: true,
+    content: 'text'
 };
 
 

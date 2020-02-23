@@ -57,6 +57,7 @@ class TMemo extends React.Component {
                     iStyle={style.edit}
                     value={this.props.value}
                     wrap={this.props.wrap}
+                    html={this.props.html}
                     data={this.props.data}
                     name={this.props.name}
                     empty={this.props.empty}
@@ -112,6 +113,11 @@ TMemo.propTypes = {
      * Otherwise (by default) it ignores new line characters and entered text treated as single string
      */
     wrap: PropTypes.any,
+    /** Value type returned by "onChange" event. Can be one of: */
+    content: PropTypes.oneOf([
+        'text',
+        'html'
+    ]),
     /** Value appeared in onChange event when editor is empty. Default is "null" */
     empty: PropTypes.any,
     /** Prevents from changing component value from user input, Default is "false" */
@@ -137,7 +143,8 @@ TMemo.propTypes = {
 TMemo.defaultProps = {
     empty: null,
     readOnly: false,
-    wrap: false
+    wrap: false,
+    content: 'text'
 };
 
 

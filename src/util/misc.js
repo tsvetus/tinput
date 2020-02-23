@@ -121,38 +121,6 @@ export function strip(source) {
     }
 }
 
-export function flood(source) {
-
-    if (source && typeof source === 'string') {
-
-        let arr = source
-            .replace(/\r/gm, '<br>')
-            .replace(/<[^>]*>?/gm, '')
-            .split(' ');
-
-        let res = '';
-
-        if (arr.length > 0) {
-            res = arr[0];
-            for (let i = 1; i < arr.length; i++) {
-                if (arr[i - 1] !== '' && arr[i] !== '') {
-                    res += ' ' + arr[i];
-                } else {
-                    res += '&nbsp;' + arr[i];
-                }
-            }
-        }
-
-        return res;
-
-    } else {
-
-        return source;
-
-    }
-
-}
-
 export function params(source) {
     let res = {};
     let path = source ? source : window.location.pathname;
