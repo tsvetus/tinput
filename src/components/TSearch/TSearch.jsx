@@ -35,6 +35,7 @@ class TSearch extends React.Component {
                 data={this.props.data}
                 name={this.props.name}
                 label={this.props.label}
+                layout={this.props.layout}
                 showIcon={this.props.showIcon}
                 timeout={this.props.timeout}
                 placeholder={this.props.placeholder}

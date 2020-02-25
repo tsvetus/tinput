@@ -76,6 +76,7 @@ class TTime extends React.Component {
             <Text
                 style={style}
                 data={this.props.data}
+                layout={this.props.layout}
                 name={this.props.name}
                 value={this.state.value}
                 label={this.props.label}
