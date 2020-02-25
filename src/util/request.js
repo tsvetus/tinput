@@ -129,68 +129,101 @@ export function messageReducer(state = null, action = null) {
     }
 }
 
+function setState(params, state) {
+    if (params.sender && params.sender.state &&
+        (params.sender.mounted || params.sender.mounted === undefined)) {
+        params.sender.setState(state);
+    }
+}
+
 export function post(params) {
+
     let xhr = new XMLHttpRequest();
+
     xhr.open(
         params.method ? params.method : 'POST',
         params.url,
         params.async !== undefined ? params.async : true
     );
+
     xhr.setRequestHeader(
         'Content-Type',
         (params.contentType ? params.contentType : 'application/json') + '; charset=UTF-8'
     );
+
     xhr.withCredentials = true;
+
     if (params.sender && params.sender.state) {
         if (params.sender.state.wait) {
             return;
         } else {
-            params.sender.setState({wait: true});
+            setState(params, {wait: true});
         }
     }
+
     xhr.send(JSON.stringify(params.data));
+
     xhr.onreadystatechange = function() {
+
         let state = {wait: false};
+
         if (params.sender && params.sender.mounted === false) {
             return;
-        }
-        if (xhr.readyState !== 4) {
+        } else if (xhr.readyState !== 4) {
+            setState(params, state);
             return;
         }
+
         if (xhr.status !== 200) {
+
             state.error = xhr.statusText;
+
             if (params.fail) {
                 params.fail(xhr.status, {message: xhr.statusText});
             }
+
             if (STORE && (xhr.status === 504 || xhr.status === 403)) {
                 STORE.dispatch(userAction(null));
             }
+
         } else {
+
             let response = JSON.parse(xhr.responseText);
+
             if (response.error) {
+
                 state.error = response.error.message;
+
                 if (params.fail) {
                     params.fail(xhr.status, response.error);
                 }
+
             } else {
+
                 if (params.target) {
                     state[params.target] = response.data;
                 }
+
                 if (response.message) {
                     state.message = response.message;
                 }
+
                 if (params.success) {
                     params.success(response.data, response.message);
                 }
+
             }
+
         }
+
         if (params.default) {
             params.default();
         }
-        if (params.sender && params.sender.state && params.sender.mounted) {
-            params.sender.setState(state);
-        }
-    };
+
+        setState(params, state);
+
+    }
+
 }
 
 export function request(params) {

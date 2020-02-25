@@ -9,11 +9,11 @@ class TLoad extends React.Component {
 
     constructor(props) {
         super(props);
-        this.cursor = document.body.style.cursor;
+        // this.cursor = document.body.style.cursor;
     }
 
     componentWillUnmount() {
-        document.body.style.cursor = this.cursor;
+        // document.body.style.cursor = this.cursor;
     }
 
     render () {
@@ -21,11 +21,11 @@ class TLoad extends React.Component {
         let style = merge(styles.TLoad, this.props.style, this.props.show &&
             this.props.showCaption ? {} : {display: "none"});
 
-        if (this.props.show) {
-            document.body.style.cursor = "wait";
-        } else {
-            document.body.style.cursor = this.cursor;
-        }
+        // if (this.props.show) {
+        //     document.body.style.cursor = "wait";
+        // } else {
+        //     document.body.style.cursor = this.cursor;
+        // }
 
         return (
             <div style={style}>
