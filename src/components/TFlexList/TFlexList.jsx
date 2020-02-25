@@ -29,8 +29,10 @@ class TFlexList extends React.Component {
     }
 
     componentDidUpdate(old) {
-        if (!compare(old.pager, this.props.pager) || !compare(old.items, this.props.items)) {
-            this.setState({items: this.props.pager ? [] : this.props.items});
+        if (old.pager !== this.props.pager || old.items !== this.props.items) {
+            if (!this.props.pager) {
+                this.setState({items: this.props.items});
+            }
         }
     }
 

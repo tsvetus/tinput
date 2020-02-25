@@ -4,7 +4,7 @@ const refs = {};
 
 class Ref {
 
-    constructor (params) {
+    create (params) {
         if (params.name) {
             this.name = params.name;
         } else {
@@ -21,7 +21,6 @@ class Ref {
                 }
             });
         }
-        this.getItems = this.getItems.bind(this);
     }
 
     getItems(name) {
