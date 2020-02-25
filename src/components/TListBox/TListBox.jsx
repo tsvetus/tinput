@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {ListBox} from '../../lib';
 
-import {merge, contain} from '../../util';
+import {merge, contain, Provider} from '../../util';
 
 import styles from '../../styles';
 
@@ -14,12 +14,45 @@ class TListBox extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {items: props.items}
+        if (props.provider) {
+            let p = Provider.get(props.provider).getProps();
+            this.state = {
+                items: p.items ? p.items : props.items,
+                keyField: p.keyField ? p.keyField : props.keyField,
+                valueField: p.valueField ? p.valueField : props.valueField,
+                empty: p.empty ? p.empty : props.empty
+            }
+        } else {
+            this.state = {
+                items: props.items,
+                keyField: props.keyField,
+                valueField: props.valueField,
+                empty: props.empty
+            }
+        }
     }
 
     componentDidUpdate(old) {
         if (old.items !== this.props.items) {
             this.setState({items: this.props.items});
+        }
+        if (old.keyField !== this.props.keyField) {
+            this.setState({keyField: this.props.keyField});
+        }
+        if (old.valueField !== this.props.valueField) {
+            this.setState({valueField: this.props.valueField});
+        }
+        if (old.empty !== this.props.empty) {
+            this.setState({empty: this.props.empty});
+        }
+        if (old.provider !== this.props.provider && this.props.provider) {
+            let p = Provider.get(this.props.provider).getProps();
+            this.setState({
+                items: p.items ? p.items : this.state.items,
+                keyField: p.keyField ? p.keyField : this.state.keyField,
+                valueField: p.valueField ? p.valueField : this.state.valueField,
+                empty: p.empty ? p.empty : this.state.empty
+            });
         }
     }
 
@@ -43,16 +76,17 @@ class TListBox extends React.Component {
                 showEdit={this.props.showEdit}
                 timeout={this.props.timeout}
                 placeholder={this.props.placeholder}
-                empty={this.props.empty}
+                empty={this.state.empty}
                 items={this.state.items}
+                provider={this.props.provider}
                 listMode={this.props.listMode}
                 showMode={this.props.showMode}
                 clickable={this.props.clickable}
                 readOnly={this.props.readOnly}
                 icon={this.props.icon}
                 layout={this.props.layout}
-                keyField={this.props.keyField}
-                valueField={this.props.valueField}
+                keyField={this.state.keyField}
+                valueField={this.state.valueField}
                 onChange={this.props.onChange}
                 onValidate={this.props.onValidate} />
         );
