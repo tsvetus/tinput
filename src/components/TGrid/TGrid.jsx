@@ -152,7 +152,9 @@ class TGrid extends React.Component {
                     if (this.props.onCellStyle) {
                         let s = this.props.onCellStyle({
                             cell: v[key],
+                            field: v[key],
                             column: key,
+                            fieldName: key,
                             index: i,
                             row: v,
                             item: v,

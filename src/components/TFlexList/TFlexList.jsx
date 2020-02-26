@@ -60,6 +60,7 @@ class TFlexList extends React.Component {
             let size = this.props.pager.size ? this.props.pager.size : TPager.defaultProps.size;
             let hide = this.props.pager.hide ? this.props.pager.hide : TPager.defaultProps.hide;
             let timeout = this.props.pager.timeout ? this.props.pager.timeout : TPager.defaultProps.timeout;
+            let maxPages = this.props.pager.maxPages ? this.props.pager.maxPages : TPager.defaultProps.maxPages;
             pager = (
                 <TPager
                     style={this.props.pager.style}
@@ -67,6 +68,7 @@ class TFlexList extends React.Component {
                     timeout={timeout}
                     size={size}
                     hide={hide}
+                    maxPages={maxPages}
                     onChange={this.onPage} />
             );
         }

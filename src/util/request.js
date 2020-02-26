@@ -273,9 +273,18 @@ export function reducer(state = null, action = null) {
 
 export function  hasAuth(auth, user) {
     if (user && user.authorities) {
-        let found = user.authorities.find(v => {return v.name === auth});
-        if (found) {
-            return true;
+        if (auth instanceof Array) {
+            for (let i=0; i<auth.length; i++) {
+                let found = hasAuth(auth[i], user);
+                if (found) {
+                    return true;
+                }
+            }
+        } else {
+            let found = user.authorities.find(v => {return v.name === auth});
+            if (found) {
+                return true;
+            }
         }
     }
     return false;
