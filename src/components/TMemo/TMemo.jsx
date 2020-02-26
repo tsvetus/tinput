@@ -144,7 +144,8 @@ TMemo.defaultProps = {
     empty: null,
     readOnly: false,
     wrap: false,
-    content: 'text'
+    content: 'text',
+    timeout: 300
 };
 
 

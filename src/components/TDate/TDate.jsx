@@ -183,7 +183,8 @@ TDate.defaultProps = {
     required: true,
     empty: null,
     readOnly: false,
-    layout: 'left'
+    layout: 'left',
+    timeout: 300
 };
 
 export default TDate;

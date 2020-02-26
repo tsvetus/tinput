@@ -172,7 +172,8 @@ TSearch.defaultProps = {
     chars: 3,
     clickable: 'label edit',
     keyField: ['key', 'id'],
-    valueField: ['value', 'name']
+    valueField: ['value', 'name'],
+    timeout: 500
 };
 
 export default TSearch;

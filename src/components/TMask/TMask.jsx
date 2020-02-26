@@ -142,7 +142,8 @@ TMask.defaultProps = {
     required: true,
     empty: null,
     readOnly: false,
-    layout: 'left'
+    layout: 'left',
+    timeout: 300
 };
 
 TMask.regexp = REGEXP;

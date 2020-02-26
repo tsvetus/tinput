@@ -71,6 +71,9 @@ export function testIsoDate(source) {
 }
 
 export function cutDate(source) {
+    if (!source) {
+        return source;
+    }
     let date = (new Date(source)).toISOString();
     let d = date.substr(8, 2);
     let m = date.substr(5, 2);
@@ -135,6 +138,9 @@ export function testIsoTime(source) {
 }
 
 export function cutTime(source) {
+    if (!source) {
+        return source;
+    }
     return source.substring(0, 5);
 }
 

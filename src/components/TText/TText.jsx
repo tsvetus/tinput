@@ -144,7 +144,8 @@ TText.defaultProps = {
     required: true,
     empty: null,
     readOnly: false,
-    layout: 'left'
+    layout: 'left',
+    timeout: 300
 };
 
 TText.regexp = REGEXP;
