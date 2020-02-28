@@ -28,12 +28,7 @@ class TSelectBox extends React.Component {
         this.updateItems(this.props.items);
     }
 
-    componentDidMount() {
-        this.mounted = true;
-    }
-
     componentWillUnmount() {
-        this.mounted = false;
         delete this.helper;
     }
 
@@ -50,16 +45,14 @@ class TSelectBox extends React.Component {
     }
 
     updateItems(items) {
-        if (this.mounted) {
-            this.helper.load(
-                items,
-                this.props.empty,
-                'value',
-                'value',
-                this.props.keyField,
-                this.props.valueField
-            );
-        }
+        this.helper.load(
+            items,
+            this.props.empty,
+            'value',
+            'value',
+            this.props.keyField,
+            this.props.valueField
+        );
     }
 
     handleClick(event) {
@@ -213,12 +206,12 @@ TSelectBox.propTypes = {
     size: PropTypes.number,
     /** Placeholder text  */
     placeholder: PropTypes.any,
-    /** Specifies key field name if it is other than "key" */
+    /** Specifies key field names */
     keyField: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.array
     ]),
-    /** Specifies value field name if it is other than "value" */
+    /** Specifies value field names */
     valueField: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.array
@@ -262,7 +255,9 @@ TSelectBox.propTypes = {
 
 TSelectBox.defaultProps = {
     size: 10,
-    timeout: 500
+    timeout: 500,
+    keyField: ['key', 'id'],
+    valueField: ['value', 'name']
 };
 
 export default TSelectBox;
