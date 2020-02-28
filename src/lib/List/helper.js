@@ -26,11 +26,14 @@ class Helper {
         this.count = 0;
         this.getStruct = this.getStruct.bind(this);
         this.getValue = this.getValue.bind(this);
+        this.getKey = this.getKey.bind(this);
         this.getMode = this.getMode.bind(this);
         this.getListItems = this.getListItems.bind(this);
         this.getShowItems = this.getShowItems.bind(this);
+        this.getOriginalItems = this.getOriginalItems.bind(this);
         this.getListItem = this.getListItem.bind(this);
         this.getShowItem = this.getShowItem.bind(this);
+        this.getOriginalItem = this.getOriginalItem.bind(this);
         this.hasItems = this.hasItems.bind(this);
         this.load = this.load.bind(this);
         this.getOriginal = this.getOriginal.bind(this);
@@ -95,10 +98,11 @@ class Helper {
 
     getValue(item, mode) {
         let value = '';
-        if (mode.indexOf('key') >= 0) {
+        let m = this.getMode(mode);
+        if (m.indexOf('key') >= 0) {
             value += item[this.struct.key];
         }
-        if (mode.indexOf('val') >= 0) {
+        if (m.indexOf('val') >= 0) {
             if (value === '') {
                 value += item[this.struct.value];
             } else {
@@ -106,6 +110,10 @@ class Helper {
             }
         }
         return value;
+    }
+
+    getKey(item) {
+        return item[this.struct.key];
     }
 
     load(items, empty, listMode, showMode, keyField, valueField) {
@@ -189,6 +197,17 @@ class Helper {
         } else {
             return null;
         }
+    }
+
+    getOriginalItems() {
+        return this.original;
+    }
+
+    getOriginalItem(value) {
+        let index = this.getListItems().findIndex( v => {
+            return v.key == value;
+        });
+        return this.getOriginal(index);
     }
 
     getQuery(query, key, value) {

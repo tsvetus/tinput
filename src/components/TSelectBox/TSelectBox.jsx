@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, clone, contain, parseItem} from '../../util';
+import {merge, clone, contain} from '../../util';
 
 import TGroupButton from '../TGroupButton';
 import ListForm from './ListForm';
 
 import styles from '../../styles';
+import List from "../../lib/List";
 
 /**
  * Combobox with select list
@@ -17,15 +18,47 @@ class TSelectBox extends React.Component {
         super(props, context);
         this.state = {
             show: false,
-            item: props.item
+            item: props.item,
+            value: props.value
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.updateItems = this.updateItems.bind(this);
+        this.helper = new List.Helper();
+        this.updateItems(this.props.items);
+    }
+
+    componentDidMount() {
+        this.mounted = true;
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
+        delete this.helper;
     }
 
     componentDidUpdate(old) {
+        if (old.items !== this.props.items) {
+            this.updateItems(this.props.items);
+        }
         if (old.item !== this.props.item) {
             this.setState({item: this.props.item});
+        }
+        if (old.value !== this.props.value) {
+            this.setState({item: this.helper.getOriginalItem(this.props.value)});
+        }
+    }
+
+    updateItems(items) {
+        if (this.mounted) {
+            this.helper.load(
+                items,
+                this.props.empty,
+                'value',
+                'value',
+                this.props.keyField,
+                this.props.valueField
+            );
         }
     }
 
@@ -53,7 +86,8 @@ class TSelectBox extends React.Component {
                 this.props.onChange({
                     name: this.props.name,
                     data: this.props.data,
-                    item: null
+                    item: null,
+                    value: null
                 });
             }
         }
@@ -64,14 +98,16 @@ class TSelectBox extends React.Component {
             this.setState({
                 show: false,
                 item: event.item
+            }, () => {
+                if (this.props.onChange) {
+                    this.props.onChange({
+                        name: this.props.name,
+                        data: this.props.data,
+                        item: event.item,
+                        value: this.helper.getKey(event.item)
+                    });
+                }
             });
-            if (this.props.onChange) {
-                this.props.onChange({
-                    name: this.props.name,
-                    data: this.props.data,
-                    item: event.item
-                });
-            }
         } else {
             this.setState({show: false});
         }
@@ -98,6 +134,7 @@ class TSelectBox extends React.Component {
             ribbon: ribbonStyle
         };
 
+        let cs = clone(style.caption);
         let content = null;
         if (this.state.item) {
             if (this.props.onFrame) {
@@ -106,15 +143,20 @@ class TSelectBox extends React.Component {
                     style: formStyle.ribbon.item
                 });
             } else {
-                let item = parseItem(this.state.item);
-                content = item.value;
+                content = this.helper.getValue(this.state.item);
             }
         } else {
-            content = this.props.children;
+            if (this.props.placeholder) {
+                cs = merge(cs, style.placeholder);
+                content = this.props.placeholder;
+            } else {
+                content = this.props.children;
+            }
         }
 
         let items = [];
-        items.push({name: 'caption', caption: content, style: clone(style.caption)});
+
+        items.push({name: 'caption', caption: content, style: cs});
         items.push({name: 'button', icon: 'close', style: clone(style.button)});
         delete style.caption;
         delete style.button;
@@ -131,7 +173,7 @@ class TSelectBox extends React.Component {
                 <ListForm
                     style={formStyle}
                     show={this.state.show}
-                    items={this.props.items}
+                    items={this.helper.getOriginalItems()}
                     size={this.props.size}
                     timeout={this.props.timeout}
                     onFrame={this.props.onFrame}
@@ -165,10 +207,22 @@ TSelectBox.propTypes = {
     items: PropTypes.array,
     /** Current item */
     item: PropTypes.object,
+    /** Current item key value */
+    value: PropTypes.any,
     /** Items page size */
     size: PropTypes.number,
     /** Placeholder text  */
     placeholder: PropTypes.any,
+    /** Specifies key field name if it is other than "key" */
+    keyField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
+    /** Specifies value field name if it is other than "value" */
+    valueField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     /** Page change delay in milliseconds */
     timeout: PropTypes.number,
     /**

@@ -88,6 +88,10 @@ export default function defaultStyles(template) {
                 backgroundColor: template.colors.window
             },
 
+            placeholder: {
+                color: template.colors.placeholder
+            },
+
             item: {
                 margin: "4px 8px 4px 8px"
             },

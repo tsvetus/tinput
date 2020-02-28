@@ -6,7 +6,6 @@ import {merge, parseItem} from '../../../util';
 import styles from '../../../styles';
 
 import TForm from '../../TForm';
-import TScroll from '../../TScroll';
 import TRibbon from '../../TRibbon';
 import TPager from '../../TPager';
 import TButton from '../../TButton';

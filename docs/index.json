@@ -2007,6 +2007,18 @@
       "displayName": "TSelectBox",
       "methods": [
         {
+          "name": "updateItems",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "items",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
           "name": "handleClick",
           "docblock": null,
           "modifiers": [],
@@ -2078,6 +2090,11 @@
           "description": "Current item",
           "required": false
         },
+        "value": {
+          "type": "any",
+          "description": "Current item key value",
+          "required": false
+        },
         "size": {
           "type": "number",
           "description": "Items page size",
@@ -2088,6 +2105,24 @@
           "type": "any",
           "description": "Placeholder text",
           "required": false
+        },
+        "keyField": {
+          "type": "union",
+          "description": "Specifies key field name if it is other than \"key\"",
+          "required": false,
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
+        "valueField": {
+          "type": "union",
+          "description": "Specifies value field name if it is other than \"value\"",
+          "required": false,
+          "structure": {
+            "string": {},
+            "array": {}
+          }
         },
         "timeout": {
           "type": "number",
