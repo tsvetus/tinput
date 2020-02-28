@@ -4,37 +4,45 @@ class Sizer {
 
     constructor (comp, callback) {
         this.comp = comp;
+        this.resize = this.resize.bind(this);
         this.getWidth = this.getWidth.bind(this);
         this.getHeight = this.getHeight.bind(this);
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
+        this.send = this.send.bind(this);
         this.handleResize = this.handleResize.bind(this);
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
         if (this.comp && this.comp.state) {
             this.comp.state.width = window.innerWidth;
             this.comp.state.height = window.innerHeight;
-            this.start(callback);
         }
+        this.timer = null;
+        this.callback = callback;
+        this.start();
     }
 
     getWidth() {
-        return this.width;
+        return window.innerWidth;
     }
 
     getHeight() {
-        return this.height;
+        return window.innerHeight;
     }
 
-    start(callback) {
-        window.addEventListener('resize', this.handleResize);
-        if (callback) {
-            this.callback = callback;
+    send() {
+        if (this.callback) {
+            this.callback({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
         }
     }
 
+    start() {
+        window.addEventListener('resize', this.handleResize);
+        this.send();
+    }
+
     stop() {
-        this.callback = null;
         window.removeEventListener('resize', this.handleResize);
     }
 
@@ -42,20 +50,23 @@ class Sizer {
         this.stop();
     }
 
-    handleResize() {
-        if (this.callback) {
-            this.callback({
-                width: window.innerWidth,
-                height: window.innerHeight
-            });
-        }
+    resize() {
         if (this.comp && this.comp.setState) {
             this.comp.setState({
                 ...clone(this.comp.state),
                 width: window.innerWidth,
                 height: window.innerHeight
+            }, () => {
+                this.send();
             });
+        } else {
+            this.send();
         }
+    }
+
+    handleResize() {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(this.resize, 500);
     }
 
 }

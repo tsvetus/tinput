@@ -20,8 +20,9 @@ class TFlexList extends React.Component {
             width: 0,
             items: props.pager ? [] : props.items
         };
-        this.sizer = new Sizer(this);
         this.onPage = this.onPage.bind(this);
+        this.onResize = this.onResize.bind(this);
+        this.sizer = new Sizer(this, this.onResize);
     }
 
     componentDidMount() {
@@ -39,6 +40,16 @@ class TFlexList extends React.Component {
     componentWillUnmount() {
         this.mounted = false;
         this.sizer.free();
+    }
+
+    onResize(event) {
+        if (this.props.onResize) {
+            this.props.onResize({
+                ...event,
+                name: this.props.name,
+                data: this.props.data
+            });
+        }
     }
 
     onPage(event) {
@@ -251,7 +262,8 @@ TFlexList.propTypes = {
      * @param {object} event.style Component style
      * @param {func} event.onClick Reference to "onClick" event
      */
-    onFrame: PropTypes.func
+    onFrame: PropTypes.func,
+    onResize: PropTypes.func
 };
 
 TFlexList.defaultProps = {

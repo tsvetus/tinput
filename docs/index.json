@@ -4086,6 +4086,18 @@
       "displayName": "TFlexList",
       "methods": [
         {
+          "name": "onResize",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
           "name": "onPage",
           "docblock": null,
           "modifiers": [],
@@ -4416,6 +4428,11 @@
               "description": "Reference to \"onClick\" event"
             }
           },
+          "required": false
+        },
+        "onResize": {
+          "type": "func",
+          "description": "",
           "required": false
         },
         "page": {
