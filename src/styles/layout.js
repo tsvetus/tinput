@@ -327,15 +327,18 @@ export default {
         },
 
         page: {
-            cursor: "pointer"
+            cursor: "pointer",
+            userSelect: "none"
         },
 
         current: {
-            cursor: "pointer"
+            cursor: "pointer",
+            userSelect: "none"
         },
 
         control: {
-            cursor: "pointer"
+            cursor: "pointer",
+            userSelect: "none"
         },
 
         ellipsis: {
