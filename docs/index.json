@@ -2778,6 +2778,13 @@
           "modifiers": [],
           "params": [],
           "returns": null
+        },
+        {
+          "name": "update",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
         }
       ],
       "example": {
@@ -3459,6 +3466,11 @@
             }
           },
           "required": false
+        },
+        "onCellValue": {
+          "type": "func",
+          "description": "",
+          "required": false
         }
       }
     },
@@ -3725,6 +3737,11 @@
               "description": "Selected item"
             }
           },
+          "required": false
+        },
+        "onCellValue": {
+          "type": "func",
+          "description": "",
           "required": false
         }
       }

@@ -28,6 +28,8 @@ class Icon extends React.Component {
 
         let style = merge({container: {}}, contain(this.props.style));
 
+        let cs = style.container;
+
         let content = null;
         let w = "0 0 384 384";
         if (icon) {
@@ -37,10 +39,13 @@ class Icon extends React.Component {
             }
             content = (<path style={ps} d={icon.d}></path>);
             w = icon.w;
+            if (icon.s) {
+                cs = merge(cs, icon.s);
+            }
         }
 
         return (
-            <svg style={style.container} viewBox={w}
+            <svg style={cs} viewBox={w}
                 onClick={this.handleClick}>
                 {content}
             </svg>

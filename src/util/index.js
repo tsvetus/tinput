@@ -35,7 +35,9 @@ import {
     strTime,
     testIsoTime,
     cutDate,
-    cutTime
+    cutTime,
+    firstDate,
+    lastDate
 } from './date.js';
 
 import {
@@ -88,6 +90,8 @@ export {
     testIsoTime,
     cutDate,
     cutTime,
+    firstDate,
+    lastDate,
 
     getCookie,
     setCookie,

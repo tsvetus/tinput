@@ -60,6 +60,8 @@ export function clone(source) {
         }
     } else if (React.isValidElement(source)) {
         dest = source;
+    } else if (source instanceof Date) {
+        dest = new Date(source.getTime());
     } else if (source instanceof Object) {
         dest = Object.assign({}, source);
         let keys = Object.keys(dest);

@@ -351,7 +351,8 @@ TGrid.propTypes = {
      * @param {string} event.index Selected item index
      * @param {string} event.item Selected item
      */
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onCellValue: PropTypes.func
 };
 
 TGrid.defaultProps = {

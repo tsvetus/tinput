@@ -144,3 +144,14 @@ export function cutTime(source) {
     return source.substring(0, 5);
 }
 
+export function firstDate(year, month) {
+    return new Date(Date.UTC(year, month, 1));
+}
+
+export function lastDate(year, month) {
+    if (month < 11) {
+        return new Date(Date.UTC(year, month + 1, 0));
+    } else {
+        return new Date(Date.UTC(year + 1, 0, 0));
+    }
+}

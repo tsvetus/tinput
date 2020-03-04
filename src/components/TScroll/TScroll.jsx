@@ -12,27 +12,38 @@ class TScroll extends React.Component {
 
     constructor(props) {
         super(props);
+        this.ref = React.createRef();
         this.updateStyle = this.updateStyle.bind(this);
         this.getHeight = this.getHeight.bind(this);
         this.resize = this.resize.bind(this);
-        this.ref = React.createRef();
+        this.update = this.update.bind(this);
     }
 
     componentDidMount() {
-        this.updateStyle();
         this.resize();
+        this.update();
+        this.updateStyle();
         this.ref.current.addEventListener('resize', this.resize);
         this.ref.current.addEventListener('DOMNodeInserted', this.resize);
         window.addEventListener('resize', this.resize);
+        this.timer = setInterval(() => {
+            this.resize();
+            this.updateStyle();
+        }, 1500);
     }
 
     componentDidUpdate(old) {
-        if (old.style !== this.props.style) {
+        if (old.style !== this.props.style ||
+            old.scrollBars !== this.props.scrollBars ||
+            old.overflow !== this.props.overflow) {
+            this.resize();
+            this.update();
             this.updateStyle();
         }
     }
 
     componentWillUnmount() {
+        clearInterval(this.timer);
         window.removeEventListener('resize', this.resize);
         this.ref.current.removeEventListener('DOMNodeInserted', this.resize);
         this.ref.current.removeEventListener('resize', this.resize);
@@ -42,7 +53,7 @@ class TScroll extends React.Component {
         let height = 0;
         if (this.style.container.height) {
             height = this.style.container.height;
-        } else {
+        } else if (this.ref.current) {
             let rect = this.ref.current.getBoundingClientRect();
             let margin = this.props.margin ? this.props.margin : 0;
             height = this.props.height ? this.props.height : window.innerHeight - rect.top - margin;
@@ -68,36 +79,43 @@ class TScroll extends React.Component {
     }
 
     resize() {
-
-        let ov = 'auto';
-        if (this.props.overflow) {
-            if (this.props.overflow.toLowerCase().indexOf('aut') === 0) {
-                ov = 'auto';
-            } else if (this.props.overflow.toLowerCase().indexOf('scr') === 0) {
-                ov = 'scroll';
-            } else if (this.props.overflow.toLowerCase().indexOf('hid') === 0) {
-                ov = 'hidden';
-            } else if (this.props.overflow.toLowerCase().indexOf('vis') === 0) {
-                ov = 'visible';
-            }
+        if (this.ref.current) {
+            this.ref.current.style.height = this.getHeight() + 'px';
         }
+    }
 
-        if (this.props.scrollBars) {
-            if (this.props.scrollBars.toLowerCase().indexOf('hor') === 0) {
-                this.ref.current.style.overflowX = ov;
-                this.ref.current.style.overflowY= 'hidden';
-            } else if (this.props.scrollBars.toLowerCase().indexOf('ver') === 0) {
-                this.ref.current.style.overflowY = ov;
-                this.ref.current.style.overflowX = 'hidden';
-            } else if (this.props.scrollBars.toLowerCase().indexOf('bot') === 0) {
-                this.ref.current.style.overflow = ov;
-            } else if (this.props.scrollBars.toLowerCase().indexOf('non') === 0) {
-                this.ref.current.style.overflow = 'hidden';
+    update() {
+
+        if (this.ref.current) {
+
+            let ov = 'auto';
+            if (this.props.overflow) {
+                if (this.props.overflow.toLowerCase().indexOf('aut') === 0) {
+                    ov = 'auto';
+                } else if (this.props.overflow.toLowerCase().indexOf('scr') === 0) {
+                    ov = 'scroll';
+                } else if (this.props.overflow.toLowerCase().indexOf('hid') === 0) {
+                    ov = 'hidden';
+                } else if (this.props.overflow.toLowerCase().indexOf('vis') === 0) {
+                    ov = 'visible';
+                }
             }
-        }
 
-//        this.ref.current.style.width = this.getWidth() + 'px';
-        this.ref.current.style.height = this.getHeight() + 'px';
+            if (this.props.scrollBars) {
+                if (this.props.scrollBars.toLowerCase().indexOf('hor') === 0) {
+                    this.ref.current.style.overflowX = ov;
+                    this.ref.current.style.overflowY= 'hidden';
+                } else if (this.props.scrollBars.toLowerCase().indexOf('ver') === 0) {
+                    this.ref.current.style.overflowY = ov;
+                    this.ref.current.style.overflowX = 'hidden';
+                } else if (this.props.scrollBars.toLowerCase().indexOf('bot') === 0) {
+                    this.ref.current.style.overflow = ov;
+                } else if (this.props.scrollBars.toLowerCase().indexOf('non') === 0) {
+                    this.ref.current.style.overflow = 'hidden';
+                }
+            }
+
+        }
 
     }
 

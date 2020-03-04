@@ -47,6 +47,8 @@ import {
     strDate,
     isoTime,
     strTime,
+    firstDate,
+    lastDate,
     params,
     getFile,
 
@@ -119,6 +121,8 @@ export {
     strDate,
     isoTime,
     strTime,
+    firstDate,
+    lastDate,
     params,
     getFile,
 

@@ -76,8 +76,12 @@ class TTop extends React.Component {
                 if (v.onClick) {
                     st = merge(st, style.clickable);
                 }
-                tools.push(<Icon key={i} name={v.icon}
-                    onClick={this.iconClick} style={st} />);
+                if (typeof v.icon === 'string') {
+                    tools.push(<Icon key={i} name={v.icon}
+                                     onClick={this.iconClick} style={st} />);
+                } else if (React.isValidElement(v.icon)) {
+                    tools.push(v.icon);
+                }
             });
         }
 
