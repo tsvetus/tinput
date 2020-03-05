@@ -409,6 +409,12 @@ export default {
             top: "0",
             left: "0",
             right: "0"
+        },
+
+        content: {
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-around"
         }
 
     },
