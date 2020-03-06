@@ -29,7 +29,7 @@ class TScroll extends React.Component {
         this.timer = setInterval(() => {
             this.resize();
             this.updateStyle();
-        }, 1500);
+        }, 1000);
     }
 
     componentDidUpdate(old) {

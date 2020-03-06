@@ -28,6 +28,7 @@ class TModal extends React.Component {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.setStyle = this.setStyle.bind(this);
         this.setShow = this.setShow.bind(this);
+        this.position = this.position.bind(this);
         this.setStyle(props.style);
         this.screenRef = React.createRef();
         this.containerRef = React.createRef();
@@ -35,6 +36,7 @@ class TModal extends React.Component {
 
     componentDidMount() {
         this.mounted = true;
+        this.position();
         this.setTimer();
         document.addEventListener('keydown', this.handleKeyDown);
         this.setShow();
@@ -54,9 +56,10 @@ class TModal extends React.Component {
                     }
                 }, this.props.transition);
             }
-        }
-        if (!compare(old.style, this.props.style)) {
+        } else if (!compare(old.style, this.props.style)) {
             this.setStyle(this.props.style);
+        } else {
+            this.position();
         }
     }
 
@@ -64,6 +67,19 @@ class TModal extends React.Component {
         this.mounted = false;
         this.containerRef.current.removeEventListener('resize', this.handleResize);
         this.stopTimer();
+    }
+
+    position() {
+        if (this.containerRef.current && this.props.show) {
+            let sh = window.innerHeight;
+            let rect = this.containerRef.current.getBoundingClientRect();
+            let ch = rect.height;
+            let top = 0;
+            if (ch < sh) {
+                top = Math.ceil((sh - ch)/2);
+            }
+            this.containerRef.current.style.top = top + "px";
+        }
     }
 
     setStyle(style) {
