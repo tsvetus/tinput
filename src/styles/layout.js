@@ -228,25 +228,10 @@ export default {
         },
 
         container: {
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -80%)",
-            display: "flex",
-            flexDirection: "column",
             zIndex: "31"
         },
 
-        form: {
-            width: "auto"
-        },
-
         component: {
-
-            container: {
-                width: "auto"
-            }
-
         }
 
     },

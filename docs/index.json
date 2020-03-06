@@ -4466,6 +4466,13 @@
       "displayName": "TModal",
       "methods": [
         {
+          "name": "position",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
           "name": "setStyle",
           "docblock": null,
           "modifiers": [],
