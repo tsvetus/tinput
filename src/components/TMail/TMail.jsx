@@ -114,7 +114,7 @@ TMail.propTypes = {
 };
 
 TMail.defaultProps = {
-    required: true,
+    required: false,
     empty: null,
     readOnly: false,
     layout: 'left'
