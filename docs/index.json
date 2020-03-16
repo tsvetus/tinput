@@ -137,7 +137,7 @@
         },
         "required": {
           "type": "any",
-          "description": "Indicates if necessary to change component color when entered date is invalid or incomplete.\r\nDefault is \"true\"",
+          "description": "If \"true\" component changes it's style when entered text is invalid",
           "required": false,
           "defaultValue": "true"
         },
@@ -362,7 +362,7 @@
         },
         "required": {
           "type": "any",
-          "description": "Indicates if necessary to change component color when entered date is invalid or incomplete.\r\nDefault is \"true\"",
+          "description": "If \"true\" component changes it's style when entered text is invalid",
           "required": false,
           "defaultValue": "true"
         },
@@ -557,9 +557,9 @@
         },
         "required": {
           "type": "any",
-          "description": "Indicates if necessary to change component color when entered date is invalid or incomplete.\r\nDefault is \"true\"",
+          "description": "If \"true\" component changes it's style when entered text is invalid",
           "required": false,
-          "defaultValue": "false"
+          "defaultValue": "true"
         },
         "readOnly": {
           "type": "any",
@@ -1050,7 +1050,7 @@
         },
         "required": {
           "type": "any",
-          "description": "Indicates if necessary to change component color when entered time is invalid or incomplete.\r\nDefault is \"true\"",
+          "description": "If \"true\" component changes it's style when entered text is invalid",
           "required": false,
           "defaultValue": "true"
         },
@@ -1271,7 +1271,7 @@
         },
         "required": {
           "type": "any",
-          "description": "Indicates if necessary to change component color when entered date is invalid or incomplete.\r\nDefault is \"true\"",
+          "description": "If \"true\" component changes it's style when entered text is invalid",
           "required": false,
           "defaultValue": "true"
         },
