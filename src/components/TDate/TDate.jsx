@@ -86,6 +86,7 @@ class TDate extends React.Component {
                 empty={this.props.empty}
                 readOnly={this.props.readOnly}
                 required={this.props.required}
+                changeStyle={this.props.changeStyle}
                 onValidate={this.handleValidate}
                 onIcon={this.props.onIcon}
                 onChange={this.handleChange} />
@@ -154,9 +155,7 @@ TDate.propTypes = {
     }),
     /** Value appeared in onChange event then date is not completely entered or invalid. Default is "null" */
     empty: PropTypes.any,
-    /** Indicates if necessary to change component color when entered date is invalid or incomplete.
-     * Default is "true"
-     */
+    /** If "true" component changes it's style when entered text is invalid */
     required: PropTypes.any,
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,

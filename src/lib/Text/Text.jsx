@@ -19,7 +19,6 @@ class Text extends React.Component {
         this.handleIcon = this.handleIcon.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
-        this.updateStyle = this.updateStyle.bind(this);
         this.state = {value: props.value};
         this.valid = true;
         this.vStyle = props.style ? props.style : {};
@@ -28,7 +27,6 @@ class Text extends React.Component {
 
     componentDidMount() {
         this.mounted = true;
-        this.updateStyle(this.valid);
     }
 
     componentWillUnmount() {
@@ -39,7 +37,6 @@ class Text extends React.Component {
         if (!compare(old.style, this.props.style)) {
             this.vStyle = this.props.style ? this.props.style : {};
             this.iStyle = merge(this.vStyle, this.vStyle.invalid);
-            this.updateStyle(this.valid);
         }
         if (old.value !== this.props.value) {
             this.setState({value: this.props.value});
@@ -68,10 +65,6 @@ class Text extends React.Component {
             valid = this.props.required ? event.full === true : event.full === true || event.empty === true;
         }
 
-        if (valid !== this.valid) {
-            this.updateStyle(valid);
-        }
-
         this.valid = valid;
 
         return this.valid;
@@ -98,24 +91,6 @@ class Text extends React.Component {
                 })
             }
         });
-    }
-
-    updateStyle(valid) {
-        if (this.mounted) {
-            if (valid) {
-                apply(this.iStyle.container,  this.vStyle.container,  this.container.current.style);
-                apply(this.iStyle.frame,  this.vStyle.frame,  this.frame.current.style);
-                if (this.label.current) {
-                    apply(this.iStyle.label,  this.vStyle.label,  this.label.current.style);
-                }
-            } else {
-                apply(this.vStyle.container,  this.iStyle.container,  this.container.current.style);
-                apply(this.vStyle.frame,  this.iStyle.frame,  this.frame.current.style);
-                if (this.label.current) {
-                    apply(this.vStyle.label,  this.iStyle.label,  this.label.current.style);
-                }
-            }
-        }
     }
 
     render () {
@@ -161,6 +136,7 @@ class Text extends React.Component {
                         format={this.props.format}
                         empty={this.props.empty}
                         readOnly={this.props.readOnly}
+                        required={this.props.required}
                         onMask={this.props.onMask}
                         onValidate={validate}
                         onChange={this.handleChange} />

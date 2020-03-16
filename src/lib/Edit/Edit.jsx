@@ -42,7 +42,7 @@ class Edit extends React.Component {
     componentDidMount() {
         this.mounted = true;
         this.validate(this.value);
-        this.updateStyle(this.valid);
+        this.updateStyle(this.valid && this.full);
         this.setText(this.value);
         this.setCaret(this.caret);
         this.showPlaceholder();
@@ -71,7 +71,7 @@ class Edit extends React.Component {
         if (old.vStyle !== this.props.vStyle || old.iStyle !== this.props.iStyle) {
             this.vStyle = this.props.vStyle;
             this.iStyle = merge(this.props.vStyle, this.props.iStyle);
-            this.updateStyle(this.valid);
+            this.updateStyle(this.valid && this.full);
         }
 
         if (this.value !== this.props.value && (this.ref.current !== document.activeElement)) {
@@ -83,7 +83,7 @@ class Edit extends React.Component {
     setValue(value) {
         this.value = value === undefined ? null : value;
         this.validate(this.value);
-        this.updateStyle(this.valid);
+        this.updateStyle(this.valid && this.full);
         this.setText(this.value);
         if (!this.props.wrap) {
             this.setCaret(this.caret);
@@ -144,7 +144,7 @@ class Edit extends React.Component {
 
     updateStyle(valid) {
         if (this.mounted) {
-            if (valid) {
+            if (valid || !this.props.required) {
                 apply(this.iStyle,  this.vStyle,  this.ref.current.style);
             } else {
                 apply(this.vStyle,  this.iStyle,  this.ref.current.style);
@@ -290,13 +290,11 @@ class Edit extends React.Component {
             this.setCaret(res.caret);
         }
 
-        if (this.valid !== res.valid) {
-            this.updateStyle(res.valid);
-        }
-
         if (!res.valid || !res.full) {
             res.value = this.props.empty;
         }
+
+        this.updateStyle(res.valid && res.full);
 
         this.sendValue(res.value);
 
@@ -384,6 +382,7 @@ Edit.propTypes = {
     placeholder: PropTypes.string,
     timeout: PropTypes.number,
     readOnly: PropTypes.any,
+    required: PropTypes.any,
     empty: PropTypes.any,
     password: PropTypes.string,
     onClick: PropTypes.func,
@@ -399,6 +398,7 @@ Edit.propTypes = {
 Edit.defaultProps = {
     empty: null,
     readOnly: false,
+    required: true,
     wrap: false,
     content: 'text',
     timeout: TIMEOUT

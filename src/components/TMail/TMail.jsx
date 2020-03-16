@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TText from '../TText';
-
 import {merge, contain, REGEXP} from '../../util';
 
 import styles from '../../styles';
+import {Text} from "../../lib";
 
 /**
  * Component representing editor for email input. "TMail" is a special case of "TText" component designed
@@ -16,12 +15,13 @@ class TMail extends React.Component {
     render () {
 
         let style = merge(
+            contain(styles.TComponent),
             contain(styles.TMail),
             contain(this.props.style)
         );
 
         return (
-            <TText
+            <Text
                 style={style}
                 data={this.props.data}
                 name={this.props.name}
@@ -33,6 +33,7 @@ class TMail extends React.Component {
                 regexp={REGEXP['email']}
                 empty={this.props.empty}
                 required={this.props.required}
+                changeStyle={this.props.changeStyle}
                 readOnly={this.props.readOnly}
                 layout={this.props.layout}
                 onValidate={this.props.onValidate}
@@ -88,10 +89,7 @@ TMail.propTypes = {
     ]),
     /** Value appeared in onChange event when editor is empty. Default is "null" */
     empty: PropTypes.any,
-    /**
-     * Indicates if necessary to change component color when entered date is invalid or incomplete.
-     * Default is "true"
-     */
+    /** If "true" component changes it's style when entered text is invalid */
     required: PropTypes.any,
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,
@@ -114,7 +112,7 @@ TMail.propTypes = {
 };
 
 TMail.defaultProps = {
-    required: false,
+    required: true,
     empty: null,
     readOnly: false,
     layout: 'left'

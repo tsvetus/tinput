@@ -85,6 +85,7 @@ class Mask extends React.Component {
                 timeout={this.props.timeout}
                 empty={this.props.empty}
                 readOnly={this.props.readOnly}
+                required={this.props.required}
                 onClick={this.props.onClick}
                 onChange={this.props.onChange}
                 onValidate={handleValidate}
@@ -110,6 +111,7 @@ Mask.propTypes = {
     format: PropTypes.object,
     empty: PropTypes.any,
     readOnly: PropTypes.any,
+    required: PropTypes.any,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
     onMask: PropTypes.func,
@@ -119,7 +121,8 @@ Mask.propTypes = {
 };
 
 Mask.defaultProps = {
-    empty: null
+    empty: null,
+    required: true
 };
 
 export default Mask;

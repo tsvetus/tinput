@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TText from '../TText';
+import {Text} from '../../lib';
 
 import {merge, contain, REGEXP} from '../../util';
 
@@ -17,12 +17,13 @@ class TMask extends React.Component {
     render () {
 
         let style = merge(
+            contain(styles.TComponent),
             contain(styles.TMask),
             contain(this.props.style)
         );
 
         return (
-            <TText
+            <Text
                 style={style}
                 data={this.props.data}
                 name={this.props.name}
@@ -104,10 +105,7 @@ TMask.propTypes = {
     regexp: PropTypes.object,
     /** Value appeared in onChange event when editor is empty. Default is "null" */
     empty: PropTypes.any,
-    /**
-     * Indicates if necessary to change component color when entered date is invalid or incomplete.
-     * Default is "true"
-     */
+    /** If "true" component changes it's style when entered text is invalid */
     required: PropTypes.any,
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,

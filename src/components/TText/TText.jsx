@@ -35,6 +35,7 @@ class TText extends React.Component {
                 regexp={this.props.regexp}
                 empty={this.props.empty}
                 required={this.props.required}
+                changeStyle={this.props.changeStyle}
                 readOnly={this.props.readOnly}
                 layout={this.props.layout}
                 onValidate={this.props.onValidate}
@@ -105,10 +106,7 @@ TText.propTypes = {
     regexp: PropTypes.object,
     /** Value appeared in onChange event when editor is empty. Default is "null" */
     empty: PropTypes.any,
-    /**
-     * Indicates if necessary to change component color when entered date is invalid or incomplete.
-     * Default is "true"
-     */
+    /** If "true" component changes it's style when entered text is invalid */
     required: PropTypes.any,
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,
