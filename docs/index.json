@@ -559,7 +559,7 @@
           "type": "any",
           "description": "Indicates if necessary to change component color when entered date is invalid or incomplete.\r\nDefault is \"true\"",
           "required": false,
-          "defaultValue": "true"
+          "defaultValue": "false"
         },
         "readOnly": {
           "type": "any",
