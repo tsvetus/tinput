@@ -17,6 +17,7 @@ class TInput extends React.Component {
         this.state = {valid: true};
         this.handleIcon = this.handleIcon.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleStyle = this.handleStyle.bind(this);
     }
 
     handleIcon() {
@@ -39,6 +40,10 @@ class TInput extends React.Component {
         }
     }
 
+    handleStyle(event) {
+        this.setState({valid: event.valid});
+    }
+
     render () {
 
         let style = merge(
@@ -50,8 +55,9 @@ class TInput extends React.Component {
 
         let label = null;
         if (this.props.label) {
+            let ls = this.state.valid ? style.label : merge(style.label, style.invalid.label);
             label = (
-                <div style={style.label}>
+                <div style={ls}>
                     {this.props.label}
                 </div>
             )
@@ -87,7 +93,8 @@ class TInput extends React.Component {
                         onKeyPress={this.props.onKeyPress}
                         onKeyDown={this.props.onKeyDown}
                         onChange={this.handleChange}
-                        onValidate={this.props.onValidate} />
+                        onValidate={this.props.onValidate}
+                        onStyle={this.handleStyle} />
                     {icon}
                 </div>
             </div>

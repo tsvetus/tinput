@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 
 import {nvl, merge} from '../../util';
 
-/**
- * @class
- * @ignore
- */
 class Input extends React.Component {
 
     constructor(props, context) {
@@ -18,11 +14,14 @@ class Input extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.getValid = this.getValid.bind(this);
+        this.updateStyle = this.updateStyle.bind(this);
     }
 
     componentDidMount() {
         this.mounted = true;
-        this.setState({valid: this.getValid(this.state.value)});
+        let valid = this.getValid(this.state.value);
+        this.updateStyle(valid);
+        this.setState({valid: valid});
     }
 
     componentWillUnmount() {
@@ -33,7 +32,15 @@ class Input extends React.Component {
     componentDidUpdate(old) {
         if (nvl(old.value, '') !== nvl(this.props.value, '')) {
             let value = nvl(this.props.value, '');
-            this.setState({value: value, valid: this.getValid(value)});
+            let valid = this.getValid(value);
+            this.updateStyle(valid);
+            this.setState({value: value, valid: valid});
+        }
+    }
+
+    updateStyle(valid) {
+        if (this.props.onStyle) {
+            this.props.onStyle({valid: valid});
         }
     }
 
@@ -52,7 +59,9 @@ class Input extends React.Component {
 
     handleChange(event) {
         let value = event.currentTarget.value;
-        this.setState({value: value, valid: this.getValid(value)}, () => {
+        let valid = this.getValid(value);
+        this.updateStyle(valid);
+        this.setState({value: value, valid: valid}, () => {
             if (this.props.onChange) {
                 clearTimeout(this.timer);
                 this.timer = setTimeout(() => {
@@ -82,8 +91,6 @@ class Input extends React.Component {
 
         let style = this.state.valid ? this.props.vStyle :
             merge(this.props.vStyle, this.props.iStyle);
-
-        console.log(this.state);
 
         return (
             <input
@@ -117,7 +124,8 @@ Input.propTypes = {
     onChange: PropTypes.func,
     onKeyPress: PropTypes.func,
     onKeyDown: PropTypes.func,
-    onValidate: PropTypes.func
+    onValidate: PropTypes.func,
+    onStyle: PropTypes.func
 };
 
 Input.defaultProps = {

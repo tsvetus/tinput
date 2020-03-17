@@ -40,7 +40,9 @@ class TResponse extends React.Component {
                         onClick={this.handleClick}>
                             {'Ok'}
                     </TButton>;
-            } else {
+            } else if (this.props.wait === undefined) {
+                content = this.props.children;
+            } else if (this.props.wait === true) {
                 content = this.props.children;
             }
         }
@@ -67,6 +69,7 @@ TResponse.propTypes = {
     data: PropTypes.any,
     error: PropTypes.string,
     message: PropTypes.string,
+    wait: PropTypes.any,
     onClose: PropTypes.func
 };
 
