@@ -19,8 +19,8 @@ class Text extends React.Component {
         this.handleIcon = this.handleIcon.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
+        this.handleStyle = this.handleStyle.bind(this);
         this.state = {value: props.value};
-        this.valid = true;
         this.vStyle = props.style ? props.style : {};
         this.iStyle = merge(this.vStyle, this.vStyle.invalid);
     }
@@ -52,23 +52,19 @@ class Text extends React.Component {
         }
 
         if (valid && this.props.regexp) {
-            if (this.props.required) {
-                valid = this.props.regexp.test(event.value);
-            } else if (event.value && event.value !== '' && event.value !== this.props.empty) {
-                valid = this.props.regexp.test(event.value);
-            } else {
-                valid = true;
-            }
+            valid = this.props.regexp.test(event.value);
         }
 
-        if (valid && this.props.mask) {
-            valid = this.props.required ? event.full === true : event.full === true || event.empty === true;
+        return valid;
+
+    }
+
+    handleStyle(event) {
+        if (event.valid) {
+            apply(this.iStyle.label,  this.vStyle.label,  this.label.current.style);
+        } else {
+            apply(this.vStyle.label,  this.iStyle.label,  this.label.current.style);
         }
-
-        this.valid = valid;
-
-        return this.valid;
-
     }
 
     handleIcon() {
@@ -139,7 +135,8 @@ class Text extends React.Component {
                         required={this.props.required}
                         onMask={this.props.onMask}
                         onValidate={validate}
-                        onChange={this.handleChange} />
+                        onChange={this.handleChange}
+                        onStyle={this.handleStyle} />
                     {icon}
                 </div>
             </div>
@@ -168,6 +165,10 @@ Text.propTypes = {
     onValidate: PropTypes.func,
     onIcon: PropTypes.func,
     onMask: PropTypes.func
+};
+
+Text.defaultProps = {
+    required: 'always'
 };
 
 export default Text;

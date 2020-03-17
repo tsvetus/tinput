@@ -5,6 +5,24 @@ import {TIMEOUT, nvl, apply, merge, strip} from '../../util';
 
 import styles from '../../styles';
 
+function parseReq(req) {
+    let r = 'en';
+    if (req === true) {
+        r = 'al';
+    } else if (req === false) {
+        r = 'no';
+    } else if (typeof req === 'string') {
+        if (req.startsWith('al')) {
+            r = 'al';
+        } else if (req.startsWith('en')) {
+            r = 'en';
+        } else {
+            r = 'no';
+        }
+    }
+    return r;
+}
+
 class Edit extends React.Component {
 
     constructor(props, context) {
@@ -37,12 +55,13 @@ class Edit extends React.Component {
         this.valid = true;
         this.full = true;
         this.empty = false;
+        this.required = parseReq(props.required);
     }
 
     componentDidMount() {
         this.mounted = true;
         this.validate(this.value);
-        this.updateStyle(this.valid && this.full);
+        this.updateStyle();
         this.setText(this.value);
         this.setCaret(this.caret);
         this.showPlaceholder();
@@ -71,11 +90,15 @@ class Edit extends React.Component {
         if (old.vStyle !== this.props.vStyle || old.iStyle !== this.props.iStyle) {
             this.vStyle = this.props.vStyle;
             this.iStyle = merge(this.props.vStyle, this.props.iStyle);
-            this.updateStyle(this.valid && this.full);
+            this.updateStyle();
         }
 
         if (this.value !== this.props.value && (this.ref.current !== document.activeElement)) {
             this.setValue(this.props.value);
+        }
+
+        if (old.required !== this.props.required) {
+            this.required = parseReq(this.props.required);
         }
 
     }
@@ -83,7 +106,7 @@ class Edit extends React.Component {
     setValue(value) {
         this.value = value === undefined ? null : value;
         this.validate(this.value);
-        this.updateStyle(this.valid && this.full);
+        this.updateStyle();
         this.setText(this.value);
         if (!this.props.wrap) {
             this.setCaret(this.caret);
@@ -142,14 +165,27 @@ class Edit extends React.Component {
 
     }
 
-    updateStyle(valid) {
+    updateStyle() {
+
         if (this.mounted) {
-            if (valid || !this.props.required) {
+
+            let valid = true;
+            if (this.required === 'al') {
+                valid = this.valid && this.full;
+            } else if (this.required === 'en') {
+                valid = (this.valid && this.full) || this.empty;
+            }
+
+            if (valid) {
                 apply(this.iStyle,  this.vStyle,  this.ref.current.style);
             } else {
                 apply(this.vStyle,  this.iStyle,  this.ref.current.style);
             }
+            if (this.props.onStyle) {
+                this.props.onStyle({valid: valid});
+            }
         }
+
     }
 
     showPlaceholder() {
@@ -294,14 +330,14 @@ class Edit extends React.Component {
             res.value = this.props.empty;
         }
 
-        this.updateStyle(res.valid && res.full);
-
         this.sendValue(res.value);
 
         this.value = res.value;
         this.valid = res.valid;
         this.empty = res.empty;
         this.full = res.full;
+
+        this.updateStyle();
 
     }
 
@@ -392,13 +428,14 @@ Edit.propTypes = {
     onValidate: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
-    onInput: PropTypes.func
+    onInput: PropTypes.func,
+    onStyle: PropTypes.func
 };
 
 Edit.defaultProps = {
     empty: null,
     readOnly: false,
-    required: true,
+    required: 'always',
     wrap: false,
     content: 'text',
     timeout: TIMEOUT

@@ -136,10 +136,15 @@
           "defaultValue": "null"
         },
         "required": {
-          "type": "any",
-          "description": "If \"true\" component changes it's style when entered text is invalid",
+          "type": "enum",
+          "description": "Determines how component changes it's style after text validation.\r\n\"always\" - always change style to invalid when validation is failed.\r\n\"enter\" - change style to invalid only while text is entering.\r\n\"newer\" - stay always valid.",
           "required": false,
-          "defaultValue": "true"
+          "defaultValue": "'always'",
+          "structure": {
+            "'always'": {},
+            "'enter'": {},
+            "'never'": {}
+          }
         },
         "readOnly": {
           "type": "any",
@@ -361,10 +366,15 @@
           "defaultValue": "null"
         },
         "required": {
-          "type": "any",
-          "description": "If \"true\" component changes it's style when entered text is invalid",
+          "type": "enum",
+          "description": "Determines how component changes it's style after text validation.\r\n\"always\" - always change style to invalid when validation is failed.\r\n\"enter\" - change style to invalid only while text is entering.\r\n\"newer\" - stay always valid.",
           "required": false,
-          "defaultValue": "true"
+          "defaultValue": "'enter'",
+          "structure": {
+            "'always'": {},
+            "'enter'": {},
+            "'never'": {}
+          }
         },
         "readOnly": {
           "type": "any",
@@ -1049,10 +1059,15 @@
           "defaultValue": "null"
         },
         "required": {
-          "type": "any",
-          "description": "If \"true\" component changes it's style when entered text is invalid",
+          "type": "enum",
+          "description": "Determines how component changes it's style after text validation.\r\n\"always\" - always change style to invalid when validation is failed.\r\n\"enter\" - change style to invalid only while text is entering.\r\n\"newer\" - stay always valid.",
           "required": false,
-          "defaultValue": "true"
+          "defaultValue": "'enter'",
+          "structure": {
+            "'always'": {},
+            "'enter'": {},
+            "'never'": {}
+          }
         },
         "readOnly": {
           "type": "any",
@@ -1270,10 +1285,15 @@
           "defaultValue": "null"
         },
         "required": {
-          "type": "any",
-          "description": "If \"true\" component changes it's style when entered text is invalid",
+          "type": "enum",
+          "description": "Determines how component changes it's style after text validation.\r\n\"always\" - always change style to invalid when validation is failed.\r\n\"enter\" - change style to invalid only while text is entering.\r\n\"newer\" - stay always valid.",
           "required": false,
-          "defaultValue": "true"
+          "defaultValue": "'enter'",
+          "structure": {
+            "'always'": {},
+            "'enter'": {},
+            "'never'": {}
+          }
         },
         "readOnly": {
           "type": "any",

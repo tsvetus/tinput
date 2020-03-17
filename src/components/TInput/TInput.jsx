@@ -8,8 +8,7 @@ import {merge} from '../../util';
 import styles from '../../styles';
 
 /**
- * Component representing icons.
- * @extends React
+ * Form Input
  */
 class TInput extends React.Component {
 
@@ -18,17 +17,6 @@ class TInput extends React.Component {
         this.state = {valid: true};
         this.handleIcon = this.handleIcon.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.validate = this.validate.bind(this);
-    }
-
-    componentDidMount() {
-        this.validate(this.props.value)
-    }
-
-    componentDidUpdate(old) {
-        if (old.value !== this.props.value) {
-            this.validate(this.props.value)
-        }
     }
 
     handleIcon() {
@@ -48,24 +36,6 @@ class TInput extends React.Component {
                 ...event,
                 icon: this.props.icon
             })
-        } else {
-            this.validate(event.value)
-        }
-    }
-
-    validate(value) {
-        if (this.props.onValidate) {
-            let valid = this.props.onValidate({
-                data: this.props.data,
-                name: this.props.name,
-                icon: this.props.icon,
-                value: value
-            });
-            if (valid !== this.state.valid) {
-                this.setState({valid: valid})
-            }
-        } else {
-            return true
         }
     }
 
@@ -77,16 +47,6 @@ class TInput extends React.Component {
             styles[this.props.name],
             this.props.style
         );
-
-        if (!this.state.valid) {
-            style = merge(
-                style,
-                styles.component ? styles.component.invalid : null,
-                styles.input ? styles.input.invalid : null,
-                styles[this.props.name] ? styles[this.props.name].invalid : null,
-                this.props.style ? this.props.style.invalid : null
-            )
-        }
 
         let label = null;
         if (this.props.label) {
@@ -115,7 +75,8 @@ class TInput extends React.Component {
                 <div style={style.frame}>
                     {!top ? label : null}
                     <Input
-                        style={style.edit}
+                        vStyle={style.edit}
+                        iStyle={style.invalid.edit}
                         data={this.props.data}
                         name={this.props.name}
                         value={this.props.value}
@@ -125,7 +86,8 @@ class TInput extends React.Component {
                         placeholder={this.props.placeholder}
                         onKeyPress={this.props.onKeyPress}
                         onKeyDown={this.props.onKeyDown}
-                        onChange={this.handleChange} />
+                        onChange={this.handleChange}
+                        onValidate={this.props.onValidate} />
                     {icon}
                 </div>
             </div>

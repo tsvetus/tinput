@@ -200,6 +200,10 @@ export default function defaultStyles(template) {
 
         },
 
+        TInput: {
+
+        },
+
         TCheck: {
             right: {
                 padding: "4px 0 0 8px"

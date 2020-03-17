@@ -106,8 +106,17 @@ TText.propTypes = {
     regexp: PropTypes.object,
     /** Value appeared in onChange event when editor is empty. Default is "null" */
     empty: PropTypes.any,
-    /** If "true" component changes it's style when entered text is invalid */
-    required: PropTypes.any,
+    /**
+     * Determines how component changes it's style after text validation.
+     * "always" - always change style to invalid when validation is failed.
+     * "enter" - change style to invalid only while text is entering.
+     * "newer" - stay always valid.
+     */
+    required: PropTypes.oneOf([
+        'always',
+        'enter',
+        'never'
+    ]),
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,
     /**
@@ -139,7 +148,7 @@ TText.propTypes = {
 };
 
 TText.defaultProps = {
-    required: true,
+    required: 'always',
     empty: null,
     readOnly: false,
     layout: 'left',

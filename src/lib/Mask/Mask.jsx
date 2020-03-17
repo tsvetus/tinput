@@ -91,7 +91,8 @@ class Mask extends React.Component {
                 onValidate={handleValidate}
                 onFocus={this.props.onFocus}
                 onBlur={this.props.onBlur}
-                onMask={handleMask} />
+                onMask={handleMask}
+                onStyle={this.props.onStyle} />
 
         );
 
@@ -117,12 +118,13 @@ Mask.propTypes = {
     onMask: PropTypes.func,
     onValidate: PropTypes.func,
     onFocus: PropTypes.func,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
+    onStyle: PropTypes.func
 };
 
 Mask.defaultProps = {
     empty: null,
-    required: true
+    required: 'always'
 };
 
 export default Mask;

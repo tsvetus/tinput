@@ -100,7 +100,6 @@ class TTextExample extends React.Component {
               mask: '+1 (NNN) NNN-NN-NN',
               empty: '_'
             }}
-            required={true}
             onChange={this.change}/>
 
         </TGroup>

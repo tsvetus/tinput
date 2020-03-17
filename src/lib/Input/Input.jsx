@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {nvl} from '../../util';
+import {nvl, merge} from '../../util';
 
 /**
  * @class
@@ -11,13 +11,18 @@ class Input extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {value: nvl(props.value, '')};
+        this.state = {
+            value: nvl(props.value, ''),
+            valid: true
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.getValid = this.getValid.bind(this);
     }
 
     componentDidMount() {
         this.mounted = true;
+        this.setState({valid: this.getValid(this.state.value)});
     }
 
     componentWillUnmount() {
@@ -27,13 +32,27 @@ class Input extends React.Component {
 
     componentDidUpdate(old) {
         if (nvl(old.value, '') !== nvl(this.props.value, '')) {
-            this.setState({value: nvl(this.props.value, '')});
+            let value = nvl(this.props.value, '');
+            this.setState({value: value, valid: this.getValid(value)});
+        }
+    }
+
+    getValid(value) {
+        if (this.props.onValidate) {
+            let valid = this.props.onValidate({
+                data: this.props.data,
+                name: this.props.name,
+                value: value
+            });
+            return valid === true;
+        } else {
+            return true;
         }
     }
 
     handleChange(event) {
         let value = event.currentTarget.value;
-        this.setState({value: value}, () => {
+        this.setState({value: value, valid: this.getValid(value)}, () => {
             if (this.props.onChange) {
                 clearTimeout(this.timer);
                 this.timer = setTimeout(() => {
@@ -61,7 +80,10 @@ class Input extends React.Component {
 
     render () {
 
-        let style = this.props.style;
+        let style = this.state.valid ? this.props.vStyle :
+            merge(this.props.vStyle, this.props.iStyle);
+
+        console.log(this.state);
 
         return (
             <input
@@ -82,7 +104,8 @@ class Input extends React.Component {
 }
 
 Input.propTypes = {
-    style: PropTypes.object,
+    vStyle: PropTypes.object,
+    iStyle: PropTypes.object,
     value: PropTypes.string,
     name: PropTypes.string,
     data: PropTypes.any,
@@ -93,7 +116,8 @@ Input.propTypes = {
     onClick: PropTypes.func,
     onChange: PropTypes.func,
     onKeyPress: PropTypes.func,
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
+    onValidate: PropTypes.func
 };
 
 Input.defaultProps = {

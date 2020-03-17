@@ -38,7 +38,7 @@ class TTime extends React.Component {
     }
 
     handleValidate(event) {
-        return event.empty || testIsoTime(isoTime(event.value, this.format.mask));
+        return testIsoTime(isoTime(event.value, this.format.mask));
     }
 
     handleChange(event) {
@@ -154,8 +154,17 @@ TTime.propTypes = {
     }),
     /** Value appeared in onChange event then date is not completely entered or invalid. Default is "null" */
     empty: PropTypes.any,
-    /** If "true" component changes it's style when entered text is invalid */
-    required: PropTypes.any,
+    /**
+     * Determines how component changes it's style after text validation.
+     * "always" - always change style to invalid when validation is failed.
+     * "enter" - change style to invalid only while text is entering.
+     * "newer" - stay always valid.
+     */
+    required: PropTypes.oneOf([
+        'always',
+        'enter',
+        'never'
+    ]),
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,
     /**
@@ -178,7 +187,7 @@ TTime.propTypes = {
 
 TTime.defaultProps = {
     format: {mask: 'hh:mm', empty: '_', full: true, type: 'iso'},
-    required: true,
+    required: 'enter',
     empty: null,
     readOnly: false,
     layout: 'left',
