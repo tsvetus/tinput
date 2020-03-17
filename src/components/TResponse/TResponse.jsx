@@ -38,23 +38,27 @@ class TResponse extends React.Component {
                     <TButton
                         style={style.button}
                         onClick={this.handleClick}>
-                            {'Ok'}
+                            {'OK'}
                     </TButton>;
-            } else if (this.props.wait === undefined) {
-                content = this.props.children;
-            } else if (this.props.wait === true) {
+            } else {
                 content = this.props.children;
             }
         }
 
+        let error = this.props.error ?
+            <div style={style.error}
+                 dangerouslySetInnerHTML={{ __html: this.props.error}}>
+            </div> : null;
+
+        let message = this.props.message ?
+            <div style={style.message}
+                 dangerouslySetInnerHTML={{ __html: this.props.message}}>
+            </div> : null;
+
         return (
             <div style={style.container}>
-                <div style={style.error}
-                        dangerouslySetInnerHTML={{ __html: this.props.error}}>
-                </div>
-                <div style={style.message}
-                        dangerouslySetInnerHTML={{ __html: this.props.message}}>
-                </div>
+                {error}
+                {message}
                 {content}
             </div>
         );

@@ -506,6 +506,9 @@ export default function defaultStyles(template) {
         TResponse: {
 
             container: {
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
                 textAlign: "center"
             },
 
@@ -519,6 +522,11 @@ export default function defaultStyles(template) {
                 ...template.fonts.common,
                 margin: "16px",
                 color: template.colors.message
+            },
+
+            button: {
+                container: {
+                }
             }
 
         },
