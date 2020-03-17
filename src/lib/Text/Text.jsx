@@ -60,10 +60,12 @@ class Text extends React.Component {
     }
 
     handleStyle(event) {
-        if (event.valid) {
-            apply(this.iStyle.label,  this.vStyle.label,  this.label.current.style);
-        } else {
-            apply(this.vStyle.label,  this.iStyle.label,  this.label.current.style);
+        if (this.label.current) {
+            if (event.valid) {
+                apply(this.iStyle.label,  this.vStyle.label,  this.label.current.style);
+            } else {
+                apply(this.vStyle.label,  this.iStyle.label,  this.label.current.style);
+            }
         }
     }
 
