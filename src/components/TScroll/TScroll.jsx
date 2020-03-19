@@ -24,7 +24,7 @@ class TScroll extends React.Component {
         this.update();
         this.updateStyle();
         this.ref.current.addEventListener('resize', this.resize);
-        this.ref.current.addEventListener('DOMNodeInserted', this.resize);
+//        this.ref.current.addEventListener('DOMNodeInserted', this.resize);
         window.addEventListener('resize', this.resize);
         this.timer = setInterval(() => {
             this.resize();
@@ -45,7 +45,7 @@ class TScroll extends React.Component {
     componentWillUnmount() {
         clearInterval(this.timer);
         window.removeEventListener('resize', this.resize);
-        this.ref.current.removeEventListener('DOMNodeInserted', this.resize);
+//        this.ref.current.removeEventListener('DOMNodeInserted', this.resize);
         this.ref.current.removeEventListener('resize', this.resize);
     }
 

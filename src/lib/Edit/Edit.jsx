@@ -48,6 +48,7 @@ class Edit extends React.Component {
         this.setValue = this.setValue.bind(this);
         this.validate = this.validate.bind(this);
         this.parseValue = this.parseValue.bind(this);
+        this.blur = this.blur.bind(this);
         this.vStyle = props.vStyle;
         this.iStyle = merge(props.vStyle, props.iStyle);
         this.value = props.value === undefined ? null : props.value;
@@ -101,6 +102,10 @@ class Edit extends React.Component {
             this.required = parseReq(this.props.required);
         }
 
+    }
+
+    blur() {
+        this.ref.current.blur();
     }
 
     setValue(value) {

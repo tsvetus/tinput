@@ -143,6 +143,7 @@ class ListBox extends React.Component {
                 event.preventDefault();
                 if (this.state.showList) {
                     this.list.current.handleUse(this.state.hover);
+                    this.edit.current.blur();
                 } else {
                     this.handleShow(true);
                 }

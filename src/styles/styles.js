@@ -491,14 +491,12 @@ export default function defaultStyles(template) {
             container: {
                 maxWidth: "320px",
                 minWidth: "220px"
-
             },
 
             form: {
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-around",
-                height: "120px"
+                justifyContent: "space-around"
             }
 
         },

@@ -47,7 +47,7 @@ class TSearch extends React.Component {
                 empty={this.props.empty}
                 keyField={this.props.keyField}
                 valueField={this.props.valueField}
-                readOnly={false}
+                readOnly={this.props.readOnly}
                 showEdit={true}
                 clickable={this.props.clickable}
                 onSearch={this.search} />
@@ -173,7 +173,8 @@ TSearch.defaultProps = {
     clickable: 'label edit',
     keyField: ['key', 'id'],
     valueField: ['value', 'name'],
-    timeout: 500
+    timeout: 500,
+    readOnly: false
 };
 
 export default TSearch;

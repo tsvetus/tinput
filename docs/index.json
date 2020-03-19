@@ -1887,7 +1887,8 @@
         "readOnly": {
           "type": "any",
           "description": "Prevents from changing component value from user input",
-          "required": false
+          "required": false,
+          "defaultValue": "false"
         },
         "showIcon": {
           "type": "any",

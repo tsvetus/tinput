@@ -53,7 +53,9 @@ export function nvl(source, def) {
 
 export function clone(source) {
     let dest = null;
-    if (source instanceof Array) {
+    if (typeof source === 'function') {
+        dest = source;
+    } else if (source instanceof Array) {
         dest = source.slice();
         for (let i=0; i<dest.length; i++) {
             dest[i] = clone(dest[i]);
