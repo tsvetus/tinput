@@ -1075,6 +1075,11 @@
           "required": false,
           "defaultValue": "false"
         },
+        "current": {
+          "type": "any",
+          "description": "If \"current\" is true and \"icon\" property is assigned then",
+          "required": false
+        },
         "onChange": {
           "type": "func",
           "description": "On date change event ",

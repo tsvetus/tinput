@@ -47,15 +47,14 @@ class TButton extends React.Component {
         );
 
         let cst = style.container;
-        if (this.props.wait) {
-            cst = merge(cst, style.wait);
-        }
         if (this.state.pressed) {
             cst = merge(cst, style.down);
         } else if (this.props.down) {
             cst = merge(cst, style.down);
         }
-
+        if (this.props.wait) {
+            cst = merge(cst, style.wait);
+        }
         if (this.props.next) {
             cst.borderLeft = 'none'
         }

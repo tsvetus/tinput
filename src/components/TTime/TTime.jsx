@@ -167,6 +167,8 @@ TTime.propTypes = {
     ]),
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,
+    /** If "current" is true and "icon" property is assigned then  */
+    current: PropTypes.any,
     /**
      * On date change event
      * @param {object} event Event object with following structure:

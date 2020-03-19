@@ -2,7 +2,9 @@ import {REGEXP} from './const.js';
 
 export function isoDate(source, mask) {
     if (source instanceof Date) {
-        return source.toISOString().substr(0, 10);
+        let offset = source.getTimezoneOffset();
+        let d = new Date(source.getTime() - offset*60*1000);
+        return d.toISOString().substr(0, 10);
     } else if (source && mask) {
         let d = mask.indexOf('DD') >= 0 ? source.substr(mask.indexOf('DD'), 2) : '01';
         let m = mask.indexOf('MM') >= 0 ? source.substr(mask.indexOf('MM'), 2) : '01';
@@ -20,7 +22,7 @@ export function strDate(source, mask, empty) {
 
     let str = null;
     if (source instanceof Date) {
-        let offset = 0;
+        let offset = source.getTimezoneOffset();
         let d = new Date(source.getTime() - offset*60*1000);
         str = d.toISOString().substr(0, 10);
     } else if (REGEXP.isoDate.test(source)) {
@@ -82,7 +84,9 @@ export function cutDate(source) {
 
 export function isoTime(source, mask) {
     if (source instanceof Date) {
-        return source.toISOString().substr(11, 8);
+        let offset = source.getTimezoneOffset();
+        let d = new Date(source.getTime() - offset*60*1000);
+        return d.toISOString().substr(11, 8);
     } else if (source && mask) {
         let h = mask.indexOf('hh') >= 0 ? source.substr(mask.indexOf('hh'), 2) : '00';
         let m = mask.indexOf('mm') >= 0 ? source.substr(mask.indexOf('mm'), 2) : '00';
