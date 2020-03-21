@@ -138,6 +138,8 @@ function setState(params, state) {
 
 export function post(params) {
 
+    let wait = params.wait === true || params.wait === undefined;
+
     let xhr = new XMLHttpRequest();
 
     xhr.open(
@@ -154,7 +156,7 @@ export function post(params) {
     xhr.withCredentials = true;
 
     if (params.sender && params.sender.state) {
-        if (params.sender.state.wait) {
+        if (wait && params.sender.state.wait) {
             return;
         } else {
             setState(params, {wait: true});
@@ -178,6 +180,8 @@ export function post(params) {
 
             state.error = xhr.statusText;
 
+            setState(params, state);
+
             if (params.fail) {
                 params.fail(xhr.status, {message: xhr.statusText});
             }
@@ -194,6 +198,8 @@ export function post(params) {
 
                 state.error = response.error.message;
 
+                setState(params, state);
+
                 if (params.fail) {
                     params.fail(xhr.status, response.error);
                 }
@@ -208,6 +214,8 @@ export function post(params) {
                     state.message = response.message;
                 }
 
+                setState(params, state);
+
                 if (params.success) {
                     params.success(response.data, response.message);
                 }
@@ -219,8 +227,6 @@ export function post(params) {
         if (params.default) {
             params.default();
         }
-
-        setState(params, state);
 
     }
 
