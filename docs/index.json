@@ -2777,6 +2777,12 @@
           "type": "string",
           "description": "",
           "required": false
+        },
+        "gradient": {
+          "type": "any",
+          "description": "",
+          "required": false,
+          "defaultValue": "true"
         }
       }
     },
@@ -2785,7 +2791,14 @@
       "displayName": "TScroll",
       "methods": [
         {
-          "name": "getHeight",
+          "name": "getSize",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "calcHeight",
           "docblock": null,
           "modifiers": [],
           "params": [],
@@ -2800,6 +2813,13 @@
         },
         {
           "name": "resize",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "change",
           "docblock": null,
           "modifiers": [],
           "params": [],
@@ -2832,6 +2852,16 @@
             }
           }
         },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
         "margin": {
           "type": "number",
           "description": "",
@@ -2861,6 +2891,33 @@
             "'hidden'": {},
             "'visible'": {}
           }
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On client rectangle change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.size": {
+              "name": "event.size",
+              "type": "any",
+              "description": "Component in the form of  {width: ..., height: ...}"
+            }
+          },
+          "required": false
         }
       }
     },

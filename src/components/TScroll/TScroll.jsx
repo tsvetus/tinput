@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, contain} from '../../util';
+import {merge, contain, compare} from '../../util';
 
 import styles from '../../styles';
 
@@ -14,21 +14,25 @@ class TScroll extends React.Component {
         super(props);
         this.ref = React.createRef();
         this.updateStyle = this.updateStyle.bind(this);
-        this.getHeight = this.getHeight.bind(this);
+        this.getSize = this.getSize.bind(this);
+        this.calcHeight = this.calcHeight.bind(this);
         this.resize = this.resize.bind(this);
         this.update = this.update.bind(this);
+        this.change = this.change.bind(this);
     }
 
     componentDidMount() {
         this.resize();
         this.update();
         this.updateStyle();
+        this.change();
         this.ref.current.addEventListener('resize', this.resize);
-//        this.ref.current.addEventListener('DOMNodeInserted', this.resize);
         window.addEventListener('resize', this.resize);
         this.timer = setInterval(() => {
-            this.resize();
-            this.updateStyle();
+            if (!compare(this.size, this.getSize())) {
+                this.resize();
+                this.updateStyle();
+            }
         }, 1000);
     }
 
@@ -39,17 +43,26 @@ class TScroll extends React.Component {
             this.resize();
             this.update();
             this.updateStyle();
+            this.change();
         }
     }
 
     componentWillUnmount() {
         clearInterval(this.timer);
         window.removeEventListener('resize', this.resize);
-//        this.ref.current.removeEventListener('DOMNodeInserted', this.resize);
         this.ref.current.removeEventListener('resize', this.resize);
     }
 
-    getHeight() {
+    getSize() {
+        if (this.ref.current) {
+            let rect = this.ref.current.getBoundingClientRect();
+            return {width: rect.width, height: rect.height};
+        } else {
+            return {width: 0, height: 0};
+        }
+    }
+
+    calcHeight() {
         let height = 0;
         if (this.style.container.height) {
             height = this.style.container.height;
@@ -80,8 +93,20 @@ class TScroll extends React.Component {
 
     resize() {
         if (this.ref.current) {
-            this.ref.current.style.height = this.getHeight() + 'px';
+            this.ref.current.style.height = this.calcHeight() + 'px';
+            this.change();
         }
+    }
+
+    change() {
+        if (this.props.onChange) {
+            this.props.onChange({
+                name: this.props.name,
+                data: this.props.data,
+                size: this.getSize()
+            });
+        }
+        this.size = this.getSize();
     }
 
     update() {
@@ -145,11 +170,26 @@ TScroll.propTypes = {
         /** Style for scroll content */
         content: PropTypes.object
     }),
+    /** Any component name that associated with component and returned in "onChange" event in "event.name" field.
+     * In addition component name can be used in global styles registered by "registerStyles" function to
+     * associate particular style with this component
+     */
+    name: PropTypes.string,
+    /** Any data that associated with component and returned in "onChange" event in "event.data" field */
+    data: PropTypes.any,
     margin: PropTypes.number,
     /** Scroll bars to show. Can be one of: */
     scrollBars: PropTypes.oneOf(['both', 'horizontal', 'vertical', 'none']),
     /** Overflow attribute. Can be one of: */
-    overflow: PropTypes.oneOf(['auto', 'scroll', 'hidden', 'visible'])
+    overflow: PropTypes.oneOf(['auto', 'scroll', 'hidden', 'visible']),
+    /**
+     * On client rectangle change event
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {any} event.size Component in the form of  {width: ..., height: ...}
+     */
+    onChange: PropTypes.func,
 };
 
 TScroll.defaultProps = {

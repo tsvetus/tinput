@@ -38,6 +38,10 @@ class TPanel extends React.Component {
             contain(this.props.style)
         );
 
+        if (!this.props.gradient) {
+            delete style.container.backgroundImage;
+        }
+
         return (
             <div style={style.container}>
                 {this.props.children}
@@ -55,7 +59,12 @@ TPanel.propTypes = {
         container: PropTypes.object
     }),
     dir: PropTypes.string,
-    align: PropTypes.string
+    align: PropTypes.string,
+    gradient: PropTypes.any
+};
+
+TPanel.defaultProps = {
+    gradient: true
 };
 
 export default TPanel;

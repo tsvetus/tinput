@@ -385,10 +385,12 @@ export default function defaultStyles(template) {
         },
 
         TPanel: {
-            backgroundImage: "linear-gradient(" + template.colors.panel + ", " + template.colors.window + ")",
-            backgroundColor: template.colors.panel,
-            color: template.colors.border,
-            ...template.fonts.common
+            container: {
+                backgroundImage: "linear-gradient(" + template.colors.panel + ", " + template.colors.window + ")",
+                backgroundColor: template.colors.panel,
+                color: template.colors.border,
+                ...template.fonts.common
+            }
         },
 
         TTop: {
