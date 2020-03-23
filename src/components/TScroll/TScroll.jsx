@@ -13,37 +13,32 @@ class TScroll extends React.Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef();
-        this.updateStyle = this.updateStyle.bind(this);
         this.getSize = this.getSize.bind(this);
         this.calcHeight = this.calcHeight.bind(this);
         this.resize = this.resize.bind(this);
+        this.check = this.check.bind(this);
         this.update = this.update.bind(this);
-        this.change = this.change.bind(this);
+        this.init = this.init.bind(this);
+        this.init(props);
+        this.start = this.start.bind(this);
     }
 
     componentDidMount() {
         this.resize();
-        this.update();
-        this.updateStyle();
-        this.change();
-        this.ref.current.addEventListener('resize', this.resize);
-        window.addEventListener('resize', this.resize);
+        this.update(this.props);
+        this.ref.current.addEventListener('resize', this.start);
+        window.addEventListener('resize', this.start);
         this.timer = setInterval(() => {
-            if (!compare(this.size, this.getSize())) {
-                this.resize();
-                this.updateStyle();
-            }
-        }, 1000);
+            this.check();
+        }, 500);
     }
 
     componentDidUpdate(old) {
         if (old.style !== this.props.style ||
             old.scrollBars !== this.props.scrollBars ||
             old.overflow !== this.props.overflow) {
-            this.resize();
-            this.update();
-            this.updateStyle();
-            this.change();
+            this.init(this.props);
+            this.update(this.props);
         }
     }
 
@@ -51,6 +46,11 @@ class TScroll extends React.Component {
         clearInterval(this.timer);
         window.removeEventListener('resize', this.resize);
         this.ref.current.removeEventListener('resize', this.resize);
+    }
+
+    start() {
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(this.resize, 500);
     }
 
     getSize() {
@@ -74,12 +74,33 @@ class TScroll extends React.Component {
         return height;
     }
 
-    updateStyle() {
+    resize() {
+        this.timeout = null;
+        if (this.ref.current) {
+            this.ref.current.style.height = this.calcHeight() + 'px';
+            this.size = this.getSize();
+            if (this.props.onChange) {
+                this.props.onChange({
+                    name: this.props.name,
+                    data: this.props.data,
+                    size: this.getSize()
+                });
+            }
+        }
+    }
+
+    check() {
+        if (!this.timeout && !compare(this.size, this.getSize())) {
+            this.resize();
+        }
+    }
+
+    init(props) {
 
         this.style = merge(
             contain(styles.TScroll),
-            contain(styles[this.props.name]),
-            contain(this.props.style)
+            contain(styles[props.name]),
+            contain(props.style)
         );
 
         for (let key in this.style.container) {
@@ -91,51 +112,33 @@ class TScroll extends React.Component {
 
     }
 
-    resize() {
-        if (this.ref.current) {
-            this.ref.current.style.height = this.calcHeight() + 'px';
-            this.change();
-        }
-    }
-
-    change() {
-        if (this.props.onChange) {
-            this.props.onChange({
-                name: this.props.name,
-                data: this.props.data,
-                size: this.getSize()
-            });
-        }
-        this.size = this.getSize();
-    }
-
-    update() {
+    update(props) {
 
         if (this.ref.current) {
 
             let ov = 'auto';
-            if (this.props.overflow) {
-                if (this.props.overflow.toLowerCase().indexOf('aut') === 0) {
+            if (props.overflow) {
+                if (props.overflow.toLowerCase().indexOf('aut') === 0) {
                     ov = 'auto';
-                } else if (this.props.overflow.toLowerCase().indexOf('scr') === 0) {
+                } else if (props.overflow.toLowerCase().indexOf('scr') === 0) {
                     ov = 'scroll';
-                } else if (this.props.overflow.toLowerCase().indexOf('hid') === 0) {
+                } else if (props.overflow.toLowerCase().indexOf('hid') === 0) {
                     ov = 'hidden';
-                } else if (this.props.overflow.toLowerCase().indexOf('vis') === 0) {
+                } else if (props.overflow.toLowerCase().indexOf('vis') === 0) {
                     ov = 'visible';
                 }
             }
 
-            if (this.props.scrollBars) {
-                if (this.props.scrollBars.toLowerCase().indexOf('hor') === 0) {
+            if (props.scrollBars) {
+                if (props.scrollBars.toLowerCase().indexOf('hor') === 0) {
                     this.ref.current.style.overflowX = ov;
                     this.ref.current.style.overflowY= 'hidden';
-                } else if (this.props.scrollBars.toLowerCase().indexOf('ver') === 0) {
+                } else if (props.scrollBars.toLowerCase().indexOf('ver') === 0) {
                     this.ref.current.style.overflowY = ov;
                     this.ref.current.style.overflowX = 'hidden';
-                } else if (this.props.scrollBars.toLowerCase().indexOf('bot') === 0) {
+                } else if (props.scrollBars.toLowerCase().indexOf('bot') === 0) {
                     this.ref.current.style.overflow = ov;
-                } else if (this.props.scrollBars.toLowerCase().indexOf('non') === 0) {
+                } else if (props.scrollBars.toLowerCase().indexOf('non') === 0) {
                     this.ref.current.style.overflow = 'hidden';
                 }
             }
@@ -145,8 +148,6 @@ class TScroll extends React.Component {
     }
 
     render () {
-
-        this.updateStyle();
 
         return (
             <div ref={this.ref} style={this.style.container}>

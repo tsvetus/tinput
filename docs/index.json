@@ -2791,6 +2791,13 @@
       "displayName": "TScroll",
       "methods": [
         {
+          "name": "start",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
           "name": "getSize",
           "docblock": null,
           "modifiers": [],
@@ -2805,13 +2812,6 @@
           "returns": null
         },
         {
-          "name": "updateStyle",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        },
-        {
           "name": "resize",
           "docblock": null,
           "modifiers": [],
@@ -2819,17 +2819,34 @@
           "returns": null
         },
         {
-          "name": "change",
+          "name": "check",
           "docblock": null,
           "modifiers": [],
           "params": [],
           "returns": null
         },
         {
+          "name": "init",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "props",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
           "name": "update",
           "docblock": null,
           "modifiers": [],
-          "params": [],
+          "params": [
+            {
+              "name": "props",
+              "type": null
+            }
+          ],
           "returns": null
         }
       ],
