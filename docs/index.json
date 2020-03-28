@@ -2626,6 +2626,17 @@
             "name": {}
           }
         },
+        "index": {
+          "type": "number",
+          "description": "Index of control in \"down/checked\" state. Use \"index\" property instead of\r\n\"indexes\" when control has only single group",
+          "required": false,
+          "defaultValue": "-1"
+        },
+        "value": {
+          "type": "number",
+          "description": "Item key value of control in \"down/checked\" state. Use \"value\" property if you prefer to work with\r\nkey values instead of item indexes",
+          "required": false
+        },
         "items": {
           "type": "arrayOf",
           "description": "Button list. It is possible to use another names instead of \"key\", \"value\" and \"group\". In that case\r\nkey, value and group will be first, second and third items respectively",
@@ -2649,6 +2660,7 @@
           "type": "union",
           "description": "Specifies key field name if it is other than \"key\"",
           "required": false,
+          "defaultValue": "['key', 'id']",
           "structure": {
             "string": {},
             "array": {}
@@ -2658,6 +2670,17 @@
           "type": "union",
           "description": "Specifies value field name if it is other than \"value\"",
           "required": false,
+          "defaultValue": "['value', 'name']",
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
+        "groupField": {
+          "type": "union",
+          "description": "Specifies group field name if it is other than \"group\"",
+          "required": false,
+          "defaultValue": "'group'",
           "structure": {
             "string": {},
             "array": {}

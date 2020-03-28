@@ -1,21 +1,4 @@
-import {clone, merge} from '../../util';
-
-function parseField(item, field, value) {
-    if (field) {
-        if (field instanceof Array) {
-            for (let i=0; i<field.length; i++) {
-                if (item.hasOwnProperty(field[i])) {
-                    return field[i];
-                }
-            }
-        } else if (typeof field === 'string') {
-            if (item.hasOwnProperty(field)) {
-                return field;
-            }
-        }
-    }
-    return value;
-}
+import {clone, merge, parseField} from '../../util';
 
 class Helper {
 

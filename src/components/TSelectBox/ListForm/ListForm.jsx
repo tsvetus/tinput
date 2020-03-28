@@ -31,8 +31,7 @@ class ListForm extends React.Component {
             };
             content = this.props.onFrame(e);
         } else {
-            let item = parseItem(event.item);
-            content = item.value;
+            content = parseItem(event.item, ['value', 'name']);
         }
         return (
             <TButton

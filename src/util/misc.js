@@ -221,43 +221,29 @@ export function isMS() {
     return /MSIE|Trident|Edge/.test(ua);
 }
 
-export function parseItem(item, index, grouped, keyField, valueField) {
-    let i = index === undefined ? 0 : index;
-    let res = {
-        key: 'key' + i,
-        value: 'value' + i,
-        group: 0
-    };
-    Object.keys(item).forEach((k, j) => {
-        if (k === 'key' || k === 'id' || k === 'value' || k === 'name' || k === 'group') {
-            if (k === 'key' || k === 'id') {
-                res.key = item[k];
-            } else if (k === 'value' || k === 'name') {
-                res.value = item[k];
-            } else if (k === 'group') {
-                res.group = item[k];
+export function parseField(item, field, def) {
+    if (field) {
+        if (field instanceof Array) {
+            for (let i=0; i<field.length; i++) {
+                if (item.hasOwnProperty(field[i])) {
+                    return field[i];
+                }
             }
-        } else {
-            if (j === 0) {
-                res.key = item[k];
-            } else if (j === 1) {
-                res.value = item[k];
-            } else if (j === 2) {
-                res.group = item[k];
+        } else if (typeof field === 'string') {
+            if (item.hasOwnProperty(field)) {
+                return field;
             }
         }
-    });
-    if (keyField && item[keyField] !== undefined) {
-        res.key = item[keyField];
     }
-    if (valueField && item[valueField] !== undefined) {
-        res.value = item[valueField];
+    return def;
+}
+
+export function parseItem(item, field, def) {
+    let key = parseField(item, field);
+    if (key) {
+        return item[key];
+    } else {
+        return def;
     }
-    if (grouped === undefined) {
-        delete res.group;
-    } else if (!grouped) {
-        res.group = i;
-    }
-    return res;
 }
 

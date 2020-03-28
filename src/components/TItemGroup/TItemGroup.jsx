@@ -8,19 +8,38 @@ import TGroup from "../TGroup";
 import TButton from "../TButton";
 import TCheck from "../TCheck";
 
-function getGroups(buttons, indexes, grouped, keyField, valueField) {
+function getGroups(buttons, indexes, grouped, groupField) {
     let groups = {};
     if (buttons) {
         buttons.forEach((v, i) => {
-            let res = parseItem(v, i, grouped, keyField, valueField);
-            if (indexes && indexes.indexOf(i) >= 0) {
-                if (groups[res.group] === undefined) {
-                    groups[res.group] = i;
+            if (grouped) {
+                let group = parseItem(v, groupField);
+                if (indexes && indexes.indexOf(i) >= 0) {
+                    if (groups[group] === undefined) {
+                        groups[group] = i;
+                    }
                 }
+            } else {
+                groups[i] = i;
             }
         });
     }
     return groups;
+}
+
+function getIndexes(props) {
+    let indexes = props.indexes ? props.indexes : [];
+    if (props.value !== undefined && props.items) {
+        let index = props.items.findIndex(v => {
+            return parseItem(v, props.keyField) == props.value;
+        });
+        if (index >= 0) {
+            indexes = [index];
+        }
+    } else if (props.index >= 0) {
+        indexes = [props.index];
+    }
+    return indexes;
 }
 
 /**
@@ -35,10 +54,9 @@ class TItemGroup extends React.Component {
             items: props.items,
             groups: getGroups(
                 props.items,
-                props.indexes,
+                getIndexes(props),
                 props.grouped,
-                props.keyField,
-                props.valueField
+                props.groupField
             )
         };
         this.handleClick = this.handleClick.bind(this);
@@ -47,15 +65,15 @@ class TItemGroup extends React.Component {
     componentDidUpdate(old) {
         if (!compare(old.items, this.props.items) ||
             !compare(old.indexes, this.props.indexes) ||
+            !compare(old.index, this.props.index) ||
             old.grouped !== this.props.grouped) {
             this.setState({
                 items: this.props.items,
                 groups: getGroups(
                     this.props.items,
-                    this.props.indexes,
+                    getIndexes(this.props),
                     this.props.grouped,
-                    this.props.keyField,
-                    this.props.valueField
+                    this.props.groupField
                 )
             });
         }
@@ -75,17 +93,19 @@ class TItemGroup extends React.Component {
                     indexes.push(index);
                     items.push(this.state.items[index]);
                 });
-                let value = false;
+                let state = false;
                 if (event.down !== undefined) {
-                    value = event.down;
+                    state = event.down;
                 } else if (event.value) {
-                    value = event.value;
+                    state = event.value;
                 }
+                let value = parseItem(event.data.item, this.props.keyField);
                 this.props.onChange({
                     name: this.props.name,
                     data: this.props.data,
                     control: event.key,
-                    value: value ? this.props.checked : this.props.unchecked,
+                    state: state ? this.props.checked : this.props.unchecked,
+                    value: value,
                     index: event.data.index,
                     item: event.data.item,
                     indexes: indexes,
@@ -108,7 +128,11 @@ class TItemGroup extends React.Component {
         let controls = null;
         if (this.state.items) {
             controls = this.state.items.map((v, i) => {
-                let res = parseItem(v, i, this.props.grouped, this.props.keyField, this.props.valueField);
+                let res = {
+                    key: parseItem(v, this.props.keyField),
+                    value: parseItem(v, this.props.valueField),
+                    group: parseItem(v, this.props.groupField)
+                };
                 if (this.props.control.indexOf('check') >= 0 || this.props.control.indexOf('radio') >= 0) {
                     let radio = this.props.control.indexOf('radio') >= 0;
                     return (
@@ -120,6 +144,8 @@ class TItemGroup extends React.Component {
                             data={{index: i, key: res.key, group: res.group, item: v}}
                             style={style.control}
                             radio={radio}
+                            checked={this.props.checked}
+                            unchecked={this.props.unchecked}
                             value={this.state.groups[res.group] === i}
                             onChange={this.handleClick} />
 
@@ -174,6 +200,16 @@ TItemGroup.propTypes = {
     /** List of indexes of controls in "down/checked" state */
     indexes: PropTypes.arrayOf(PropTypes.number),
     /**
+     * Index of control in "down/checked" state. Use "index" property instead of
+     * "indexes" when control has only single group
+     */
+    index: PropTypes.number,
+    /**
+     * Item key value of control in "down/checked" state. Use "value" property if you prefer to work with
+     * key values instead of item indexes
+     */
+    value: PropTypes.number,
+    /**
      * Button list. It is possible to use another names instead of "key", "value" and "group". In that case
      * key, value and group will be first, second and third items respectively
      */
@@ -192,6 +228,11 @@ TItemGroup.propTypes = {
     ]),
     /** Specifies value field name if it is other than "value" */
     valueField: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
+    /** Specifies group field name if it is other than "group" */
+    groupField: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.array
     ]),
@@ -221,9 +262,13 @@ TItemGroup.propTypes = {
 TItemGroup.defaultProps = {
     grouped: true,
     indexes: [],
+    index: -1,
     control: 'button',
     checked: true,
-    unchecked: false
+    unchecked: false,
+    keyField: ['key', 'id'],
+    valueField: ['value', 'name'],
+    groupField: 'group'
 };
 
 export default TItemGroup;

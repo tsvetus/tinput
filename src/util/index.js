@@ -13,6 +13,7 @@ import {
     compare,
     replace,
     isMS,
+    parseField,
     parseItem
 } from './misc.js';
 
@@ -74,6 +75,7 @@ export {
     compare,
     replace,
     isMS,
+    parseField,
     parseItem,
 
     Format,
