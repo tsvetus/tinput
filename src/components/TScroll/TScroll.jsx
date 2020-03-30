@@ -56,9 +56,9 @@ class TScroll extends React.Component {
     getSize() {
         if (this.ref.current) {
             let rect = this.ref.current.getBoundingClientRect();
-            return {width: rect.width, height: rect.height};
+            return {width: rect.width, height: rect.height, top: rect.top};
         } else {
-            return {width: 0, height: 0};
+            return {width: 0, height: 0, top: 0};
         }
     }
 

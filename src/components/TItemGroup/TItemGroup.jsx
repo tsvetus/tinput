@@ -65,8 +65,9 @@ class TItemGroup extends React.Component {
     componentDidUpdate(old) {
         if (!compare(old.items, this.props.items) ||
             !compare(old.indexes, this.props.indexes) ||
-            !compare(old.index, this.props.index) ||
-            old.grouped !== this.props.grouped) {
+            (old.value !== this.props.value) ||
+            (old.index !== this.props.index) ||
+            (old.grouped !== this.props.grouped)) {
             this.setState({
                 items: this.props.items,
                 groups: getGroups(
