@@ -10,7 +10,7 @@ import styles from '../../styles';
 /**
  * Represents list box
  */
-class TListBox extends React.Component {
+class TListBox extends React.PureComponent {
 
     constructor(props) {
         super(props);

@@ -11,7 +11,7 @@ import styles from '../../styles';
 /**
  * Clickable button with text caption and icon
  */
-class TGroupButton extends React.Component {
+class TGroupButton extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

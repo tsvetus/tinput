@@ -8,7 +8,7 @@ import styles from '../../styles';
 /**
  * Groups components in a single block
  */
-class TGroup extends React.Component {
+class TGroup extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

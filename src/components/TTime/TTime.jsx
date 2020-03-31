@@ -10,7 +10,7 @@ import styles from '../../styles';
 /**
  * Time editor with time value validation
  */
-class TTime extends React.Component {
+class TTime extends React.PureComponent {
 
     constructor(props) {
         super(props);

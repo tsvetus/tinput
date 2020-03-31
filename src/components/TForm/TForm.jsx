@@ -12,7 +12,7 @@ import styles from '../../styles';
  * Extends TModal component. Adds buttons panel at the bottom and on button click events. In addition TForm has
  * "message" and "error" props. If "message" or "error" assigned then they are shown in content area with "OK" button
  */
-class TForm extends React.Component {
+class TForm extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

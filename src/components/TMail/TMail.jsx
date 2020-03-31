@@ -10,7 +10,7 @@ import {Text} from "../../lib";
  * Component representing editor for email input. "TMail" is a special case of "TText" component designed
  * for mail input
  */
-class TMail extends React.Component {
+class TMail extends React.PureComponent {
 
     render () {
 

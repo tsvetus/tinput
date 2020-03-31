@@ -10,7 +10,7 @@ import styles from '../../styles';
 /**
  * Component representing single line text editor
  */
-class TText extends React.Component {
+class TText extends React.PureComponent {
 
     render () {
 

@@ -8,7 +8,7 @@ import styles from '../../styles';
 /**
  * Clickable button with text caption
  */
-class TButton extends React.Component {
+class TButton extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

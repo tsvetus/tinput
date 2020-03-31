@@ -11,7 +11,7 @@ const ICON_CLOSE = 'close';
 /**
  * Shows modal dialog
  */
-class TModal extends React.Component {
+class TModal extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

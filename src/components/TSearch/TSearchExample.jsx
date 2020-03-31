@@ -92,7 +92,8 @@ class TSearchExample extends React.Component {
             listMode={'key value'}
             empty={{code: 0, name: '-'}}
             onSearch={this.search}
-            onChange={this.change}/>
+            onChange={this.change}
+          />
 
         </TGroup>
 

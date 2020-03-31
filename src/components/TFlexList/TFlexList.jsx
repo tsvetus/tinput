@@ -12,7 +12,7 @@ import styles from '../../styles';
 /**
  * Represents data items as TTable or TRibbon depending on component client width and "flexWidth" property value
  */
-class TFlexList extends React.Component {
+class TFlexList extends React.PureComponent {
 
     constructor(props) {
         super(props);

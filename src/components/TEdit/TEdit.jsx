@@ -10,7 +10,7 @@ import styles from '../../styles';
 /**
  * Component representing simple text editor
  */
-class TEdit extends React.Component {
+class TEdit extends React.PureComponent {
 
     render () {
 

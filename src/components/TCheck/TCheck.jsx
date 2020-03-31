@@ -10,7 +10,7 @@ import styles from '../../styles';
 /**
  * Represents checkbox with label
  */
-class TCheck extends React.Component {
+class TCheck extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

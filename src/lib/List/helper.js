@@ -21,6 +21,8 @@ class Helper {
         this.load = this.load.bind(this);
         this.getOriginal = this.getOriginal.bind(this);
         this.getQuery = this.getQuery.bind(this);
+        this.getIndex = this.getIndex.bind(this);
+        this.getItem = this.getItem.bind(this);
     }
 
     getStruct(items, empty, keyField, valueField) {
@@ -162,16 +164,47 @@ class Helper {
         });
     }
 
+    getIndex(value) {
+        if (this.items) {
+            return this.items.findIndex(v => {return v.key === value});
+        } else {
+            return -1;
+        }
+    }
+
+    getItem(value) {
+        let index = this.getIndex(value);
+        if (index < 0) {
+            return null;
+        } else {
+            return this.items[index];
+        }
+    }
+
     getShowItem(value) {
-        return this.getShowItems().find( v =>{
-            return v.key == value;
-        });
+        let item = this.getItem(value);
+        if (item) {
+            return {
+                index: item.index,
+                key: item.key,
+                value: item.showValue
+            }
+        } else {
+            return null;
+        }
     }
 
     getListItem(value) {
-        return this.getListItems().find( v =>{
-            return v.key == value;
-        });
+        let item = this.getItem(value);
+        if (item) {
+            return {
+                index: item.index,
+                key: item.key,
+                value: item.showValue
+            }
+        } else {
+            return null;
+        }
     }
 
     getOriginal(index) {

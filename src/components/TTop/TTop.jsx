@@ -10,7 +10,7 @@ import styles from '../../styles';
 /**
  * Component represents top menu
  */
-class TTop extends React.Component {
+class TTop extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

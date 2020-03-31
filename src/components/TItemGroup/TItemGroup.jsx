@@ -46,7 +46,7 @@ function getIndexes(props) {
  * Groups items in a single block. Items represented as buttons, radio buttons or
  * check boxes depending on "control" property
  */
-class TItemGroup extends React.Component {
+class TItemGroup extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

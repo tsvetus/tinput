@@ -10,7 +10,7 @@ import styles from '../../styles';
 /**
  * Date editor with masked input and date value validation
  */
-class TDate extends React.Component {
+class TDate extends React.PureComponent {
 
     constructor(props) {
         super(props);

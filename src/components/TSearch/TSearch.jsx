@@ -7,7 +7,7 @@ import {merge, contain} from '../../util';
 
 import styles from '../../styles';
 
-class TSearch extends React.Component {
+class TSearch extends React.PureComponent {
 
     constructor(props) {
         super(props);

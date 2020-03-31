@@ -8,7 +8,7 @@ import styles from '../../styles';
 /**
  * Component represents scroll box
  */
-class TScroll extends React.Component {
+class TScroll extends React.PureComponent {
 
     constructor(props) {
         super(props);

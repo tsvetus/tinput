@@ -326,7 +326,9 @@ class Edit extends React.Component {
         }
 
         if (res.caret === 0) {
-            this.ref.current.focus();
+            if (!this.props.readOnly) {
+                this.ref.current.focus();
+            }
         } else if (!this.props.wrap) {
             this.setCaret(res.caret);
         }
@@ -405,7 +407,7 @@ class Edit extends React.Component {
         return (
             <div
                 ref={this.ref}
-                contentEditable={true} />
+                contentEditable={!this.props.readOnly} />
         );
 
     }

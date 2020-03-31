@@ -12,7 +12,7 @@ import styles from '../../styles';
  * Component representing single line text editor with masked input. All functionality of masked input
  * realized in "TText" component. "TMask" represented only for compatibility reasons with previous versions
  */
-class TMask extends React.Component {
+class TMask extends React.PureComponent {
 
     render () {
 

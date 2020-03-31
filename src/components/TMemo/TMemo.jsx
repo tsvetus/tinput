@@ -10,7 +10,7 @@ import styles from '../../styles';
 /**
  * Component representing multiline editor
  */
-class TMemo extends React.Component {
+class TMemo extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

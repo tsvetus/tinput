@@ -8,7 +8,7 @@ import styles from '../../styles';
 /**
  * Groups components in a single block
  */
-class TPanel extends React.Component {
+class TPanel extends React.PureComponent {
 
     render () {
 
