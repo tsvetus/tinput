@@ -39,11 +39,13 @@ export default {
 
         container: {
             outline: "none",
-            userSelect: "none"
+            userSelect: "none",
+            boxSizing: "border-box"
         },
 
         frame: {
             display: "flex",
+            flexDirection: "row",
             flexWrap: "nowrap",
             alignItems: "center",
             justifyContent: "space-between"
@@ -163,11 +165,15 @@ export default {
     TMemo: {
 
         container: {
-            border: "none"
         },
 
         frame: {
-            justifyContent: "space-between"
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            height: "auto"
         },
 
         edit: {
@@ -214,7 +220,6 @@ export default {
     },
 
     TListBox: {
-
     },
 
     TSearch: {
@@ -418,6 +423,12 @@ export default {
     },
 
     TText: {
+
+        container: {
+        },
+
+        frame: {
+        }
 
     },
 

@@ -332,6 +332,7 @@ class ListBox extends React.PureComponent {
         }
 
         let containerStyle = merge(style.container, this.getContainerStyle());
+//        let containerStyle = style.container;
 
         let top = this.props.layout && this.props.layout.indexOf('top') >= 0;
 

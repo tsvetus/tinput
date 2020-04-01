@@ -27,10 +27,6 @@ class Helper {
 
     getStruct(items, empty, keyField, valueField) {
 
-        if (items === undefined && empty === undefined) {
-            return this.struct;
-        }
-
         let item = null;
 
         if (items && items.length > 0) {
@@ -65,6 +61,12 @@ class Helper {
                     return {key: key, value: value}
                 }
 
+            }
+
+        } else {
+
+            if ((typeof keyField === 'string') && (typeof valueField === 'string')) {
+                return {key: keyField, value: valueField}
             }
 
         }
@@ -227,15 +229,14 @@ class Helper {
     }
 
     getQuery(query, key, value) {
+        let result = query;
         if (this.struct) {
-            let result = merge(query, {
+            result = merge(query, {
                 [this.struct.key]: key,
                 [this.struct.value]: value
             });
-            return result;
-        } else {
-            return query;
         }
+        return result;
     }
 
 }
