@@ -38,6 +38,7 @@ class TText extends React.PureComponent {
                 changeStyle={this.props.changeStyle}
                 readOnly={this.props.readOnly}
                 layout={this.props.layout}
+                onKeyDown={this.props.onKeyDown}
                 onValidate={this.props.onValidate}
                 onIcon={this.props.onIcon}
                 onMask={this.props.onMask}
@@ -144,7 +145,8 @@ TText.propTypes = {
      * @param {string} event.value Text to validate
      */
     onValidate: PropTypes.func,
-    onMask: PropTypes.func
+    onMask: PropTypes.func,
+    onKeyDown: PropTypes.func
 };
 
 TText.defaultProps = {

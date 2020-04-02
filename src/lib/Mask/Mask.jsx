@@ -86,6 +86,7 @@ class Mask extends React.Component {
                 empty={this.props.empty}
                 readOnly={this.props.readOnly}
                 required={this.props.required}
+                onKeyDown={this.props.onKeyDown}
                 onClick={this.props.onClick}
                 onChange={this.props.onChange}
                 onValidate={handleValidate}
@@ -113,6 +114,7 @@ Mask.propTypes = {
     empty: PropTypes.any,
     readOnly: PropTypes.any,
     required: PropTypes.any,
+    onKeyDown: PropTypes.func,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
     onMask: PropTypes.func,

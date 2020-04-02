@@ -135,6 +135,7 @@ class Text extends React.Component {
                         empty={this.props.empty}
                         readOnly={this.props.readOnly}
                         required={this.props.required}
+                        onKeyDown={this.props.onKeyDown}
                         onMask={this.props.onMask}
                         onValidate={validate}
                         onChange={this.handleChange}
@@ -163,6 +164,7 @@ Text.propTypes = {
     required: PropTypes.any,
     readOnly: PropTypes.any,
     layout: PropTypes.string,
+    onKeyDown: PropTypes.func,
     onChange: PropTypes.func,
     onValidate: PropTypes.func,
     onIcon: PropTypes.func,
