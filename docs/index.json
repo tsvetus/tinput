@@ -2506,6 +2506,11 @@
           "description": "Component data",
           "required": false
         },
+        "rotateTime": {
+          "type": "number",
+          "description": "Rotate animation period in milliseconds",
+          "required": false
+        },
         "onClick": {
           "type": "func",
           "description": "On click event ",

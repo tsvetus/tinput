@@ -591,14 +591,26 @@ export default function defaultStyles(template) {
         },
 
         TLoad: {
-            border: "1px solid " + template.colors.frame,
-            borderRadius: "16px",
-            backgroundColor: template.colors.face,
-            color: template.colors.border,
-            padding: "16px",
-            opacity: "0.8",
-            fontSize: "20px",
-            fontWeight: "bold"
+            caption: {
+                container: {
+                    border: "1px solid " + template.colors.frame,
+                    borderRadius: "16px",
+                    backgroundColor: template.colors.face,
+                    color: template.colors.border,
+                    padding: "16px",
+                    opacity: "0.8",
+                    fontSize: "20px",
+                    fontWeight: "bold"
+                }
+            },
+            icon: {
+                container: {
+                    color: template.colors.border,
+                    opacity: "0.8",
+                    width: "64px",
+                    height: "64px"
+                }
+            }
         },
 
         TGrid: {

@@ -5,7 +5,7 @@ import {merge, contain} from '../../util';
 
 import icons from './icons.js';
 
-class Icon extends React.Component {
+class Icon extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);
@@ -44,10 +44,22 @@ class Icon extends React.Component {
             }
         }
 
+        let animate = this.props.rotateTime ?
+            <animateTransform
+                attributeType="xml"
+                attributeName="transform"
+                type="rotate"
+                from="360 0 0"
+                to="0 0 0"
+                dur={this.props.rotateTime + "ms"}
+                additive="sum"
+                repeatCount="indefinite" /> : null;
+
         return (
             <svg style={cs} viewBox={w}
                 onClick={this.handleClick}>
                 {content}
+                {animate}
             </svg>
         );
 
@@ -62,6 +74,7 @@ Icon.propTypes = {
     name: PropTypes.string,
     icon: PropTypes.object,
     data: PropTypes.any,
+    rotateTime: PropTypes.number,
     onClick: PropTypes.func
 };
 

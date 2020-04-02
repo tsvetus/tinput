@@ -139,6 +139,9 @@ function setState(params, state) {
 export function post(params) {
 
     let wait = params.wait === true || params.wait === undefined;
+    if (params.force) {
+        wait = false;
+    }
 
     if (params.trace) {
         console.log('Data: ' + JSON.stringify(params.data));

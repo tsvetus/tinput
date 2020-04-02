@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge} from '../../util';
+import {merge, contain} from '../../util';
+
+import {Icon} from '../../lib';
 
 import styles from '../../styles';
 
@@ -9,29 +11,34 @@ class TLoad extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.cursor = document.body.style.cursor;
-    }
-
-    componentWillUnmount() {
-        // document.body.style.cursor = this.cursor;
     }
 
     render () {
 
-        let style = merge(styles.TLoad, this.props.style, this.props.show &&
-            this.props.showCaption ? {} : {display: "none"});
+        let show = this.props.show ? {} : {container: {display: "none"}};
 
-        // if (this.props.show) {
-        //     document.body.style.cursor = "wait";
-        // } else {
-        //     document.body.style.cursor = this.cursor;
-        // }
-
-        return (
-            <div style={style}>
-                {this.props.show ? this.props.caption : null}
-            </div>
+        let style = merge(
+            contain(styles.TLoad),
+            contain(this.props.style)
         );
+
+        if (this.props.show) {
+            if (this.props.icon) {
+                let is = merge(style.icon, show);
+                return (
+                    <Icon style={is} name={this.props.icon} rotateTime={700} />
+                );
+            } else {
+                let cs = merge(style.caption, show);
+                return (
+                    <div style={cs.container}>
+                        {this.props.caption}
+                    </div>
+                );
+            }
+        } else {
+            return null;
+        }
 
     }
 
@@ -40,7 +47,7 @@ class TLoad extends React.Component {
 TLoad.propTypes = {
     style: PropTypes.object,
     caption: PropTypes.string,
-    showCaption: PropTypes.any,
+    icon: PropTypes.string,
     show: PropTypes.any
 };
 

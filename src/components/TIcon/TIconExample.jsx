@@ -58,6 +58,23 @@ class TIconExample extends React.Component {
             content: {justifyContent: "flex-start"}
           }}>
 
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    margin: "16px"
+                }}>
+                <TIcon
+                    style={{
+                        container: {margin: "0 0 16px 0"}
+                    }}
+                    name={'refresh'}
+                    rotateTime={700}
+                    onClick={this.click}/>
+                <div>{"Rotated icon"}</div>
+            </div>
+
           {icons}
 
         </TGroup>

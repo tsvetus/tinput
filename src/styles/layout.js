@@ -343,12 +343,25 @@ export default {
     },
 
     TLoad: {
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -80%)",
-        zIndex: "40",
-        cursor: "default"
+        caption: {
+            container: {
+                position: "fixed",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -80%)",
+                zIndex: "40",
+                cursor: "default"
+            }
+        },
+        icon: {
+            container: {
+                position: "fixed",
+                top: "30%",
+                left: "calc(50% - 32px)",
+                zIndex: "40",
+                cursor: "default"
+            }
+        }
     },
 
     TScroll: {

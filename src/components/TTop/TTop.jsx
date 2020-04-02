@@ -77,8 +77,13 @@ class TTop extends React.PureComponent {
                     st = merge(st, style.clickable);
                 }
                 if (typeof v.icon === 'string') {
-                    tools.push(<Icon key={i} name={v.icon}
-                                     onClick={this.iconClick} style={st} />);
+                    tools.push(
+                        <Icon
+                            key={i}
+                            name={v.icon}
+                            onClick={this.iconClick}
+                            style={st}
+                            rotateTime={v.rotateTime} />);
                 } else if (React.isValidElement(v.icon)) {
                     tools.push(v.icon);
                 }
