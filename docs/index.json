@@ -237,6 +237,11 @@
           "type": "func",
           "description": "",
           "required": false
+        },
+        "onKeyDown": {
+          "type": "func",
+          "description": "",
+          "required": false
         }
       }
     },
