@@ -31,7 +31,8 @@ import {
     TRibbon,
     TFlexList,
     TMenu,
-    TEdit
+    TEdit,
+    TPopup
 } from './components';
 
 import {
@@ -110,6 +111,7 @@ export {
     TFlexList,
     TMenu,
     TEdit,
+    TPopup,
 
     download,
     clone,

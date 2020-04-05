@@ -15,19 +15,18 @@ class TLoad extends React.Component {
 
     render () {
 
-        let show = this.props.show ? {} : {container: {display: "none"}};
-        let inline = this.props.inline ? {container: {position: "relative"}} : {};
+        let style = contain(styles.TLoad);
 
-        let style = merge(
-            contain(styles.TLoad),
-            contain(this.props.style)
-        );
+        let show = this.props.show ? {} : {container: {display: "none"}};
+        let inline = this.props.inline ? style.inline : {};
 
         if (this.props.show) {
             if (this.props.icon) {
-                let is = merge(style.icon, show, inline);
+                let is = merge(style.icon, contain(this.props.style), show, inline);
                 return (
-                    <Icon style={is} name={this.props.icon} rotateTime={700} />
+                    <div style={is.container}>
+                        <Icon style={is.icon} name={this.props.icon} rotateTime={700} />
+                    </div>
                 );
             } else {
                 let cs = merge(style.caption, show, inline);
@@ -54,7 +53,8 @@ TLoad.propTypes = {
 };
 
 TLoad.defaultProps = {
-    caption: 'Loading...'
+    caption: 'Loading...',
+    icon: 'refresh'
 };
 
 export default TLoad;

@@ -31,6 +31,7 @@ import TRibbon from './TRibbon';
 import TFlexList from './TFlexList';
 import TMenu from './TMenu';
 import TEdit from './TEdit';
+import TPopup from './TPopup';
 
 export {
     TIcon,
@@ -65,5 +66,6 @@ export {
     TRibbon,
     TFlexList,
     TMenu,
-    TEdit
+    TEdit,
+    TPopup
 }

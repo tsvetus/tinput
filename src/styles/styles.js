@@ -605,10 +605,17 @@ export default function defaultStyles(template) {
             },
             icon: {
                 container: {
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100"
+
+                },
+                icon: {
                     color: template.colors.border,
                     opacity: "0.8",
-                    width: "64px",
-                    height: "64px"
+                    width: "48px",
+                    height: "48px"
                 }
             }
         },
@@ -736,6 +743,22 @@ export default function defaultStyles(template) {
 
         TEdit: {
             width: "100%"
+        },
+
+        TPopup: {
+            container: {
+            },
+            frame: {
+                cursor: "pointer"
+            },
+            label: {
+                cursor: "pointer"
+            },
+            icon: {
+                container: {
+                    cursor: "pointer",
+                }
+            }
         }
 
     }

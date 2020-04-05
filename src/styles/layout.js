@@ -361,6 +361,13 @@ export default {
                 zIndex: "40",
                 cursor: "default"
             }
+        },
+        inline: {
+            container: {
+                position: "relative",
+                left: "0",
+                top: "0"
+            }
         }
     },
 
@@ -451,6 +458,17 @@ export default {
 
     TMask: {
 
+    },
+
+    TPopup: {
+        frame: {
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: "auto"
+        }
     }
 
 }
