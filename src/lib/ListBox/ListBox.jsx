@@ -234,9 +234,8 @@ class ListBox extends React.PureComponent {
             }, null, event.value);
             this.props.onSearch(query, (items) => {
                 this.updateItems(items);
-                this.setState({
-                    showList: this.helper.hasItems(),
-                    hover: -1
+                this.setState({showList: false, hover: -1}, () => {
+                    this.setState({showList: this.helper.hasItems()});
                 });
             });
         } else if (event.value === null) {

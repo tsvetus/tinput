@@ -304,14 +304,14 @@ class Edit extends React.Component {
 
     handleChange() {
 
-        // if (this.props.simple) {
-        //
-        //     this.value = this.getText();
-        //     this.empty = this.value === this.props.empty;
-        //
-        //     this.sendValue(this.value);
-        //
-        // } else {
+        if (this.props.simple) {
+
+            this.value = this.getText();
+            this.empty = this.value === this.props.empty;
+
+            this.sendValue(this.value);
+
+        } else {
 
             if (this.mute || !this.mounted) {
                 return;
@@ -359,7 +359,7 @@ class Edit extends React.Component {
 
             this.updateStyle();
 
-        // }
+        }
 
     }
 

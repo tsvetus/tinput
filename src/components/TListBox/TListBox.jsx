@@ -14,12 +14,6 @@ class TListBox extends React.Component {
 
     constructor(props) {
         super(props);
-            this.state = {
-                items: props.items,
-                keyField: props.keyField,
-                valueField: props.valueField,
-                empty: props.empty
-            }
         if (props.provider) {
             let p = Provider.get(props.provider).getProps();
             this.state = {
