@@ -18,8 +18,8 @@ class TGroup extends React.PureComponent {
     render () {
 
         let style = merge(
-            contain(styles.TComponent),
-            contain(styles.TGroup),
+            styles.TComponent,
+            styles.TGroup,
             contain(styles[this.props.name]),
             contain(this.props.style)
         );

@@ -10,10 +10,16 @@ import styles from '../../styles';
 /**
  * Represents list box
  */
-class TListBox extends React.PureComponent {
+class TListBox extends React.Component {
 
     constructor(props) {
         super(props);
+            this.state = {
+                items: props.items,
+                keyField: props.keyField,
+                valueField: props.valueField,
+                empty: props.empty
+            }
         if (props.provider) {
             let p = Provider.get(props.provider).getProps();
             this.state = {
@@ -56,11 +62,19 @@ class TListBox extends React.PureComponent {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return (
+            (nextProps.items !== this.props.items) ||
+            (nextState.items !== this.state.items) ||
+            (nextProps.value !== this.props.value)
+        );
+    }
+
     render() {
 
         let style = merge(
-            contain(styles.TComponent),
-            contain(styles.TListBox),
+            styles.TComponent,
+            styles.TListBox,
             contain(styles[this.props.name]),
             contain(this.props.style)
         );

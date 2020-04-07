@@ -61,8 +61,8 @@ class TCheck extends React.PureComponent {
     render () {
 
         let style = merge(
-            contain(styles.TComponent),
-            contain(styles.TCheck),
+            styles.TComponent,
+            styles.TCheck,
             contain(styles[this.props.name]),
             contain(this.props.style)
         );

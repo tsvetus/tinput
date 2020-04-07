@@ -30,8 +30,8 @@ class TMemo extends React.PureComponent {
     render () {
 
         let style = merge(
-            contain(styles.TComponent),
-            contain(styles.TMemo),
+            styles.TComponent,
+            styles.TMemo,
             contain(styles[this.props.name]),
             contain(this.props.style)
         );
@@ -55,6 +55,7 @@ class TMemo extends React.PureComponent {
                 <Edit
                     vStyle={style.edit}
                     iStyle={style.edit}
+                    simple={true}
                     value={this.props.value}
                     wrap={this.props.wrap}
                     html={this.props.html}

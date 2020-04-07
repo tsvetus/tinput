@@ -13,7 +13,7 @@ class TIcon extends React.PureComponent {
     render () {
 
         let style = merge(
-            contain(styles.TIcon),
+            styles.TIcon,
             contain(styles[this.props.name]),
             contain(this.props.style)
         );

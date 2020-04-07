@@ -41,7 +41,7 @@ class TButton extends React.PureComponent {
     render () {
 
         let style = merge(
-            contain(styles.TButton),
+            styles.TButton,
             contain(styles[this.props.name]),
             contain(this.props.style)
         );

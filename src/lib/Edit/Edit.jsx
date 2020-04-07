@@ -67,22 +67,26 @@ class Edit extends React.Component {
         this.setCaret(this.caret);
         this.showPlaceholder();
         this.ref.current.addEventListener('input', this.handleChange);
-        this.ref.current.addEventListener('keypress', this.handleKeyPress);
-        this.ref.current.addEventListener('keydown', this.handleKeyDown);
         this.ref.current.addEventListener('click', this.handleClick);
-        this.ref.current.addEventListener('focus', this.handleFocus);
-        this.ref.current.addEventListener('blur', this.handleBlur);
+//        if (!this.props.simple) {
+            this.ref.current.addEventListener('keypress', this.handleKeyPress);
+            this.ref.current.addEventListener('keydown', this.handleKeyDown);
+            this.ref.current.addEventListener('focus', this.handleFocus);
+            this.ref.current.addEventListener('blur', this.handleBlur);
+//        }
         this.ref.current.addEventListener('paste', this.handlePaste);
     }
 
     componentWillUnmount() {
         this.mounted = false;
         this.ref.current.removeEventListener('paste', this.handlePaste);
-        this.ref.current.removeEventListener('blur', this.handleBlur);
-        this.ref.current.removeEventListener('focus', this.handleFocus);
         this.ref.current.removeEventListener('click', this.handleClick);
-        this.ref.current.removeEventListener('keydown', this.handleKeyDown);
-        this.ref.current.removeEventListener('keypress', this.handleKeyPress);
+//        if (!this.props.simple) {
+            this.ref.current.removeEventListener('blur', this.handleBlur);
+            this.ref.current.removeEventListener('focus', this.handleFocus);
+            this.ref.current.removeEventListener('keydown', this.handleKeyDown);
+            this.ref.current.removeEventListener('keypress', this.handleKeyPress);
+//        }
         this.ref.current.removeEventListener('input', this.handleChange);
     }
 
@@ -300,51 +304,62 @@ class Edit extends React.Component {
 
     handleChange() {
 
-        if (this.mute || !this.mounted) {
-            return;
-        }
+        // if (this.props.simple) {
+        //
+        //     this.value = this.getText();
+        //     this.empty = this.value === this.props.empty;
+        //
+        //     this.sendValue(this.value);
+        //
+        // } else {
 
-        clearTimeout(this.timer);
-
-        this.value = this.getText();
-        if (this.value === '') {
-            this.value = this.props.empty;
-        }
-
-        let res = this.parseValue(this.value);
-
-        if (this.props.onInput) {
-            this.props.onInput({
-                data: this.props.data,
-                name: this.props.name,
-                value: this.value
-            });
-        }
-
-        if (!this.props.wrap) {
-            this.setText(res.value);
-        }
-
-        if (res.caret === 0) {
-            if (!this.props.readOnly) {
-                this.ref.current.focus();
+            if (this.mute || !this.mounted) {
+                return;
             }
-        } else if (!this.props.wrap) {
-            this.setCaret(res.caret);
-        }
 
-        if (!res.valid || !res.full) {
-            res.value = this.props.empty;
-        }
+            clearTimeout(this.timer);
 
-        this.sendValue(res.value);
+            this.value = this.getText();
+            if (this.value === '') {
+                this.value = this.props.empty;
+            }
 
-        this.value = res.value;
-        this.valid = res.valid;
-        this.empty = res.empty;
-        this.full = res.full;
+            let res = this.parseValue(this.value);
 
-        this.updateStyle();
+            if (this.props.onInput) {
+                this.props.onInput({
+                    data: this.props.data,
+                    name: this.props.name,
+                    value: this.value
+                });
+            }
+
+            if (!this.props.wrap) {
+                this.setText(res.value);
+            }
+
+            if (res.caret === 0) {
+                if (!this.props.readOnly) {
+                    this.ref.current.focus();
+                }
+            } else if (!this.props.wrap) {
+                this.setCaret(res.caret);
+            }
+
+            if (!res.valid || !res.full) {
+                res.value = this.props.empty;
+            }
+
+            this.sendValue(res.value);
+
+            this.value = res.value;
+            this.valid = res.valid;
+            this.empty = res.empty;
+            this.full = res.full;
+
+            this.updateStyle();
+
+        // }
 
     }
 
@@ -415,6 +430,7 @@ class Edit extends React.Component {
 }
 
 Edit.propTypes = {
+    simple: PropTypes.any,
     vStyle: PropTypes.object,
     iStyle: PropTypes.object,
     value: PropTypes.string,

@@ -17,8 +17,8 @@ class TMask extends React.PureComponent {
     render () {
 
         let style = merge(
-            contain(styles.TComponent),
-            contain(styles.TMask),
+            styles.TComponent,
+            styles.TMask,
             contain(this.props.style)
         );
 

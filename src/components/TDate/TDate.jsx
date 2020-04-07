@@ -66,8 +66,8 @@ class TDate extends React.PureComponent {
     render () {
 
         let style = merge(
-            contain(styles.TComponent),
-            contain(styles.TDate),
+            styles.TComponent,
+            styles.TDate,
             contain(styles[this.props.name]),
             contain(this.props.style)
         );

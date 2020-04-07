@@ -15,8 +15,8 @@ class TMail extends React.PureComponent {
     render () {
 
         let style = merge(
-            contain(styles.TComponent),
-            contain(styles.TMail),
+            styles.TComponent,
+            styles.TMail,
             contain(this.props.style)
         );
 

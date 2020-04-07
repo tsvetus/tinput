@@ -344,6 +344,7 @@ class ListBox extends React.PureComponent {
                     {!top ? label : null}
                     {this.props.showEdit ?
                         <Edit
+                            simple={true}
                             ref={this.edit}
                             vStyle={style.edit}
                             iStyle={style.edit}
