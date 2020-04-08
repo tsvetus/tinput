@@ -9,7 +9,7 @@ import {merge} from '../../util';
  * @class
  * @ignore
  */
-class List extends React.Component {
+class List extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

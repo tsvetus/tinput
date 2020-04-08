@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {TIMEOUT, nvl, apply, merge, strip} from '../../util';
+import {TIMEOUT, nvl, apply, merge, strip, compare} from '../../util';
 
 import styles from '../../styles';
 
@@ -23,7 +23,7 @@ function parseReq(req) {
     return r;
 }
 
-class Edit extends React.Component {
+class Edit extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);
@@ -68,12 +68,10 @@ class Edit extends React.Component {
         this.showPlaceholder();
         this.ref.current.addEventListener('input', this.handleChange);
         this.ref.current.addEventListener('click', this.handleClick);
-//        if (!this.props.simple) {
-            this.ref.current.addEventListener('keypress', this.handleKeyPress);
-            this.ref.current.addEventListener('keydown', this.handleKeyDown);
-            this.ref.current.addEventListener('focus', this.handleFocus);
-            this.ref.current.addEventListener('blur', this.handleBlur);
-//        }
+        this.ref.current.addEventListener('keypress', this.handleKeyPress);
+        this.ref.current.addEventListener('keydown', this.handleKeyDown);
+        this.ref.current.addEventListener('focus', this.handleFocus);
+        this.ref.current.addEventListener('blur', this.handleBlur);
         this.ref.current.addEventListener('paste', this.handlePaste);
     }
 
@@ -81,18 +79,16 @@ class Edit extends React.Component {
         this.mounted = false;
         this.ref.current.removeEventListener('paste', this.handlePaste);
         this.ref.current.removeEventListener('click', this.handleClick);
-//        if (!this.props.simple) {
-            this.ref.current.removeEventListener('blur', this.handleBlur);
-            this.ref.current.removeEventListener('focus', this.handleFocus);
-            this.ref.current.removeEventListener('keydown', this.handleKeyDown);
-            this.ref.current.removeEventListener('keypress', this.handleKeyPress);
-//        }
+        this.ref.current.removeEventListener('blur', this.handleBlur);
+        this.ref.current.removeEventListener('focus', this.handleFocus);
+        this.ref.current.removeEventListener('keydown', this.handleKeyDown);
+        this.ref.current.removeEventListener('keypress', this.handleKeyPress);
         this.ref.current.removeEventListener('input', this.handleChange);
     }
 
     componentDidUpdate(old) {
 
-        if (old.vStyle !== this.props.vStyle || old.iStyle !== this.props.iStyle) {
+        if (!compare(old.vStyle, this.props.vStyle) || !compare(old.iStyle, this.props.iStyle)) {
             this.vStyle = this.props.vStyle;
             this.iStyle = merge(this.props.vStyle, this.props.iStyle);
             this.updateStyle();
@@ -206,9 +202,11 @@ class Edit extends React.Component {
     }
 
     hidePlaceholder() {
-        let html = nvl(this.getHtml(), '');
-        if (html.indexOf('<span') >= 0) {
-            this.setHtml(html.replace(/<span.*<\/span>/, ''));
+        if (this.props.placeholder) {
+            let html = nvl(this.getHtml(), '');
+            if (html.indexOf('<span') >= 0) {
+                this.setHtml(html.replace(/<span.*<\/span>/, ''));
+            }
         }
     }
 
@@ -404,6 +402,7 @@ class Edit extends React.Component {
                 value: this.value
             });
         }
+        this.ref.current.contentEditable = !this.props.readOnly;
     }
 
     handleBlur() {
@@ -415,14 +414,16 @@ class Edit extends React.Component {
             });
         }
         this.showPlaceholder();
+        this.ref.current.contentEditable = false;
     }
 
     render () {
 
         return (
             <div
+                tabIndex={-1}
                 ref={this.ref}
-                contentEditable={!this.props.readOnly} />
+                contentEditable={false} />
         );
 
     }

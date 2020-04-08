@@ -57,8 +57,10 @@ class TListBox extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.items !== this.props.items) {
+            this.setState({items: nextProps.items});
+        }
         return (
-            (nextProps.items !== this.props.items) ||
             (nextState.items !== this.state.items) ||
             (nextProps.value !== this.props.value)
         );

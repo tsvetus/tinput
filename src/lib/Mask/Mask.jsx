@@ -18,7 +18,7 @@ function createFormatter(props) {
     }
 }
 
-class Mask extends React.Component {
+class Mask extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);

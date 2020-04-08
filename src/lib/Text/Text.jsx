@@ -9,7 +9,7 @@ import {merge, apply, compare} from '../../util';
  * Component representing icons.
  * @extends React
  */
-class Text extends React.Component {
+class Text extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);
