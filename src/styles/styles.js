@@ -742,7 +742,8 @@ export default function defaultStyles(template) {
         },
 
         TEdit: {
-            width: "100%"
+            width: "100%",
+            minHeight: "22px"
         },
 
         TPopup: {
