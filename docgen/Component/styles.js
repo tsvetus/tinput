@@ -43,7 +43,8 @@ export default {
         backgroundColor: "#eee",
         color: "#90167f",
         padding: "8px",
-        fontSize: "16px"
+        fontSize: "16px",
+        overflowX: "scroll"
     }
 
 }

@@ -23,6 +23,7 @@ class TEdit extends React.PureComponent {
 
         return (
                 <Edit
+                    simple={true}
                     vStyle={style}
                     iStyle={style}
                     value={this.props.value}

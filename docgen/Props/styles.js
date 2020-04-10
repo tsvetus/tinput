@@ -66,7 +66,8 @@ export default {
     box: {
         border: '1px solid ' + styles.colors.frame,
         padding: "8px",
-        margin: "4px 0 4px 0"
+        margin: "4px 0 4px 0",
+        width: "100%"
     },
 
     top: {

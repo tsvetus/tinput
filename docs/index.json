@@ -724,7 +724,7 @@
           "type": "number",
           "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
           "required": false,
-          "defaultValue": "300"
+          "defaultValue": "700"
         },
         "placeholder": {
           "type": "string",
@@ -2971,6 +2971,71 @@
         }
       }
     },
+    "TPopup": {
+      "description": "Component hides/shows it's content",
+      "displayName": "TPopup",
+      "methods": [
+        {
+          "name": "handleClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TPopupExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label"
+            },
+            "content": {
+              "type": "object",
+              "description": "Style for group content. By default content is a \"flex box\" so it is possible to use\r\n\"flex\" styles without specifying \"display: 'flex'\" in \"content\" section"
+            }
+          }
+        },
+        "label": {
+          "type": "string",
+          "description": "Component caption",
+          "required": false
+        },
+        "show": {
+          "type": "any",
+          "description": "Shows/Hides content tab",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "showIcon": {
+          "type": "any",
+          "description": "Show/Hide content tab state indicator",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "icons": {
+          "type": "object",
+          "description": "Icons used as content tab state indicator",
+          "required": false,
+          "defaultValue": "{up: 'up', down: 'down'}"
+        }
+      }
+    },
     "separator4": {
       "displayName": "separator"
     },
@@ -3075,6 +3140,14 @@
             "style": {
               "type": "object",
               "description": "Tool icon custom style"
+            },
+            "rotateTime": {
+              "type": "number",
+              "description": "If above zero \"rotateTime\" denotes icon rotation speed in milliseconds"
+            },
+            "active": {
+              "type": "any",
+              "description": "Set \"active\" to false to temporary hide icon"
             }
           }
         },

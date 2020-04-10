@@ -72,7 +72,7 @@ class TIconExample extends React.Component {
                     name={'refresh'}
                     rotateTime={700}
                     onClick={this.click}/>
-                <div>{"Rotated icon"}</div>
+                <div>{"Rotating icon"}</div>
             </div>
 
           {icons}

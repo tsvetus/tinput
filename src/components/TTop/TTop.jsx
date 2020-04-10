@@ -68,24 +68,26 @@ class TTop extends React.PureComponent {
         let tools = [];
         if (this.props.tools) {
             this.props.tools.forEach((v, i) => {
-                let st = merge(
-                    style.icon,
-                    style[v.icon],
-                    v.style
-                );
-                if (v.onClick) {
-                    st = merge(st, style.clickable);
-                }
-                if (typeof v.icon === 'string') {
-                    tools.push(
-                        <Icon
-                            key={i}
-                            name={v.icon}
-                            onClick={this.iconClick}
-                            style={st}
-                            rotateTime={v.rotateTime} />);
-                } else if (React.isValidElement(v.icon)) {
-                    tools.push(v.icon);
+                if (v.active === undefined || v.active) {
+                    let st = merge(
+                        style.icon,
+                        style[v.icon],
+                        v.style
+                    );
+                    if (v.onClick) {
+                        st = merge(st, style.clickable);
+                    }
+                    if (typeof v.icon === 'string') {
+                        tools.push(
+                            <Icon
+                                key={i}
+                                name={v.icon}
+                                onClick={this.iconClick}
+                                style={st}
+                                rotateTime={v.rotateTime} />);
+                    } else if (React.isValidElement(v.icon)) {
+                        tools.push(v.icon);
+                    }
                 }
             });
         }
@@ -140,7 +142,11 @@ TTop.propTypes = {
         /** Tool icon click event */
         onClick: PropTypes.func,
         /** Tool icon custom style */
-        style: PropTypes.object
+        style: PropTypes.object,
+        /** If above zero "rotateTime" denotes icon rotation speed in milliseconds */
+        rotateTime: PropTypes.number,
+        /** Set "active" to false to temporary hide icon */
+        active: PropTypes.any
     })),
     /**
      * On click event. Fires when main menu button or tools icon are clicked

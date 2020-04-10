@@ -21,8 +21,6 @@ class TText extends React.PureComponent {
             contain(this.props.style)
         );
 
-//        console.log('TEXT');
-
         return (
             <Text
                 style={style}

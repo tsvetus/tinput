@@ -179,6 +179,7 @@ export function post(params) {
         if (params.sender && params.sender.mounted === false) {
             return;
         } else if (xhr.readyState !== 4) {
+            state.failed = true;
             setState(params, state);
             return;
         }
@@ -186,6 +187,7 @@ export function post(params) {
         if (xhr.status !== 200) {
 
             state.error = xhr.statusText;
+            state.failed = true;
 
             setState(params, state);
 
@@ -198,6 +200,8 @@ export function post(params) {
             }
 
         } else {
+
+            state.failed = false;
 
             let response = JSON.parse(xhr.responseText);
 

@@ -112,6 +112,11 @@ module.exports = {
             name: "TScrollExample"
         }
     }, {
+        name: "TPopup",
+        example: {
+            name: "TPopupExample"
+        }
+    }, {
         name: 'separator'
     }, {
         name: "TTop",
