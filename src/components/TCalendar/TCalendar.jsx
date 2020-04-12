@@ -196,6 +196,7 @@ class TCalendar extends React.Component {
                     year={this.state.year}
                     month={this.state.month}
                     months={this.templates.months}
+                    navigators={this.props.navigators}
                     onChange={this.handleNavigatorChange} />
                 {this.getContent({style: style})}
             </div>
@@ -278,6 +279,8 @@ TCalendar.propTypes = {
     show: PropTypes.any,
     /** Allows to select more than single date */
     multiSelect: PropTypes.any,
+    /** Navigator button types */
+    navigators: PropTypes.string,
     /**
      * Calendar captions for months and weekdays. Another way to set captions is to use
      * "registerStyles" like a way "registerStyles(null, {days: [...], months: [...]})"
@@ -306,7 +309,8 @@ TCalendar.defaultProps = {
     multiSelect: false,
     dates: [],
     dateFormat: 'native',
-    show: true
+    show: true,
+    navigators: 'year month'
 };
 
 

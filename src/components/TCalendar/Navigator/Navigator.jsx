@@ -54,18 +54,20 @@ class Navigator extends React.PureComponent {
         let style = this.props.style;
 
         let month = this.props.months[this.state.month];
+        let mn = this.props.navigators && this.props.navigators.indexOf('mon') >= 0;
+        let yn = this.props.navigators && this.props.navigators.indexOf('yea') >= 0;
 
         return (
             <div style={style.container}>
                 <div style={style.left}>
-                    <div style={style.button} onClick={()=>{this.changeYear(-1)}}>&lt;</div>
-                    <div style={style.button} onClick={()=>{this.changeMonth(-1)}}>&lt;&lt;&lt;</div>
+                    {yn ? <div style={style.button} onClick={()=>{this.changeYear(-1)}}>&lt;</div> : null}
+                    {mn ? <div style={style.button} onClick={()=>{this.changeMonth(-1)}}>&lt;&lt;&lt;</div> : null}
                 </div>
                 <div style={style.month}>{month}</div>
                 <div style={style.year}>{this.state.year}</div>
                 <div style={style.right}>
-                    <div style={style.button} onClick={()=>{this.changeMonth(1)}}>&gt;&gt;&gt;</div>
-                    <div style={style.button} onClick={()=>{this.changeYear(1)}}>&gt;</div>
+                    {mn ? <div style={style.button} onClick={()=>{this.changeMonth(1)}}>&gt;&gt;&gt;</div> : null}
+                    {yn ? <div style={style.button} onClick={()=>{this.changeYear(1)}}>&gt;</div> : null}
                 </div>
             </div>
         );
@@ -79,6 +81,7 @@ Navigator.propTypes = {
     year: PropTypes.number,
     month: PropTypes.number,
     months: PropTypes.array,
+    navigators: PropTypes.string,
     onChange: PropTypes.func
 };
 
