@@ -834,8 +834,10 @@ export default function defaultStyles(template) {
                     color: template.colors.border
                 },
                 month: {
+                    margin: "0 2px 0 0 "
                 },
                 year: {
+                    margin: "0 0 0 2px"
                 },
                 button: {
                     border: "1px solid " + template.colors.frame,

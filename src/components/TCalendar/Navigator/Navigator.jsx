@@ -63,8 +63,10 @@ class Navigator extends React.PureComponent {
                     {yn ? <div style={style.button} onClick={()=>{this.changeYear(-1)}}>&lt;</div> : null}
                     {mn ? <div style={style.button} onClick={()=>{this.changeMonth(-1)}}>&lt;&lt;&lt;</div> : null}
                 </div>
-                <div style={style.month}>{month}</div>
-                <div style={style.year}>{this.state.year}</div>
+                <div style={style.center}>
+                    <div style={style.month}>{month}</div>
+                    <div style={style.year}>{this.state.year}</div>
+                </div>
                 <div style={style.right}>
                     {mn ? <div style={style.button} onClick={()=>{this.changeMonth(1)}}>&gt;&gt;&gt;</div> : null}
                     {yn ? <div style={style.button} onClick={()=>{this.changeYear(1)}}>&gt;</div> : null}
