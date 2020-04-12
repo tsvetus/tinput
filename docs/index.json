@@ -2499,6 +2499,12 @@
           "required": false,
           "defaultValue": "false"
         },
+        "navigators": {
+          "type": "string",
+          "description": "Navigator button types",
+          "required": false,
+          "defaultValue": "'year month'"
+        },
         "templates": {
           "type": "shape",
           "description": "Calendar captions for months and weekdays. Another way to set captions is to use\r\n\"registerStyles\" like a way \"registerStyles(null, {days: [...], months: [...]})\"",
