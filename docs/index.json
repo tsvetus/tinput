@@ -1367,153 +1367,6 @@
         }
       }
     },
-    "TCheck": {
-      "description": "Represents checkbox with label",
-      "displayName": "TCheck",
-      "methods": [
-        {
-          "name": "handleIcon",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        },
-        {
-          "name": "handleChange",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "event",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "updateChecked",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "value",
-              "type": null
-            },
-            {
-              "name": "change",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "isRight",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        }
-      ],
-      "example": {
-        "name": "TCheckExample"
-      },
-      "props": {
-        "style": {
-          "type": "shape",
-          "description": "Component style:",
-          "required": false,
-          "structure": {
-            "container": {
-              "type": "object",
-              "description": "Style for outer component container"
-            },
-            "label": {
-              "type": "object",
-              "description": "Style for component label"
-            },
-            "icon": {
-              "type": "object",
-              "description": "Style for component icon"
-            }
-          }
-        },
-        "value": {
-          "type": "any",
-          "description": "Component initial value",
-          "required": false
-        },
-        "name": {
-          "type": "any",
-          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
-          "required": false
-        },
-        "data": {
-          "type": "any",
-          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
-          "required": false
-        },
-        "label": {
-          "type": "string",
-          "description": "Label caption. Default is undefined and label is hidden",
-          "required": false
-        },
-        "checked": {
-          "type": "any",
-          "description": "Checked state value",
-          "required": false,
-          "defaultValue": "true"
-        },
-        "unchecked": {
-          "type": "any",
-          "description": "Unchecked state value",
-          "required": false,
-          "defaultValue": "false"
-        },
-        "radio": {
-          "type": "any",
-          "description": "Shows component icons as radio buttons",
-          "required": false,
-          "defaultValue": "false"
-        },
-        "layout": {
-          "type": "enum",
-          "description": "Label position towards icon. Can be one of:",
-          "required": false,
-          "defaultValue": "'left'",
-          "structure": {
-            "'left'": {},
-            "'right'": {}
-          }
-        },
-        "onChange": {
-          "type": "func",
-          "description": "On click event ",
-          "arguments": {
-            "event": {
-              "name": "event",
-              "type": "object",
-              "description": "event object with following structure:"
-            },
-            "event.name": {
-              "name": "event.name",
-              "type": "string",
-              "description": "component name from \"name\" property"
-            },
-            "event.data": {
-              "name": "event.data",
-              "type": "object",
-              "description": "component data from \"data\" property"
-            },
-            "event.value": {
-              "name": "event.value",
-              "type": "object",
-              "description": "component value. If component state is checked then \"value\" equals to \"checked\" property. Otherwise it equals to \"unchecked\" property"
-            }
-          },
-          "required": false
-        }
-      }
-    },
     "TListBox": {
       "description": "Represents list box",
       "displayName": "TListBox",
@@ -2281,6 +2134,423 @@
     "separator2": {
       "displayName": "separator"
     },
+    "TCheck": {
+      "description": "Represents checkbox with label",
+      "displayName": "TCheck",
+      "methods": [
+        {
+          "name": "handleIcon",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "handleChange",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "updateChecked",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "value",
+              "type": null
+            },
+            {
+              "name": "change",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "isRight",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TCheckExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label"
+            },
+            "icon": {
+              "type": "object",
+              "description": "Style for component icon"
+            }
+          }
+        },
+        "value": {
+          "type": "any",
+          "description": "Component initial value",
+          "required": false
+        },
+        "name": {
+          "type": "any",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "label": {
+          "type": "string",
+          "description": "Label caption. Default is undefined and label is hidden",
+          "required": false
+        },
+        "checked": {
+          "type": "any",
+          "description": "Checked state value",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "unchecked": {
+          "type": "any",
+          "description": "Unchecked state value",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "radio": {
+          "type": "any",
+          "description": "Shows component icons as radio buttons",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "layout": {
+          "type": "enum",
+          "description": "Label position towards icon. Can be one of:",
+          "required": false,
+          "defaultValue": "'left'",
+          "structure": {
+            "'left'": {},
+            "'right'": {}
+          }
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "object",
+              "description": "component value. If component state is checked then \"value\" equals to \"checked\" property. Otherwise it equals to \"unchecked\" property"
+            }
+          },
+          "required": false
+        }
+      }
+    },
+    "TCalendar": {
+      "description": "Component representing calendar. Calendar captions can be localized using \"templates\" props or\r\n\"registerStyles\" function described in readme page. Simply set \"templates={{days: [...]}, months: [...]}\r\ndirectly in component declaration or set it globally by call:\r\n\"registerStyles(null, {days: [...]}, months: [...])\".",
+      "displayName": "TCalendar",
+      "methods": [
+        {
+          "name": "getParams",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "getContent",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "change",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "handleDayClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleNavigatorChange",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TCalendarExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label"
+            },
+            "navigator": {
+              "type": "shape",
+              "description": "Style for navigator bar",
+              "structure": {
+                "container": {
+                  "type": "object",
+                  "description": "Style for navigator container"
+                },
+                "month": {
+                  "type": "object",
+                  "description": "Style for month"
+                },
+                "year": {
+                  "type": "object",
+                  "description": "Style for year"
+                },
+                "button": {
+                  "type": "object",
+                  "description": "Style for navigator buttons"
+                }
+              }
+            },
+            "day": {
+              "type": "shape",
+              "description": "Style for weekdays",
+              "structure": {
+                "container": {
+                  "type": "object",
+                  "description": "Style for weekday container"
+                },
+                "content": {
+                  "type": "object",
+                  "description": "Style for weekday content"
+                }
+              }
+            },
+            "date": {
+              "type": "shape",
+              "description": "Style for dates",
+              "structure": {
+                "container": {
+                  "type": "object",
+                  "description": "Style for date container"
+                },
+                "content": {
+                  "type": "object",
+                  "description": "Style for date content"
+                },
+                "current": {
+                  "type": "object",
+                  "description": "Style for current date"
+                },
+                "inactive": {
+                  "type": "object",
+                  "description": "Style for inactive date"
+                },
+                "selected": {
+                  "type": "object",
+                  "description": "Style for selected date"
+                }
+              }
+            }
+          }
+        },
+        "label": {
+          "type": "string",
+          "description": "Label caption. Default is undefined and label is hidden",
+          "required": false
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "start": {
+          "type": "number",
+          "description": "Calendar start week day. Cam be varied from \"0\" for sunday to \"6\" for saturday",
+          "required": false,
+          "defaultValue": "0"
+        },
+        "current": {
+          "type": "union",
+          "description": "Calendar current date. Accepts iso strings or Date objects. Default is current day",
+          "required": false,
+          "structure": {
+            "string": {},
+            "Date": {}
+          }
+        },
+        "date": {
+          "type": "union",
+          "description": "Selected date. Accepts iso strings or Date objects.",
+          "required": false,
+          "structure": {
+            "string": {},
+            "Date": {}
+          }
+        },
+        "dates": {
+          "type": "array",
+          "description": "Array of selected dates. Accepts array of iso strings or Date objects.",
+          "required": false,
+          "defaultValue": "[]"
+        },
+        "dateFormat": {
+          "type": "enum",
+          "description": "Date format in \"onChange\" event",
+          "required": false,
+          "defaultValue": "'native'",
+          "structure": {
+            "'iso'": {},
+            "'native'": {}
+          }
+        },
+        "year": {
+          "type": "number",
+          "description": "Initial calendar year. Default is current year",
+          "required": false
+        },
+        "month": {
+          "type": "number",
+          "description": "Initial calendar month. Default is current month",
+          "required": false
+        },
+        "show": {
+          "type": "any",
+          "description": "Shows/Hides component",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "multiSelect": {
+          "type": "any",
+          "description": "Allows to select more than single date",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "templates": {
+          "type": "shape",
+          "description": "Calendar captions for months and weekdays. Another way to set captions is to use\r\n\"registerStyles\" like a way \"registerStyles(null, {days: [...], months: [...]})\"",
+          "required": false,
+          "structure": {
+            "days": {
+              "type": "arrayOf",
+              "description": "Array of weekdays captions"
+            },
+            "months": {
+              "type": "arrayOf",
+              "description": "Array of months captions"
+            }
+          }
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.date": {
+              "name": "event.date",
+              "type": "string",
+              "description": "Selected date in single selection mode. Returned date format depends on \"dateFormat\" property. Can be one of 'iso' or 'native'"
+            },
+            "event.dates": {
+              "name": "event.dates",
+              "type": "string",
+              "description": "Array of selected dates in multi select mode. Returned dates format depends on \"dateFormat\" property. Can be one of 'iso' or 'native'"
+            }
+          },
+          "required": false
+        }
+      }
+    },
+    "separator3": {
+      "displayName": "separator"
+    },
     "TButton": {
       "description": "Clickable button with text caption",
       "displayName": "TButton",
@@ -2535,7 +2805,7 @@
         }
       }
     },
-    "separator3": {
+    "separator4": {
       "displayName": "separator"
     },
     "TGroup": {
@@ -3036,7 +3306,7 @@
         }
       }
     },
-    "separator4": {
+    "separator5": {
       "displayName": "separator"
     },
     "TTop": {
@@ -3405,7 +3675,7 @@
         }
       }
     },
-    "separator5": {
+    "separator6": {
       "displayName": "separator"
     },
     "TGrid": {
@@ -4664,7 +4934,7 @@
         }
       }
     },
-    "separator6": {
+    "separator7": {
       "displayName": "separator"
     },
     "TModal": {

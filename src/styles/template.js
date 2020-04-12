@@ -22,10 +22,18 @@ export default {
             fontFamily: "Arial",
             fontSize: "18px"
         },
+        small: {
+            fontFamily: "Arial",
+            fontSize: "16px"
+        },
         code: {
             fontFamily: "Helvetica",
             fontSize: "16px"
         }
     },
+
+    months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Now', 'Dec'],
+
+    days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 }

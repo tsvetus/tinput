@@ -7,13 +7,13 @@ export function merge(...sources) {
             if (!(res instanceof Array)) {
                 res = []
             }
-            res = [...res, ...source]
+            source.forEach((v, i) => {res[i] = v});
         } else if (source instanceof Object) {
             for (let [key, value] of Object.entries(source)) {
                 if (value instanceof Object && key in res) {
                     value = merge(res[key], value)
                 }
-                res = { ...res, [key]: value }
+                res = {...res, [key]: value}
             }
         }
     }

@@ -53,11 +53,6 @@ module.exports = {
             name: "TDateExample"
         }
     }, {
-        name: "TCheck",
-        example: {
-            name: "TCheckExample"
-        }
-    }, {
         name: "TListBox",
         example: {
             name: "TListBoxExample"
@@ -71,6 +66,18 @@ module.exports = {
         name: "TSelectBox",
         example: {
             name: "TSelectBoxExample"
+        }
+    }, {
+        name: 'separator'
+    }, {
+        name: "TCheck",
+        example: {
+            name: "TCheckExample"
+        }
+    }, {
+        name: "TCalendar",
+        example: {
+            name: "TCalendarExample"
         }
     }, {
         name: 'separator'

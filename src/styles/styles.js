@@ -4,6 +4,8 @@ export default function defaultStyles(template) {
 
         colors: template.colors,
         fonts: template.fonts,
+        months: template.months,
+        days: template.days,
 
         TIcon: {
             container: {
@@ -760,6 +762,90 @@ export default function defaultStyles(template) {
                     cursor: "pointer",
                 }
             }
+        },
+
+        TCalendar: {
+
+            container: {
+
+            },
+
+            label: {
+                textAlign: "center",
+                ...template.fonts.common,
+                color: template.colors.border,
+                whiteSpace: "normal",
+                margin: "0 0 8px 0"
+            },
+
+            row: {
+                display: "flex"
+            },
+
+            day: {
+
+                container: {
+                    width: "38px",
+                    height: "24px",
+                    margin: "0 -1px -1px 0"
+                },
+
+                content: {
+                    ...template.fonts.small,
+                    color: template.colors.border,
+                    fontWeight: "bold"
+                }
+
+            },
+
+            date: {
+
+                container: {
+                    minWidth: "38px",
+                    minHeight: "36px",
+                    margin: "0 -1px -1px 0",
+                    border: "1px solid " + template.colors.frame
+                },
+
+                content: {
+                    cursor: "pointer",
+                    ...template.fonts.common
+                },
+
+                current: {
+                    border: "2px solid " + template.colors.signal
+                },
+
+                inactive: {
+                    color: template.colors.face,
+                    cursor: "default"
+                },
+
+                selected: {
+                    backgroundColor: template.colors.face,
+                    fontWeight: "bold"
+                }
+
+            },
+
+            navigator: {
+                container: {
+                    margin: "0 0 8px 0",
+                    color: template.colors.border
+                },
+                month: {
+                },
+                year: {
+                },
+                button: {
+                    border: "1px solid " + template.colors.frame,
+                    textAlign: "center",
+                    cursor: "pointer",
+                    margin: "0 -1px -1px 0",
+                    padding: "4px 10px 4px 10px"
+                }
+            }
+
         }
 
     }

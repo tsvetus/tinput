@@ -26,6 +26,7 @@ import TModalExample from './components/TModal/TModalExample.jsx';
 import TFormExample from './components/TForm/TFormExample.jsx';
 import TEditExample from './components/TEdit/TEditExample.jsx';
 import TPopupExample from './components/TPopup/TPopupExample.jsx';
+import TCalendarExample from './components/TCalendar/TCalendarExample.jsx';
 
 export {
     TDateExample,
@@ -55,5 +56,6 @@ export {
     TModalExample,
     TFormExample,
     TEditExample,
-    TPopupExample
+    TPopupExample,
+    TCalendarExample
 }

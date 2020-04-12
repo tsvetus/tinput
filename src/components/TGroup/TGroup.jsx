@@ -56,7 +56,7 @@ TGroup.propTypes = {
         content: PropTypes.object
     }),
     /** Label caption. Default is undefined and label is hidden */
-    label: PropTypes.string,
+    label: PropTypes.string
 };
 
 export default TGroup;

@@ -32,6 +32,7 @@ import TFlexList from './TFlexList';
 import TMenu from './TMenu';
 import TEdit from './TEdit';
 import TPopup from './TPopup';
+import TCalendar from './TCalendar';
 
 export {
     TIcon,
@@ -67,5 +68,6 @@ export {
     TFlexList,
     TMenu,
     TEdit,
-    TPopup
+    TPopup,
+    TCalendar
 }

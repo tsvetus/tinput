@@ -159,3 +159,8 @@ export function lastDate(year, month) {
         return new Date(Date.UTC(year + 1, 0, 0));
     }
 }
+
+export function clearDate(date) {
+    let d = date instanceof Date ? date : new Date(date);
+    return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+}

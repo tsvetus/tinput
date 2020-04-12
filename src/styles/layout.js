@@ -469,6 +469,75 @@ export default {
             justifyContent: "space-between",
             height: "auto"
         }
+    },
+
+    TCalendar: {
+
+        container: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center"
+        },
+
+        row: {
+            display: "flex"
+        },
+
+        day: {
+            container: {
+                boxSizing: "border-box",
+                display: "flex"
+            },
+            content: {
+                boxSizing: "border-box",
+                flex: "1 1 100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+            }
+        },
+
+        date: {
+            container: {
+                boxSizing: "border-box",
+                display: "flex"
+            },
+            content: {
+                boxSizing: "border-box",
+                flex: "1 1 100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+            }
+        },
+
+        navigator: {
+            container: {
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+                alignItems: "center"
+            },
+            left: {
+                display: "flex",
+                justifyContent: "flex-start"
+            },
+            center: {
+                display: "flex",
+                justifyContent: "center"
+            },
+            right: {
+                display: "flex",
+                justifyContent: "flex-end"
+            },
+            button: {
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }
+        }
+
     }
 
 }

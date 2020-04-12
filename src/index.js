@@ -32,7 +32,8 @@ import {
     TFlexList,
     TMenu,
     TEdit,
-    TPopup
+    TPopup,
+    TCalendar
 } from './components';
 
 import {
@@ -112,6 +113,7 @@ export {
     TMenu,
     TEdit,
     TPopup,
+    TCalendar,
 
     download,
     clone,
