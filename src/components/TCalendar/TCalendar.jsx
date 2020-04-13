@@ -74,7 +74,7 @@ class TCalendar extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.dates !== this.props.dates || prevProps.date !== this.props.date) {
+        if (prevProps.value !== this.props.value) {
             this.setState(calcState(this.props));
         }
     }
