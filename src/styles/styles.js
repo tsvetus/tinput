@@ -785,8 +785,7 @@ export default function defaultStyles(template) {
             day: {
 
                 container: {
-                    width: "38px",
-                    height: "24px",
+                    minWidth: "38px",
                     margin: "0 -1px -1px 0"
                 },
 
@@ -801,7 +800,6 @@ export default function defaultStyles(template) {
             date: {
 
                 container: {
-                    minWidth: "38px",
                     minHeight: "36px",
                     margin: "0 -1px -1px 0",
                     border: "1px solid " + template.colors.frame

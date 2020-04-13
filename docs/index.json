@@ -2377,8 +2377,24 @@
                 "button": {
                   "type": "object",
                   "description": "Style for navigator buttons"
+                },
+                "left": {
+                  "type": "object",
+                  "description": "Style for left buttons box"
+                },
+                "center": {
+                  "type": "object",
+                  "description": "Style for month/year box"
+                },
+                "right": {
+                  "type": "object",
+                  "description": "Style for right buttons box"
                 }
               }
+            },
+            "content": {
+              "type": "object",
+              "description": "Style for calendar grid box"
             },
             "day": {
               "type": "shape",

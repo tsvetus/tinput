@@ -480,6 +480,11 @@ export default {
             alignItems: "center"
         },
 
+        content: {
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr"
+        },
+
         row: {
             display: "flex"
         },

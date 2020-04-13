@@ -86,49 +86,39 @@ class TCalendar extends React.Component {
     }
 
     getContent(event) {
+
         let content = [];
-        let dates = [];
-        let days = [];
+        let key = 0;
+
         let date = new Date(this.state.from);
-        let row = 0;
+        for (let i=0; i<7; i++) {
+            let d = new Date(date);
+            content.push(
+                <Day
+                    style={event.style.day}
+                    key={key++}
+                    caption={this.templates.days[d.getDay()]} />
+            );
+            date.setDate(date.getDate() + 1);
+        }
+
+        date = new Date(this.state.from);
         while (date.getTime() <= this.state.to.getTime()) {
             let d = new Date(date);
-            if (row === 0) {
-                days.push(
-                    <Day
-                        style={event.style.day}
-                        key={d.getDay()}
-                        caption={this.templates.days[d.getDay()]} />
-                );
-            }
-            dates.push(
+            content.push(
                 <Day
                     style={event.style.date}
-                    key={row + '_' + d.getDay()}
+                    key={key++}
                     data={d}
                     caption={d.getDate()}
                     params={this.getParams({date: d})}
                     onClick={this.handleDayClick} />
             );
-            if (d.getDay() === this.state.finish) {
-                if (row === 0) {
-                    content.push(
-                        <div style={event.style.row} key={-1}>
-                            {days}
-                        </div>
-                    );
-                }
-                content.push(
-                    <div style={event.style.row} key={row}>
-                        {dates}
-                    </div>
-                );
-                row += 1;
-                dates = [];
-            }
             date.setDate(date.getDate() + 1);
         }
+
         return content;
+
     }
 
     change() {
@@ -198,7 +188,9 @@ class TCalendar extends React.Component {
                     months={this.templates.months}
                     navigators={this.props.navigators}
                     onChange={this.handleNavigatorChange} />
-                {this.getContent({style: style})}
+                <div style={style.content}>
+                    {this.getContent({style: style})}
+                </div>
             </div>
         );
 
@@ -222,8 +214,16 @@ TCalendar.propTypes = {
             /** Style for year */
             year: PropTypes.object,
             /** Style for navigator buttons */
-            button: PropTypes.object
+            button: PropTypes.object,
+            /** Style for left buttons box */
+            left: PropTypes.object,
+            /** Style for month/year box */
+            center: PropTypes.object,
+            /** Style for right buttons box */
+            right: PropTypes.object
         }),
+        /** Style for calendar grid box */
+        content: PropTypes.object,
         /** Style for weekdays */
         day: PropTypes.shape({
             /** Style for weekday container */
