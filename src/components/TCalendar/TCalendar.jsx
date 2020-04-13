@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, clone, contain, firstDate, lastDate, clearDate, isoDate} from '../../util';
+import {merge, clone, contain, compare, firstDate, lastDate, clearDate, isoDate} from '../../util';
 
 import Day from './Day';
 import Navigator from './Navigator';
@@ -21,7 +21,7 @@ function shift(date, to, direction) {
 }
 
 function calcDates(props) {
-    let dates = [];
+    let dates = props.dates ? props.dates : [];
     if (props.value) {
         if (props.value instanceof Array) {
             dates = props.value;
@@ -57,7 +57,7 @@ function calcState(props) {
  * directly in component declaration or set it globally by call:
  * "registerStyles(null, {days: [...]}, months: [...])".
  */
-class TCalendar extends React.Component {
+class TCalendar extends React.PureComponent {
 
     constructor (props) {
         super(props);
@@ -74,16 +74,15 @@ class TCalendar extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.value !== this.props.value) {
-            this.setState(calcState(this.props));
+        if (!compare(prevProps.value, this.props.value)) {
+            let dates = calcDates(this.props);
+            if (!compare(dates, this.state.dates)) {
+                console.log(dates);
+                console.log(this.dates);
+                this.setState(calcState(this.props));
+            }
         }
     }
-
-    // shouldComponentUpdate(nextProps, nextState, nextContext) {
-    //     return (
-    //         nextState !== this.props.state
-    //     );
-    // }
 
     getParams(event) {
         let params = {};
@@ -275,6 +274,8 @@ TCalendar.propTypes = {
     /** Selected date or array of dates. Accepts iso strings or Date objects. */
     value: PropTypes.oneOfType([
         PropTypes.string,
+        PropTypes.instanceOf(Date),
+        PropTypes.number,
         PropTypes.array
     ]),
     /** Date format in "onChange" event */

@@ -2510,6 +2510,8 @@
           "required": false,
           "structure": {
             "string": {},
+            "Date": {},
+            "number": {},
             "array": {}
           }
         },

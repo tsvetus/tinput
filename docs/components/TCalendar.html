@@ -7,7 +7,9 @@ class TCalendarExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-       event: ''
+      multi: [(new Date()).setDate(15), (new Date()).setDate(17)],
+      single: (new Date()).setDate(15),
+      event: ''
     };
     this.change = this.change.bind(this);
     this.clear = this.clear.bind(this);
@@ -15,6 +17,7 @@ class TCalendarExample extends React.Component {
 
   change(event) {
     this.setState({
+      [event.name]: event.value,
       event: this.state.event + ' ' +
         JSON.stringify(event)
     });
@@ -36,14 +39,16 @@ class TCalendarExample extends React.Component {
 
           &lt;TCalendar
             style={{container: {margin: "8px"}}}
+            name={'single'}
             label={'Single date selector'}
             start={1}
             onChange={this.change}
-            value={'2020-04-15'} /&gt;
+            value={this.state.single} /&gt;
 
-        &lt;TCalendar
+          &lt;TCalendar
             style={{container: {margin: "8px"}}}
             label={'Multi date selector in iso format'}
+            name={'multi'}
             start={0}
             onChange={this.change}
             multiSelect={true}
@@ -53,10 +58,7 @@ class TCalendarExample extends React.Component {
                 days: ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'],
                 months: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
             }}
-            value={[
-                (new Date()).setDate(15),
-                (new Date()).setDate(17)
-            ]} /&gt;
+            value={this.state.multi} /&gt;
 
         &lt;/TGroup&gt;
 
