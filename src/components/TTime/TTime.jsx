@@ -14,7 +14,7 @@ class TTime extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.format = merge(TTime.defaultProps.format, props.format);
+        this.format = merge(styles.formats.time, props.format);
         this.state = {
             value: strTime(props.value, this.format.mask, this.format.empty)
         };
@@ -24,7 +24,7 @@ class TTime extends React.PureComponent {
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value || old.format !== this.props.format) {
-            this.format = merge(TTime.defaultProps.format, this.props.format);
+            this.format = merge(styles.formats.time, this.props.format);
             let value = null;
             if (this.props.value === this.props.empty) {
                 value = this.props.empty;
@@ -188,7 +188,7 @@ TTime.propTypes = {
 };
 
 TTime.defaultProps = {
-    format: {mask: 'hh:mm', empty: '_', full: true, type: 'iso'},
+    format: styles.formats.time,
     required: 'enter',
     empty: null,
     readOnly: false,

@@ -21,9 +21,13 @@ function shift(date, to, direction) {
 }
 
 function calcDates(props) {
-    let dates = props.dates ? props.dates : [];
-    if (props.date) {
-        dates.push(props.date)
+    let dates = [];
+    if (props.value) {
+        if (props.value instanceof Array) {
+            dates = props.value;
+        } else if (props.value) {
+            dates = [props.value];
+        }
     }
     let result = [];
     dates.forEach(v => {
@@ -141,8 +145,6 @@ class TCalendar extends React.Component {
             this.props.onChange({
                 name: this.props.name,
                 data: this.props.data,
-                dates: dates,
-                date: date,
                 value: value
             });
         }
@@ -270,13 +272,11 @@ TCalendar.propTypes = {
         PropTypes.string,
         PropTypes.instanceOf(Date)
     ]),
-    /** Selected date. Accepts iso strings or Date objects. */
-    date: PropTypes.oneOfType([
+    /** Selected date or array of dates. Accepts iso strings or Date objects. */
+    value: PropTypes.oneOfType([
         PropTypes.string,
-        PropTypes.instanceOf(Date)
+        PropTypes.array
     ]),
-    /** Array of selected dates. Accepts array of iso strings or Date objects. */
-    dates: PropTypes.array,
     /** Date format in "onChange" event */
     dateFormat: PropTypes.oneOf(['iso', 'native']),
     /** Initial calendar year. Default is current year */
@@ -304,11 +304,6 @@ TCalendar.propTypes = {
      * @param {object} event Event object with following structure:
      * @param {string} event.name Component name from "name" property
      * @param {object} event.data Component data from "data" property
-     * @param {any} event.date Selected date in single selection mode. Returned date format depends on
-     * "dateFormat" property. Can be one of 'iso' or 'native'. In multi select mode contains first date in
-     * selected dates array.
-     * @param {array} event.dates Array of selected dates in multi select mode. Returned dates format depends on
-     * "dateFormat" property. Can be one of 'iso' or 'native'
      * @param {array} event.value In multi select mode contains array of selected dates. In single select mode
      * contains selected date. Returned dates format depends on
      * "dateFormat" property. Can be one of 'iso' or 'native'
@@ -319,11 +314,9 @@ TCalendar.propTypes = {
 TCalendar.defaultProps = {
     start: 0,
     multiSelect: false,
-    dates: [],
     dateFormat: 'native',
     show: true,
     navigators: 'year month'
 };
-
 
 export default TCalendar;

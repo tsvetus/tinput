@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import {Text} from '../../lib';
 
+import TCalendar from '../TCalendar';
+
 import {merge, compare, contain, strDate, isoDate, testIsoDate} from '../../util';
 
 import styles from '../../styles';
@@ -14,17 +16,20 @@ class TDate extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.format = merge(TDate.format, props.format);
+        this.format = merge(styles.formats.date, props.format);
         this.state = {
-            value: strDate(props.value, this.format.mask, this.format.empty)
+            value: strDate(props.value, this.format.mask, this.format.empty),
+            calendar: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
+        this.handleIconClick = this.handleIconClick.bind(this);
+        this.handleDateSelect = this.handleDateSelect.bind(this);
     }
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value || !compare(old.format, this.props.format)) {
-            this.format = merge(TDate.format, this.props.format);
+            this.format = merge(styles.formats.date, this.props.format);
             let value = null;
             if (this.props.value === this.props.empty) {
                 value = this.props.empty;
@@ -63,6 +68,30 @@ class TDate extends React.PureComponent {
         }
     }
 
+    handleIconClick(event) {
+        if (this.props.calendar) {
+            this.setState({calendar: !this.state.calendar});
+        }
+        if (this.props.onIcon) {
+            this.props.onIcon(event);
+        }
+    }
+
+    handleDateSelect(event) {
+        this.setState({
+            calendar: false,
+            value:  strDate(event.value, this.format.mask, this.format.empty)
+        }, () => {
+            if (this.props.onChange) {
+                this.props.onChange({
+                    name: this.props.name,
+                    data: this.props.data,
+                    value: event.value
+                });
+            }
+        });
+    }
+
     render () {
 
         let style = merge(
@@ -72,6 +101,18 @@ class TDate extends React.PureComponent {
             contain(this.props.style)
         );
 
+        let icon = this.props.icon ? this.props.icon : null;
+        if (this.props.calendar) {
+            icon = icon ? icon : 'calendar';
+        }
+
+        let calendar = this.state.calendar ?
+            <TCalendar
+                style={style.calendar}
+                value={isoDate(this.state.value, this.format.mask)}
+                dateFormat={this.format.type}
+                onChange={this.handleDateSelect} /> : null;
+
         return (
             <Text
                 style={style}
@@ -80,15 +121,16 @@ class TDate extends React.PureComponent {
                 name={this.props.name}
                 value={this.state.value}
                 label={this.props.label}
-                icon={this.props.icon}
+                icon={icon}
                 timeout={this.props.timeout}
                 format={this.format}
                 empty={this.props.empty}
                 readOnly={this.props.readOnly}
                 required={this.props.required}
                 changeStyle={this.props.changeStyle}
+                children={calendar}
                 onValidate={this.handleValidate}
-                onIcon={this.props.onIcon}
+                onIcon={this.handleIconClick}
                 onChange={this.handleChange} />
         );
 
@@ -140,7 +182,11 @@ TDate.propTypes = {
     icon: PropTypes.string,
     /** Represents timeout for "onChange" event in milliseconds. Default is "700" */
     timeout: PropTypes.number,
-    /** Date format: */
+    /**
+     * Date format. Instead of using "format" property one can use "registerStyles" function to register global
+     * date format simply by call "registerStyles(null, {formats: {date: {mask: 'DD.MM.YYYY',
+     * empty: '_', full: true, type: 'iso'}}})"
+     */
     format: PropTypes.shape({
         /** Date mask. Default is "DD.MM.YYYY" */
         mask: PropTypes.string,
@@ -168,6 +214,7 @@ TDate.propTypes = {
     ]),
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,
+    calendar: PropTypes.any,
     /**
      * On date change event
      * @param {object} event Event object with following structure:
@@ -187,7 +234,7 @@ TDate.propTypes = {
 };
 
 TDate.defaultProps = {
-    format: {mask: 'DD.MM.YYYY', empty: '_', full: true, type: 'iso'},
+    format: styles.formats.date,
     required: 'enter',
     empty: null,
     readOnly: false,

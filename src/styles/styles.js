@@ -6,6 +6,7 @@ export default function defaultStyles(template) {
         fonts: template.fonts,
         months: template.months,
         days: template.days,
+        formats: template.formats,
 
         TIcon: {
             container: {
@@ -140,7 +141,7 @@ export default function defaultStyles(template) {
             },
 
             edit: {
-                minHeight: "18px",
+                minHeight: "20px",
                 padding: "4px 4px 2px 4px",
                 border: "1px solid " + template.colors.frame,
                 color: template.colors.text,
@@ -537,6 +538,15 @@ export default function defaultStyles(template) {
 
             container: {
                 width: "220px"
+            },
+
+            calendar: {
+                container: {
+                    backgroundColor: template.colors.window
+                },
+                content: {
+                    width: "100%"
+                }
             }
 
         },
@@ -767,7 +777,7 @@ export default function defaultStyles(template) {
         TCalendar: {
 
             container: {
-
+                minWidth: "273px"
             },
 
             label: {

@@ -34,6 +34,11 @@ export default {
 
     months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Now', 'Dec'],
 
-    days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+
+    formats: {
+        date: {mask: 'DD.MM.YYYY', empty: '_', full: true, type: 'iso'},
+        time: {mask: 'hh:mm', empty: '_', full: true, type: 'iso'}
+    }
 
 }

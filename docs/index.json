@@ -1037,7 +1037,7 @@
           "type": "shape",
           "description": "Time format:",
           "required": false,
-          "defaultValue": "{mask: 'hh:mm', empty: '_', full: true, type: 'iso'}",
+          "defaultValue": "styles.formats.time",
           "structure": {
             "mask": {
               "type": "string",
@@ -1168,6 +1168,30 @@
             }
           ],
           "returns": null
+        },
+        {
+          "name": "handleIconClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleDateSelect",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
         }
       ],
       "example": {
@@ -1266,9 +1290,9 @@
         },
         "format": {
           "type": "shape",
-          "description": "Date format:",
+          "description": "Date format. Instead of using \"format\" property one can use \"registerStyles\" function to register global\r\ndate format simply by call \"registerStyles(null, {formats: {date: {mask: 'DD.MM.YYYY',\r\nempty: '_', full: true, type: 'iso'}}})\"",
           "required": false,
-          "defaultValue": "{mask: 'DD.MM.YYYY', empty: '_', full: true, type: 'iso'}",
+          "defaultValue": "styles.formats.date",
           "structure": {
             "mask": {
               "type": "string",
@@ -1310,6 +1334,11 @@
           "description": "Prevents from changing component value from user input, Default is \"false\"",
           "required": false,
           "defaultValue": "false"
+        },
+        "calendar": {
+          "type": "any",
+          "description": "",
+          "required": false
         },
         "onChange": {
           "type": "func",
@@ -2468,20 +2497,14 @@
             "Date": {}
           }
         },
-        "date": {
+        "value": {
           "type": "union",
-          "description": "Selected date. Accepts iso strings or Date objects.",
+          "description": "Selected date or array of dates. Accepts iso strings or Date objects.",
           "required": false,
           "structure": {
             "string": {},
-            "Date": {}
+            "array": {}
           }
-        },
-        "dates": {
-          "type": "array",
-          "description": "Array of selected dates. Accepts array of iso strings or Date objects.",
-          "required": false,
-          "defaultValue": "[]"
         },
         "dateFormat": {
           "type": "enum",
@@ -2554,16 +2577,6 @@
               "name": "event.data",
               "type": "object",
               "description": "Component data from \"data\" property"
-            },
-            "event.date": {
-              "name": "event.date",
-              "type": "any",
-              "description": "Selected date in single selection mode. Returned date format depends on \"dateFormat\" property. Can be one of 'iso' or 'native'. In multi select mode contains first date in selected dates array."
-            },
-            "event.dates": {
-              "name": "event.dates",
-              "type": "array",
-              "description": "Array of selected dates in multi select mode. Returned dates format depends on \"dateFormat\" property. Can be one of 'iso' or 'native'"
             },
             "event.value": {
               "name": "event.value",

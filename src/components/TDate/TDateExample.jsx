@@ -7,7 +7,8 @@ class TDateExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: new Date(),
+      date: new Date(),
+      calendar: new Date(),
       event: ''
     };
     this.change = this.change.bind(this);
@@ -16,7 +17,7 @@ class TDateExample extends React.Component {
 
   change(event) {
     this.setState({
-      value: event.value,
+      [event.name]: event.value,
       event: this.state.event + ' ' +
         JSON.stringify(event)
     });
@@ -44,7 +45,7 @@ class TDateExample extends React.Component {
               }
             }}
             name={'myDateEdit'}
-            value={this.state.value}
+            value={this.state.date}
             label={'Enter valid date:'}
             format={{
               mask: 'DD/MM/YYYY',
@@ -52,14 +53,23 @@ class TDateExample extends React.Component {
               full: true,
               type: 'iso'
             }}
-            onChange={this.change}/>
+            onChange={this.change} />
 
-            <TButton
-              onClick={() => {
-                this.setState({value: null})
-              }}>
-              Clear
-            </TButton>
+          <TDate
+              style={{
+                container: {
+                  width: "280px",
+                  margin: "8px 0 8px 0"
+                }
+              }}
+              name={'calendar'}
+              value={this.state.calendar}
+              label={'Pickup date:'}
+              format={{
+                type: 'iso'
+              }}
+              calendar={true}
+              onChange={this.change}/>
 
         </TGroup>
 

@@ -543,6 +543,17 @@ export default {
             }
         }
 
+    },
+
+    TDate: {
+        calendar: {
+            container: {
+                position: "relative",
+                top: "0",
+                left: "0",
+                zIndex: "3"
+            }
+        }
     }
 
 }

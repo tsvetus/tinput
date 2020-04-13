@@ -20,6 +20,7 @@ class Text extends React.PureComponent {
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
         this.handleStyle = this.handleStyle.bind(this);
+        this.getContainerStyle = this.getContainerStyle.bind(this);
         this.state = {value: props.value};
         this.vStyle = props.style ? props.style : {};
         this.iStyle = merge(this.vStyle, this.vStyle.invalid);
@@ -91,6 +92,21 @@ class Text extends React.PureComponent {
         });
     }
 
+    getContainerStyle() {
+        if (this.props.children) {
+            this.containerHeight = this.container.current.style.height ?
+                this.container.current.style.height : 'auto';
+            let rect = this.container.current.getBoundingClientRect();
+            return {
+                height: rect.height + 'px'
+            }
+        } else {
+            return {
+                height: this.containerHeight
+            }
+        }
+    }
+
     render () {
 
         let label = null;
@@ -117,8 +133,10 @@ class Text extends React.PureComponent {
         let validate = this.props.onValidate || this.props.regexp || this.props.mask ? this.handleValidate : null;
         let top = this.props.layout && this.props.layout.indexOf('top') >= 0;
 
+        let containerStyle = merge(this.vStyle.container, this.getContainerStyle());
+
         return (
-            <div ref={this.container} style={this.vStyle.container}>
+            <div ref={this.container} style={containerStyle}>
                 {top ? label : null}
                 <div style={this.vStyle.frame} ref={this.frame}>
                     {!top ? label : null}
@@ -142,6 +160,7 @@ class Text extends React.PureComponent {
                         onStyle={this.handleStyle} />
                     {icon}
                 </div>
+                {this.props.children}
             </div>
         );
 

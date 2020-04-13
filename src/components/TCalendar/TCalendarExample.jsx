@@ -39,7 +39,7 @@ class TCalendarExample extends React.Component {
             label={'Single date selector'}
             start={1}
             onChange={this.change}
-            date={'2020-04-15'} />
+            value={'2020-04-15'} />
 
         <TCalendar
             style={{container: {margin: "8px"}}}
@@ -53,7 +53,7 @@ class TCalendarExample extends React.Component {
                 days: ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'],
                 months: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
             }}
-            dates={[
+            value={[
                 (new Date()).setDate(15),
                 (new Date()).setDate(17)
             ]} />
