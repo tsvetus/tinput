@@ -2557,13 +2557,18 @@
             },
             "event.date": {
               "name": "event.date",
-              "type": "string",
-              "description": "Selected date in single selection mode. Returned date format depends on \"dateFormat\" property. Can be one of 'iso' or 'native'"
+              "type": "any",
+              "description": "Selected date in single selection mode. Returned date format depends on \"dateFormat\" property. Can be one of 'iso' or 'native'. In multi select mode contains first date in selected dates array."
             },
             "event.dates": {
               "name": "event.dates",
-              "type": "string",
+              "type": "array",
               "description": "Array of selected dates in multi select mode. Returned dates format depends on \"dateFormat\" property. Can be one of 'iso' or 'native'"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "array",
+              "description": "In multi select mode contains array of selected dates. In single select mode contains selected date. Returned dates format depends on \"dateFormat\" property. Can be one of 'iso' or 'native'"
             }
           },
           "required": false

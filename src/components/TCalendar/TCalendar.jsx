@@ -69,11 +69,17 @@ class TCalendar extends React.Component {
         );
     }
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return (
-            nextState !== this.props.state
-        );
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.dates !== this.props.dates || prevProps.date !== this.props.date) {
+            this.setState(calcState(this.props));
+        }
     }
+
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
+    //     return (
+    //         nextState !== this.props.state
+    //     );
+    // }
 
     getParams(event) {
         let params = {};
@@ -131,11 +137,13 @@ class TCalendar extends React.Component {
                 }
             });
             let date = dates.length > 0 ? dates[0] : null;
+            let value = this.props.multiSelect ? dates : date;
             this.props.onChange({
                 name: this.props.name,
                 data: this.props.data,
                 dates: dates,
-                date: date
+                date: date,
+                value: value
             });
         }
     }
@@ -296,9 +304,13 @@ TCalendar.propTypes = {
      * @param {object} event Event object with following structure:
      * @param {string} event.name Component name from "name" property
      * @param {object} event.data Component data from "data" property
-     * @param {string} event.date Selected date in single selection mode. Returned date format depends on
+     * @param {any} event.date Selected date in single selection mode. Returned date format depends on
+     * "dateFormat" property. Can be one of 'iso' or 'native'. In multi select mode contains first date in
+     * selected dates array.
+     * @param {array} event.dates Array of selected dates in multi select mode. Returned dates format depends on
      * "dateFormat" property. Can be one of 'iso' or 'native'
-     * @param {string} event.dates Array of selected dates in multi select mode. Returned dates format depends on
+     * @param {array} event.value In multi select mode contains array of selected dates. In single select mode
+     * contains selected date. Returned dates format depends on
      * "dateFormat" property. Can be one of 'iso' or 'native'
      */
     onChange: PropTypes.func
