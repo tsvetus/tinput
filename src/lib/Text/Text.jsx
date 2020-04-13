@@ -20,6 +20,7 @@ class Text extends React.PureComponent {
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
         this.handleStyle = this.handleStyle.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
         this.getContainerStyle = this.getContainerStyle.bind(this);
         this.state = {value: props.value};
         this.vStyle = props.style ? props.style : {};
@@ -92,6 +93,12 @@ class Text extends React.PureComponent {
         });
     }
 
+    handleBlur(event) {
+        if (this.props.onBlur) {
+            this.props.onBlur(event);
+        }
+    }
+
     getContainerStyle() {
         if (this.props.children) {
             this.containerHeight = this.container.current.style.height ?
@@ -136,7 +143,7 @@ class Text extends React.PureComponent {
         let containerStyle = merge(this.vStyle.container, this.getContainerStyle());
 
         return (
-            <div ref={this.container} style={containerStyle}>
+            <div ref={this.container} style={containerStyle} onBlur={this.handleBlur} tabIndex={-1}>
                 {top ? label : null}
                 <div style={this.vStyle.frame} ref={this.frame}>
                     {!top ? label : null}
@@ -187,7 +194,8 @@ Text.propTypes = {
     onChange: PropTypes.func,
     onValidate: PropTypes.func,
     onIcon: PropTypes.func,
-    onMask: PropTypes.func
+    onMask: PropTypes.func,
+    onBlur: PropTypes.func
 };
 
 Text.defaultProps = {

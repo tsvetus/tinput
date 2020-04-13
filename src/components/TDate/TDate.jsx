@@ -25,6 +25,7 @@ class TDate extends React.PureComponent {
         this.handleValidate = this.handleValidate.bind(this);
         this.handleIconClick = this.handleIconClick.bind(this);
         this.handleDateSelect = this.handleDateSelect.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
     }
 
     componentDidUpdate(old) {
@@ -92,6 +93,12 @@ class TDate extends React.PureComponent {
         });
     }
 
+    handleBlur() {
+        if (this.state.calendar) {
+            this.setState({calendar: false});
+        }
+    }
+
     render () {
 
         let style = merge(
@@ -131,7 +138,8 @@ class TDate extends React.PureComponent {
                 children={calendar}
                 onValidate={this.handleValidate}
                 onIcon={this.handleIconClick}
-                onChange={this.handleChange} />
+                onChange={this.handleChange}
+                onBlur={this.handleBlur} />
         );
 
     }
