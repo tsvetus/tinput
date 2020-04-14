@@ -625,7 +625,7 @@ export default function defaultStyles(template) {
                 },
                 icon: {
                     color: template.colors.border,
-                    opacity: "0.8",
+                    opacity: "0.5",
                     width: "48px",
                     height: "48px"
                 }

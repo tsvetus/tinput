@@ -1142,7 +1142,7 @@
       }
     },
     "TDate": {
-      "description": "Date editor with masked input and date value validation",
+      "description": "Date editor with masked input and date value validation. Date format depends on \"format\" property while\r\ncalendar localization depends on \"templates\" property. Both can be set globally by call to registerStyles\r\nfunction (see example)",
       "displayName": "TDate",
       "methods": [
         {
@@ -1225,6 +1225,10 @@
             "icon": {
               "type": "object",
               "description": "Style for component icon"
+            },
+            "calendar": {
+              "type": "object",
+              "description": "Style for calendar. See \"TCalendar\" description"
             },
             "invalid": {
               "type": "shape",
@@ -1344,8 +1348,23 @@
         },
         "calendar": {
           "type": "any",
-          "description": "",
+          "description": "If true calendar icon appears on the left. Clicking on icon shows date picker represented by\r\n\"TCalendar\" component. See \"TCalendar\" documentation about stylization and localization of\r\ncalendar component.",
           "required": false
+        },
+        "templates": {
+          "type": "shape",
+          "description": "Calendar captions for months and weekdays. Another way to set captions is to use\r\n\"registerStyles\" (see example)",
+          "required": false,
+          "structure": {
+            "days": {
+              "type": "arrayOf",
+              "description": "Array of weekdays captions"
+            },
+            "months": {
+              "type": "arrayOf",
+              "description": "Array of months captions"
+            }
+          }
         },
         "onChange": {
           "type": "func",
@@ -2318,7 +2337,7 @@
       }
     },
     "TCalendar": {
-      "description": "Component representing calendar. Calendar captions can be localized using \"templates\" props or\r\n\"registerStyles\" function described in readme page. Simply set \"templates={{days: [...]}, months: [...]}\r\ndirectly in component declaration or set it globally by call:\r\n\"registerStyles(null, {days: [...]}, months: [...])\".",
+      "description": "Component representing calendar. Calendar captions can be localized using \"templates\" props or\r\n\"registerStyles\" function described in readme page. Simply set \"templates={{days: [...], months: [...]}}\r\ndirectly in component declaration or set it globally by call:\r\n\"registerStyles(null, {days: [...], months: [...]})\". Weekdays ranges: 0..6 where 0 is Sunday.\r\nMonths ranges: 0..11 where 0 is January (see example)",
       "displayName": "TCalendar",
       "methods": [
         {
@@ -2555,7 +2574,7 @@
         },
         "templates": {
           "type": "shape",
-          "description": "Calendar captions for months and weekdays. Another way to set captions is to use\r\n\"registerStyles\" like a way \"registerStyles(null, {days: [...], months: [...]})\"",
+          "description": "Calendar captions for months and weekdays. Another way to set captions is to use\r\n\"registerStyles\" (see example)\"",
           "required": false,
           "structure": {
             "days": {

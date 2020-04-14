@@ -53,9 +53,10 @@ function calcState(props) {
 
 /**
  * Component representing calendar. Calendar captions can be localized using "templates" props or
- * "registerStyles" function described in readme page. Simply set "templates={{days: [...]}, months: [...]}
+ * "registerStyles" function described in readme page. Simply set "templates={{days: [...], months: [...]}}
  * directly in component declaration or set it globally by call:
- * "registerStyles(null, {days: [...]}, months: [...])".
+ * "registerStyles(null, {days: [...], months: [...]})". Weekdays ranges: 0..6 where 0 is Sunday.
+ * Months ranges: 0..11 where 0 is January (see example)
  */
 class TCalendar extends React.PureComponent {
 
@@ -292,7 +293,7 @@ TCalendar.propTypes = {
     navigators: PropTypes.string,
     /**
      * Calendar captions for months and weekdays. Another way to set captions is to use
-     * "registerStyles" like a way "registerStyles(null, {days: [...], months: [...]})"
+     * "registerStyles" (see example)"
      */
     templates: PropTypes.shape({
         /** Array of weekdays captions */
@@ -305,8 +306,8 @@ TCalendar.propTypes = {
      * @param {object} event Event object with following structure:
      * @param {string} event.name Component name from "name" property
      * @param {object} event.data Component data from "data" property
-     * @param {array} event.value In multi select mode contains array of selected dates. In single select mode
-     * contains selected date. Returned dates format depends on
+     * @param {array} event.value In multi select mode contains array of selected dates.
+     * In single select mode contains selected date. Returned dates format depends on
      * "dateFormat" property. Can be one of 'iso' or 'native'
      */
     onChange: PropTypes.func

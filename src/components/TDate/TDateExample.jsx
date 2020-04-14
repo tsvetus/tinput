@@ -1,6 +1,24 @@
 import React from 'react';
 
-import {TDate, TMemo, TGroup, TButton} from 'tinput';
+import {TDate, TMemo, TGroup, registerStyles} from 'tinput';
+
+/**
+ * Register custom date and time formats and calendar localization captions.
+ * All fields are optional. If not supplied default values are used.
+ * "registerStyles" function can be called once in main module before component
+ * creation. See "Readme" for explanation in detail
+ */
+registerStyles(null, {
+  /** Date/Time formats */
+  formats: {
+    date: {mask: 'DD.MM.YYYY', empty: '_', full: true, type: 'iso'},
+    time: {mask: 'hh:mm', empty: '_', full: true, type: 'iso'}
+  },
+  /** Calendar localization */
+  months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
+    'Sep', 'Oct', 'Now', 'Dec'],
+  days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+});
 
 class TDateExample extends React.Component {
 

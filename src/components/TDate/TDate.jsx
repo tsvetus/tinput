@@ -10,7 +10,9 @@ import {merge, compare, contain, strDate, isoDate, testIsoDate} from '../../util
 import styles from '../../styles';
 
 /**
- * Date editor with masked input and date value validation
+ * Date editor with masked input and date value validation. Date format depends on "format" property while
+ * calendar localization depends on "templates" property. Both can be set globally by call to registerStyles
+ * function (see example)
  */
 class TDate extends React.PureComponent {
 
@@ -118,6 +120,7 @@ class TDate extends React.PureComponent {
                 style={style.calendar}
                 value={isoDate(this.state.value, this.format.mask)}
                 dateFormat={this.format.type}
+                templates={this.props.templates}
                 onChange={this.handleDateSelect} /> : null;
 
         return (
@@ -157,6 +160,8 @@ TDate.propTypes = {
         edit: PropTypes.object,
         /** Style for component icon */
         icon: PropTypes.object,
+        /** Style for calendar. See "TCalendar" description */
+        calendar: PropTypes.object,
         /** Style for invalid component state. Contains all listed above fields: */
         invalid:  PropTypes.shape({
             container: PropTypes.object,
@@ -222,7 +227,22 @@ TDate.propTypes = {
     ]),
     /** Prevents from changing component value from user input, Default is "false" */
     readOnly: PropTypes.any,
+    /**
+     * If true calendar icon appears on the left. Clicking on icon shows date picker represented by
+     * "TCalendar" component. See "TCalendar" documentation about stylization and localization of
+     * calendar component.
+     */
     calendar: PropTypes.any,
+    /**
+     * Calendar captions for months and weekdays. Another way to set captions is to use
+     * "registerStyles" (see example)
+     */
+    templates: PropTypes.shape({
+        /** Array of weekdays captions */
+        days: PropTypes.arrayOf(PropTypes.string),
+        /** Array of months captions */
+        months: PropTypes.arrayOf(PropTypes.string)
+    }),
     /**
      * On date change event
      * @param {object} event Event object with following structure:

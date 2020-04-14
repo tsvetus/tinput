@@ -356,7 +356,7 @@ export default {
         icon: {
             container: {
                 position: "fixed",
-                top: "30%",
+                top: "calc(50% - 32px)",
                 left: "calc(50% - 32px)",
                 zIndex: "40",
                 cursor: "default"
