@@ -7,6 +7,8 @@ export const INITIAL_STATE = {
     message: null
 };
 
+let ENDPOINT = '';
+
 let STORE = null;
 
 const WAIT_ACTION = 'WAIT_ACTION';
@@ -138,6 +140,14 @@ function setState(params, state) {
 
 export function post(params) {
 
+    if (params.endpoint) {
+        ENDPOINT = params.endpoint;
+    }
+
+    if (!params.url) {
+        return;
+    }
+
     let wait = params.wait === true || params.wait === undefined;
     if (params.force) {
         wait = false;
@@ -151,7 +161,7 @@ export function post(params) {
 
     xhr.open(
         params.method ? params.method : 'POST',
-        params.url,
+        ENDPOINT + params.url,
         params.async !== undefined ? params.async : true
     );
 
