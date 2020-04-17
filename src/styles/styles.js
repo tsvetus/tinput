@@ -7,6 +7,7 @@ export default function defaultStyles(template) {
         months: template.months,
         days: template.days,
         formats: template.formats,
+        buttons: template.buttons,
 
         TIcon: {
             container: {

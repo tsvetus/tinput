@@ -39,6 +39,13 @@ export default {
     formats: {
         date: {mask: 'DD.MM.YYYY', empty: '_', full: true, type: 'iso'},
         time: {mask: 'hh:mm', empty: '_', full: true, type: 'iso'}
+    },
+
+    buttons: {
+        yearUp: "&#10095;",
+        yearDown: "&#10094;",
+        monthUp: "&#10095;&#10095;&#10095;",
+        monthDown: "&#10094;&#10094;&#10094;"
     }
 
 }

@@ -1353,7 +1353,7 @@
         },
         "templates": {
           "type": "shape",
-          "description": "Calendar captions for months and weekdays. Another way to set captions is to use\r\n\"registerStyles\" (see example)",
+          "description": "Calendar captions for months, weekdays and buttons. Another way to set captions is to use\r\n\"registerStyles\" (see example)",
           "required": false,
           "structure": {
             "days": {
@@ -1363,6 +1363,28 @@
             "months": {
               "type": "arrayOf",
               "description": "Array of months captions"
+            },
+            "buttons": {
+              "type": "shape",
+              "description": "Set of navigation buttons",
+              "structure": {
+                "yearUp": {
+                  "type": "string",
+                  "description": "Year up button"
+                },
+                "yearDown": {
+                  "type": "string",
+                  "description": "Year down button"
+                },
+                "monthUp": {
+                  "type": "string",
+                  "description": "Month up button"
+                },
+                "monthDown": {
+                  "type": "string",
+                  "description": "Month down button"
+                }
+              }
             }
           }
         },
@@ -2337,7 +2359,7 @@
       }
     },
     "TCalendar": {
-      "description": "Component representing calendar. Calendar captions can be localized using \"templates\" props or\r\n\"registerStyles\" function described in readme page. Simply set \"templates={{days: [...], months: [...]}}\r\ndirectly in component declaration or set it globally by call:\r\n\"registerStyles(null, {days: [...], months: [...]})\". Weekdays ranges: 0..6 where 0 is Sunday.\r\nMonths ranges: 0..11 where 0 is January (see example)",
+      "description": "Component representing calendar. Calendar captions can be localized using \"templates\" props or\r\n\"registerStyles\" function described in readme page. Simply set \"templates={{days: [...], months: [...]}}\r\ndirectly in component declaration or set it globally by call:\r\n\"registerStyles(null, {days: [...], months: [...], buttons[...]})\". Weekdays ranges: 0..6 where 0 is Sunday.\r\nMonths ranges: 0..11 where 0 is January (see example)",
       "displayName": "TCalendar",
       "methods": [
         {
@@ -2574,7 +2596,7 @@
         },
         "templates": {
           "type": "shape",
-          "description": "Calendar captions for months and weekdays. Another way to set captions is to use\r\n\"registerStyles\" (see example)\"",
+          "description": "Calendar captions for months, weekdays and buttons. Another way to set captions is to use\r\n\"registerStyles\" (see example)\"",
           "required": false,
           "structure": {
             "days": {
@@ -2584,6 +2606,28 @@
             "months": {
               "type": "arrayOf",
               "description": "Array of months captions"
+            },
+            "buttons": {
+              "type": "shape",
+              "description": "Set of navigation buttons",
+              "structure": {
+                "yearUp": {
+                  "type": "string",
+                  "description": "Year up button"
+                },
+                "yearDown": {
+                  "type": "string",
+                  "description": "Year down button"
+                },
+                "monthUp": {
+                  "type": "string",
+                  "description": "Month up button"
+                },
+                "monthDown": {
+                  "type": "string",
+                  "description": "Month down button"
+                }
+              }
             }
           }
         },

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {merge} from '../../../util';
+
 import styles from '../../../styles';
 
 class Navigator extends React.PureComponent {
@@ -57,19 +59,37 @@ class Navigator extends React.PureComponent {
         let mn = this.props.navigators && this.props.navigators.indexOf('mon') >= 0;
         let yn = this.props.navigators && this.props.navigators.indexOf('yea') >= 0;
 
+        let buttons = merge(styles.buttons, this.props.buttons);
+
         return (
             <div style={style.container}>
                 <div style={style.left}>
-                    {yn ? <div style={style.button} onClick={()=>{this.changeYear(-1)}}>&lt;</div> : null}
-                    {mn ? <div style={style.button} onClick={()=>{this.changeMonth(-1)}}>&lt;&lt;&lt;</div> : null}
+                    {yn ? <div
+                        style={style.button}
+                        onClick={()=>{this.changeYear(-1)}}
+                        dangerouslySetInnerHTML={{__html: buttons.yearDown}} />
+                    : null}
+                    {mn ? <div
+                        style={style.button}
+                        onClick={()=>{this.changeMonth(-1)}}
+                        dangerouslySetInnerHTML={{__html: buttons.monthDown}} />
+                    : null}
                 </div>
                 <div style={style.center}>
                     <div style={style.month}>{month}</div>
                     <div style={style.year}>{this.state.year}</div>
                 </div>
                 <div style={style.right}>
-                    {mn ? <div style={style.button} onClick={()=>{this.changeMonth(1)}}>&gt;&gt;&gt;</div> : null}
-                    {yn ? <div style={style.button} onClick={()=>{this.changeYear(1)}}>&gt;</div> : null}
+                    {mn ? <div
+                        style={style.button}
+                        onClick={()=>{this.changeMonth(1)}}
+                        dangerouslySetInnerHTML={{__html: buttons.monthUp}} />
+                     : null}
+                    {yn ? <div
+                        style={style.button}
+                        onClick={()=>{this.changeYear(1)}}
+                        dangerouslySetInnerHTML={{__html: buttons.yearUp}} />
+                        : null}
                 </div>
             </div>
         );

@@ -234,14 +234,25 @@ TDate.propTypes = {
      */
     calendar: PropTypes.any,
     /**
-     * Calendar captions for months and weekdays. Another way to set captions is to use
+     * Calendar captions for months, weekdays and buttons. Another way to set captions is to use
      * "registerStyles" (see example)
      */
     templates: PropTypes.shape({
         /** Array of weekdays captions */
         days: PropTypes.arrayOf(PropTypes.string),
         /** Array of months captions */
-        months: PropTypes.arrayOf(PropTypes.string)
+        months: PropTypes.arrayOf(PropTypes.string),
+        /** Set of navigation buttons */
+        buttons: PropTypes.shape({
+            /** Year up button */
+            yearUp: PropTypes.string,
+            /** Year down button */
+            yearDown: PropTypes.string,
+            /** Month up button */
+            monthUp: PropTypes.string,
+            /** Month down button */
+            monthDown: PropTypes.string
+        })
     }),
     /**
      * On date change event

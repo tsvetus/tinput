@@ -18,6 +18,13 @@ registerStyles(null, {
   months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
     'Sep', 'Oct', 'Now', 'Dec'],
   days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  /** Navigation buttons */
+  buttons: {
+    yearUp: "&#10095;",
+    yearDown: "&#10094;",
+    monthUp: "&#10095;&#10095;&#10095;",
+    monthDown: "&#10094;&#10094;&#10094;"
+  }
 });
 
 class TDateExample extends React.Component {
