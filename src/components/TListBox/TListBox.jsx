@@ -97,6 +97,8 @@ class TListBox extends React.Component {
                 layout={this.props.layout}
                 keyField={this.state.keyField}
                 valueField={this.state.valueField}
+                modal={this.props.modal}
+                caption={this.props.caption}
                 onChange={this.props.onChange}
                 onValidate={this.props.onValidate} />
         );
@@ -124,7 +126,12 @@ TListBox.propTypes = {
             item: PropTypes.object,
             /** Style for selected list item */
             selected: PropTypes.object
-        })
+        }),
+        /**
+         * Style for modal list view. See "TModal"component description for detail style
+         * structure
+         */
+        modal: PropTypes.object
     }),
     /** Component initial value. Contains "key" value of default list item */
     value: PropTypes.any,
@@ -179,6 +186,13 @@ TListBox.propTypes = {
     listMode: PropTypes.string,
     /** Determines what part of "item" should be shown in editor */
     showMode: PropTypes.string,
+    /**
+     * If true then items list appears in modal window. If "modal" is number it indicates
+     * minimum number of list items necessary to show list in modal view
+     */
+    modal: PropTypes.any,
+    /** Modal list view caption */
+    caption: PropTypes.any,
     /** Determines what components reacts on "onClick" events */
     clickable: PropTypes.string,
     /** Icon name */
@@ -211,7 +225,8 @@ TListBox.defaultProps = {
     showEdit: true,
     clickable: 'label edit',
     keyField: ['key', 'id'],
-    valueField: ['value', 'name']
+    valueField: ['value', 'name'],
+    modal: false
 };
 
 export default TListBox;

@@ -37,7 +37,7 @@ class TForm extends React.PureComponent {
     render () {
 
         let style = merge(
-            styles.TModal,
+            styles.Modal,
             styles.TForm,
             styles[this.props.name],
             this.props.style

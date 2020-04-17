@@ -76,7 +76,12 @@ TSearch.propTypes = {
             item: PropTypes.object,
             /** Style for selected list item */
             selected: PropTypes.object
-        })
+        }),
+        /**
+         * Style for modal list view. See "TModal"component description for detail style
+         * structure
+         */
+        modal: PropTypes.object
     }),
     /** Component initial value. Contains "key" value of default list item */
     value: PropTypes.any,
@@ -174,7 +179,8 @@ TSearch.defaultProps = {
     keyField: ['key', 'id'],
     valueField: ['value', 'name'],
     timeout: 500,
-    readOnly: false
+    readOnly: false,
+    modal: false
 };
 
 export default TSearch;

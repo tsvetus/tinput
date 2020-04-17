@@ -6,6 +6,7 @@ import ListBox from './ListBox';
 import Input from './Input';
 import Text from './Text';
 import Grid from './Grid';
+import Modal from './Modal';
 
 export {
     Icon,
@@ -15,5 +16,6 @@ export {
     ListBox,
     Input,
     Text,
-    Grid
+    Grid,
+    Modal
 }

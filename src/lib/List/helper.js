@@ -23,6 +23,7 @@ class Helper {
         this.getQuery = this.getQuery.bind(this);
         this.getIndex = this.getIndex.bind(this);
         this.getItem = this.getItem.bind(this);
+        this.getCount = this.getCount.bind(this);
     }
 
     getStruct(items, empty, keyField, valueField) {
@@ -140,6 +141,10 @@ class Helper {
 
     hasItems() {
         return this.count > 0;
+    }
+
+    getCount() {
+        return this.count;
     }
 
     getLength() {

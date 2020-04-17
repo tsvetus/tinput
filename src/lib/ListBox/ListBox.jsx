@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import Edit from '../Edit';
 import List from '../List';
+import Modal from '../Modal';
 
 import {merge, find, compare} from '../../util';
 
@@ -32,10 +33,13 @@ class ListBox extends React.PureComponent {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.handleModalClose= this.handleModalClose.bind(this);
         this.getContainerStyle = this.getContainerStyle.bind(this);
+        this.getModalStyle = this.getModalStyle.bind(this);
         this.moveHover = this.moveHover.bind(this);
         this.search = this.search.bind(this);
         this.clear = this.clear.bind(this);
+        this.isModal = this.isModal.bind(this);
         this.container = React.createRef();
         this.frame = React.createRef();
         this.list = React.createRef();
@@ -118,6 +122,14 @@ class ListBox extends React.PureComponent {
             } else if (dir === 1 && this.state.hover < this.helper.getLength() - 1) {
                 this.setState({hover: this.state.hover + 1});
             }
+        }
+    }
+
+    isModal() {
+        if (typeof this.props.modal === 'number') {
+            return this.props.modal > 0 && this.helper.getCount() >= this.props.modal;
+        } else {
+            return this.props.modal;
         }
     }
 
@@ -226,6 +238,10 @@ class ListBox extends React.PureComponent {
 
     }
 
+    handleModalClose() {
+        this.setState({showList: false});
+    }
+
     handleTextChange(event) {
         if (this.props.onSearch && event.value && event.value.length >= this.props.chars) {
             let query = this.helper.getQuery({
@@ -279,7 +295,9 @@ class ListBox extends React.PureComponent {
     }
 
     getContainerStyle() {
-        if (this.state.showList) {
+        if (this.isModal()) {
+            return {}
+        } else if (this.state.showList && this.container.current) {
             this.containerHeight = this.container.current.style.height ?
                 this.container.current.style.height : 'auto';
             let rect = this.container.current.getBoundingClientRect();
@@ -290,6 +308,15 @@ class ListBox extends React.PureComponent {
             return {
                 height: this.containerHeight
             }
+        }
+    }
+
+    getModalStyle() {
+        if (this.container.current) {
+            let rect = this.container.current.getBoundingClientRect();
+            return {width: rect.width + 'px'}
+        } else {
+            return {}
         }
     }
 
@@ -320,14 +347,28 @@ class ListBox extends React.PureComponent {
 
         let list = null;
         if (this.state.showList && this.helper.hasItems()) {
-            list =
+            let comp =
                 <List
                     ref={this.list}
                     style={style.list}
                     selected={this.state.value}
                     hover={this.state.hover}
                     items={this.helper.getListItems()}
-                    onClick={this.handleItemClick} />
+                    onClick={this.handleItemClick} />;
+            if (this.isModal()) {
+                let ms = merge(style.modal, this.getModalStyle());
+                list = <Modal
+                    style={ms}
+                    caption={this.props.caption}
+                    show={true}
+                    onClose={this.handleModalClose}
+                    squeeze={true}
+                    outerClick={true} >
+                    {comp}
+                </Modal>
+            } else {
+                list = comp;
+            }
         }
 
         let containerStyle = merge(style.container, this.getContainerStyle());
@@ -394,6 +435,8 @@ ListBox.propTypes = {
     chars: PropTypes.number,
     readOnly: PropTypes.any,
     layout: PropTypes.string,
+    modal: PropTypes.any,
+    caption: PropTypes.any,
     onChange: PropTypes.func,
     onSearch: PropTypes.func,
     onValidate: PropTypes.func

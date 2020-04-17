@@ -121,6 +121,7 @@ class TDate extends React.PureComponent {
                 value={isoDate(this.state.value, this.format.mask)}
                 dateFormat={this.format.type}
                 templates={this.props.templates}
+                navigators={this.props.navigators}
                 onChange={this.handleDateSelect} /> : null;
 
         return (
@@ -233,6 +234,8 @@ TDate.propTypes = {
      * calendar component.
      */
     calendar: PropTypes.any,
+    /** Navigator button types. For example: navigators={'month year'}  */
+    navigators: PropTypes.string,
     /**
      * Calendar captions for months, weekdays and buttons. Another way to set captions is to use
      * "registerStyles" (see example)

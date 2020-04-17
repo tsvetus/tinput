@@ -288,7 +288,7 @@ TCalendar.propTypes = {
     show: PropTypes.any,
     /** Allows to select more than single date */
     multiSelect: PropTypes.any,
-    /** Navigator button types */
+    /** Navigator button types. For example: navigators={'month year'}  */
     navigators: PropTypes.string,
     /**
      * Calendar captions for months, weekdays and buttons. Another way to set captions is to use

@@ -76,7 +76,7 @@ class TLogin extends React.Component {
     render () {
 
         let style = merge(
-            styles.TModal,
+            styles.Modal,
             styles.TForm,
             {TComponent: styles.TComponent},
             styles.TLogin,

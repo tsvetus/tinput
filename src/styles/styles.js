@@ -200,6 +200,29 @@ export default function defaultStyles(template) {
                     backgroundColor: "#eea"
                 }
 
+            },
+
+            modal: {
+
+                container: {
+                    padding: "4px",
+                    borderRadius: "4px"
+                },
+
+                header: {
+                    margin: "8px 4px 8px 4px",
+                    ...template.fonts.common
+                },
+
+                caption: {
+                    margin: "0"
+                },
+
+                content: {
+                    padding: "2px",
+                    margin: "0"
+                }
+
             }
 
         },
@@ -247,6 +270,8 @@ export default function defaultStyles(template) {
             },
 
             close: {
+                margin: "0",
+                padding: "0",
                 color: template.colors.border,
                 width: "24px",
                 height: "24px",
@@ -853,7 +878,7 @@ export default function defaultStyles(template) {
                     textAlign: "center",
                     cursor: "pointer",
                     margin: "0 -1px -1px 0",
-                    padding: "4px 10px 4px 10px"
+                    padding: "2px 10px 4px 10px"
                 }
             }
 

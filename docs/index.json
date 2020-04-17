@@ -1351,6 +1351,11 @@
           "description": "If true calendar icon appears on the left. Clicking on icon shows date picker represented by\r\n\"TCalendar\" component. See \"TCalendar\" documentation about stylization and localization of\r\ncalendar component.",
           "required": false
         },
+        "navigators": {
+          "type": "string",
+          "description": "Navigator button types. For example: navigators={'month year'}",
+          "required": false
+        },
         "templates": {
           "type": "shape",
           "description": "Calendar captions for months, weekdays and buttons. Another way to set captions is to use\r\n\"registerStyles\" (see example)",
@@ -1490,6 +1495,10 @@
                   "description": "Style for selected list item"
                 }
               }
+            },
+            "modal": {
+              "type": "object",
+              "description": "Style for modal list view. See \"TModal\"component description for detail style\r\nstructure"
             }
           }
         },
@@ -1605,6 +1614,17 @@
           "description": "Determines what part of \"item\" should be shown in editor",
           "required": false,
           "defaultValue": "'value'"
+        },
+        "modal": {
+          "type": "any",
+          "description": "If true then items list appears in modal window. If \"modal\" is number it indicates\r\nminimum number of list items necessary to show list in modal view",
+          "required": false,
+          "defaultValue": "false"
+        },
+        "caption": {
+          "type": "any",
+          "description": "Modal list view caption",
+          "required": false
         },
         "clickable": {
           "type": "string",
@@ -1746,6 +1766,10 @@
                   "description": "Style for selected list item"
                 }
               }
+            },
+            "modal": {
+              "type": "object",
+              "description": "Style for modal list view. See \"TModal\"component description for detail style\r\nstructure"
             }
           }
         },
@@ -1960,6 +1984,10 @@
             }
           },
           "required": false
+        },
+        "modal": {
+          "required": false,
+          "defaultValue": "false"
         }
       }
     },
@@ -2590,7 +2618,7 @@
         },
         "navigators": {
           "type": "string",
-          "description": "Navigator button types",
+          "description": "Navigator button types. For example: navigators={'month year'}",
           "required": false,
           "defaultValue": "'year month'"
         },
@@ -5052,74 +5080,7 @@
     "TModal": {
       "description": "Shows modal dialog",
       "displayName": "TModal",
-      "methods": [
-        {
-          "name": "position",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        },
-        {
-          "name": "setStyle",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "style",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "setShow",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        },
-        {
-          "name": "close",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        },
-        {
-          "name": "setTimer",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        },
-        {
-          "name": "stopTimer",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        },
-        {
-          "name": "handleCancel",
-          "docblock": null,
-          "modifiers": [],
-          "params": [],
-          "returns": null
-        },
-        {
-          "name": "handleKeyDown",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "event",
-              "type": null
-            }
-          ],
-          "returns": null
-        }
-      ],
+      "methods": [],
       "example": {
         "name": "TModalExample"
       },
@@ -5203,6 +5164,11 @@
           "description": "Transition time in milliseconds",
           "required": false,
           "defaultValue": "250"
+        },
+        "footerContent": {
+          "type": "any",
+          "description": "Footer content",
+          "required": false
         },
         "onClose": {
           "type": "func",
