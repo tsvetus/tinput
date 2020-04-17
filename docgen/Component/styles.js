@@ -44,7 +44,7 @@ export default {
         color: "#90167f",
         padding: "8px",
         fontSize: "16px",
-        overflowX: "scroll"
+        overflowX: "auto"
     }
 
 }
