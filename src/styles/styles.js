@@ -839,7 +839,8 @@ export default function defaultStyles(template) {
                 container: {
                     minHeight: "36px",
                     margin: "0 -1px -1px 0",
-                    border: "1px solid " + template.colors.frame
+                    border: "1px solid " + template.colors.frame,
+                    color: template.colors.text
                 },
 
                 content: {
