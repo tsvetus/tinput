@@ -57,18 +57,26 @@ class TSide extends React.Component {
 
     handleMove(event) {
         event.stopPropagation();
-        this.setState({width: event.touches[0].clientX})
+        let X = event.touches[0].clientX;
+        let Y = event.touches[0].clientY;
+        if (Math.abs(X - this.X) > Math.abs(Y - this.Y)) {
+            this.setState({width: event.touches[0].clientX})
+        }
+        this.X = X;
+        this.Y = Y;
     }
 
     handleStart(event) {
         event.stopPropagation();
-        this.pos = event.touches[0].clientX;
+        this.posX = event.touches[0].clientX;
+        this.X = event.touches[0].clientX;
+        this.Y = event.touches[0].clientY;
     }
 
     handleEnd(event) {
         event.stopPropagation();
-        let pos = event.changedTouches[0].clientX;
-        let diff = pos - this.pos;
+        let posX = event.changedTouches[0].clientX;
+        let diff = posX - this.posX;
         if (diff > this.state.touchWidth) {
             this.setState({width: this.state.sideWidth});
         } else {
@@ -79,8 +87,8 @@ class TSide extends React.Component {
 
     handleEndS(event) {
         event.stopPropagation();
-        let pos = event.changedTouches[0].clientX;
-        let diff = pos - this.pos;
+        let posX = event.changedTouches[0].clientX;
+        let diff = posX - this.posX;
         if (diff < -this.state.touchWidth) {
             this.setState({width: 0});
             this.doClick(-1, {name: "close"});
@@ -136,7 +144,7 @@ class TSide extends React.Component {
                     }
                     items.push(
                         <div
-                            onTouchMove={this.handleMove}
+//                            onTouchMove={this.handleMove}
                             key={i}
                             index={i}
                             style={st}
