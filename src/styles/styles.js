@@ -256,6 +256,7 @@ export default function defaultStyles(template) {
                 backgroundColor: template.colors.window,
                 borderRadius: "16px",
                 maxWidth: "600px",
+                minWidth: "320px",
                 width: "55%",
                 padding: "4px"
             },
