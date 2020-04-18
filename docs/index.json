@@ -1626,6 +1626,12 @@
           "description": "Modal list view caption",
           "required": false
         },
+        "fitHeight": {
+          "type": "any",
+          "description": "Indicates whether to fit modal list view height into the screen height",
+          "required": false,
+          "defaultValue": "true"
+        },
         "clickable": {
           "type": "string",
           "description": "Determines what components reacts on \"onClick\" events",
@@ -2090,6 +2096,12 @@
           "required": false,
           "defaultValue": "10"
         },
+        "fitHeight": {
+          "type": "any",
+          "description": "Indicates whether to fit modal list view height into the screen height",
+          "required": false,
+          "defaultValue": "true"
+        },
         "placeholder": {
           "type": "any",
           "description": "Placeholder text",
@@ -2416,6 +2428,13 @@
         },
         {
           "name": "change",
+          "docblock": null,
+          "modifiers": [],
+          "params": [],
+          "returns": null
+        },
+        {
+          "name": "fitScreen",
           "docblock": null,
           "modifiers": [],
           "params": [],
@@ -5147,6 +5166,12 @@
           "required": false,
           "defaultValue": "true"
         },
+        "fitHeight": {
+          "type": "any",
+          "description": "Indicates whether to fit modal height into the screen height",
+          "required": false,
+          "defaultValue": "false"
+        },
         "escape": {
           "type": "any",
           "description": "Indicates whether to close dialog when \"Escape\" key is pressed",
@@ -5365,9 +5390,14 @@
           "required": false,
           "defaultValue": "false"
         },
+        "fitHeight": {
+          "type": "any",
+          "description": "Indicates whether to fit modal height into the screen height",
+          "required": false
+        },
         "footerContent": {
           "type": "any",
-          "description": "",
+          "description": "Custom footer content",
           "required": false
         },
         "transition": {

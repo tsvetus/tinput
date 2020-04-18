@@ -362,7 +362,7 @@ class ListBox extends React.PureComponent {
                     caption={this.props.caption}
                     show={true}
                     onClose={this.handleModalClose}
-                    squeeze={true}
+                    fitHeight={this.props.fitHeight}
                     outerClick={true} >
                     {comp}
                 </Modal>
@@ -437,6 +437,7 @@ ListBox.propTypes = {
     layout: PropTypes.string,
     modal: PropTypes.any,
     caption: PropTypes.any,
+    fitHeight: PropTypes.any,
     onChange: PropTypes.func,
     onSearch: PropTypes.func,
     onValidate: PropTypes.func
@@ -449,7 +450,8 @@ ListBox.defaultProps = {
     showEdit: true,
     editable: false,
     clickable: 'label edit',
-    chars: 3
+    chars: 3,
+    fitHeight: true
 };
 
 export default ListBox;

@@ -23,6 +23,7 @@ class TModal extends React.PureComponent {
                 outerClick={this.props.outerClick}
                 transition={this.props.transition}
                 footerContent={this.props.footerContent}
+                fitHeight={this.props.fitHeight}
                 onClose={this.props.onClose}>
                 {this.props.children}
             </Modal>
@@ -65,6 +66,8 @@ TModal.propTypes = {
     caption: PropTypes.string,
     /** Indicates whether to show header or not */
     showHeader: PropTypes.any,
+    /** Indicates whether to fit modal height into the screen height */
+    fitHeight: PropTypes.any,
     /** Indicates whether to close dialog when "Escape" key is pressed */
     escape: PropTypes.any,
     /** Indicates whether to close dialog when outer region is clicked */
@@ -87,7 +90,8 @@ TModal.defaultProps = {
     showHeader: true,
     escape: false,
     outerClick: false,
-    transition: 250
+    transition: 250,
+    fitHeight: false
 };
 
 export default TModal;

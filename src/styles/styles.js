@@ -157,13 +157,14 @@ export default function defaultStyles(template) {
                 textAlign: "right",
                 color: template.colors.border,
                 cursor: "pointer",
-                margin: "0 0 0 4px"
+                padding: "0 0 0 4px"
             },
 
             list: {
 
                 container: {
-                    backgroundColor: template.colors.window
+                    backgroundColor: template.colors.window,
+                    boxSizing: "border-box"
                 },
 
                 item: {
@@ -175,7 +176,8 @@ export default function defaultStyles(template) {
                     cursor: "pointer",
                     textAlign: "center",
                     tabindex: "0",
-                    ...template.fonts.common
+                    ...template.fonts.common,
+                    boxSizing: "border-box"
                 },
 
                 selected: {
@@ -258,7 +260,8 @@ export default function defaultStyles(template) {
                 maxWidth: "600px",
                 minWidth: "320px",
                 width: "55%",
-                padding: "4px"
+                padding: "4px",
+                boxSizing: "border-box"
             },
 
             containerHidden: {
@@ -582,7 +585,8 @@ export default function defaultStyles(template) {
             container: {
                 ...template.fonts.common,
                 backgroundColor: template.colors.window,
-                width: "100%"
+                width: "100%",
+                boxSizing: "border-box"
             },
 
             content: {
@@ -804,7 +808,8 @@ export default function defaultStyles(template) {
         TCalendar: {
 
             container: {
-                minWidth: "273px"
+                minWidth: "273px",
+                boxSizing: "border-box"
             },
 
             label: {

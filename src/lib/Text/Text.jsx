@@ -16,6 +16,7 @@ class Text extends React.PureComponent {
         this.container = React.createRef();
         this.frame = React.createRef();
         this.label = React.createRef();
+        this.content = React.createRef();
         this.handleIcon = this.handleIcon.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
@@ -100,17 +101,23 @@ class Text extends React.PureComponent {
     }
 
     getContainerStyle() {
-        if (this.props.children) {
-            this.containerHeight = this.container.current.style.height ?
-                this.container.current.style.height : 'auto';
-            let rect = this.container.current.getBoundingClientRect();
-            return {
-                height: rect.height + 'px'
+        if (this.container.current) {
+            if (this.props.children) {
+                this.containerHeight = this.container.current.style.height ?
+                    this.container.current.style.height : 'auto';
+                this.containerWidth = this.container.current.style.width ?
+                    this.container.current.style.width : 'auto';
+                let rect = this.container.current.getBoundingClientRect();
+                return {
+                    height: rect.height + 'px'
+                }
+            } else {
+                return {
+                    height: this.containerHeight
+                }
             }
         } else {
-            return {
-                height: this.containerHeight
-            }
+            return {}
         }
     }
 

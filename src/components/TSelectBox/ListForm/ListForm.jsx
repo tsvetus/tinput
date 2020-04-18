@@ -80,6 +80,7 @@ class ListForm extends React.Component {
                 escape={true}
                 outerClick={true}
                 footerContent={pager}
+                fitHeight={this.props.fitHeight}
                 onClose={this.props.onClose}>
 
                     <TRibbon
@@ -103,6 +104,7 @@ ListForm.propTypes = {
     items: PropTypes.array,
     size: PropTypes.number,
     timeout: PropTypes.number,
+    fitHeight: PropTypes.any,
     onClose: PropTypes.func,
     onFrame: PropTypes.func
 };

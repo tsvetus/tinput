@@ -1,6 +1,6 @@
 <pre><code>import React from 'react';
 
-import {TDate, TMemo, TGroup, registerStyles} from 'tinput';
+import {TDate, TMemo, TGroup, registerStyles, styles} from 'tinput';
 
 /**
  * Register custom date and time formats and calendar localization captions.
@@ -85,6 +85,13 @@ class TDateExample extends React.Component {
                 container: {
                   width: "280px",
                   margin: "8px 0 8px 0"
+                },
+                calendar: {
+                  container: {
+                    padding: "8px",
+                    margin: "8px 0 0 0",
+                    border: "1px solid " + styles.colors.border
+                  }
                 }
               }}
               name={'calendar'}

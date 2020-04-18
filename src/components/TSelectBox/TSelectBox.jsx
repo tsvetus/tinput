@@ -169,6 +169,7 @@ class TSelectBox extends React.Component {
                     items={this.helper.getOriginalItems()}
                     size={this.props.size}
                     timeout={this.props.timeout}
+                    fitHeight={this.props.fitHeight}
                     onFrame={this.props.onFrame}
                     onClose={this.handleClose} />
 
@@ -204,6 +205,8 @@ TSelectBox.propTypes = {
     value: PropTypes.any,
     /** Items page size */
     size: PropTypes.number,
+    /** Indicates whether to fit modal list view height into the screen height */
+    fitHeight: PropTypes.any,
     /** Placeholder text  */
     placeholder: PropTypes.any,
     /** Specifies key field names */
@@ -257,7 +260,8 @@ TSelectBox.defaultProps = {
     size: 10,
     timeout: 500,
     keyField: ['key', 'id'],
-    valueField: ['value', 'name']
+    valueField: ['value', 'name'],
+    fitHeight: true
 };
 
 export default TSelectBox;

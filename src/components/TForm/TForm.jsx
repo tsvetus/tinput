@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import {merge} from '../../util';
 
-import TModal from '../TModal';
+import Modal from '../../lib/Modal';
+
 import TButton from '../TButton';
 
 import styles from '../../styles';
@@ -94,7 +95,7 @@ class TForm extends React.PureComponent {
         }
 
         return (
-            <TModal
+            <Modal
                     style={style}
                     name={this.props.name}
                     data={this.props.data}
@@ -105,12 +106,13 @@ class TForm extends React.PureComponent {
                     escape={this.props.escape}
                     outerClick={this.props.outerClick}
                     transition={this.props.transition}
+                    fitHeight={this.props.fitHeight}
                     footerContent={footer}
                     onClose={this.handleCancel}>
                 {message}
                 {content}
                 {error}
-            </TModal>
+            </Modal>
         );
 
     }
@@ -190,6 +192,9 @@ TForm.propTypes = {
     escape: PropTypes.any,
     /** Indicates whether to close dialog when outer region is clicked */
     outerClick: PropTypes.any,
+    /** Indicates whether to fit modal height into the screen height */
+    fitHeight: PropTypes.any,
+    /** Custom footer content */
     footerContent: PropTypes.any,
     /** Transition time in milliseconds */
     transition: PropTypes.number,

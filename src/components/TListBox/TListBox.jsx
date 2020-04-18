@@ -99,6 +99,7 @@ class TListBox extends React.Component {
                 valueField={this.state.valueField}
                 modal={this.props.modal}
                 caption={this.props.caption}
+                fitHeight={this.props.fitHeight}
                 onChange={this.props.onChange}
                 onValidate={this.props.onValidate} />
         );
@@ -193,6 +194,8 @@ TListBox.propTypes = {
     modal: PropTypes.any,
     /** Modal list view caption */
     caption: PropTypes.any,
+    /** Indicates whether to fit modal list view height into the screen height */
+    fitHeight: PropTypes.any,
     /** Determines what components reacts on "onClick" events */
     clickable: PropTypes.string,
     /** Icon name */
@@ -226,7 +229,8 @@ TListBox.defaultProps = {
     clickable: 'label edit',
     keyField: ['key', 'id'],
     valueField: ['value', 'name'],
-    modal: false
+    modal: false,
+    fitHeight: true
 };
 
 export default TListBox;

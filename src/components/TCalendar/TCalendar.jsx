@@ -72,6 +72,12 @@ class TCalendar extends React.PureComponent {
             {days: styles.days, months: styles.months},
             props.templates
         );
+        this.container = React.createRef();
+        this.fitScreen = this.fitScreen.bind(this);
+    }
+
+    componentDidMount() {
+        this.fitScreen();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -81,6 +87,7 @@ class TCalendar extends React.PureComponent {
                 this.setState(calcState(this.props));
             }
         }
+        this.fitScreen();
     }
 
     getParams(event) {
@@ -148,6 +155,21 @@ class TCalendar extends React.PureComponent {
         }
     }
 
+    fitScreen() {
+        if (this.container.current) {
+            let rect = this.container.current.getBoundingClientRect();
+            let sw = window.innerWidth - 18;
+            let margin = sw - rect.left - rect.width;
+            if (margin < 0) {
+                let left = rect.left + margin;
+                if (left < 8) {
+                    margin -= left - 8;
+                }
+                this.container.current.style.marginLeft = margin + 'px';
+            }
+        }
+    }
+
     handleDayClick(event) {
         let dates = [];
         if (this.props.multiSelect) {
@@ -187,7 +209,7 @@ class TCalendar extends React.PureComponent {
         );
 
         return (
-            <div style={style.container}>
+            <div style={style.container} ref={this.container}>
                 {this.props.label ? <div style={style.label}>{this.props.label}</div> : null}
                 <Navigator
                     style={style.navigator}

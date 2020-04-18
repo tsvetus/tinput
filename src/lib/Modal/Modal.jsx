@@ -72,10 +72,10 @@ class Modal extends React.PureComponent {
             let sh = window.innerHeight;
             let rect = this.containerRef.current.getBoundingClientRect();
             let ch = rect.height;
-            let top = 0;
+            let top = 8;
             if (ch < sh) {
-                top = Math.ceil((sh - ch)/2);
-            } else if (this.props.squeeze) {
+                top = Math.ceil((sh -16 - ch)/2);
+            } else if (this.props.fitHeight) {
                 this.containerRef.current.style.height = sh - 16 + "px";
                 this.contentRef.current.style.height = "100%";
                 this.contentRef.current.style.overflowY = "auto";
@@ -232,7 +232,7 @@ Modal.propTypes = {
     outerClick: PropTypes.any,
     transition: PropTypes.number,
     footerContent: PropTypes.any,
-    squeeze: PropTypes.any,
+    fitHeight: PropTypes.any,
     onClose: PropTypes.func.isRequired
 };
 
@@ -240,7 +240,8 @@ Modal.defaultProps = {
     showHeader: true,
     escape: false,
     outerClick: false,
-    transition: 250
+    transition: 250,
+    fitHeight: false
 };
 
 export default Modal;
