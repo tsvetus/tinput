@@ -809,16 +809,16 @@ export default function defaultStyles(template) {
                 boxSizing: "border-box"
             },
 
+            content: {
+                width: "100%"
+            },
+
             label: {
                 textAlign: "center",
                 ...template.fonts.common,
                 color: template.colors.border,
                 whiteSpace: "normal",
                 margin: "0 0 8px 0"
-            },
-
-            row: {
-                display: "flex"
             },
 
             day: {

@@ -485,7 +485,7 @@ export default {
             boxSizing: "border-box",
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr",
-            flex: "1"
+            flex: "1 1 100%"
         },
 
         day: {

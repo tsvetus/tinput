@@ -83,7 +83,7 @@ class TDateExample extends React.Component {
           <TDate
               style={{
                 container: {
-                  width: "280px",
+                  width: "380px",
                   margin: "8px 0 8px 0"
                 },
                 calendar: {

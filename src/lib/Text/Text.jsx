@@ -24,16 +24,17 @@ class Text extends React.PureComponent {
         this.handleBlur = this.handleBlur.bind(this);
         this.getContainerStyle = this.getContainerStyle.bind(this);
         this.handleMounted = this.handleMounted.bind(this);
+        this.saveStyle = this.saveStyle.bind(this);
         this.state = {value: props.value};
         this.vStyle = props.style ? props.style : {};
         this.iStyle = merge(this.vStyle, this.vStyle.invalid);
         this.editor = null;
-        this.showChildren = false;
     }
 
     componentDidMount() {
         this.mounted = true;
         this.handleMounted();
+        this.saveStyle();
     }
 
     componentWillUnmount() {
@@ -47,6 +48,9 @@ class Text extends React.PureComponent {
         }
         if (old.value !== this.props.value) {
             this.setState({value: this.props.value});
+        }
+        if (!this.props.children) {
+            this.saveStyle();
         }
     }
 
@@ -116,19 +120,13 @@ class Text extends React.PureComponent {
     }
 
     getContainerStyle() {
-        let style = {}
+        let style = {};
         if (this.container.current) {
-            if (this.props.children && !this.showChildren) {
-                this.showChildren = true;
-                this.containerHeight = this.container.current.style.height ?
-                    this.container.current.style.height : 'auto';
-                this.containerWidth = this.container.current.style.width ?
-                    this.container.current.style.width : 'auto';
+            if (this.props.children) {
                 let rect = this.container.current.getBoundingClientRect();
                 style.height = rect.height + 'px';
                 style.width = rect.width + 'px';
             } else {
-                this.showChildren = false;
                 if (this.containerHeight) {
                     style.height = this.containerHeight;
                 }
@@ -138,6 +136,15 @@ class Text extends React.PureComponent {
             }
         }
         return style;
+    }
+
+    saveStyle() {
+        if (this.container.current) {
+            this.containerHeight = this.container.current.style.height ?
+                this.container.current.style.height : 'auto';
+            this.containerWidth = this.container.current.style.width ?
+                this.container.current.style.width : 'auto';
+        }
     }
 
     handleMounted(event) {
