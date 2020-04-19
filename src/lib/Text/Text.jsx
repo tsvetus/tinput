@@ -28,6 +28,7 @@ class Text extends React.PureComponent {
         this.vStyle = props.style ? props.style : {};
         this.iStyle = merge(this.vStyle, this.vStyle.invalid);
         this.editor = null;
+        this.showChildren = false;
     }
 
     componentDidMount() {
@@ -115,24 +116,28 @@ class Text extends React.PureComponent {
     }
 
     getContainerStyle() {
+        let style = {}
         if (this.container.current) {
-            if (this.props.children) {
+            if (this.props.children && !this.showChildren) {
+                this.showChildren = true;
                 this.containerHeight = this.container.current.style.height ?
                     this.container.current.style.height : 'auto';
                 this.containerWidth = this.container.current.style.width ?
                     this.container.current.style.width : 'auto';
                 let rect = this.container.current.getBoundingClientRect();
-                return {
-                    height: rect.height + 'px'
-                }
+                style.height = rect.height + 'px';
+                style.width = rect.width + 'px';
             } else {
-                return {
-                    height: this.containerHeight
+                this.showChildren = false;
+                if (this.containerHeight) {
+                    style.height = this.containerHeight;
+                }
+                if (this.containerWidth) {
+                    style.width = this.containerWidth;
                 }
             }
-        } else {
-            return {}
         }
+        return style;
     }
 
     handleMounted(event) {
