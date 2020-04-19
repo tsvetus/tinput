@@ -87,6 +87,8 @@ class TListBoxExample extends React.Component {
               label={'Choose item from modal view:'}
               layout={'top'}
               modal={8}
+              fitHeight={true}
+              showIcon={false}
               caption={'List items'}
               onChange={this.change}/>
 

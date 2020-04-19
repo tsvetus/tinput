@@ -474,6 +474,7 @@ export default {
     TCalendar: {
 
         container: {
+            boxSizing: "border-box",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -481,13 +482,10 @@ export default {
         },
 
         content: {
+            boxSizing: "border-box",
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr",
-            width: "100%"
-        },
-
-        row: {
-            display: "flex"
+            flex: "1"
         },
 
         day: {

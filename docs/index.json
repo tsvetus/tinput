@@ -1356,6 +1356,11 @@
           "description": "Navigator button types. For example: navigators={'month year'}",
           "required": false
         },
+        "start": {
+          "type": "number",
+          "description": "Calendar start week day. Cam be varied from \"0\" for sunday to \"6\" for saturday",
+          "required": false
+        },
         "templates": {
           "type": "shape",
           "description": "Calendar captions for months, weekdays and buttons. Another way to set captions is to use\r\n\"registerStyles\" (see example)",

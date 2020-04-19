@@ -573,9 +573,6 @@ export default function defaultStyles(template) {
             calendar: {
                 container: {
                     backgroundColor: template.colors.window
-                },
-                content: {
-                    width: "100%"
                 }
             }
 
