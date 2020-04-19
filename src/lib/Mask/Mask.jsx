@@ -23,7 +23,14 @@ class Mask extends React.PureComponent {
     constructor(props, context) {
         super(props, context);
         this.formatter = createFormatter(props);
+        this.editor = React.createRef();
         this.handleValidate = this.handleValidate.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.props.onMounted) {
+            this.props.onMounted({editor: this.editor.current});
+        }
     }
 
     componentDidUpdate(old) {
@@ -75,6 +82,8 @@ class Mask extends React.PureComponent {
         return (
 
             <Edit
+                ref={this.editor}
+                simple={this.props.simple}
                 vStyle={this.props.vStyle}
                 iStyle={this.props.iStyle}
                 value={this.props.value}
@@ -102,6 +111,7 @@ class Mask extends React.PureComponent {
 }
 
 Mask.propTypes = {
+    simple: PropTypes.any,
     vStyle: PropTypes.object,
     iStyle: PropTypes.object,
     value: PropTypes.string,
@@ -121,7 +131,8 @@ Mask.propTypes = {
     onValidate: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
-    onStyle: PropTypes.func
+    onStyle: PropTypes.func,
+    onMounted: PropTypes.func
 };
 
 Mask.defaultProps = {

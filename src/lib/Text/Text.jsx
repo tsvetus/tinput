@@ -16,20 +16,23 @@ class Text extends React.PureComponent {
         this.container = React.createRef();
         this.frame = React.createRef();
         this.label = React.createRef();
-        this.content = React.createRef();
         this.handleIcon = this.handleIcon.bind(this);
+        this.handleLabel = this.handleLabel.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
         this.handleStyle = this.handleStyle.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
         this.getContainerStyle = this.getContainerStyle.bind(this);
+        this.handleMounted = this.handleMounted.bind(this);
         this.state = {value: props.value};
         this.vStyle = props.style ? props.style : {};
         this.iStyle = merge(this.vStyle, this.vStyle.invalid);
+        this.editor = null;
     }
 
     componentDidMount() {
         this.mounted = true;
+        this.handleMounted();
     }
 
     componentWillUnmount() {
@@ -83,6 +86,17 @@ class Text extends React.PureComponent {
         }
     }
 
+    handleLabel() {
+        if (this.props.onLabel) {
+            this.props.onLabel({
+                data: this.props.data,
+                name: this.props.name,
+                icon: this.props.icon,
+                value: this.state.value
+            });
+        }
+    }
+
     handleChange(event) {
         this.setState({value: event.value}, () => {
             if (this.mounted && this.props.onChange) {
@@ -121,6 +135,22 @@ class Text extends React.PureComponent {
         }
     }
 
+    handleMounted(event) {
+        if (this.props.onMounted) {
+            if (event && event.editor) {
+                this.editor = event.editor;
+            }
+            if (this.editor && this.container) {
+                this.props.onMounted({
+                    container: this.container.current,
+                    frame: this.frame.current,
+                    label: this.label.current,
+                    editor: this.editor
+                });
+            }
+        }
+    }
+
     render () {
 
         let label = null;
@@ -128,7 +158,8 @@ class Text extends React.PureComponent {
             label = (
                 <div
                     ref={this.label}
-                    style={this.vStyle.label}>
+                    style={this.vStyle.label}
+                    onClick={this.handleLabel}>
                     {this.props.label}
                 </div>
             )
@@ -154,7 +185,9 @@ class Text extends React.PureComponent {
                 {top ? label : null}
                 <div style={this.vStyle.frame} ref={this.frame}>
                     {!top ? label : null}
-                    <Mask
+                    {this.props.showEdit ? <Mask
+                        simple={this.props.simple}
+                        tabIndex={this.props.tabIndex}
                         vStyle={this.vStyle.edit}
                         iStyle={this.iStyle.edit}
                         data={this.props.data}
@@ -169,9 +202,11 @@ class Text extends React.PureComponent {
                         required={this.props.required}
                         onKeyDown={this.props.onKeyDown}
                         onMask={this.props.onMask}
+                        onClick={this.props.onClick}
                         onValidate={validate}
                         onChange={this.handleChange}
-                        onStyle={this.handleStyle} />
+                        onStyle={this.handleStyle}
+                        onMounted={this.handleMounted} /> : null}
                     {icon}
                 </div>
                 {this.props.children}
@@ -197,16 +232,23 @@ Text.propTypes = {
     required: PropTypes.any,
     readOnly: PropTypes.any,
     layout: PropTypes.string,
+    showEdit: PropTypes.any,
+    wrap: PropTypes.any,
+    onClick: PropTypes.func,
+    onUpdate: PropTypes.func,
     onKeyDown: PropTypes.func,
     onChange: PropTypes.func,
     onValidate: PropTypes.func,
     onIcon: PropTypes.func,
+    onLabel: PropTypes.func,
     onMask: PropTypes.func,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
+    onMounted: PropTypes.func
 };
 
 Text.defaultProps = {
-    required: 'always'
+    required: 'always',
+    showEdit: true
 };
 
 export default Text;

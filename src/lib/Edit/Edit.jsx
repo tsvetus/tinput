@@ -453,7 +453,8 @@ Edit.propTypes = {
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onInput: PropTypes.func,
-    onStyle: PropTypes.func
+    onStyle: PropTypes.func,
+    onMounted: PropTypes.func
 };
 
 Edit.defaultProps = {

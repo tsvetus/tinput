@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../Icon';
-import Edit from '../Edit';
+import Text from '../Text';
 import List from '../List';
 import Modal from '../Modal';
 
@@ -34,19 +34,15 @@ class ListBox extends React.PureComponent {
         this.handleBlur = this.handleBlur.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleModalClose= this.handleModalClose.bind(this);
-        this.getContainerStyle = this.getContainerStyle.bind(this);
+        this.handleMounted = this.handleMounted.bind(this);
         this.getModalStyle = this.getModalStyle.bind(this);
         this.moveHover = this.moveHover.bind(this);
         this.search = this.search.bind(this);
         this.clear = this.clear.bind(this);
         this.isModal = this.isModal.bind(this);
-        this.container = React.createRef();
-        this.frame = React.createRef();
         this.list = React.createRef();
-        this.edit = React.createRef();
         this.helper = new List.Helper();
         this.item = null;
-        this.containerHeight = 'auto';
     }
 
     componentWillUnmount() {
@@ -105,13 +101,13 @@ class ListBox extends React.PureComponent {
     }
 
     setValue(value) {
-        if (this.edit.current) {
+        if (this.editor) {
             this.item = this.helper.getShowItem(value);
             let text = '';
             if (this.item && this.item.index >= 0) {
                 text = this.item.value;
             }
-            this.edit.current.setValue(text);
+            this.editor.setValue(text);
         }
     }
 
@@ -131,6 +127,11 @@ class ListBox extends React.PureComponent {
         } else {
             return this.props.modal;
         }
+    }
+
+    handleMounted(event) {
+        this.editor = event.editor;
+        this.container = event.container;
     }
 
     handleKeyDown(event) {
@@ -155,7 +156,7 @@ class ListBox extends React.PureComponent {
                 event.preventDefault();
                 if (this.state.showList) {
                     this.list.current.handleUse(this.state.hover);
-                    this.edit.current.blur();
+                    this.editor.blur();
                 } else {
                     this.handleShow(true);
                 }
@@ -294,26 +295,9 @@ class ListBox extends React.PureComponent {
         this.setState({showText: event.value});
     }
 
-    getContainerStyle() {
-        if (this.isModal()) {
-            return {}
-        } else if (this.state.showList && this.container.current) {
-            this.containerHeight = this.container.current.style.height ?
-                this.container.current.style.height : 'auto';
-            let rect = this.container.current.getBoundingClientRect();
-            return {
-                height: rect.height + 'px'
-            }
-        } else {
-            return {
-                height: this.containerHeight
-            }
-        }
-    }
-
     getModalStyle() {
-        if (this.container.current) {
-            let rect = this.container.current.getBoundingClientRect();
+        if (this.container) {
+            let rect = this.container.getBoundingClientRect();
             return {width: rect.width + 'px'}
         } else {
             return {}
@@ -324,25 +308,9 @@ class ListBox extends React.PureComponent {
 
         let style = merge(styles.TComponent, styles.TText, this.props.style);
 
-        let label = null;
-        if (this.props.label) {
-            label =
-                <div style={style.label} onClick={this.handleLabelClick}>
-                    {this.props.label}
-                </div>
-        }
-
         let icon = null;
         if (this.props.showIcon) {
-            icon = this.props.icon ?
-                <Icon
-                    style={style.icon}
-                    name={this.props.icon}
-                    onClick={this.handleIconClick} /> :
-                <Icon
-                    style={style.icon}
-                    name={this.state.showList ? 'up' : 'down'}
-                    onClick={this.handleIconClick} />;
+            icon = this.props.icon ? this.props.icon : (this.state.showList ? 'up' : 'down');
         }
 
         let list = null;
@@ -371,37 +339,32 @@ class ListBox extends React.PureComponent {
             }
         }
 
-        let containerStyle = merge(style.container, this.getContainerStyle());
-
-        let top = this.props.layout && this.props.layout.indexOf('top') >= 0;
-
         return (
-            <div style={containerStyle} ref={this.container}
-                 onBlur={this.handleBlur} tabIndex={-1}>
-                {top ? label : null}
-                <div style={style.frame} ref={this.frame}>
-                    {!top ? label : null}
-                    {this.props.showEdit ?
-                        <Edit
-                            simple={true}
-                            ref={this.edit}
-                            vStyle={style.edit}
-                            iStyle={style.edit}
-                            data={this.props.data}
-                            name={this.props.name}
-                            value={this.state.showText}
-                            timeout={this.props.timeout}
-                            placeholder={this.props.placeholder}
-                            wrap={false}
-                            readOnly={!this.props.onSearch || this.props.readOnly}
-                            onInput={this.handleInput}
-                            onClick={this.handleEditClick}
-                            onKeyDown={this.handleKeyDown}
-                            onChange={this.handleTextChange} /> : null}
-                    {icon}
-                </div>
-                {list}
-            </div>
+
+            <Text
+                simple={true}
+                style={style}
+                data={this.props.data}
+                name={this.props.name}
+                value={this.state.showText}
+                timeout={this.props.timeout}
+                layout={this.props.layout}
+                label={this.props.label}
+                placeholder={this.props.placeholder}
+                icon={icon}
+                wrap={false}
+                readOnly={!this.props.onSearch || this.props.readOnly}
+                showEdit={this.props.showEdit}
+                children={list}
+                onIcon={this.handleIconClick}
+                onLabel={this.handleLabelClick}
+                onBlur={this.handleBlur}
+                onInput={this.handleInput}
+                onClick={this.handleEditClick}
+                onKeyDown={this.handleKeyDown}
+                onChange={this.handleTextChange}
+                onMounted={this.handleMounted} />
+
         );
 
     }
