@@ -50,7 +50,7 @@ class TTextExample extends React.Component {
             label={'TText with top label:'}
             name={'layout'}
             layout={'top'}
-            placeholder={'Enter single line text ...'}
+//            placeholder={'Enter single line text ...'}
             onChange={this.change}/>
 
           <TText

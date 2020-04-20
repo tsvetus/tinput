@@ -142,7 +142,7 @@ export default function defaultStyles(template) {
             },
 
             edit: {
-                minHeight: "20px",
+                minHeight: "29px",
                 padding: "4px 4px 2px 4px",
                 border: "1px solid " + template.colors.frame,
                 color: template.colors.text,
