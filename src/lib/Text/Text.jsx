@@ -152,14 +152,12 @@ class Text extends React.PureComponent {
             if (event && event.editor) {
                 this.editor = event.editor;
             }
-            if (this.editor && this.container) {
-                this.props.onMounted({
-                    container: this.container.current,
-                    frame: this.frame.current,
-                    label: this.label.current,
-                    editor: this.editor
-                });
-            }
+            this.props.onMounted({
+                container: this.container.current,
+                frame: this.frame.current,
+                label: this.label.current,
+                editor: this.editor
+            });
         }
     }
 

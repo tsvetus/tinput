@@ -52,16 +52,19 @@ export default {
         },
 
         label: {
+            boxSizing: "border-box",
             cursor: "default"
         },
 
         edit: {
+            boxSizing: "border-box",
             flex: "1 0",
             whiteSpace: "nowrap",
             overflow: "hidden"
         },
 
         icon: {
+            boxSizing: "border-box",
             flexShrink: "0",
             flexGrow: "0"
         },
@@ -69,6 +72,7 @@ export default {
         list: {
 
             container: {
+                boxSizing: "border-box",
                 position: "relative",
                 top: "0",
                 left: "0",

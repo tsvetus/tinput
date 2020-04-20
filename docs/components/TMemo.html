@@ -15,7 +15,6 @@ class TMemoExample extends React.Component {
   }
 
   change(event) {
-    console.log(event);
     this.setState({
       value: event.value,
       event: this.state.event + ' ' +

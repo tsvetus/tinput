@@ -15,7 +15,6 @@ class TEditExample extends React.Component {
   }
 
   change(event) {
-    console.log(event);
     this.setState({
       text: event.text,
       event: this.state.event + ' ' +

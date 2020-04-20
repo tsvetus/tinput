@@ -153,10 +153,6 @@ export function post(params) {
         wait = false;
     }
 
-    if (params.trace) {
-        console.log('Data: ' + JSON.stringify(params.data));
-    }
-
     let xhr = new XMLHttpRequest();
 
     xhr.open(

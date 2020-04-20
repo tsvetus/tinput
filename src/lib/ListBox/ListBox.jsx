@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from '../Icon';
 import Text from '../Text';
 import List from '../List';
 import Modal from '../Modal';
@@ -101,12 +100,12 @@ class ListBox extends React.PureComponent {
     }
 
     setValue(value) {
+        this.item = this.helper.getShowItem(value);
+        let text = '';
+        if (this.item && this.item.index >= 0) {
+            text = this.item.value;
+        }
         if (this.editor) {
-            this.item = this.helper.getShowItem(value);
-            let text = '';
-            if (this.item && this.item.index >= 0) {
-                text = this.item.value;
-            }
             this.editor.setValue(text);
         }
     }
