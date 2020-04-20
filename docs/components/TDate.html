@@ -59,7 +59,12 @@ class TDateExample extends React.Component {
       &lt;div&gt;
 
         &lt;TGroup style={{
-          container: {margin: "0 0 16px 0"}
+          container: {
+            margin: "0 0 16px 0",
+          },
+          content: {
+            justifyContent: "space-around"
+          }
         }}&gt;
 
           &lt;TDate
@@ -83,7 +88,7 @@ class TDateExample extends React.Component {
           &lt;TDate
               style={{
                 container: {
-                  width: "380px",
+                  width: "280px",
                   margin: "8px 0 8px 0"
                 },
                 calendar: {
