@@ -470,8 +470,13 @@ export default {
             flexDirection: "row",
             flexWrap: "nowrap",
             alignItems: "center",
-            justifyContent: "space-between",
-            height: "auto"
+            justifyContent: "space-between"
+        },
+        label: {
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-start"
         }
     },
 

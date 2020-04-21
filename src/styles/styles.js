@@ -787,13 +787,13 @@ export default function defaultStyles(template) {
         },
 
         TPopup: {
-            container: {
-            },
             frame: {
                 cursor: "pointer"
             },
             label: {
-                cursor: "pointer"
+                cursor: "pointer",
+                padding: "0",
+                width: "100%"
             },
             icon: {
                 container: {
