@@ -20,6 +20,7 @@ export default function defaultStyles(template) {
 
         TButton: {
             container: {
+                boxSizing: "border-box",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -35,10 +36,10 @@ export default function defaultStyles(template) {
                 ...template.fonts.common
             },
             wait: {
-                color: "#ddd"
+                color: template.colors.wait
             },
             down: {
-                backgroundColor: template.colors.shadow,
+                backgroundColor: template.colors.down,
                 borderLeft: "1px solid " + template.colors.border,
                 borderTop: "1px solid " + template.colors.border,
                 borderBottom: "1px solid " + template.colors.window,
@@ -302,6 +303,10 @@ export default function defaultStyles(template) {
                 ...template.fonts.common
             },
 
+            footer: {
+                margin: "8px 16px 16px 16px"
+            },
+
             hidden: {
 
                 screen: {
@@ -317,10 +322,6 @@ export default function defaultStyles(template) {
         },
 
         TForm: {
-
-            footer: {
-                margin: "8px 16px 16px 16px"
-            },
 
             message: {
                 ...template.fonts.common,
@@ -420,7 +421,6 @@ export default function defaultStyles(template) {
         TPanel: {
             container: {
                 backgroundImage: "linear-gradient(" + template.colors.panel + ", " + template.colors.window + ")",
-                backgroundColor: template.colors.panel,
                 color: template.colors.border,
                 ...template.fonts.common
             }
@@ -443,15 +443,14 @@ export default function defaultStyles(template) {
                 ...template.fonts.common,
                 color: template.colors.border,
                 fontSize: "24px",
+                margin: "0 8px 0 8px",
                 textAlign: "center"
             },
 
             tools: {
-                margin: "0 8px 0 0"
             },
 
             icon: {
-                margin: "0 0 0 8px",
                 color: template.colors.border,
                 height: "32px",
                 width: "32px"

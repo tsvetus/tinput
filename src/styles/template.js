@@ -5,6 +5,8 @@ export default {
         face: "#eee",
         frame: "#bfbbff",
         shadow: "#ddd",
+        wait: "#ddd",
+        down: "#ddd",
         control: "#777",
         placeholder: "#777",
         text: "#000",
@@ -45,7 +47,9 @@ export default {
         yearUp: "&#10095;",
         yearDown: "&#10094;",
         monthUp: "&#10095;&#10095;&#10095;",
-        monthDown: "&#10094;&#10094;&#10094;"
+        monthDown: "&#10094;&#10094;&#10094;",
+        left: "&#10094;",
+        right: "&#10095;"
     }
 
 }

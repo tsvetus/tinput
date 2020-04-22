@@ -13,20 +13,38 @@ class TButton extends React.PureComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            pressed: false
+            pressed: false,
+            wait: false
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleDown = this.handleDown.bind(this);
         this.handleUp = this.handleUp.bind(this);
     }
 
+    componentDidMount() {
+        this.mounted = true;
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+
     handleClick() {
+        if (this.props.wait || this.state.wait) {
+            return;
+        }
         if (this.props.onClick) {
             this.props.onClick({
                 name: this.props.name,
                 data: this.props.data,
                 down: this.props.down
             });
+        }
+        if (this.props.timeout) {
+            this.setState({wait: true});
+            setTimeout(() => {
+                this.setState({wait: false});
+            }, this.props.timeout);
         }
     }
 
@@ -52,7 +70,7 @@ class TButton extends React.PureComponent {
         } else if (this.props.down) {
             cst = merge(cst, style.down);
         }
-        if (this.props.wait) {
+        if (this.props.wait || this.state.wait) {
             cst = merge(cst, style.wait);
         }
         if (this.props.next) {
@@ -96,6 +114,7 @@ TButton.propTypes = {
     wait: PropTypes.any,
     /** If "true" button preserves pressed state */
     down: PropTypes.any,
+    timeout: PropTypes.number,
     /**
      * On click event
      * @param {object} event Event object with following structure:

@@ -6,6 +6,7 @@ import {merge, contain} from '../../util';
 import styles from '../../styles';
 
 import TButton from "../TButton";
+import TLoad from "../TLoad";
 
 class TResponse extends React.Component {
 
@@ -18,7 +19,9 @@ class TResponse extends React.Component {
         if (this.props.onClose) {
             this.props.onClose({
                 name: this.props.name,
-                data: this.props.data
+                data: this.props.data,
+                message: this.props.message,
+                error: this.props.error
             })
         }
     }
@@ -40,6 +43,8 @@ class TResponse extends React.Component {
                         onClick={this.handleClick}>
                             {'OK'}
                     </TButton>;
+            } else if (this.props.wait) {
+                content = <TLoad inline={true} show={true} />;
             } else {
                 content = this.props.children;
             }

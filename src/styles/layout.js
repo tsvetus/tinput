@@ -128,17 +128,17 @@ export default {
 
         content: {
             flex: "1"
-        }
-
-    },
-
-    TForm: {
+        },
 
         footer: {
             display: "flex",
             justifyContent: "space-around",
             flexWrap: "wrap"
         }
+
+    },
+
+    TForm: {
 
     },
 

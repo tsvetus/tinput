@@ -144,9 +144,17 @@ class TPager extends React.Component {
 
             edit =
                 <div style={style.edit}>
-                    <div style={style.page} data={'left'} onClick={this.handleClick}>&lt;</div>
+                    <div
+                        style={style.page}
+                        data={'left'}
+                        onClick={this.handleClick}
+                        dangerouslySetInnerHTML={{__html: styles.buttons.left}} />
                     {pages}
-                    <div style={style.page} data={'right'} onClick={this.handleClick}>&gt;</div>
+                    <div
+                        style={style.page}
+                        data={'right'}
+                        onClick={this.handleClick}
+                        dangerouslySetInnerHTML={{__html: styles.buttons.right}} />
                 </div>;
         }
 
@@ -160,9 +168,17 @@ class TPager extends React.Component {
         } else if (this.props.layout === 'middle') {
             content =
                 <div style={style.container}>
-                    <div style={style.page} data={'left'} onClick={this.handleClick}>&lt;</div>
+                    <div
+                        style={style.page}
+                        data={'left'}
+                        onClick={this.handleClick}
+                        dangerouslySetInnerHTML={{__html: styles.buttons.left}} />
                     {label}
-                    <div style={style.page} data={'right'} onClick={this.handleClick}>&gt;</div>
+                    <div
+                        style={style.page}
+                        data={'right'}
+                        onClick={this.handleClick}
+                        dangerouslySetInnerHTML={{__html: styles.buttons.right}} />
                 </div>;
         } else {
             content =

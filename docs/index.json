@@ -2786,6 +2786,11 @@
           "required": false,
           "defaultValue": "false"
         },
+        "timeout": {
+          "type": "number",
+          "description": "",
+          "required": false
+        },
         "onClick": {
           "type": "func",
           "description": "On click event ",
