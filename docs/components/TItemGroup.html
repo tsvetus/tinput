@@ -52,7 +52,7 @@ class TItemGroupExample extends React.Component {
             },
             control: {
                 container: {
-                    width: "60px",
+                    width: "100px",
                     margin: "8px"
                 },
                 down: {
