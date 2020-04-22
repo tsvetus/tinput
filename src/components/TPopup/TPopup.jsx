@@ -30,7 +30,15 @@ class TPopup extends React.PureComponent {
         if (event.stopPropagation) {
             event.stopPropagation();
         }
-        this.setState({show: !this.state.show});
+        this.setState({show: !this.state.show}, () => {
+            if (this.props.onShow) {
+                this.props.onShow({
+                    name: this.props.name,
+                    data: this.props.data,
+                    show: this.state.show
+                });
+            }
+        });
     }
 
     render () {
@@ -82,6 +90,14 @@ TPopup.propTypes = {
          */
         content: PropTypes.object
     }),
+    /**
+     * Any component name that associated with component and returned in "onChange" event in "event.name" field.
+     * In addition component name can be used in global styles registered by "registerStyles" function to
+     * associate particular style with this component
+     */
+    name: PropTypes.string,
+    /** Any data that associated with component and returned in "onChange" event in "event.data" field */
+    data: PropTypes.any,
     /** Component caption */
     label: PropTypes.string,
     /** Shows/Hides content tab */
@@ -89,7 +105,15 @@ TPopup.propTypes = {
     /** Show/Hide content tab state indicator */
     showIcon: PropTypes.any,
     /** Icons used as content tab state indicator */
-    icons: PropTypes.object
+    icons: PropTypes.object,
+    /**
+     * On show state change event
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {object} event.show Current showing state
+     */
+    onShow: PropTypes.func
 };
 
 TPopup.defaultProps = {

@@ -114,6 +114,7 @@ TButton.propTypes = {
     wait: PropTypes.any,
     /** If "true" button preserves pressed state */
     down: PropTypes.any,
+    /** Time in milliseconds during which button stays inactive after click */
     timeout: PropTypes.number,
     /**
      * On click event

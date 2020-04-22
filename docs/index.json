@@ -2788,7 +2788,7 @@
         },
         "timeout": {
           "type": "number",
-          "description": "",
+          "description": "Time in milliseconds during which button stays inactive after click",
           "required": false
         },
         "onClick": {
@@ -2948,6 +2948,11 @@
         "rotateTime": {
           "type": "number",
           "description": "Rotate animation period in milliseconds",
+          "required": false
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Time in milliseconds during which icon stays inactive after click",
           "required": false
         },
         "onClick": {
@@ -3450,6 +3455,16 @@
             }
           }
         },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
         "label": {
           "type": "string",
           "description": "Component caption",
@@ -3472,6 +3487,33 @@
           "description": "Icons used as content tab state indicator",
           "required": false,
           "defaultValue": "{up: 'up', down: 'down'}"
+        },
+        "onShow": {
+          "type": "func",
+          "description": "On show state change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.show": {
+              "name": "event.show",
+              "type": "object",
+              "description": "Current showing state"
+            }
+          },
+          "required": false
         }
       }
     },

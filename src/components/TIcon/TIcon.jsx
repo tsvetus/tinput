@@ -25,6 +25,7 @@ class TIcon extends React.PureComponent {
                 icon={this.props.icon}
                 data={this.props.data}
                 rotateTime={this.props.rotateTime}
+                timeout={this.props.timeout}
                 onClick={this.props.onClick} />
         );
     }
@@ -45,6 +46,8 @@ TIcon.propTypes = {
     data: PropTypes.any,
     /** Rotate animation period in milliseconds */
     rotateTime: PropTypes.number,
+    /** Time in milliseconds during which icon stays inactive after click */
+    timeout: PropTypes.number,
     /**
      * On click event
      * @param {object} event Event object with following structure:

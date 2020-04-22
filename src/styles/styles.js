@@ -15,6 +15,9 @@ export default function defaultStyles(template) {
                 height: "32px",
                 color: template.colors.border,
                 flexShrink: "0"
+            },
+            wait: {
+                color: template.colors.wait
             }
         },
 
@@ -50,7 +53,6 @@ export default function defaultStyles(template) {
         TGroupButton: {
 
             container: {
-
             },
 
             icon: {
@@ -397,7 +399,7 @@ export default function defaultStyles(template) {
         TMemo: {
 
             edit: {
-                minHeight: "18px",
+                minHeight: "29px",
                 border: "1px solid " + template.colors.border
             }
 
@@ -586,6 +588,7 @@ export default function defaultStyles(template) {
             },
 
             content: {
+                boxSizing: "border-box"
             },
 
             close: {
