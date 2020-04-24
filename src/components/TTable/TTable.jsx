@@ -5,7 +5,7 @@ import {merge, clone, contain, replace} from '../../util';
 
 import {Grid} from '../../lib';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Represents data table. TTable is similar to TGrid component but designed using "table" layout.

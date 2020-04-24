@@ -7,7 +7,7 @@ import Modal from '../../lib/Modal';
 
 import TButton from '../TButton';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Extends TModal component. Adds buttons panel at the bottom and on button click events. In addition TForm has

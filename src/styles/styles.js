@@ -2,13 +2,6 @@ export default function defaultStyles(template) {
 
     return {
 
-        colors: template.colors,
-        fonts: template.fonts,
-        months: template.months,
-        days: template.days,
-        formats: template.formats,
-        buttons: template.buttons,
-
         TIcon: {
             container: {
                 width: "32px",
@@ -32,6 +25,7 @@ export default function defaultStyles(template) {
                 color: template.colors.text,
                 borderRadius: "8px",
                 textAlign: "center",
+                border: "none",
                 borderLeft: "1px solid " + template.colors.frame,
                 borderTop: "1px solid " + template.colors.frame,
                 borderBottom: "1px solid " + template.colors.frame,
@@ -42,6 +36,7 @@ export default function defaultStyles(template) {
                 color: template.colors.wait
             },
             down: {
+                border: "none",
                 backgroundColor: template.colors.down,
                 borderLeft: "1px solid " + template.colors.border,
                 borderTop: "1px solid " + template.colors.border,
@@ -163,6 +158,23 @@ export default function defaultStyles(template) {
                 padding: "0 0 0 4px"
             },
 
+            invalid: {
+
+                label: {
+                    color: "#f43"
+                },
+
+                edit: {
+                    border: "1px solid red",
+                    backgroundColor: "#eea"
+                }
+
+            }
+
+        },
+
+        TListBox: {
+
             list: {
 
                 container: {
@@ -194,25 +206,7 @@ export default function defaultStyles(template) {
 
             },
 
-            invalid: {
-
-                label: {
-                    color: "#f43"
-                },
-
-                edit: {
-                    border: "1px solid red",
-                    backgroundColor: "#eea"
-                }
-
-            },
-
             modal: {
-
-                container: {
-                    padding: "4px",
-                    borderRadius: "4px"
-                },
 
                 header: {
                     margin: "8px 4px 8px 4px",
@@ -220,12 +214,18 @@ export default function defaultStyles(template) {
                 },
 
                 caption: {
-                    margin: "0"
+                    margin: "0",
+                    padding: "0"
                 },
 
                 content: {
                     padding: "2px",
                     margin: "0"
+                },
+
+                footer: {
+                    margin: "0",
+                    padding: "0"
                 }
 
             }
@@ -259,7 +259,7 @@ export default function defaultStyles(template) {
                 transitionProperty: "opacity",
                 transitionDuration: "${transition}ms",
                 backgroundColor: template.colors.window,
-                borderRadius: "16px",
+                borderRadius: "12px",
                 maxWidth: "600px",
                 minWidth: "320px",
                 width: "55%",
@@ -272,7 +272,7 @@ export default function defaultStyles(template) {
             },
 
             header: {
-                margin: "16px 16px 8px 16px",
+                margin: "8px",
                 ...template.fonts.common
             },
 
@@ -301,12 +301,12 @@ export default function defaultStyles(template) {
 
             content: {
                 color: template.colors.text,
-                margin: "8px 16px 8px 16px",
+                margin: "8px",
                 ...template.fonts.common
             },
 
             footer: {
-                margin: "8px 16px 16px 16px"
+                margin: "8px"
             },
 
             hidden: {
@@ -469,6 +469,7 @@ export default function defaultStyles(template) {
             container: {
                 backgroundColor: template.colors.panel,
                 paddingTop: "60px",
+                border: "none",
                 borderRight: "1px solid " + template.colors.frame
             },
 
@@ -736,7 +737,7 @@ export default function defaultStyles(template) {
                 position: "sticky",
                 backgroundColor: template.colors.window,
                 backgroundClip: "padding-box",
-//                border: "${width}px solid " + template.colors.frame,
+                border: "none",
                 borderLeft: "${width}px solid " + template.colors.frame,
                 borderRight: "${width}px solid " + template.colors.frame,
                 padding: "4px",

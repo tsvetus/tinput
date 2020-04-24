@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, clone, contain} from '../../util';
+import {merge, contain} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Clickable button with text caption

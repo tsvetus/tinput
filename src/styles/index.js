@@ -1,3 +1,11 @@
-import {styles as styles} from './const.js';
+import {
+    styles,
+    templates,
+    registerStyles
+} from './const.js';
 
-export default styles;
+export {
+    styles,
+    templates,
+    registerStyles
+};

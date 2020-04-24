@@ -1,11 +1,11 @@
-import {styles} from 'tinput';
+import {templates} from 'tinput';
 
 export default {
 
     top: {
         padding: "16px",
         flexWrap: "wrap",
-        borderBottom: "1px solid " + styles.colors.frame
+        borderBottom: "1px solid " + templates.colors.frame
     },
 
     box: {
@@ -15,8 +15,8 @@ export default {
     menu: {
         container: {
             flex: "0 0 260px",
-            backgroundColor: styles.colors.face,
-            borderRight: "1px solid " + styles.colors.frame
+            backgroundColor: templates.colors.face,
+            borderRight: "1px solid " + templates.colors.frame
         },
         content: {
             paddingTop: "8px"
@@ -33,8 +33,8 @@ export default {
     },
 
     readme: {
-        ...styles.fonts.common,
-        color: styles.colors.border,
+        ...templates.fonts.common,
+        color: templates.colors.border,
         textAlign: "center"
     }
 }

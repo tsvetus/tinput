@@ -5,7 +5,7 @@ import {Edit} from '../../lib';
 
 import {merge} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Component representing simple text editor

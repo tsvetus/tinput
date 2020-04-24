@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {merge, contain} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 class TIndicator extends React.Component {
 

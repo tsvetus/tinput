@@ -4,14 +4,20 @@ import defaultTemplates from './template.js';
 
 import {merge} from '../util';
 
-const styles = merge(defaultLayout, defaultStyles(defaultTemplates));
+const templates = defaultTemplates;
+const styles = defaultLayout;
+
+Object.assign(styles, merge(styles, defaultStyles(templates)));
+
+function registerTemplates(customTemplates) {
+    if (customTemplates && customTemplates instanceof Object) {
+        Object.assign(templates, merge(templates, customTemplates));
+    }
+}
 
 function registerStyles(customStyles, customTemplates) {
-    let templates = defaultTemplates;
-    if (customTemplates && customTemplates instanceof Object) {
-        templates = merge(defaultTemplates, customTemplates);
-    }
-    Object.assign(styles, merge(defaultLayout, defaultStyles(templates)));
+    registerTemplates(customTemplates);
+    Object.assign(styles, merge(styles, defaultStyles(templates)));
     if (customStyles && customStyles instanceof Object) {
         Object.assign(styles, merge(styles, customStyles));
     }
@@ -19,5 +25,6 @@ function registerStyles(customStyles, customTemplates) {
 
 export {
     styles,
+    templates,
     registerStyles
 }

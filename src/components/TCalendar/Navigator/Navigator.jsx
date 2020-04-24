@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {merge} from '../../../util';
 
-import styles from '../../../styles';
+import {templates} from '../../../styles';
 
 class Navigator extends React.PureComponent {
 
@@ -59,7 +59,7 @@ class Navigator extends React.PureComponent {
         let mn = this.props.navigators && this.props.navigators.indexOf('mon') >= 0;
         let yn = this.props.navigators && this.props.navigators.indexOf('yea') >= 0;
 
-        let buttons = merge(styles.buttons, this.props.buttons);
+        let buttons = merge(templates.buttons, this.props.buttons);
 
         return (
             <div style={style.container}>

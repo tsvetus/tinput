@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {merge, contain} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Groups components in a single block
@@ -18,7 +18,6 @@ class TGroup extends React.PureComponent {
     render () {
 
         let style = merge(
-            styles.TComponent,
             styles.TGroup,
             contain(styles[this.props.name]),
             contain(this.props.style)

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge} from 'tinput';
+import {merge} from '../../../util';
 
 class Day extends React.PureComponent {
 

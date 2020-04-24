@@ -5,7 +5,7 @@ import {merge, contain} from '../../util';
 
 import {Grid} from '../../lib';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Shows list items in form of ribbon

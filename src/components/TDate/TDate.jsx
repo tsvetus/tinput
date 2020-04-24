@@ -7,7 +7,7 @@ import TCalendar from '../TCalendar';
 
 import {merge, compare, contain, strDate, isoDate, testIsoDate} from '../../util';
 
-import styles from '../../styles';
+import {styles, templates} from '../../styles';
 
 /**
  * Date editor with masked input and date value validation. Date format depends on "format" property while
@@ -18,7 +18,7 @@ class TDate extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.format = merge(styles.formats.date, props.format);
+        this.format = merge(templates.formats.date, props.format);
         this.state = {
             value: strDate(props.value, this.format.mask, this.format.empty),
             calendar: false
@@ -32,7 +32,7 @@ class TDate extends React.PureComponent {
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value || !compare(old.format, this.props.format)) {
-            this.format = merge(styles.formats.date, this.props.format);
+            this.format = merge(templates.formats.date, this.props.format);
             let value = null;
             if (this.props.value === this.props.empty) {
                 value = this.props.empty;
@@ -279,7 +279,7 @@ TDate.propTypes = {
 };
 
 TDate.defaultProps = {
-    format: styles.formats.date,
+    format: templates.formats.date,
     required: 'enter',
     empty: null,
     readOnly: false,

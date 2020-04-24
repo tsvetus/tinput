@@ -5,7 +5,7 @@ import {merge, clone, contain, replace, isMS} from '../../util';
 
 import {Grid} from '../../lib';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Represents data grid designed on CSS Grid layout. Some browsers experience performance

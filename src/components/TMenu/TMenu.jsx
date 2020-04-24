@@ -5,7 +5,7 @@ import TScroll from '../TScroll';
 
 import {merge, contain} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 class TMenu extends React.Component {
 

@@ -5,7 +5,7 @@ import {ListBox} from '../../lib';
 
 import {merge, contain} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 class TSearch extends React.PureComponent {
 
@@ -24,6 +24,7 @@ class TSearch extends React.PureComponent {
 
         let style = merge(
             styles.TComponent,
+            styles.TListBox,
             styles.TSearch,
             contain(styles[this.props.name]),
             contain(this.props.style)

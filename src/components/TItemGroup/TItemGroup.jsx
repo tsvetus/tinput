@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import {merge, contain, compare, clone, parseItem} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
+
 import TGroup from "../TGroup";
 import TButton from "../TButton";
 import TCheck from "../TCheck";

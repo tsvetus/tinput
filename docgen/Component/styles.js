@@ -1,4 +1,4 @@
-import {styles} from 'tinput';
+import {templates} from 'tinput';
 
 export default {
 
@@ -9,34 +9,34 @@ export default {
 
     name: {
         margin: "0 0 0 0",
-        ...styles.fonts.common,
-        color: styles.colors.border,
+        ...templates.fonts.common,
+        color: templates.colors.border,
         fontSize: "36px"
     },
 
     desc: {
         margin: "16px 0 0 0",
-        ...styles.fonts.common,
-        color: styles.colors.border,
+        ...templates.fonts.common,
+        color: templates.colors.border,
         fontSize: "24px"
     },
 
     props: {
         margin: "16px 0 0 0",
-        ...styles.fonts.common,
-        color: styles.colors.border,
+        ...templates.fonts.common,
+        color: templates.colors.border,
         fontSize: "18px"
     },
 
     example: {
         margin: "16px 0 0 0",
-        ...styles.fonts.common,
-        color: styles.colors.border,
+        ...templates.fonts.common,
+        color: templates.colors.border,
         fontSize: "18px"
     },
 
     box: {
-        border: "1px solid " + styles.colors.border
+        border: "1px solid " + templates.colors.border
     },
 
     code: {

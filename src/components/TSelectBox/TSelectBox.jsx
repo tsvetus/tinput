@@ -6,7 +6,7 @@ import {merge, clone, contain} from '../../util';
 import TGroupButton from '../TGroupButton';
 import ListForm from './ListForm';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 import List from "../../lib/List";
 
 /**

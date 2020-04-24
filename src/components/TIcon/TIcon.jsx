@@ -5,7 +5,7 @@ import {Icon} from '../../lib';
 
 import {merge, contain} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /** Clickable icon */
 class TIcon extends React.PureComponent {

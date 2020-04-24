@@ -7,7 +7,7 @@ import Modal from '../Modal';
 
 import {merge, find, compare} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 class ListBox extends React.PureComponent {
 
@@ -305,7 +305,7 @@ class ListBox extends React.PureComponent {
 
     render () {
 
-        let style = merge(styles.TComponent, styles.TText, this.props.style);
+        let style = merge(styles.TComponent, styles.TListBox, this.props.style);
 
         let icon = null;
         if (this.props.showIcon) {
@@ -324,15 +324,16 @@ class ListBox extends React.PureComponent {
                     onClick={this.handleItemClick} />;
             if (this.isModal()) {
                 let ms = merge(style.modal, this.getModalStyle());
-                list = <Modal
-                    style={ms}
-                    caption={this.props.caption}
-                    show={true}
-                    onClose={this.handleModalClose}
-                    fitHeight={this.props.fitHeight}
-                    outerClick={true} >
-                    {comp}
-                </Modal>
+                list =
+                    <Modal
+                        style={ms}
+                        caption={this.props.caption}
+                        show={true}
+                        onClose={this.handleModalClose}
+                        fitHeight={this.props.fitHeight}
+                        outerClick={true} >
+                        {comp}
+                    </Modal>
             } else {
                 list = comp;
             }

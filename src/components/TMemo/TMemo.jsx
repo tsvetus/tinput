@@ -5,7 +5,7 @@ import {Edit, Icon} from '../../lib';
 
 import {merge, contain} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Component representing multiline editor

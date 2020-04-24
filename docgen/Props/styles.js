@@ -1,4 +1,4 @@
-import {styles} from "tinput";
+import {templates} from "tinput";
 
 export default {
 
@@ -49,7 +49,7 @@ export default {
 
     description: {
         margin: "0 4px 0 0 ",
-        color: styles.colors.border,
+        color: templates.colors.border,
         fontSize: "16px"
     },
 
@@ -64,7 +64,7 @@ export default {
     },
 
     box: {
-        border: '1px solid ' + styles.colors.frame,
+        border: '1px solid ' + templates.colors.frame,
         padding: "8px",
         margin: "4px 0 4px 0",
         width: "100%"
@@ -80,7 +80,7 @@ export default {
 
     text: {
         margin: "0 4px 0 0",
-        color: styles.colors.border,
+        color: templates.colors.border,
         fontSize: "16px",
         fontWeight: "normal",
         whiteSpace: "nowrap"

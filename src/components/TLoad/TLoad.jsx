@@ -5,7 +5,7 @@ import {merge, contain} from '../../util';
 
 import {Icon} from '../../lib';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 class TLoad extends React.Component {
 

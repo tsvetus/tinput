@@ -6,7 +6,7 @@ import TInput from '../TInput';
 
 import {merge} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 class TLogin extends React.Component {
 
@@ -76,9 +76,8 @@ class TLogin extends React.Component {
     render () {
 
         let style = merge(
-            styles.Modal,
+            styles.TModal,
             styles.TForm,
-            {TComponent: styles.TComponent},
             styles.TLogin,
             styles[this.props.name],
             this.props.style

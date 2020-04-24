@@ -7,7 +7,7 @@ import {Icon} from '../../lib';
 
 import {merge, contain} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 const DEFAULT_SIDE_WIDTH = "300px";
 const DEFAULT_TOUCH_WIDTH = 50;

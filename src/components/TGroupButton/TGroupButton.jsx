@@ -6,7 +6,7 @@ import {merge, contain, clone} from '../../util';
 import {Icon} from '../../lib';
 import TButton from '../TButton';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Clickable button with text caption and icon

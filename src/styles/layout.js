@@ -104,6 +104,7 @@ export default {
         },
 
         container: {
+            boxSizing: "border-box",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -116,6 +117,7 @@ export default {
         },
 
         header: {
+            boxSizing: "border-box",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -127,10 +129,12 @@ export default {
         },
 
         content: {
+            boxSizing: "border-box",
             flex: "1"
         },
 
         footer: {
+            boxSizing: "border-box",
             display: "flex",
             justifyContent: "space-around",
             flexWrap: "wrap"

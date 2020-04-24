@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {TIMEOUT, nvl, apply, merge, strip, compare} from '../../util';
 
-import styles from '../../styles';
+import {templates} from '../../styles';
 
 function parseReq(req) {
     let r = 'en';
@@ -94,7 +94,7 @@ class Edit extends React.PureComponent {
             this.updateStyle();
         }
 
-        if (this.value !== this.props.value && (this.ref.current !== document.activeElement)) {
+        if (this.value !== this.props.value && (this.props.readOnly || this.ref.current !== document.activeElement)) {
             this.setValue(this.props.value);
         }
 
@@ -196,7 +196,7 @@ class Edit extends React.PureComponent {
     showPlaceholder() {
         if (this.props.placeholder && nvl(this.getText(), '') === '' &&
             nvl(this.getHtml(), '').indexOf('<span') < 0) {
-             this.setHtml('<span style="pointer-events: none; color: ' + styles.colors.placeholder + ';">' +
+             this.setHtml('<span style="pointer-events: none; color: ' + templates.colors.placeholder + ';">' +
                  this.props.placeholder + '</span>');
         }
     }

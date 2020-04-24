@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {merge, seconds, contain, compare, apply, replace} from '../../util';
 import {Icon} from '../../lib';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 const ICON_CLOSE = 'close';
 

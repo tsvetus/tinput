@@ -5,7 +5,7 @@ import {ListBox} from '../../lib';
 
 import {merge, contain, Provider} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Represents list box

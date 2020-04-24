@@ -75,7 +75,7 @@ import {
 
 } from './util';
 
-import {styles, registerStyles} from './styles/const.js';
+import {styles, templates, registerStyles} from './styles';
 
 export {
 
@@ -151,6 +151,7 @@ export {
     INITIAL_STATE,
 
     styles,
+    templates,
     registerStyles
 
 }

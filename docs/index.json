@@ -1037,7 +1037,7 @@
           "type": "shape",
           "description": "Time format:",
           "required": false,
-          "defaultValue": "styles.formats.time",
+          "defaultValue": "templates.formats.time",
           "structure": {
             "mask": {
               "type": "string",
@@ -1303,7 +1303,7 @@
           "type": "shape",
           "description": "Date format. Instead of using \"format\" property one can use \"registerStyles\" function to register global\r\ndate format simply by call \"registerStyles(null, {formats: {date: {mask: 'DD.MM.YYYY',\r\nempty: '_', full: true, type: 'iso'}}})\"",
           "required": false,
-          "defaultValue": "styles.formats.date",
+          "defaultValue": "templates.formats.date",
           "structure": {
             "mask": {
               "type": "string",

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Pager, merge, clone, contain} from '../../util';
 
-import styles from '../../styles';
+import {styles, templates} from '../../styles';
 
 /**
  * Splits up grid item list to pages and shows page navigation bar
@@ -148,13 +148,13 @@ class TPager extends React.Component {
                         style={style.page}
                         data={'left'}
                         onClick={this.handleClick}
-                        dangerouslySetInnerHTML={{__html: styles.buttons.left}} />
+                        dangerouslySetInnerHTML={{__html: templates.buttons.left}} />
                     {pages}
                     <div
                         style={style.page}
                         data={'right'}
                         onClick={this.handleClick}
-                        dangerouslySetInnerHTML={{__html: styles.buttons.right}} />
+                        dangerouslySetInnerHTML={{__html: templates.buttons.right}} />
                 </div>;
         }
 
@@ -172,13 +172,13 @@ class TPager extends React.Component {
                         style={style.page}
                         data={'left'}
                         onClick={this.handleClick}
-                        dangerouslySetInnerHTML={{__html: styles.buttons.left}} />
+                        dangerouslySetInnerHTML={{__html: templates.buttons.left}} />
                     {label}
                     <div
                         style={style.page}
                         data={'right'}
                         onClick={this.handleClick}
-                        dangerouslySetInnerHTML={{__html: styles.buttons.right}} />
+                        dangerouslySetInnerHTML={{__html: templates.buttons.right}} />
                 </div>;
         } else {
             content =

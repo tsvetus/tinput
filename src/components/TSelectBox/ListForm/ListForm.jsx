@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {merge, parseItem} from '../../../util';
 
-import styles from '../../../styles';
+import {styles} from '../../../styles';
 
 import TForm from '../../TForm';
 import TRibbon from '../../TRibbon';

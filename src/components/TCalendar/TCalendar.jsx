@@ -6,7 +6,7 @@ import {merge, clone, contain, compare, firstDate, lastDate, clearDate, isoDate}
 import Day from './Day';
 import Navigator from './Navigator';
 
-import styles from '../../styles';
+import {styles, templates} from '../../styles';
 
 function shift(date, to, direction) {
     if (date.getDay() === to) {
@@ -69,7 +69,7 @@ class TCalendar extends React.PureComponent {
         this.handleDayClick = this.handleDayClick.bind(this);
         this.handleNavigatorChange = this.handleNavigatorChange.bind(this);
         this.templates = merge(
-            {days: styles.days, months: styles.months},
+            {days: templates.days, months: templates.months},
             props.templates
         );
         this.container = React.createRef();

@@ -5,7 +5,7 @@ import {Text} from '../../lib';
 
 import {merge, contain, strTime, isoTime, testIsoTime} from '../../util';
 
-import styles from '../../styles';
+import {styles, templates} from '../../styles';
 
 /**
  * Time editor with time value validation
@@ -14,7 +14,7 @@ class TTime extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.format = merge(styles.formats.time, props.format);
+        this.format = merge(templates.formats.time, props.format);
         this.state = {
             value: strTime(props.value, this.format.mask, this.format.empty)
         };
@@ -24,7 +24,7 @@ class TTime extends React.PureComponent {
 
     componentDidUpdate(old) {
         if (old.value !== this.props.value || old.format !== this.props.format) {
-            this.format = merge(styles.formats.time, this.props.format);
+            this.format = merge(templates.formats.time, this.props.format);
             let value = null;
             if (this.props.value === this.props.empty) {
                 value = this.props.empty;
@@ -67,7 +67,7 @@ class TTime extends React.PureComponent {
 
         let style = merge(
             styles.TComponent,
-            styles.TDate,
+            styles.TTime,
             contain(styles[this.props.name]),
             contain(this.props.style)
         );
@@ -188,7 +188,7 @@ TTime.propTypes = {
 };
 
 TTime.defaultProps = {
-    format: styles.formats.time,
+    format: templates.formats.time,
     required: 'enter',
     empty: null,
     readOnly: false,

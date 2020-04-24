@@ -7,7 +7,7 @@ import TTable from '../TTable';
 import TRibbon from '../TRibbon';
 import TPager from '../TPager';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 /**
  * Represents data items as TTable or TRibbon depending on component client width and "flexWidth" property value

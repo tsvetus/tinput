@@ -13,7 +13,10 @@ export function merge(...sources) {
                 if (value instanceof Object && key in res) {
                     value = merge(res[key], value)
                 }
-                res = {...res, [key]: value}
+                res = {
+                    ...res,
+                    [key]: value
+                }
             }
         }
     }

@@ -5,7 +5,7 @@ import {Text} from '../../lib';
 
 import {merge, contain, REGEXP} from '../../util';
 
-import styles from '../../styles';
+import {styles} from '../../styles';
 
 
 /**
