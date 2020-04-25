@@ -64,9 +64,11 @@ export default {
         },
 
         icon: {
-            boxSizing: "border-box",
-            flexShrink: "0",
-            flexGrow: "0"
+            container: {
+                boxSizing: "border-box",
+                flexShrink: "0",
+                flexGrow: "0"
+            }
         },
 
         list: {
@@ -351,31 +353,21 @@ export default {
     },
 
     TLoad: {
-        caption: {
-            container: {
-                position: "fixed",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -80%)",
-                zIndex: "40",
-                cursor: "default"
-            }
-        },
-        icon: {
-            container: {
-                position: "fixed",
-                top: "calc(50% - 32px)",
-                left: "calc(50% - 32px)",
-                zIndex: "40",
-                cursor: "default"
-            }
+        container: {
+            position: "fixed",
+            top: "calc(50% - 32px)",
+            left: "0",
+            right: "0",
+            zIndex: "40",
+            cursor: "default",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100"
         },
         inline: {
-            container: {
-                position: "relative",
-                left: "0",
-                top: "0"
-            }
+            position: "relative",
+            top: "0"
         }
     },
 

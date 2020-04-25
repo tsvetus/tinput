@@ -51,10 +51,12 @@ export default function defaultStyles(template) {
             },
 
             icon: {
-                width: "21px",
-                height: "21px",
-                textAlign: "right",
-                color: template.colors.border
+                container: {
+                    width: "21px",
+                    height: "21px",
+                    textAlign: "right",
+                    color: template.colors.border
+                }
             },
 
             button: {
@@ -150,12 +152,14 @@ export default function defaultStyles(template) {
             },
 
             icon: {
-                width: "21px",
-                height: "21px",
-                textAlign: "right",
-                color: template.colors.border,
-                cursor: "pointer",
-                padding: "0 0 0 4px"
+                container: {
+                    width: "21px",
+                    height: "21px",
+                    textAlign: "right",
+                    color: template.colors.border,
+                    cursor: "pointer",
+                    padding: "0 0 0 4px"
+                }
             },
 
             invalid: {
@@ -178,7 +182,7 @@ export default function defaultStyles(template) {
             list: {
 
                 container: {
-                    backgroundColor: template.colors.window,
+//                    backgroundColor: template.colors.window,
                     boxSizing: "border-box"
                 },
 
@@ -634,27 +638,8 @@ export default function defaultStyles(template) {
         },
 
         TLoad: {
-            caption: {
-                container: {
-                    border: "1px solid " + template.colors.frame,
-                    borderRadius: "16px",
-                    backgroundColor: template.colors.face,
-                    color: template.colors.border,
-                    padding: "16px",
-                    opacity: "0.8",
-                    fontSize: "20px",
-                    fontWeight: "bold"
-                }
-            },
             icon: {
                 container: {
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100"
-
-                },
-                icon: {
                     color: template.colors.border,
                     opacity: "0.5",
                     width: "48px",
