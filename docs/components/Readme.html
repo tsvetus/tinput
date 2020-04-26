@@ -210,16 +210,16 @@ const templates = {
 registerStyles(styles, templates);
 </code></pre>
 
-<p>New <code>styles</code> make all controls appeared on grey background then all editable
+<p>New <code>styles</code> and <code>templates</code> make all controls appeared on grey background then all editable
     controls have <code>red</code> border except <code>green</code>
     border for <code>TMemo</code> and with yellow list items in <code>TListBox</code> component
     with <code>name="MyListBox"</code>. </p>
 
-<p>All default and registered styles are merged into global <code>style</code> object accessible
-    in code as follows:</p>
+<p>All default and registered <code>styles</code> and <code>templates</code> are merged into
+    global <code>style</code> and <code>templates</code> objects accessible in code as follows:</p>
 
 <pre><code>
-import {styles} from 'tinput';
+import {styles, templates} from 'tinput';
 </code></pre>
 
 <h2 id="properties">Properties</h2>
