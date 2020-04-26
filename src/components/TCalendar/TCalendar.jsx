@@ -81,7 +81,9 @@ class TCalendar extends React.PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!compare(prevProps.value, this.props.value)) {
+        if (!compare(prevProps.value, this.props.value) ||
+        prevProps.month !== this.props.month ||
+        prevProps.year !== this.props.year) {
             let dates = calcDates(this.props);
             if (!compare(dates, this.state.dates)) {
                 this.setState(calcState(this.props));

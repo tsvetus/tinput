@@ -18,6 +18,15 @@ class Navigator extends React.PureComponent {
         this.change = this.change.bind(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.year !== this.props.year || prevProps.month !== this.props.month) {
+            this.setState({
+                year: this.props.year,
+                month: this.props.month
+            });
+        }
+    }
+
     change() {
         if (this.props.onChange) {
             this.props.onChange(this.state);
