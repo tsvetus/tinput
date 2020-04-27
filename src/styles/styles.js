@@ -153,12 +153,12 @@ export default function defaultStyles(template) {
 
             icon: {
                 container: {
-                    width: "21px",
+                    width: "21x",
                     height: "21px",
                     textAlign: "right",
                     color: template.colors.border,
                     cursor: "pointer",
-                    padding: "0 0 0 4px"
+                    margin: "0 0 0 4px"
                 }
             },
 
@@ -171,6 +171,20 @@ export default function defaultStyles(template) {
                 edit: {
                     border: "1px solid red",
                     backgroundColor: "#eea"
+                }
+
+            },
+
+            nested: {
+
+                edit: {
+                    borderRight: "none"
+                },
+
+                icon: {
+                    container: {
+                        borderLeft: "none"
+                    }
                 }
 
             }

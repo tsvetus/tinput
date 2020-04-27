@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, contain} from '../../util';
+import {merge, contain, apply} from '../../util';
 
 import icons from './icons.js';
 
-import {styles} from '../../styles';
+import {styles, templates} from '../../styles';
 
 class Icon extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);
         this.state = {wait: false};
+        this.ref = React.createRef();
         this.handleClick = this.handleClick.bind(this);
+        this.setStyle = this.setStyle.bind(this);
     }
 
     componentDidMount() {
@@ -21,6 +23,12 @@ class Icon extends React.PureComponent {
 
     componentWillUnmount() {
         this.mounted = false;
+    }
+
+    setStyle(from, to) {
+        if (this.mounted && from && to) {
+            apply(from,  to,  this.ref.current.style);
+        }
     }
 
     handleClick(event) {
@@ -61,9 +69,9 @@ class Icon extends React.PureComponent {
         let content = null;
         let w = "0 0 384 384";
         if (icon) {
-            let ps = {};
+            let ps = style.path;
             if (cs.color) {
-                ps.fill = cs.color;
+                ps = merge(ps, {fill: cs.color});
             }
             content = (<path style={ps} d={icon.d}></path>);
             w = icon.w;
@@ -84,7 +92,10 @@ class Icon extends React.PureComponent {
                 repeatCount="indefinite" /> : null;
 
         return (
-            <svg style={cs} viewBox={w}
+            <svg
+                ref={this.ref}
+                style={cs}
+                viewBox={w}
                 onClick={this.handleClick}>
                 {content}
                 {animate}

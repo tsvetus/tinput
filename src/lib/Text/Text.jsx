@@ -3,7 +3,28 @@ import PropTypes from 'prop-types';
 
 import {Mask, Icon} from '../../lib';
 
-import {merge, apply, compare} from '../../util';
+import {merge, apply, compare, clone} from '../../util';
+
+function parseStyle(props) {
+    let v = props.style ? clone(props.style) : {};
+    let i = merge(v, v.invalid);
+    if (props.icon && props.nestedIcon) {
+        v = merge(
+            v,
+            {icon: {container: {border: v.edit.border, backgroundColor: v.edit.backgroundColor}}},
+            v.nested
+        );
+        i = merge(
+            i,
+            {icon: {container: {border: i.edit.border, backgroundColor: i.edit.backgroundColor}}},
+            i.nested
+        );
+    }
+    return {
+        v: v,
+        i: i
+    }
+}
 
 /**
  * Component representing icons.
@@ -16,6 +37,7 @@ class Text extends React.PureComponent {
         this.container = React.createRef();
         this.frame = React.createRef();
         this.label = React.createRef();
+        this.icon = React.createRef();
         this.handleIcon = this.handleIcon.bind(this);
         this.handleLabel = this.handleLabel.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -25,16 +47,18 @@ class Text extends React.PureComponent {
         this.getContainerStyle = this.getContainerStyle.bind(this);
         this.handleMounted = this.handleMounted.bind(this);
         this.saveStyle = this.saveStyle.bind(this);
+        this.updateStyle = this.updateStyle.bind(this);
         this.state = {value: props.value};
-        this.vStyle = props.style ? props.style : {};
-        this.iStyle = merge(this.vStyle, this.vStyle.invalid);
+        this.style = parseStyle(props);
         this.editor = null;
     }
 
     componentDidMount() {
         this.mounted = true;
-        this.handleMounted();
         this.saveStyle();
+        this.handleMounted();
+        this.updateStyle();
+        this.handleStyle({valid: true});
     }
 
     componentWillUnmount() {
@@ -43,14 +67,31 @@ class Text extends React.PureComponent {
 
     componentDidUpdate(old) {
         if (!compare(old.style, this.props.style)) {
-            this.vStyle = this.props.style ? this.props.style : {};
-            this.iStyle = merge(this.vStyle, this.vStyle.invalid);
+            this.style = parseStyle(this.props);
         }
         if (old.value !== this.props.value) {
             this.setState({value: this.props.value});
         }
         if (!this.props.children) {
             this.saveStyle();
+        }
+    }
+
+    updateStyle() {
+        if (this.mounted && this.props.icon && this.props.nestedIcon) {
+            let rect = this.container.current.getBoundingClientRect();
+            let style = {
+                icon: {
+                    container: {
+                        width: rect.height + "px",
+                        height: rect.height + "px",
+                        margin: "0",
+                        padding: "4px"
+                    }
+                }
+            };
+            this.style.v = merge(this.style.v, style);
+            this.style.i = merge(this.style.i, style);
         }
     }
 
@@ -71,11 +112,21 @@ class Text extends React.PureComponent {
     }
 
     handleStyle(event) {
-        if (this.label.current) {
+        if (this.mounted) {
             if (event.valid) {
-                apply(this.iStyle.label,  this.vStyle.label,  this.label.current.style);
+                if (this.label.current) {
+                    apply(this.style.i.label,  this.style.v.label,  this.label.current.style);
+                }
+                if (this.icon.current) {
+                    this.icon.current.setStyle(this.style.i.icon.container, this.style.v.icon.container);
+                }
             } else {
-                apply(this.vStyle.label,  this.iStyle.label,  this.label.current.style);
+                if (this.label.current) {
+                    apply(this.style.v.label, this.style.i.label, this.label.current.style);
+                }
+                if (this.icon.current) {
+                    this.icon.current.setStyle(this.style.v.icon.container, this.style.i.icon.container);
+                }
             }
         }
     }
@@ -148,10 +199,10 @@ class Text extends React.PureComponent {
     }
 
     handleMounted(event) {
+        if (event && event.editor) {
+            this.editor = event.editor;
+        }
         if (this.props.onMounted) {
-            if (event && event.editor) {
-                this.editor = event.editor;
-            }
             this.props.onMounted({
                 container: this.container.current,
                 frame: this.frame.current,
@@ -168,7 +219,7 @@ class Text extends React.PureComponent {
             label = (
                 <div
                     ref={this.label}
-                    style={this.vStyle.label}
+                    style={this.style.v.label}
                     onClick={this.handleLabel}>
                     {this.props.label}
                 </div>
@@ -179,7 +230,8 @@ class Text extends React.PureComponent {
         if (this.props.icon) {
             icon = (
                 <Icon
-                    style={this.vStyle.icon}
+                    ref={this.icon}
+                    style={this.style.v.icon}
                     name={this.props.icon}
                     onClick={this.handleIcon} />
             )
@@ -188,18 +240,18 @@ class Text extends React.PureComponent {
         let validate = this.props.onValidate || this.props.regexp || this.props.mask ? this.handleValidate : null;
         let top = this.props.layout && this.props.layout.indexOf('top') >= 0;
 
-        let containerStyle = merge(this.vStyle.container, this.getContainerStyle());
+        let containerStyle = merge(this.style.v.container, this.getContainerStyle());
 
         return (
             <div ref={this.container} style={containerStyle} onBlur={this.handleBlur} tabIndex={-1}>
                 {top ? label : null}
-                <div style={this.vStyle.frame} ref={this.frame}>
+                <div style={this.style.v.frame} ref={this.frame}>
                     {!top ? label : null}
                     {this.props.showEdit ? <Mask
                         simple={this.props.simple}
                         tabIndex={this.props.tabIndex}
-                        vStyle={this.vStyle.edit}
-                        iStyle={this.iStyle.edit}
+                        vStyle={this.style.v.edit}
+                        iStyle={this.style.i.edit}
                         data={this.props.data}
                         name={this.props.name}
                         value={this.state.value}
@@ -244,6 +296,7 @@ Text.propTypes = {
     layout: PropTypes.string,
     showEdit: PropTypes.any,
     wrap: PropTypes.any,
+    nestedIcon: PropTypes.any,
     onClick: PropTypes.func,
     onUpdate: PropTypes.func,
     onKeyDown: PropTypes.func,
@@ -258,7 +311,8 @@ Text.propTypes = {
 
 Text.defaultProps = {
     required: 'always',
-    showEdit: true
+    showEdit: true,
+    nestedIcon: true
 };
 
 export default Text;

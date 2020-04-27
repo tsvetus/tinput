@@ -33,7 +33,11 @@ export function apply(from, to, style) {
     let t = Object.keys(to);
 
     for (let i=0; i<t.length; i++) {
-        style[t[i]] = to[t[i]];
+        if (to[t[i]] === undefined) {
+            style[t[i]] = null;
+        } else {
+            style[t[i]] = to[t[i]];
+        }
     }
 
     if (from) {

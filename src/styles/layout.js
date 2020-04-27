@@ -7,6 +7,15 @@ export default {
         }
     },
 
+    TIcon: {
+        container: {
+
+        },
+        path: {
+
+        }
+    },
+
     TGroupButton: {
 
         container: {

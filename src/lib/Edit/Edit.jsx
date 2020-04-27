@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {TIMEOUT, nvl, apply, merge, strip, compare} from '../../util';
+import {TIMEOUT, nvl, apply, merge, strip, compare, clone} from '../../util';
 
 import {templates} from '../../styles';
 
@@ -49,7 +49,7 @@ class Edit extends React.PureComponent {
         this.validate = this.validate.bind(this);
         this.parseValue = this.parseValue.bind(this);
         this.blur = this.blur.bind(this);
-        this.vStyle = props.vStyle;
+        this.vStyle = clone(props.vStyle);
         this.iStyle = merge(props.vStyle, props.iStyle);
         this.value = props.value === undefined ? null : props.value;
         this.caret = 0;
@@ -89,7 +89,7 @@ class Edit extends React.PureComponent {
     componentDidUpdate(old) {
 
         if (!compare(old.vStyle, this.props.vStyle) || !compare(old.iStyle, this.props.iStyle)) {
-            this.vStyle = this.props.vStyle;
+            this.vStyle = clone(this.props.vStyle);
             this.iStyle = merge(this.props.vStyle, this.props.iStyle);
             this.updateStyle();
         }
@@ -101,6 +101,8 @@ class Edit extends React.PureComponent {
         if (old.required !== this.props.required) {
             this.required = parseReq(this.props.required);
         }
+
+        this.updateStyle();
 
     }
 
@@ -186,9 +188,11 @@ class Edit extends React.PureComponent {
             } else {
                 apply(this.vStyle,  this.iStyle,  this.ref.current.style);
             }
+
             if (this.props.onStyle) {
                 this.props.onStyle({valid: valid});
             }
+
         }
 
     }
@@ -453,8 +457,7 @@ Edit.propTypes = {
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onInput: PropTypes.func,
-    onStyle: PropTypes.func,
-    onMounted: PropTypes.func
+    onStyle: PropTypes.func
 };
 
 Edit.defaultProps = {
