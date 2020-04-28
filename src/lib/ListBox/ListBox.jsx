@@ -38,6 +38,7 @@ class ListBox extends React.PureComponent {
         this.search = this.search.bind(this);
         this.clear = this.clear.bind(this);
         this.isModal = this.isModal.bind(this);
+        this.getContainerStyle = this.getContainerStyle.bind(this);
         this.list = React.createRef();
         this.helper = new List.Helper();
         this.item = null;
@@ -129,6 +130,7 @@ class ListBox extends React.PureComponent {
 
     handleMounted(event) {
         this.editor = event.editor;
+        this.container = event.container;
     }
 
     handleKeyDown(event) {
@@ -292,6 +294,15 @@ class ListBox extends React.PureComponent {
         this.setState({showText: event.value});
     }
 
+    getContainerStyle() {
+        if (this.container) {
+            let rect = this.container.getBoundingClientRect();
+            return {container: {width: rect.width + "px"}}
+        } else {
+            return {}
+        }
+    }
+
     render () {
 
         let style = merge(styles.TComponent, styles.TListBox, this.props.style);
@@ -312,12 +323,12 @@ class ListBox extends React.PureComponent {
                     items={this.helper.getListItems()}
                     onClick={this.handleItemClick} />;
             if (this.isModal()) {
+                let ms = merge(style.modal, this.getContainerStyle());
                 list =
                     <Modal
-                        style={style.modal}
+                        style={ms}
                         caption={this.props.caption}
                         show={true}
-                        nested={true}
                         onClose={this.handleModalClose}
                         fitHeight={this.props.fitHeight}
                         outerClick={true} >

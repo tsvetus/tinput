@@ -48,6 +48,7 @@ class Text extends React.PureComponent {
         this.handleChange = this.handleChange.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
         this.handleValidChange = this.handleValidChange.bind(this);
+        this.handleMounted = this.handleMounted.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
         this.getContainerStyle = this.getContainerStyle.bind(this);
         this.saveStyle = this.saveStyle.bind(this);
@@ -56,6 +57,12 @@ class Text extends React.PureComponent {
     componentDidMount() {
         this.mounted = true;
         this.saveStyle();
+        if (this.props.onMounted) {
+            this.props.onMounted({
+                editor: this.editor,
+                container: this.container.current
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -135,6 +142,10 @@ class Text extends React.PureComponent {
         if (this.props.onBlur) {
             this.props.onBlur(event);
         }
+    }
+
+    handleMounted(event) {
+        this.editor = event.editor;
     }
 
     getContainerStyle() {
@@ -222,7 +233,7 @@ class Text extends React.PureComponent {
                         onValidate={validate}
                         onValidChange={this.handleValidChange}
                         onChange={this.handleChange}
-                        onMounted={this.props.onMounted} /> : null}
+                        onMounted={this.handleMounted} /> : null}
                     {icon}
                 </div>
                 {this.props.children}
