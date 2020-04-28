@@ -1,16 +1,18 @@
-export default function defaultStyles(template) {
+export default function defaultStyles(templates) {
 
     return {
 
         TIcon: {
             container: {
+                boxSizing: "border-box",
                 width: "32px",
                 height: "32px",
-                color: template.colors.border,
-                flexShrink: "0"
+                color: templates.colors.border,
+                flexShrink: "0",
+                flexGrow: "0"
             },
             wait: {
-                color: template.colors.wait
+                color: templates.colors.wait
             }
         },
 
@@ -21,27 +23,27 @@ export default function defaultStyles(template) {
                 alignItems: "center",
                 justifyContent: "center",
                 padding: "8px 16px 8px 16px",
-                backgroundColor: template.colors.face,
-                color: template.colors.text,
+                backgroundColor: templates.colors.face,
+                color: templates.colors.text,
                 borderRadius: "8px",
                 textAlign: "center",
                 border: "none",
-                borderLeft: "1px solid " + template.colors.frame,
-                borderTop: "1px solid " + template.colors.frame,
-                borderBottom: "1px solid " + template.colors.frame,
-                borderRight: "1px solid " + template.colors.frame,
-                ...template.fonts.common
+                borderLeft: "1px solid " + templates.colors.frame,
+                borderTop: "1px solid " + templates.colors.frame,
+                borderBottom: "1px solid " + templates.colors.frame,
+                borderRight: "1px solid " + templates.colors.frame,
+                ...templates.fonts.common
             },
             wait: {
-                color: template.colors.wait
+                color: templates.colors.wait
             },
             down: {
                 border: "none",
-                backgroundColor: template.colors.down,
-                borderLeft: "1px solid " + template.colors.border,
-                borderTop: "1px solid " + template.colors.border,
-                borderBottom: "1px solid " + template.colors.window,
-                borderRight: "1px solid " + template.colors.window
+                backgroundColor: templates.colors.down,
+                borderLeft: "1px solid " + templates.colors.border,
+                borderTop: "1px solid " + templates.colors.border,
+                borderBottom: "1px solid " + templates.colors.window,
+                borderRight: "1px solid " + templates.colors.window
             }
         },
 
@@ -55,7 +57,7 @@ export default function defaultStyles(template) {
                     width: "21px",
                     height: "21px",
                     textAlign: "right",
-                    color: template.colors.border
+                    color: templates.colors.border
                 }
             },
 
@@ -69,7 +71,7 @@ export default function defaultStyles(template) {
             },
 
             placeholder: {
-                color: template.colors.placeholder
+                color: templates.colors.placeholder
             },
 
             left: {
@@ -89,11 +91,11 @@ export default function defaultStyles(template) {
         TSelectBox: {
 
             caption: {
-                backgroundColor: template.colors.window
+                backgroundColor: templates.colors.window
             },
 
             placeholder: {
-                color: template.colors.placeholder
+                color: templates.colors.placeholder
             },
 
             item: {
@@ -116,11 +118,11 @@ export default function defaultStyles(template) {
 
         TIndicator: {
             container: {
-                color: template.colors.indicator,
+                color: templates.colors.indicator,
                 flex: "0 0 24px",
                 textAlign: "center",
                 fontWeight: "bold",
-                ...template.fonts.common
+                ...templates.fonts.common
             }
         },
 
@@ -135,20 +137,20 @@ export default function defaultStyles(template) {
             label: {
                 padding: "4px 8px 0 0",
                 border: "none",
-                color: template.colors.border,
+                color: templates.colors.border,
                 outline: "none",
                 textAlign: "left",
-                ...template.fonts.common
+                ...templates.fonts.common
             },
 
             edit: {
                 minHeight: "29px",
                 padding: "4px 4px 2px 4px",
-                border: "1px solid " + template.colors.frame,
-                color: template.colors.text,
+                border: "1px solid " + templates.colors.frame,
+                color: templates.colors.text,
                 outline: "none",
                 textAlign: "left",
-                ...template.fonts.common
+                ...templates.fonts.common
             },
 
             icon: {
@@ -156,7 +158,7 @@ export default function defaultStyles(template) {
                     width: "21x",
                     height: "21px",
                     textAlign: "right",
-                    color: template.colors.border,
+                    color: templates.colors.border,
                     cursor: "pointer",
                     margin: "0 0 0 4px"
                 }
@@ -207,14 +209,14 @@ export default function defaultStyles(template) {
 
                 item: {
                     padding: "8px",
-                    border: "1px solid " + template.colors.frame,
-                    color: template.colors.text,
+                    border: "1px solid " + templates.colors.frame,
+                    color: templates.colors.text,
                     outline: "none",
-                    backgroundColor: template.colors.panel,
+                    backgroundColor: templates.colors.panel,
                     cursor: "pointer",
                     textAlign: "center",
                     tabindex: "0",
-                    ...template.fonts.common,
+                    ...templates.fonts.common,
                     boxSizing: "border-box"
                 },
 
@@ -224,7 +226,7 @@ export default function defaultStyles(template) {
 
                 hover: {
                     backgroundColor: "#fff",
-                    border: "1px solid " + template.colors.border
+                    border: "1px solid " + templates.colors.border
                 }
 
             },
@@ -233,7 +235,7 @@ export default function defaultStyles(template) {
 
                 header: {
                     margin: "8px 4px 8px 4px",
-                    ...template.fonts.common
+                    ...templates.fonts.common
                 },
 
                 caption: {
@@ -281,7 +283,7 @@ export default function defaultStyles(template) {
                 opacity: "1",
                 transitionProperty: "opacity",
                 transitionDuration: "${transition}ms",
-                backgroundColor: template.colors.window,
+                backgroundColor: templates.colors.window,
                 borderRadius: "12px",
                 maxWidth: "600px",
                 minWidth: "320px",
@@ -296,36 +298,36 @@ export default function defaultStyles(template) {
 
             header: {
                 margin: "8px",
-                ...template.fonts.common
+                ...templates.fonts.common
             },
 
             close: {
                 margin: "0",
                 padding: "0",
-                color: template.colors.border,
+                color: templates.colors.border,
                 width: "24px",
                 height: "24px",
-                ...template.fonts.common
+                ...templates.fonts.common
             },
 
             timer: {
-                ...template.fonts.common,
-                color: template.colors.signal,
+                ...templates.fonts.common,
+                color: templates.colors.signal,
                 fontSize: "24px",
                 width: "48px"
             },
 
             caption: {
-                color: template.colors.border,
+                color: templates.colors.border,
                 textAlign: "center",
                 margin: "0 8px 0 8px",
-                ...template.fonts.common
+                ...templates.fonts.common
             },
 
             content: {
-                color: template.colors.text,
+                color: templates.colors.text,
                 margin: "8px",
-                ...template.fonts.common
+                ...templates.fonts.common
             },
 
             footer: {
@@ -349,21 +351,21 @@ export default function defaultStyles(template) {
         TForm: {
 
             message: {
-                ...template.fonts.common,
+                ...templates.fonts.common,
                 margin: "16px",
                 color: "#393",
                 textAlign: "center"
             },
 
             error: {
-                ...template.fonts.common,
+                ...templates.fonts.common,
                 margin: "16px",
                 color: "#a13b3b",
                 textAlign: "center"
             },
 
             button: {
-                ...template.fonts.common,
+                ...templates.fonts.common,
                 margin: "4px",
                 textAlign: "center"
             },
@@ -423,7 +425,7 @@ export default function defaultStyles(template) {
 
             edit: {
                 minHeight: "29px",
-                border: "1px solid " + template.colors.border
+                border: "1px solid " + templates.colors.border
             }
 
         },
@@ -432,41 +434,41 @@ export default function defaultStyles(template) {
 
             content: {
                 padding: "12px",
-                border: "1px solid " + template.colors.border
+                border: "1px solid " + templates.colors.border
             },
 
             label: {
                 margin: "0 0 -8px 8px",
                 padding: "0 4px 0 4px",
-                backgroundColor: template.colors.window
+                backgroundColor: templates.colors.window
             }
 
         },
 
         TPanel: {
             container: {
-                backgroundImage: "linear-gradient(" + template.colors.panel + ", " + template.colors.window + ")",
-                color: template.colors.border,
-                ...template.fonts.common
+                backgroundImage: "linear-gradient(" + templates.colors.panel + ", " + templates.colors.window + ")",
+                color: templates.colors.border,
+                ...templates.fonts.common
             }
         },
 
         TTop: {
 
             container: {
-                backgroundColor: template.colors.panel
+                backgroundColor: templates.colors.panel
             },
 
             button: {
                 flexShrink: "0",
-                color: template.colors.border,
+                color: templates.colors.border,
                 height: "32px",
                 width: "32px"
             },
 
             caption: {
-                ...template.fonts.common,
-                color: template.colors.border,
+                ...templates.fonts.common,
+                color: templates.colors.border,
                 fontSize: "24px",
                 margin: "0 8px 0 8px",
                 textAlign: "center"
@@ -476,7 +478,7 @@ export default function defaultStyles(template) {
             },
 
             icon: {
-                color: template.colors.border,
+                color: templates.colors.border,
                 height: "32px",
                 width: "32px"
             },
@@ -490,21 +492,21 @@ export default function defaultStyles(template) {
         TSide: {
 
             container: {
-                backgroundColor: template.colors.panel,
+                backgroundColor: templates.colors.panel,
                 paddingTop: "60px",
                 border: "none",
-                borderRight: "1px solid " + template.colors.frame
+                borderRight: "1px solid " + templates.colors.frame
             },
 
             close: {
-                color: template.colors.border
+                color: templates.colors.border
             },
 
             item: {
-                ...template.fonts.common,
+                ...templates.fonts.common,
                 padding: "8px 8px 8px 32px",
                 fontSize: "24px",
-                color: template.colors.text
+                color: templates.colors.text
             },
 
             current: {
@@ -515,7 +517,7 @@ export default function defaultStyles(template) {
             separator: {
                 padding: "0",
                 margin: "0 32px 0 32px",
-                borderTop: "1px solid " + template.colors.frame
+                borderTop: "1px solid " + templates.colors.frame
             }
 
         },
@@ -527,10 +529,10 @@ export default function defaultStyles(template) {
             },
 
             item: {
-                ...template.fonts.common,
+                ...templates.fonts.common,
                 padding: "8px 8px 8px 32px",
                 fontSize: "24px",
-                color: template.colors.text
+                color: templates.colors.text
             },
 
             current: {
@@ -541,7 +543,7 @@ export default function defaultStyles(template) {
             separator: {
                 padding: "0",
                 margin: "0 32px 0 32px",
-                borderTop: "1px solid " + template.colors.frame
+                borderTop: "1px solid " + templates.colors.frame
             }
 
         },
@@ -571,15 +573,15 @@ export default function defaultStyles(template) {
             },
 
             error: {
-                ...template.fonts.common,
+                ...templates.fonts.common,
                 margin: "16px",
-                color: template.colors.error
+                color: templates.colors.error
             },
 
             message: {
-                ...template.fonts.common,
+                ...templates.fonts.common,
                 margin: "16px",
-                color: template.colors.message
+                color: templates.colors.message
             },
 
             button: {
@@ -599,8 +601,8 @@ export default function defaultStyles(template) {
                 container: {
                     padding: "8px",
                     margin: "-1px 0 0 0",
-                    border: "1px solid " + template.colors.border,
-                    backgroundColor: template.colors.window
+                    border: "1px solid " + templates.colors.border,
+                    backgroundColor: templates.colors.window
                 }
             }
 
@@ -608,8 +610,8 @@ export default function defaultStyles(template) {
 
         TScroll: {
             container: {
-                ...template.fonts.common,
-                backgroundColor: template.colors.window,
+                ...templates.fonts.common,
+                backgroundColor: templates.colors.window,
                 width: "100%",
                 boxSizing: "border-box"
             },
@@ -640,16 +642,16 @@ export default function defaultStyles(template) {
                 alignItems: "center",
                 margin: "0 0 2px 2px",
                 padding: "0 6px 0 5px",
-                border: "1px solid " + template.colors.frame
+                border: "1px solid " + templates.colors.frame
             },
 
             current: {
-                backgroundColor: template.colors.face,
+                backgroundColor: templates.colors.face,
                 fontWeight: "bold"
             },
 
             wait: {
-                backgroundColor: template.colors.window,
+                backgroundColor: templates.colors.window,
                 color: "#ddd"
             },
 
@@ -662,7 +664,7 @@ export default function defaultStyles(template) {
         TLoad: {
             icon: {
                 container: {
-                    color: template.colors.border,
+                    color: templates.colors.border,
                     opacity: "0.5",
                     width: "48px",
                     height: "48px"
@@ -680,20 +682,20 @@ export default function defaultStyles(template) {
             },
 
             title: {
-                backgroundColor: template.colors.window,
+                backgroundColor: templates.colors.window,
                 padding: "0 0 4px 0",
                 fontWeight: "normal"
             },
 
             caption: {
-                backgroundColor: template.colors.window,
-                border: "${width}px solid " + template.colors.frame,
+                backgroundColor: templates.colors.window,
+                border: "${width}px solid " + templates.colors.frame,
                 marginLeft: "-${width}px",
                 marginTop: "-${width}px",
                 padding: "4px",
                 textAlign: "center",
                 fontWeight: "bold",
-                color: template.colors.border
+                color: templates.colors.border
             },
 
             head: {
@@ -701,8 +703,8 @@ export default function defaultStyles(template) {
             },
 
             cell: {
-                backgroundColor: template.colors.window,
-                border: "${width}px solid " + template.colors.frame,
+                backgroundColor: templates.colors.window,
+                border: "${width}px solid " + templates.colors.frame,
                 marginLeft: "-${width}px",
                 marginTop: "-${width}px",
                 padding: "4px",
@@ -714,7 +716,7 @@ export default function defaultStyles(template) {
             },
 
             selected: {
-                backgroundColor: template.colors.panel,
+                backgroundColor: templates.colors.panel,
                 fontWeight: "bold"
             }
 
@@ -733,33 +735,33 @@ export default function defaultStyles(template) {
 
             title: {
                 position: "sticky",
-                backgroundColor: template.colors.window,
+                backgroundColor: templates.colors.window,
                 padding: "0 0 4px 0",
                 fontWeight: "normal",
                 textAlign: "center",
-                boxShadow: "-${width}px 0 " + template.colors.window + ", ${width}px 0 " + template.colors.window
+                boxShadow: "-${width}px 0 " + templates.colors.window + ", ${width}px 0 " + templates.colors.window
             },
 
             caption: {
                 position: "sticky",
-                backgroundColor: template.colors.window,
+                backgroundColor: templates.colors.window,
                 backgroundClip: "padding-box",
                 border: "none",
-                borderLeft: "${width}px solid " + template.colors.frame,
-                borderRight: "${width}px solid " + template.colors.frame,
+                borderLeft: "${width}px solid " + templates.colors.frame,
+                borderRight: "${width}px solid " + templates.colors.frame,
                 padding: "4px",
                 textAlign: "center",
                 fontWeight: "bold",
-                color: template.colors.border,
-                boxShadow: "inset 0 ${width}px " + template.colors.frame + ", 0 ${width}px " + template.colors.frame
+                color: templates.colors.border,
+                boxShadow: "inset 0 ${width}px " + templates.colors.frame + ", 0 ${width}px " + templates.colors.frame
             },
 
             head: {
             },
 
             cell: {
-                backgroundColor: template.colors.window,
-                border: "${width}px solid " + template.colors.frame,
+                backgroundColor: templates.colors.window,
+                border: "${width}px solid " + templates.colors.frame,
                 padding: "4px",
                 cursor: "pointer",
             },
@@ -768,7 +770,7 @@ export default function defaultStyles(template) {
             },
 
             selected: {
-                backgroundColor: template.colors.panel,
+                backgroundColor: templates.colors.panel,
                 fontWeight: "bold"
             }
 
@@ -777,7 +779,7 @@ export default function defaultStyles(template) {
         TRibbon: {
 
             title: {
-                backgroundColor: template.colors.window,
+                backgroundColor: templates.colors.window,
                 padding: "0 0 4px 0"
             }
 
@@ -825,8 +827,8 @@ export default function defaultStyles(template) {
 
             label: {
                 textAlign: "center",
-                ...template.fonts.common,
-                color: template.colors.border,
+                ...templates.fonts.common,
+                color: templates.colors.border,
                 whiteSpace: "normal",
                 margin: "0 0 8px 0"
             },
@@ -839,8 +841,8 @@ export default function defaultStyles(template) {
                 },
 
                 content: {
-                    ...template.fonts.small,
-                    color: template.colors.border,
+                    ...templates.fonts.small,
+                    color: templates.colors.border,
                     fontWeight: "bold"
                 }
 
@@ -851,26 +853,26 @@ export default function defaultStyles(template) {
                 container: {
                     minHeight: "36px",
                     margin: "0 -1px -1px 0",
-                    border: "1px solid " + template.colors.frame,
-                    color: template.colors.text
+                    border: "1px solid " + templates.colors.frame,
+                    color: templates.colors.text
                 },
 
                 content: {
                     cursor: "pointer",
-                    ...template.fonts.common
+                    ...templates.fonts.common
                 },
 
                 current: {
-                    border: "2px solid " + template.colors.signal
+                    border: "2px solid " + templates.colors.signal
                 },
 
                 inactive: {
-                    color: template.colors.face,
+                    color: templates.colors.face,
                     cursor: "default"
                 },
 
                 selected: {
-                    backgroundColor: template.colors.face,
+                    backgroundColor: templates.colors.face,
                     fontWeight: "bold"
                 }
 
@@ -879,7 +881,7 @@ export default function defaultStyles(template) {
             navigator: {
                 container: {
                     margin: "0 0 8px 0",
-                    color: template.colors.border
+                    color: templates.colors.border
                 },
                 month: {
                     margin: "0 2px 0 0 "
@@ -888,7 +890,7 @@ export default function defaultStyles(template) {
                     margin: "0 0 0 2px"
                 },
                 button: {
-                    border: "1px solid " + template.colors.frame,
+                    border: "1px solid " + templates.colors.frame,
                     textAlign: "center",
                     cursor: "pointer",
                     margin: "0 -1px -1px 0",

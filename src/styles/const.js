@@ -1,6 +1,6 @@
 import defaultLayout from './layout.js';
 import defaultStyles from './styles.js';
-import defaultTemplates from './template.js';
+import defaultTemplates from './templates.js';
 
 import {merge} from '../util';
 

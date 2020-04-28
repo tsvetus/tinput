@@ -1,27 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {TIMEOUT, nvl, apply, merge, strip, compare, clone} from '../../util';
+import {TIMEOUT, nvl, apply, strip} from '../../util';
 
 import {templates} from '../../styles';
-
-function parseReq(req) {
-    let r = 'en';
-    if (req === true) {
-        r = 'al';
-    } else if (req === false) {
-        r = 'no';
-    } else if (typeof req === 'string') {
-        if (req.startsWith('al')) {
-            r = 'al';
-        } else if (req.startsWith('en')) {
-            r = 'en';
-        } else {
-            r = 'no';
-        }
-    }
-    return r;
-}
 
 class Edit extends React.PureComponent {
 
@@ -34,7 +16,6 @@ class Edit extends React.PureComponent {
         this.full = true;
         this.empty = false;
         this.style = props.style;
-        this.required = parseReq(props.required);
         this.handleChange = this.handleChange.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -88,9 +69,6 @@ class Edit extends React.PureComponent {
     componentDidUpdate(old) {
         if (this.value !== this.props.value && (this.props.readOnly || this.ref.current !== document.activeElement)) {
             this.setValue(this.props.value);
-        }
-        if (old.required !== this.props.required) {
-            this.required = parseReq(this.props.required);
         }
         if (old.style !== this.props.style) {
             this.updateStyle(this.props.style);
@@ -419,7 +397,6 @@ Edit.propTypes = {
     placeholder: PropTypes.string,
     timeout: PropTypes.number,
     readOnly: PropTypes.any,
-    required: PropTypes.any,
     empty: PropTypes.any,
     password: PropTypes.string,
     onClick: PropTypes.func,
@@ -437,7 +414,6 @@ Edit.propTypes = {
 Edit.defaultProps = {
     empty: null,
     readOnly: false,
-    required: 'always',
     wrap: false,
     content: 'text',
     timeout: TIMEOUT

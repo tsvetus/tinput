@@ -25,6 +25,7 @@ class Mask extends React.PureComponent {
         this.formatter = createFormatter(props);
         this.editor = React.createRef();
         this.handleValidate = this.handleValidate.bind(this);
+        this.validate = this.validate.bind(this);
     }
 
     componentDidMount() {
@@ -48,11 +49,37 @@ class Mask extends React.PureComponent {
         }
     }
 
-    handleValidate() {
-        if (this.formatter) {
-            return (this.formatter.isEmpty || this.formatter.isFull);
+    validate(event) {
+        if (this.props.onValidate) {
+            return this.props.onValidate(event);
         } else {
             return true;
+        }
+    }
+
+    handleValidate(event) {
+        let r = this.props.required ? '' + this.props.required : '';
+        if (this.formatter) {
+            if (r.startsWith('al')) {
+                return this.formatter.isFull ? this.validate(event) : false;
+            } else if (r.startsWith('en')) {
+                if (this.formatter.isEmpty) {
+                    return true;
+                } else if (this.formatter.isFull) {
+                    return this.validate(event);
+                } else {
+                    return false
+                }
+            } else {
+                return true;
+            }
+        } else {
+            if (r.startsWith('al') || r.startsWith('en')) {
+                return this.validate(event);
+            } else {
+                return true;
+            }
+
         }
     }
 
@@ -63,13 +90,6 @@ class Mask extends React.PureComponent {
             handleMask = this.props.onMask;
         } else if (this.formatter) {
             handleMask = this.formatter.parse;
-        }
-
-        let handleValidate = null;
-        if  (this.props.onValidate) {
-           handleValidate = this.props.onValidate;
-        } else if (this.formatter) {
-           handleValidate = this.handleValidate;
         }
 
         return (
@@ -90,7 +110,7 @@ class Mask extends React.PureComponent {
                 onKeyDown={this.props.onKeyDown}
                 onClick={this.props.onClick}
                 onChange={this.props.onChange}
-                onValidate={handleValidate}
+                onValidate={this.handleValidate}
                 onValidChange={this.props.onValidChange}
                 onFocus={this.props.onFocus}
                 onBlur={this.props.onBlur}

@@ -72,8 +72,9 @@ class Modal extends React.PureComponent {
             let container = this.containerRef.current;
             let content = this.contentRef.current;
             if (this.props.nested) {
-                let prev = container.parentElement;
-                let rect = prev.getBoundingClientRect();
+                let par = container.parentElement;
+                let rect = par.getBoundingClientRect();
+                console.log(rect);
                 container.style.width = rect.width + "px";
             }
             let sh = window.innerHeight;

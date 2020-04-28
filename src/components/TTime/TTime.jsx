@@ -86,6 +86,7 @@ class TTime extends React.PureComponent {
                 empty={this.props.empty}
                 required={this.props.required}
                 readOnly={this.props.readOnly}
+                nestedIcon={this.props.nestedIcon}
                 onValidate={this.handleValidate}
                 onIcon={this.props.onIcon}
                 onChange={this.handleChange} />
@@ -137,6 +138,8 @@ TTime.propTypes = {
     ]),
     /** Icon name to show. Default is undefined and icon is hidden */
     icon: PropTypes.string,
+    /** Determines icon location in or out of the editor box */
+    nestedIcon: PropTypes.any,
     /** Represents timeout for "onChange" event in milliseconds. Default is "700" */
     timeout: PropTypes.number,
     /** Time format: */
@@ -193,7 +196,8 @@ TTime.defaultProps = {
     empty: null,
     readOnly: false,
     layout: 'left',
-    timeout: 300
+    timeout: 300,
+    nestedIcon: false
 };
 
 export default TTime;

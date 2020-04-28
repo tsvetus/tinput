@@ -126,6 +126,8 @@ TSearch.propTypes = {
     readOnly: PropTypes.any,
     /** If "true" drop up/down indicator is shown */
     showIcon: PropTypes.any,
+    /** Determines icon location in or out of the editor box */
+    nestedIcon: PropTypes.any,
     /** Minimal number of characters entered in editor required for "onSearch" event to be called */
     chars: PropTypes.number,
     /** Determines what part of "item" should be shown in dropdown list */
@@ -181,7 +183,8 @@ TSearch.defaultProps = {
     valueField: ['value', 'name'],
     timeout: 500,
     readOnly: false,
-    modal: false
+    modal: false,
+    nestedIcon: false
 };
 
 export default TSearch;

@@ -121,8 +121,6 @@ export default {
             justifyContent: "space-between",
             position: "relative",
             margin: "auto",
-            // top: "50%",
-            // transform: "translateY(-50%)",
             zIndex: "11",
             cursor: "default"
         },

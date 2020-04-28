@@ -164,6 +164,8 @@ TListBox.propTypes = {
     readOnly: PropTypes.any,
     /** If "true" drop up/down indicator is shown */
     showIcon: PropTypes.any,
+    /** Determines icon location in or out of the editor box */
+    nestedIcon: PropTypes.any,
     /** If "true" drop up/down editor is shown */
     showEdit: PropTypes.any,
     /** List of dropdown items */
@@ -230,7 +232,8 @@ TListBox.defaultProps = {
     keyField: ['key', 'id'],
     valueField: ['value', 'name'],
     modal: false,
-    fitHeight: true
+    fitHeight: true,
+    nestedIcon: false
 };
 
 export default TListBox;

@@ -266,7 +266,7 @@ Text.propTypes = {
 Text.defaultProps = {
     required: 'always',
     showEdit: true,
-    nestedIcon: true
+    nestedIcon: false
 };
 
 export default Text;
