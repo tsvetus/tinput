@@ -1027,6 +1027,12 @@
           "description": "Icon name to show. Default is undefined and icon is hidden",
           "required": false
         },
+        "nestedIcon": {
+          "type": "any",
+          "description": "Determines icon location in or out of the editor box",
+          "required": false,
+          "defaultValue": "false"
+        },
         "timeout": {
           "type": "number",
           "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
@@ -1292,6 +1298,12 @@
           "type": "string",
           "description": "Icon name to show. Default is undefined and icon is hidden",
           "required": false
+        },
+        "nestedIcon": {
+          "type": "any",
+          "description": "Determines icon location in or out of the editor box",
+          "required": false,
+          "defaultValue": "false"
         },
         "timeout": {
           "type": "number",
@@ -1566,6 +1578,12 @@
           "description": "If \"true\" drop up/down indicator is shown",
           "required": false,
           "defaultValue": "true"
+        },
+        "nestedIcon": {
+          "type": "any",
+          "description": "Determines icon location in or out of the editor box",
+          "required": false,
+          "defaultValue": "false"
         },
         "showEdit": {
           "type": "any",
@@ -1870,6 +1888,12 @@
           "description": "If \"true\" drop up/down indicator is shown",
           "required": false,
           "defaultValue": "true"
+        },
+        "nestedIcon": {
+          "type": "any",
+          "description": "Determines icon location in or out of the editor box",
+          "required": false,
+          "defaultValue": "false"
         },
         "chars": {
           "type": "number",

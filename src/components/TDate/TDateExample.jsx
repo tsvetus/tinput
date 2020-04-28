@@ -77,6 +77,7 @@ class TDateExample extends React.Component {
             name={'myDateEdit'}
             value={this.state.date}
             label={'Enter valid date:'}
+            required={'always'}
             format={{
               mask: 'DD/MM/YYYY',
               empty: '_',
@@ -106,6 +107,32 @@ class TDateExample extends React.Component {
                 type: 'iso'
               }}
               calendar={true}
+              onChange={this.change}/>
+
+          <TDate
+              style={{
+                container: {
+                  width: "280px",
+                  margin: "8px 0 8px 0"
+                },
+                calendar: {
+                  container: {
+                    padding: "8px",
+                    margin: "8px 0 0 0",
+                    border: "1px solid " + templates.colors.border
+                  }
+                }
+              }}
+              name={'nested'}
+              nestedIcon={true}
+              value={this.state.nested}
+              label={'Pickup date:'}
+              format={{
+                type: 'iso'
+              }}
+              calendar={true}
+              navigators={'month'}
+              start={1}
               onChange={this.change}/>
 
         </TGroup>

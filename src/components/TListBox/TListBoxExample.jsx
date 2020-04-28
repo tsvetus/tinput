@@ -92,6 +92,26 @@ class TListBoxExample extends React.Component {
               caption={'List items'}
               onChange={this.change}/>
 
+          <TListBox
+              style={{
+                container: {
+                  width: "380px",
+                  margin: "8px 0 8px 0"
+                }
+              }}
+              name={'myListBox'}
+              empty={{id: 0, name: '-'}}
+              items={ITEMS}
+              keyField={'id'}
+              valueField={'name'}
+              value={this.state.value}
+              placeholder={'Select item from list ...'}
+              showMode={'value'}
+              listMode={'key value'}
+              label={'Choose item:'}
+              nestedIcon={true}
+              onChange={this.change}/>
+
         </TGroup>
 
         <TMemo

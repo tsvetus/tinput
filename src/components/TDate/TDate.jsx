@@ -141,6 +141,7 @@ class TDate extends React.PureComponent {
                 required={this.props.required}
                 changeStyle={this.props.changeStyle}
                 children={calendar}
+                nestedIcon={this.props.nestedIcon}
                 onValidate={this.handleValidate}
                 onIcon={this.handleIconClick}
                 onChange={this.handleChange}

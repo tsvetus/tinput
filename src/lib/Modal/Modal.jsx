@@ -34,7 +34,6 @@ class Modal extends React.PureComponent {
 
     componentDidMount() {
         this.mounted = true;
-        this.position();
         this.setTimer();
         document.addEventListener('keydown', this.handleKeyDown);
         this.setShow();
@@ -71,12 +70,6 @@ class Modal extends React.PureComponent {
         if (this.containerRef.current && this.props.show) {
             let container = this.containerRef.current;
             let content = this.contentRef.current;
-            if (this.props.nested) {
-                let par = container.parentElement;
-                let rect = par.getBoundingClientRect();
-                console.log(rect);
-                container.style.width = rect.width + "px";
-            }
             let sh = window.innerHeight;
             let rect = container.getBoundingClientRect();
             let ch = rect.height;
@@ -99,10 +92,7 @@ class Modal extends React.PureComponent {
             contain(style)
         );
         this.showing = replace(this.showing, 'transition', this.props.transition);
-        this.style = merge(
-            this.showing,
-            styles.TModal.hidden
-        );
+        this.style = merge(this.showing, styles.TModal.hidden);
     }
 
     setShow() {
@@ -111,6 +101,7 @@ class Modal extends React.PureComponent {
                 if (this.props.show) {
                     apply(this.style.screen, this.showing.screen, this.screenRef.current.style);
                     apply(this.style.container, this.showing.container, this.containerRef.current.style);
+                    this.position();
                 } else {
                     apply(this.showing.screen, this.style.screen, this.screenRef.current.style);
                     apply(this.showing.container, this.style.container, this.containerRef.current.style);
@@ -240,7 +231,6 @@ Modal.propTypes = {
     transition: PropTypes.number,
     footerContent: PropTypes.any,
     fitHeight: PropTypes.any,
-    nested: PropTypes.any,
     onClose: PropTypes.func.isRequired
 };
 

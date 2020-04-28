@@ -95,6 +95,27 @@ class TSearchExample extends React.Component {
             onChange={this.change}
           />
 
+          <TSearch
+              style={{
+                container: {
+                  width: "380px",
+                  margin: "8px 0 8px 0"
+                }
+              }}
+              name={'mySearch2'}
+              value={this.state.mySearch2}
+              label={'Choose item:'}
+              placeholder={'Type word "item" or "key"'}
+              keyField={'code'}
+              valueField={'name'}
+              showMode={'key value'}
+              listMode={'key value'}
+              empty={{code: 0, name: '-'}}
+              nestedIcon={true}
+              onSearch={this.search}
+              onChange={this.change}
+          />
+
         </TGroup>
 
         <TMemo

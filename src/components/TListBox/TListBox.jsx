@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {ListBox} from '../../lib';
+import {ListBox, Text} from '../../lib';
 
 import {merge, contain, Provider} from '../../util';
 
@@ -100,6 +100,7 @@ class TListBox extends React.Component {
                 modal={this.props.modal}
                 caption={this.props.caption}
                 fitHeight={this.props.fitHeight}
+                nestedIcon={this.props.nestedIcon}
                 onChange={this.props.onChange}
                 onValidate={this.props.onValidate} />
         );

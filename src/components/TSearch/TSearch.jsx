@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {ListBox} from '../../lib';
+import {ListBox, Text} from '../../lib';
 
 import {merge, contain} from '../../util';
 
@@ -49,6 +49,7 @@ class TSearch extends React.PureComponent {
                 keyField={this.props.keyField}
                 valueField={this.props.valueField}
                 readOnly={this.props.readOnly}
+                nestedIcon={this.props.nestedIcon}
                 showEdit={true}
                 clickable={this.props.clickable}
                 onSearch={this.search} />

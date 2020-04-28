@@ -42,15 +42,30 @@ class TTimeExample extends React.Component {
         }}&gt;
 
           &lt;TTime
+              style={{
+                container: {
+                  width: "180px",
+                  margin: "8px 0 8px 0"
+                }
+              }}
+              name={'simpleTimeEdit'}
+              value={this.state.value}
+              label={'Enter time:'}
+              nestedIcon={true}
+              required={'never'}
+              onChange={this.change}/&gt;
+
+          &lt;TTime
             style={{
               container: {
-                width: "280px",
+                width: "260px",
                 margin: "8px 0 8px 0"
               }
             }}
             name={'myTimeEdit'}
             value={this.state.value}
             label={'Enter valid time:'}
+            required={'always'}
             format={{
               mask: 'hh:mm',
               empty: '_',
@@ -60,6 +75,21 @@ class TTimeExample extends React.Component {
             icon={'add'}
             onIcon={this.onIcon}
             onChange={this.change}/&gt;
+
+          &lt;TTime
+              style={{
+                container: {
+                  width: "200px",
+                  margin: "8px 0 8px 0"
+                }
+              }}
+              name={'anotherTimeEdit'}
+              value={this.state.value}
+              label={'Enter time:'}
+              nestedIcon={true}
+              icon={'calendar'}
+              onIcon={this.onIcon}
+              onChange={this.change}/&gt;
 
         &lt;/TGroup&gt;
 
