@@ -5,20 +5,24 @@ import {Mask, Icon} from '../../lib';
 
 import {merge, apply, compare, clone} from '../../util';
 
+function copyStyle(style) {
+    return {
+        icon: {
+            container: {
+                border: style.edit.border,
+                borderRadius: style.edit.borderRadius,
+                backgroundColor: style.edit.backgroundColor
+            }
+        }
+    }
+}
+
 function parseStyle(props) {
     let v = props.style ? clone(props.style) : {};
     let i = merge(v, v.invalid);
     if (props.icon && props.nestedIcon) {
-        v = merge(
-            v,
-            {icon: {container: {border: v.edit.border, backgroundColor: v.edit.backgroundColor}}},
-            v.nested
-        );
-        i = merge(
-            i,
-            {icon: {container: {border: i.edit.border, backgroundColor: i.edit.backgroundColor}}},
-            i.nested
-        );
+        v = merge(v, copyStyle(v), v.nested);
+        i = merge(i, copyStyle(i), i.nested);
     }
     return {
         v: v,
@@ -79,14 +83,12 @@ class Text extends React.PureComponent {
 
     updateStyle() {
         if (this.mounted && this.props.icon && this.props.nestedIcon) {
-            let rect = this.container.current.getBoundingClientRect();
+            let rect = this.frame.current.getBoundingClientRect();
             let style = {
                 icon: {
                     container: {
                         width: rect.height + "px",
-                        height: rect.height + "px",
-                        margin: "0",
-                        padding: "4px"
+                        height: rect.height + "px"
                     }
                 }
             };

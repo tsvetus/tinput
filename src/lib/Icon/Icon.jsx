@@ -5,7 +5,7 @@ import {merge, contain, apply} from '../../util';
 
 import icons from './icons.js';
 
-import {styles, templates} from '../../styles';
+import {styles} from '../../styles';
 
 class Icon extends React.PureComponent {
 

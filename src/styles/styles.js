@@ -178,12 +178,18 @@ export default function defaultStyles(template) {
             nested: {
 
                 edit: {
-                    borderRight: "none"
+                    borderRight: "none",
+                    borderTopRightRadius: "0",
+                    borderBottomRightRadius: "0"
                 },
 
                 icon: {
                     container: {
-                        borderLeft: "none"
+                        borderLeft: "none",
+                        borderTopLeftRadius: "0",
+                        borderBottomLeftRadius: "0",
+                        margin: "0",
+                        padding: "4px"
                     }
                 }
 
@@ -196,7 +202,6 @@ export default function defaultStyles(template) {
             list: {
 
                 container: {
-//                    backgroundColor: template.colors.window,
                     boxSizing: "border-box"
                 },
 
@@ -592,6 +597,9 @@ export default function defaultStyles(template) {
 
             calendar: {
                 container: {
+                    padding: "8px",
+                    margin: "-1px 0 0 0",
+                    border: "1px solid " + template.colors.border,
                     backgroundColor: template.colors.window
                 }
             }
