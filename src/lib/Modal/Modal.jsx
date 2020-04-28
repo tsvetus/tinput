@@ -18,6 +18,9 @@ class Modal extends React.PureComponent {
             countdown: 0,
             height: 0
         };
+        this.screenRef = React.createRef();
+        this.containerRef = React.createRef();
+        this.contentRef = React.createRef();
         this.close = this.close.bind(this);
         this.setTimer = this.setTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
@@ -27,9 +30,6 @@ class Modal extends React.PureComponent {
         this.setShow = this.setShow.bind(this);
         this.position = this.position.bind(this);
         this.setStyle(props.style);
-        this.screenRef = React.createRef();
-        this.containerRef = React.createRef();
-        this.contentRef = React.createRef();
     }
 
     componentDidMount() {
@@ -69,18 +69,25 @@ class Modal extends React.PureComponent {
 
     position() {
         if (this.containerRef.current && this.props.show) {
+            let container = this.containerRef.current;
+            let content = this.contentRef.current;
+            if (this.props.nested) {
+                let prev = container.parentElement;
+                let rect = prev.getBoundingClientRect();
+                container.style.width = rect.width + "px";
+            }
             let sh = window.innerHeight;
-            let rect = this.containerRef.current.getBoundingClientRect();
+            let rect = container.getBoundingClientRect();
             let ch = rect.height;
             let top = 8;
             if (ch < sh) {
                 top = Math.ceil((sh -16 - ch)/2);
             } else if (this.props.fitHeight) {
-                this.containerRef.current.style.height = sh - 16 + "px";
-                this.contentRef.current.style.height = "100%";
-                this.contentRef.current.style.overflowY = "auto";
+                container.style.height = sh - 16 + "px";
+                content.style.height = "100%";
+                content.style.overflowY = "auto";
             }
-            this.containerRef.current.style.top = top + "px";
+            container.style.top = top + "px";
         }
     }
 
@@ -178,7 +185,6 @@ class Modal extends React.PureComponent {
             header =
                 <div style={style.header}>
                     {countdown ? <div style={style.timer}>{countdown}</div> : <div></div>}
-                    {/*<div style={style.caption} dangerouslySetInnerHTML={{__html: this.props.caption}}></div>*/}
                     <div style={style.caption}>{this.props.caption}</div>
                     <Icon style={contain(style.close)} name={ICON_CLOSE} onClick={this.handleCancel} />
                 </div>
@@ -233,6 +239,7 @@ Modal.propTypes = {
     transition: PropTypes.number,
     footerContent: PropTypes.any,
     fitHeight: PropTypes.any,
+    nested: PropTypes.any,
     onClose: PropTypes.func.isRequired
 };
 

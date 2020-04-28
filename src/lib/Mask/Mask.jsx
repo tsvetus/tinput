@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Edit from '../Edit';
 
-import {Format} from '../../util';
+import {Format, compare} from '../../util';
 
 function createFormatter(props) {
     if (props.format && !props.onMask) {
@@ -34,7 +34,7 @@ class Mask extends React.PureComponent {
     }
 
     componentDidUpdate(old) {
-        if (old.format !== this.props.format && this.formatter) {
+        if (this.formatter && !compare(old.format, this.props.format)) {
             if (this.formatter) {
                 delete this.formatter;
                 this.formatter = createFormatter(this.props);
@@ -48,21 +48,9 @@ class Mask extends React.PureComponent {
         }
     }
 
-    handleValidate(event) {
-        if (this.props.onValidate) {
-            if (this.formatter) {
-                return this.props.onValidate({
-                    ...event,
-                    empty: this.formatter.isEmpty(),
-                    full: this.formatter.isFull()
-                });
-            } else {
-                return this.props.onValidate({
-                    ...event,
-                    empty: false,
-                    full: true
-                });
-            }
+    handleValidate() {
+        if (this.formatter) {
+            return (this.formatter.isEmpty || this.formatter.isFull);
         } else {
             return true;
         }
@@ -77,15 +65,19 @@ class Mask extends React.PureComponent {
             handleMask = this.formatter.parse;
         }
 
-        let handleValidate = this.props.onValidate ? this.props.onValidate : null;
+        let handleValidate = null;
+        if  (this.props.onValidate) {
+           handleValidate = this.props.onValidate;
+        } else if (this.formatter) {
+           handleValidate = this.handleValidate;
+        }
 
         return (
 
             <Edit
                 ref={this.editor}
                 simple={this.props.simple}
-                vStyle={this.props.vStyle}
-                iStyle={this.props.iStyle}
+                style={this.props.style}
                 value={this.props.value}
                 name={this.props.name}
                 data={this.props.data}
@@ -99,6 +91,7 @@ class Mask extends React.PureComponent {
                 onClick={this.props.onClick}
                 onChange={this.props.onChange}
                 onValidate={handleValidate}
+                onValidChange={this.props.onValidChange}
                 onFocus={this.props.onFocus}
                 onBlur={this.props.onBlur}
                 onMask={handleMask}
@@ -112,8 +105,7 @@ class Mask extends React.PureComponent {
 
 Mask.propTypes = {
     simple: PropTypes.any,
-    vStyle: PropTypes.object,
-    iStyle: PropTypes.object,
+    style: PropTypes.object,
     value: PropTypes.string,
     name: PropTypes.string,
     data: PropTypes.any,
@@ -129,6 +121,7 @@ Mask.propTypes = {
     onChange: PropTypes.func,
     onMask: PropTypes.func,
     onValidate: PropTypes.func,
+    onValidChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onStyle: PropTypes.func,

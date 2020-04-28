@@ -28,6 +28,13 @@ class Edit extends React.PureComponent {
     constructor(props, context) {
         super(props, context);
         this.ref = React.createRef();
+        this.value = props.value === undefined ? null : props.value;
+        this.caret = 0;
+        this.valid = true;
+        this.full = true;
+        this.empty = false;
+        this.style = props.style;
+        this.required = parseReq(props.required);
         this.handleChange = this.handleChange.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -43,29 +50,21 @@ class Edit extends React.PureComponent {
         this.setCaret = this.setCaret.bind(this);
         this.showPlaceholder = this.showPlaceholder.bind(this);
         this.hidePlaceholder = this.hidePlaceholder.bind(this);
-        this.updateStyle = this.updateStyle.bind(this);
         this.sendValue = this.sendValue.bind(this);
         this.setValue = this.setValue.bind(this);
         this.validate = this.validate.bind(this);
         this.parseValue = this.parseValue.bind(this);
         this.blur = this.blur.bind(this);
-        this.vStyle = clone(props.vStyle);
-        this.iStyle = merge(props.vStyle, props.iStyle);
-        this.value = props.value === undefined ? null : props.value;
-        this.caret = 0;
-        this.valid = true;
-        this.full = true;
-        this.empty = false;
-        this.required = parseReq(props.required);
+        this.updateStyle = this.updateStyle.bind(this);
     }
 
     componentDidMount() {
         this.mounted = true;
         this.validate(this.value);
-        this.updateStyle();
         this.setText(this.value);
         this.setCaret(this.caret);
         this.showPlaceholder();
+        this.updateStyle(this.style);
         this.ref.current.addEventListener('input', this.handleChange);
         this.ref.current.addEventListener('click', this.handleClick);
         this.ref.current.addEventListener('keypress', this.handleKeyPress);
@@ -87,23 +86,15 @@ class Edit extends React.PureComponent {
     }
 
     componentDidUpdate(old) {
-
-        if (!compare(old.vStyle, this.props.vStyle) || !compare(old.iStyle, this.props.iStyle)) {
-            this.vStyle = clone(this.props.vStyle);
-            this.iStyle = merge(this.props.vStyle, this.props.iStyle);
-            this.updateStyle();
-        }
-
         if (this.value !== this.props.value && (this.props.readOnly || this.ref.current !== document.activeElement)) {
             this.setValue(this.props.value);
         }
-
         if (old.required !== this.props.required) {
             this.required = parseReq(this.props.required);
         }
-
-        this.updateStyle();
-
+        if (old.style !== this.props.style) {
+            this.updateStyle(this.props.style);
+        }
     }
 
     blur() {
@@ -113,7 +104,6 @@ class Edit extends React.PureComponent {
     setValue(value) {
         this.value = value === undefined ? null : value;
         this.validate(this.value);
-        this.updateStyle();
         this.setText(this.value);
         if (!this.props.wrap) {
             this.setCaret(this.caret);
@@ -162,37 +152,16 @@ class Edit extends React.PureComponent {
             });
         }
 
+        if (valid !== this.valid && this.props.onValidChange) {
+            this.props.onValidChange({valid: valid});
+        }
+
         return {
             valid: valid,
             value: query.value,
             caret: query.caret,
             full: query.full,
             empty: query.empty
-        }
-
-    }
-
-    updateStyle() {
-
-        if (this.mounted) {
-
-            let valid = true;
-            if (this.required === 'al') {
-                valid = this.valid && this.full;
-            } else if (this.required === 'en') {
-                valid = (this.valid && this.full) || this.empty;
-            }
-
-            if (valid) {
-                apply(this.iStyle,  this.vStyle,  this.ref.current.style);
-            } else {
-                apply(this.vStyle,  this.iStyle,  this.ref.current.style);
-            }
-
-            if (this.props.onStyle) {
-                this.props.onStyle({valid: valid});
-            }
-
         }
 
     }
@@ -359,8 +328,6 @@ class Edit extends React.PureComponent {
             this.empty = res.empty;
             this.full = res.full;
 
-            this.updateStyle();
-
         }
 
     }
@@ -421,6 +388,13 @@ class Edit extends React.PureComponent {
         this.ref.current.contentEditable = false;
     }
 
+    updateStyle(style) {
+        if (this.ref.current) {
+            apply(this.style, style, this.ref.current.style);
+            this.style = style;
+        }
+    }
+
     render () {
 
         return (
@@ -436,8 +410,7 @@ class Edit extends React.PureComponent {
 
 Edit.propTypes = {
     simple: PropTypes.any,
-    vStyle: PropTypes.object,
-    iStyle: PropTypes.object,
+    style: PropTypes.object,
     value: PropTypes.string,
     name: PropTypes.string,
     data: PropTypes.any,
@@ -454,6 +427,7 @@ Edit.propTypes = {
     onMask: PropTypes.func,
     onKeyDown: PropTypes.func,
     onValidate: PropTypes.func,
+    onValidChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onInput: PropTypes.func,

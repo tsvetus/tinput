@@ -53,8 +53,7 @@ class TMemo extends React.PureComponent {
                     {icon}
                 </div>
                 <Edit
-                    vStyle={style.edit}
-                    iStyle={style.edit}
+                    style={style.edit}
                     simple={true}
                     value={this.props.value}
                     wrap={this.props.wrap}

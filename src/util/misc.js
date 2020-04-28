@@ -10,12 +10,15 @@ export function merge(...sources) {
             source.forEach((v, i) => {res[i] = v});
         } else if (source instanceof Object) {
             for (let [key, value] of Object.entries(source)) {
+                let r = null;
                 if (value instanceof Object && key in res) {
-                    value = merge(res[key], value)
+                    r = {[key]: merge(res[key], value)}
+                } else {
+                    r = {[key]: value};
                 }
                 res = {
                     ...res,
-                    [key]: value
+                    ...r
                 }
             }
         }
