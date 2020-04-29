@@ -25,7 +25,7 @@ function parseStyle(props, state) {
     return style;
 }
 
-class Icon extends React.PureComponent {
+class Icon extends React.Component {
 
     constructor(props, context) {
         super(props, context);
@@ -47,7 +47,10 @@ class Icon extends React.PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!compare(prevProps.style, this.props.style) || prevState.wait !== this.state.wait) {
+        if (!compare(prevProps.style, this.props.style) ||
+            prevState.icon !== this.props.icon ||
+            prevState.name !== this.props.name ||
+            prevState.wait !== this.state.wait) {
             this.updateStyle(parseStyle(this.props, this.state));
         }
         if (prevState.wait !== this.props.wait) {

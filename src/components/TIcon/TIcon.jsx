@@ -8,7 +8,7 @@ import {merge, contain} from '../../util';
 import {styles} from '../../styles';
 
 /** Clickable icon */
-class TIcon extends React.PureComponent {
+class TIcon extends React.Component {
 
     render () {
 
