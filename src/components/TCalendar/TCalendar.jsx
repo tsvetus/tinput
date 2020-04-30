@@ -38,8 +38,8 @@ function calcDates(props) {
 
 function calcState(props) {
     let st = {};
-    st.current = clearDate(props.current ? props.current : new Date());
     st.dates = calcDates(props);
+    st.current = clearDate(st.dates.length > 0 ? st.dates[0] : new Date());
     st.start = props.start > 0 && props.start < 7 ? props.start : 0;
     st.finish = st.start === 0 ? 6 : st.start - 1;
     st.year = props.year >= 0 ? props.year : st.current.getFullYear();
