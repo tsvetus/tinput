@@ -77,6 +77,11 @@ class TTop extends React.PureComponent {
                     if (v.onClick) {
                         st = merge(st, style.clickable);
                     }
+                    let rotateTime = v.rotateTime;
+                    if (v.rotate) {
+                        st = merge(st, style.rotate);
+                        rotateTime = rotateTime ? rotateTime : 700;
+                    }
                     if (typeof v.icon === 'string') {
                         tools.push(
                             <Icon
@@ -84,7 +89,7 @@ class TTop extends React.PureComponent {
                                 name={v.icon}
                                 onClick={this.iconClick}
                                 style={st}
-                                rotateTime={v.rotateTime} />);
+                                rotateTime={rotateTime} />);
                     } else if (React.isValidElement(v.icon)) {
                         tools.push(v.icon);
                     }

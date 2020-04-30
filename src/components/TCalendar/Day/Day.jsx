@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge} from '../../../util';
+import {merge, isoDate} from '../../../util';
 
 class Day extends React.PureComponent {
 
@@ -28,7 +28,7 @@ class Day extends React.PureComponent {
             if (this.props.params.selected) {
                 cs = merge(cs, style.selected);
             }
-            if (this.props.params.current) {
+            if (isoDate(this.props.data) === isoDate(new Date())) {
                 cs = merge(cs, style.current);
             }
         }

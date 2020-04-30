@@ -153,21 +153,6 @@ export function post(params) {
         wait = false;
     }
 
-    let xhr = new XMLHttpRequest();
-
-    xhr.open(
-        params.method ? params.method : 'POST',
-        ENDPOINT + params.url,
-        params.async !== undefined ? params.async : true
-    );
-
-    xhr.setRequestHeader(
-        'Content-Type',
-        (params.contentType ? params.contentType : 'application/json') + '; charset=UTF-8'
-    );
-
-    xhr.withCredentials = true;
-
     if (params.sender && params.sender.state) {
         if (wait && params.sender.state.wait) {
             return;
@@ -176,7 +161,26 @@ export function post(params) {
         }
     }
 
-    xhr.send(JSON.stringify(params.data));
+    let xhr = new XMLHttpRequest();
+
+    xhr.open(
+        params.method ? params.method : 'POST',
+        ENDPOINT + params.url
+    );
+
+    xhr.withCredentials = true;
+
+    let contentType = params.contentType ? params.contentType : 'application/json; charset=UTF-8';
+
+    if (contentType.indexOf('application/json') >= 0) {
+        xhr.setRequestHeader(
+            'Content-Type',
+            contentType
+        );
+        xhr.send(JSON.stringify(params.data));
+    } else {
+        xhr.send(params.data);
+    }
 
     xhr.onreadystatechange = function() {
 

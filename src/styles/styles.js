@@ -485,6 +485,10 @@ export default function defaultStyles(templates) {
 
             clickable: {
                 cursor: "pointer"
+            },
+
+            rotate: {
+                color: templates.colors.signal
             }
 
         },
