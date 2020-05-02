@@ -42,6 +42,7 @@ class TSearch extends React.PureComponent {
                 placeholder={this.props.placeholder}
                 listMode={this.props.listMode}
                 showMode={this.props.showMode}
+                modal={this.props.modal}
                 onChange={this.props.onChange}
                 value={this.props.value}
                 chars={this.props.chars}
