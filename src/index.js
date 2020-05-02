@@ -64,6 +64,7 @@ import {
     Provider,
 
     post,
+    get,
     request,
     login,
     logout,
@@ -141,6 +142,7 @@ export {
     Provider,
 
     post,
+    get,
     request,
     login,
     logout,

@@ -29,6 +29,8 @@ class Modal extends React.PureComponent {
         this.setStyle = this.setStyle.bind(this);
         this.setShow = this.setShow.bind(this);
         this.position = this.position.bind(this);
+        this.screenClick = this.screenClick.bind(this);
+        this.containerClick = this.containerClick.bind(this);
         this.setStyle(props.style);
         this.event = new CustomEvent('showModal',{});
     }
@@ -169,50 +171,62 @@ class Modal extends React.PureComponent {
         }
     }
 
+    screenClick() {
+        if (this.props.show && this.props.outerClick) {
+            this.close()
+        }
+    }
+
+    containerClick(event) {
+        if (this.props.show && this.props.outerClick) {
+            event.stopPropagation()
+        }
+    }
+
     render () {
 
         let style = merge(this.style, {screen: {display: this.state.show ? 'block' : 'none'}});
 
         let countdown = this.state.countdown > 0 ? this.state.countdown : null;
 
-        let header = null;
-        if (this.props.showHeader) {
-            header =
-                <div style={style.header}>
-                    {countdown ? <div style={style.timer}>{countdown}</div> : <div></div>}
-                    <div style={style.caption}>{this.props.caption}</div>
-                    <Icon style={contain(style.close)} name={ICON_CLOSE} onClick={this.handleCancel} />
-                </div>
-        }
+        let header = this.props.showHeader ?
+            <div style={style.header}>
+                {countdown ? <div style={style.timer}>{countdown}</div> : <div></div>}
+                <div style={style.caption}>{this.props.caption}</div>
+                <Icon style={contain(style.close)} name={ICON_CLOSE} onClick={this.handleCancel} />
+            </div> : null;
 
-        let containerStyle = style.container;
+        let title = this.props.titleContent ?
+            <div
+                style={style.title}>
+                {this.props.titleContent}
+            </div> : null;
+
+        let content = this.props.children ?
+            <div
+                style={style.content}
+                ref={this.contentRef}>
+                {this.props.children}
+            </div> : null;
+
+        let footer = this.props.footerContent ?
+            <div style={style.footer}>
+                {this.props.footerContent}
+            </div> : null;
 
         return (
             <div
                 style={style.screen}
                 ref={this.screenRef}
-                onClick={() => {
-                    if (this.props.show && this.props.outerClick) {
-                        this.close()
-                    }
-                }}>
+                onClick={this.screenClick}>
                 <div
-                    style={containerStyle}
+                    style={style.container}
                     ref={this.containerRef}
-                    onClick={(e) => {
-                        if (this.props.show && this.props.outerClick) {
-                            e.stopPropagation()
-                        }
-                    }}>
+                    onClick={this.containerClick}>
                     {header}
-                    <div
-                        style={style.content}
-                        ref={this.contentRef}>
-                        {this.props.children}
-                    </div>
-                    <div style={style.footer}>
-                        {this.props.footerContent}
-                    </div>
+                    {title}
+                    {content}
+                    {footer}
                 </div>
             </div>
         );
@@ -232,6 +246,7 @@ Modal.propTypes = {
     escape: PropTypes.any,
     outerClick: PropTypes.any,
     transition: PropTypes.number,
+    titleContent: PropTypes.any,
     footerContent: PropTypes.any,
     fitHeight: PropTypes.any,
     onClose: PropTypes.func.isRequired

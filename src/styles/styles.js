@@ -301,6 +301,11 @@ export default function defaultStyles(templates) {
                 ...templates.fonts.common
             },
 
+            title: {
+                boxSizing: "border-box",
+                width: "100%"
+            },
+
             close: {
                 margin: "0",
                 padding: "0",

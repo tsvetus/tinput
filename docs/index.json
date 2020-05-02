@@ -5284,6 +5284,11 @@
           "required": false,
           "defaultValue": "250"
         },
+        "titleContent": {
+          "type": "any",
+          "description": "Title content",
+          "required": false
+        },
         "footerContent": {
           "type": "any",
           "description": "Footer content",

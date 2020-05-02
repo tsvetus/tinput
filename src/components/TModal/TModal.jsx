@@ -22,6 +22,7 @@ class TModal extends React.PureComponent {
                 escape={this.props.escape}
                 outerClick={this.props.outerClick}
                 transition={this.props.transition}
+                titleContent={this.props.titleContent}
                 footerContent={this.props.footerContent}
                 fitHeight={this.props.fitHeight}
                 onClose={this.props.onClose}>
@@ -74,6 +75,8 @@ TModal.propTypes = {
     outerClick: PropTypes.any,
     /** Transition time in milliseconds */
     transition: PropTypes.number,
+    /** Title content */
+    titleContent: PropTypes.any,
     /** Footer content */
     footerContent: PropTypes.any,
     /**

@@ -283,6 +283,110 @@ export function request(params) {
     };
 }
 
+// export function get(params) {
+// 	let xhr = new XMLHttpRequest();
+// 	xhr.open('GET', params.url, true);
+// 	xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
+//     xhr.withCredentials = true;
+// 	xhr.send(JSON.stringify(params.data));
+// 	xhr.onreadystatechange = function() {
+// 	    if (xhr.readyState !== 4) {
+// 		    return;
+// 	    }
+// 	    if (xhr.status !== 200) {
+// 	        if (params.fail) {
+// 	            params.fail(xhr.status, {message: xhr.statusText});
+// 	        }
+// 	    } else {
+// 	        if (params.success) {
+// 	            params.success(xhr.responseText);
+// 	        }
+// 	    }
+// 	};
+// }
+
+export function get(params) {
+
+    if (params.endpoint) {
+        ENDPOINT = params.endpoint;
+    }
+
+    if (!params.url) {
+        return;
+    }
+
+    let wait = params.wait === true || params.wait === undefined;
+    if (params.force) {
+        wait = false;
+    }
+
+    if (params.sender && params.sender.state) {
+        if (wait && params.sender.state.wait) {
+            return;
+        } else {
+            setState(params, {wait: true});
+        }
+    }
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET',ENDPOINT + params.url);
+
+    xhr.withCredentials = true;
+
+    xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
+    xhr.send(params.data);
+
+    xhr.onreadystatechange = function() {
+
+        let state = {wait: false};
+
+        if (params.sender && params.sender.mounted === false) {
+            return;
+        } else if (xhr.readyState !== 4) {
+            state.failed = true;
+            setState(params, state);
+            return;
+        }
+
+        if (xhr.status !== 200) {
+
+            state.error = xhr.statusText;
+            state.failed = true;
+
+            setState(params, state);
+
+            if (params.fail) {
+                params.fail(xhr.status, {message: xhr.statusText});
+            }
+
+        } else {
+
+            state.failed = false;
+
+            let response = xhr.responseText;
+
+            if (params.target) {
+                state[params.target] = response;
+            }
+
+            setState(params, state);
+
+            if (params.success) {
+                params.success(response);
+            }
+
+        }
+
+        if (params.default) {
+            params.default();
+        }
+
+    }
+
+}
+
+
 export function reducer(state = null, action = null) {
     if (action === null) {
         return state;

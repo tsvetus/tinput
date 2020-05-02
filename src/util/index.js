@@ -50,6 +50,7 @@ import {
 
 import {
     post,
+    get,
     request,
     login,
     logout,
@@ -105,6 +106,7 @@ export {
     REGEXP,
 
     post,
+    get,
     request,
     login,
     logout,
