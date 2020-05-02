@@ -283,6 +283,31 @@ export function request(params) {
     };
 }
 
+export function get(params) {
+//    console.log('REQUEST METHOD=POST, URL=' + params.url + ', DATA=' + JSON.stringify(params.data));
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', params.url, true);
+	xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
+    xhr.withCredentials = true;
+	xhr.send(JSON.stringify(params.data));
+	xhr.onreadystatechange = function() {
+	    if (xhr.readyState !== 4) {
+		    return;
+	    }
+	    if (xhr.status !== 200) {
+//	          console.log(xhr.status + ': ' + xhr.statusText);
+	        if (params.fail) {
+	            params.fail(xhr.status, {message: xhr.statusText});
+	        }
+	    } else {
+//            console.log('RESPONSE TEXT = ' + xhr.responseText);
+	        if (params.success) {
+	            params.success(xhr.responseText);
+	        }
+	    }
+	};
+}
+
 export function reducer(state = null, action = null) {
     if (action === null) {
         return state;
