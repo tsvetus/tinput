@@ -2769,6 +2769,18 @@
           "modifiers": [],
           "params": [],
           "returns": null
+        },
+        {
+          "name": "updateStyle",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "style",
+              "type": null
+            }
+          ],
+          "returns": null
         }
       ],
       "example": {
