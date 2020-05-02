@@ -408,7 +408,6 @@ export default function defaultStyles(templates) {
                 wait: {
                     fontWeight: "bold",
                     color: "#ddd",
-                    border: "1px solid #ddd",
                     cursor: "default"
                 },
 

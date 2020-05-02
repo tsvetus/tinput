@@ -35,27 +35,29 @@ class Icon extends React.Component {
         this.style = parseStyle(props, this.state);
         this.handleClick = this.handleClick.bind(this);
         this.updateStyle = this.updateStyle.bind(this);
+        this.handleShow = this.handleShow.bind(this);
     }
 
     componentDidMount() {
         this.mounted = true;
         this.updateStyle(this.style);
+        document.addEventListener('showModal', this.handleShow);
     }
 
     componentWillUnmount() {
         this.mounted = false;
+        document.removeEventListener('showModal', this.handleShow);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!compare(prevProps.style, this.props.style) ||
-            prevState.icon !== this.props.icon ||
-            prevState.name !== this.props.name ||
-            prevState.wait !== this.state.wait) {
-            this.updateStyle(parseStyle(this.props, this.state));
-        }
         if (prevState.wait !== this.props.wait) {
             this.setState({wait: this.props.wait});
         }
+        this.updateStyle(parseStyle(this.props, this.state));
+    }
+
+    handleShow() {
+        this.updateStyle(this.style);
     }
 
     updateStyle(style) {

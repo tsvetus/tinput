@@ -1,9 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, contain} from '../../util';
+import {merge, contain, apply} from '../../util';
 
 import {styles} from '../../styles';
+
+function getStyle(props, state) {
+
+    let style = merge(
+        styles.TButton,
+        contain(styles[props.name]),
+        contain(props.style)
+    );
+
+    let res = style.container;
+
+    if (state.pressed) {
+        res = merge(res, style.down);
+    } else if (props.down) {
+        res = merge(res, style.down);
+    }
+
+    if (props.wait || state.wait) {
+        res = merge(res, style.wait);
+    }
+
+    if (props.next) {
+        res.borderLeft = 'none'
+    }
+
+    return res;
+
+}
 
 /**
  * Clickable button with text caption
@@ -16,17 +44,25 @@ class TButton extends React.PureComponent {
             pressed: false,
             wait: false
         };
+        this.style = getStyle(props, this.state);
+        this.ref = React.createRef();
         this.handleClick = this.handleClick.bind(this);
         this.handleDown = this.handleDown.bind(this);
         this.handleUp = this.handleUp.bind(this);
+        this.updateStyle = this.updateStyle.bind(this);
     }
 
     componentDidMount() {
         this.mounted = true;
+        this.updateStyle(this.style);
     }
 
     componentWillUnmount() {
         this.mounted = false;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.updateStyle(getStyle(this.props, this.state));
     }
 
     handleClick() {
@@ -56,30 +92,17 @@ class TButton extends React.PureComponent {
         this.setState({pressed: false});
     }
 
+    updateStyle(style) {
+        if (this.ref.current) {
+            apply(this.style, style, this.ref.current.style);
+        }
+    }
+
     render () {
-
-        let style = merge(
-            styles.TButton,
-            contain(styles[this.props.name]),
-            contain(this.props.style)
-        );
-
-        let cst = style.container;
-        if (this.state.pressed) {
-            cst = merge(cst, style.down);
-        } else if (this.props.down) {
-            cst = merge(cst, style.down);
-        }
-        if (this.props.wait || this.state.wait) {
-            cst = merge(cst, style.wait);
-        }
-        if (this.props.next) {
-            cst.borderLeft = 'none'
-        }
 
         return (
             <div
-                style={cst}
+                ref={this.ref}
                 name={this.props.name}
                 onMouseDown={this.handleDown}
                 onMouseUp={this.handleUp}

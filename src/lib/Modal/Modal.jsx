@@ -30,6 +30,7 @@ class Modal extends React.PureComponent {
         this.setShow = this.setShow.bind(this);
         this.position = this.position.bind(this);
         this.setStyle(props.style);
+        this.event = new CustomEvent('showModal',{});
     }
 
     componentDidMount() {
@@ -64,6 +65,7 @@ class Modal extends React.PureComponent {
         this.mounted = false;
         this.containerRef.current.removeEventListener('resize', this.handleResize);
         this.stopTimer();
+        delete this.event;
     }
 
     position() {
@@ -99,6 +101,7 @@ class Modal extends React.PureComponent {
         setTimeout(() => {
             if (this.mounted) {
                 if (this.props.show) {
+                    document.dispatchEvent(this.event);
                     apply(this.style.screen, this.showing.screen, this.screenRef.current.style);
                     apply(this.style.container, this.showing.container, this.containerRef.current.style);
                     this.position();

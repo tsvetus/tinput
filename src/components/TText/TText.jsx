@@ -29,6 +29,7 @@ class TText extends React.PureComponent {
                 value={this.props.value}
                 label={this.props.label}
                 icon={this.props.icon}
+                nestedIcon={this.props.nestedIcon}
                 timeout={this.props.timeout}
                 placeholder={this.props.placeholder}
                 format={this.props.format}
@@ -82,6 +83,8 @@ TText.propTypes = {
     label: PropTypes.string,
     /** Icon name to show. Default is undefined and icon is hidden */
     icon: PropTypes.string,
+    /** Determines icon location in or out of the editor box */
+    nestedIcon: PropTypes.any,
     /** Represents timeout for "onChange" event in milliseconds. Default is "700" */
     timeout: PropTypes.number,
     /** Text to show when editor is empty */
@@ -154,7 +157,8 @@ TText.defaultProps = {
     empty: null,
     readOnly: false,
     layout: 'left',
-    timeout: 300
+    timeout: 300,
+    nestedIcon: false
 };
 
 TText.regexp = REGEXP;
