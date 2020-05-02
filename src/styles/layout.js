@@ -142,6 +142,10 @@ export default {
             flex: "1"
         },
 
+        button: {
+            boxSizing: "border-box"
+        },
+
         footer: {
             boxSizing: "border-box",
             display: "flex",

@@ -102,6 +102,24 @@ class TTextExample extends React.Component {
             }}
             onChange={this.change}/>
 
+            <TText
+                style={{
+                    container: {
+                        maxWidth: "440px",
+                        margin: "8px"
+                    },
+                    label: {width: "180px"},
+                }}
+                value={this.state.icon}
+                label={'TText with nested icon:'}
+                name={'icon'}
+                icon={'open'}
+                nestedIcon={true}
+                onChange={this.change}
+                onIcon={(event) => {
+                    alert('Icon ' + event.icon + ' clicked!')
+                }} />
+
         </TGroup>
 
         <TMemo

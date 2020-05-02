@@ -84,6 +84,12 @@
           "description": "Icon name to show. Default is undefined and icon is hidden",
           "required": false
         },
+        "nestedIcon": {
+          "type": "any",
+          "description": "Determines icon location in or out of the editor box",
+          "required": false,
+          "defaultValue": "false"
+        },
         "timeout": {
           "type": "number",
           "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
