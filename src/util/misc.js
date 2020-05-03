@@ -137,7 +137,7 @@ export function strip(source) {
 
 export function params(source) {
     let res = {};
-    let path = source ? source : window.location.pathname;
+    let path = source ? source : window.location.href;
     if (path) {
         let arr = path.split('?');
         if (arr.length > 1) {
