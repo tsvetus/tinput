@@ -275,10 +275,6 @@ export default function defaultStyles(templates) {
                 transitionDuration: "${transition}ms"
             },
 
-            screenHidden: {
-                backgroundColor: "rgba(0,0,0,0)"
-            },
-
             container: {
                 opacity: "1",
                 transitionProperty: "opacity",
@@ -290,10 +286,6 @@ export default function defaultStyles(templates) {
                 width: "55%",
                 padding: "4px",
                 boxSizing: "border-box"
-            },
-
-            containerHidden: {
-                opacity: "0"
             },
 
             header: {

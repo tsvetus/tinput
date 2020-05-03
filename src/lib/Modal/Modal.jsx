@@ -6,6 +6,19 @@ import {Icon} from '../../lib';
 
 import {styles} from '../../styles';
 
+function getStyle(props, show) {
+    let style = merge(
+        contain(styles.TModal),
+        contain(styles[props.name]),
+        contain(props.style)
+    );
+    style = replace(style,'transition', props.transition);
+    if (!show) {
+        style = merge(style, styles.TModal.hidden);
+    }
+    return style;
+}
+
 const ICON_CLOSE = 'close';
 
 class Modal extends React.PureComponent {
@@ -13,110 +26,103 @@ class Modal extends React.PureComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            show: this.props.show,
-            timer: null,
-            countdown: 0,
-            height: 0
-        };
+            show: false,
+            countdown: 0
+         };
+        this.style = getStyle(props, false);
+        this.event = new CustomEvent('showModal',{});
         this.screenRef = React.createRef();
         this.containerRef = React.createRef();
         this.contentRef = React.createRef();
-        this.close = this.close.bind(this);
-        this.setTimer = this.setTimer.bind(this);
-        this.stopTimer = this.stopTimer.bind(this);
-        this.handleCancel = this.handleCancel.bind(this);
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.setStyle = this.setStyle.bind(this);
-        this.setShow = this.setShow.bind(this);
+        this.stepCountdown = this.stepCountdown.bind(this);
+        this.startCountdown = this.startCountdown.bind(this);
+        this.stopCountdown = this.stopCountdown.bind(this);
+        this.showModal = this.showModal.bind(this);
+        this.updateStyle = this.updateStyle.bind(this);
         this.position = this.position.bind(this);
+        this.close = this.close.bind(this);
         this.screenClick = this.screenClick.bind(this);
         this.containerClick = this.containerClick.bind(this);
-        this.setStyle(props.style);
-        this.event = new CustomEvent('showModal',{});
+        this.handleCancel = this.handleCancel.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleResize = this.handleResize.bind(this);
     }
 
     componentDidMount() {
         this.mounted = true;
-        this.setTimer();
         document.addEventListener('keydown', this.handleKeyDown);
-        this.setShow();
+        window.addEventListener('resize', this.handleResize);
+        this.showModal(this.props.show);
     }
 
-    componentDidUpdate(old) {
-        if (old.show !== this.props.show) {
-            this.setShow();
-            if (this.props.show) {
-                this.setTimer();
-                this.setState({show: true});
-            } else {
-                this.stopTimer();
-                setTimeout(() => {
-                    if (this.mounted) {
-                        this.setState({show: false})
-                    }
-                }, this.props.transition);
-            }
-        } else if (!compare(old.style, this.props.style)) {
-            this.setStyle(this.props.style);
-        } else {
-            this.position();
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.show !== this.state.show && this.state.show) {
+            setTimeout(() => {
+                this.updateStyle(getStyle(this.props, true));
+                this.startCountdown();
+                document.dispatchEvent(this.event);
+            }, 0);
+        }
+        if (prevProps.show !== this.props.show) {
+            this.showModal(this.props.show);
         }
     }
 
     componentWillUnmount() {
         this.mounted = false;
-        this.containerRef.current.removeEventListener('resize', this.handleResize);
-        this.stopTimer();
+        clearTimeout(this.showTimer);
+        clearTimeout(this.countdownTimer);
+        document.removeEventListener('keydown', this.handleKeyDown);
+        window.removeEventListener('resize', this.handleResize);
         delete this.event;
+    }
+
+    showModal(show) {
+        if (show) {
+            this.setState({show: true});
+        } else {
+            this.updateStyle(getStyle(this.props, false));
+            this.showTimer = setTimeout(() => {
+                if (this.mounted) {
+                    this.setState({show: false});
+                }
+            }, this.props.transition);
+        }
     }
 
     position() {
         if (this.containerRef.current && this.props.show) {
-            let container = this.containerRef.current;
-            let content = this.contentRef.current;
-            let sh = window.innerHeight;
-            let rect = container.getBoundingClientRect();
-            let ch = rect.height;
-            let top = 8;
-            if (ch < sh) {
-                top = Math.ceil((sh -16 - ch)/2);
-            } else if (this.props.fitHeight) {
-                container.style.height = sh - 16 + "px";
-                content.style.height = "100%";
-                content.style.overflowY = "auto";
+            let rect = this.containerRef.current.getBoundingClientRect();
+            let margin = this.props.margin;
+            let winHeight = window.innerHeight - margin*2;
+            let conHeight = rect.height;
+            let top = margin;
+            // console.log(margin);
+            if (conHeight < winHeight) {
+                top = margin + Math.ceil((winHeight - conHeight)/2);
+                this.containerRef.current.style.height = this.style.container.height;
+                this.contentRef.current.style.height = this.style.content.height;
+                this.contentRef.current.style.overflowY = this.style.content.overflowY;
+            } else {
+                if (this.props.fitHeight) {
+                    this.containerRef.current.style.height = winHeight + "px";
+                    this.contentRef.current.style.height = "100%";
+                    this.contentRef.current.style.overflowY = "auto";
+                }
             }
-            container.style.top = top + "px";
+            this.containerRef.current.style.top = top + "px";
         }
     }
 
-    setStyle(style) {
-        this.showing = merge(
-            contain(styles.TModal),
-            contain(styles[this.props.name]),
-            contain(style)
-        );
-        this.showing = replace(this.showing, 'transition', this.props.transition);
-        this.style = merge(this.showing, styles.TModal.hidden);
-    }
-
-    setShow() {
-        setTimeout(() => {
-            if (this.mounted) {
-                if (this.props.show) {
-                    document.dispatchEvent(this.event);
-                    apply(this.style.screen, this.showing.screen, this.screenRef.current.style);
-                    apply(this.style.container, this.showing.container, this.containerRef.current.style);
-                    this.position();
-                } else {
-                    apply(this.showing.screen, this.style.screen, this.screenRef.current.style);
-                    apply(this.showing.container, this.style.container, this.containerRef.current.style);
-                }
-            }
-        }, 1);
+    updateStyle(style) {
+        apply(this.style.screen, style.screen, this.screenRef.current.style);
+        apply(this.style.container, style.container, this.containerRef.current.style);
+        this.position();
+        this.style = style;
     }
 
     close() {
-        this.stopTimer();
+        this.stopCountdown();
         if (this.props.onClose) {
             this.props.onClose({
                 name: this.props.name,
@@ -124,50 +130,41 @@ class Modal extends React.PureComponent {
                 button: ICON_CLOSE
             });
         }
+        this.showModal(false);
     }
 
-    setTimer() {
-        if (this.props.show) {
-            let countdown = this.props.countdown;
-            if (countdown) {
-                if (isNaN(countdown)) {
-                    countdown = seconds(countdown);
+    stepCountdown() {
+        clearTimeout(this.countdownTimer);
+        if (this.state.countdown > 0) {
+            this.countdownTimer = setTimeout(() => {
+                if (this.mounted) {
+                    this.setState({countdown: this.state.countdown - 1});
+                    this.stepCountdown();
                 }
-                if (countdown > 0) {
-                    clearInterval(this.state.timer);
-                    this.setState({
-                        countdown: countdown,
-                        timer: setInterval(
-                            () => {
-                                this.setState({countdown: this.state.countdown - 1});
-                                if (this.state.countdown <= 0) {
-                                    this.close();
-                                }
-                            },
-                            1000
-                        )
-                    });
-                }
-            }
+            }, 1000);
         } else {
-            clearInterval(this.state.timer);
-        }
-    }
-
-    stopTimer() {
-        if (this.state.timer) {
-            clearInterval(this.state.timer);
-            this.setState({timer: null});
-        }
-    }
-
-    handleCancel() {
-        this.close();
-    }
-
-    handleKeyDown(event) {
-        if (event.key === 'Escape' && this.props.show && this.props.escape) {
             this.close();
+        }
+    }
+
+    startCountdown() {
+        if (this.mounted && this.props.show && this.props.countdown) {
+            let countdown = this.props.countdown;
+            if (isNaN(countdown)) {
+                countdown = seconds(countdown);
+            }
+            if (countdown > 0) {
+                clearTimeout(this.countdownTimer);
+                this.setState({countdown: countdown});
+                this.stepCountdown();
+            }
+        }
+    }
+
+    stopCountdown() {
+        clearTimeout(this.countdownTimer);
+        if (this.mounted) {
+            this.setState({countdown: 0});
         }
     }
 
@@ -183,15 +180,33 @@ class Modal extends React.PureComponent {
         }
     }
 
+    handleCancel() {
+        this.close();
+    }
+
+    handleKeyDown(event) {
+        if (event.key === 'Escape' && this.props.show && this.props.escape) {
+            this.close();
+        }
+    }
+
+    handleResize() {
+        if (this.state.show) {
+            this.position();
+        }
+    }
+
     render () {
 
-        let style = merge(this.style, {screen: {display: this.state.show ? 'block' : 'none'}});
-
-        let countdown = this.state.countdown > 0 ? this.state.countdown : null;
+        let show = !this.state.show ? {screen: {display: "none"}} : {};
+        let style = merge(this.style, show);
 
         let header = this.props.showHeader ?
             <div style={style.header}>
-                {countdown ? <div style={style.timer}>{countdown}</div> : <div></div>}
+                {this.state.countdown > 0 ?
+                    <div style={style.timer}>
+                        {this.state.countdown}
+                    </div> : <div></div>}
                 <div style={style.caption}>{this.props.caption}</div>
                 <Icon style={contain(style.close)} name={ICON_CLOSE} onClick={this.handleCancel} />
             </div> : null;
@@ -249,6 +264,7 @@ Modal.propTypes = {
     titleContent: PropTypes.any,
     footerContent: PropTypes.any,
     fitHeight: PropTypes.any,
+    margin: PropTypes.number,
     onClose: PropTypes.func.isRequired
 };
 
@@ -257,7 +273,8 @@ Modal.defaultProps = {
     escape: false,
     outerClick: false,
     transition: 250,
-    fitHeight: false
+    fitHeight: false,
+    margin: 8
 };
 
 export default Modal;
