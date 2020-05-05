@@ -24,8 +24,7 @@ class TEdit extends React.PureComponent {
         return (
                 <Edit
                     simple={true}
-                    vStyle={style}
-                    iStyle={style}
+                    style={style}
                     value={this.props.value}
                     wrap={true}
                     data={this.props.data}
