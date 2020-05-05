@@ -33,6 +33,7 @@ import TMenu from './TMenu';
 import TEdit from './TEdit';
 import TPopup from './TPopup';
 import TCalendar from './TCalendar';
+import TTree from './TTree';
 
 export {
     TIcon,
@@ -69,5 +70,6 @@ export {
     TMenu,
     TEdit,
     TPopup,
-    TCalendar
+    TCalendar,
+    TTree
 }
