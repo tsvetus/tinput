@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Helper from './helper.js';
-
 import {merge} from '../../util';
 
 /**
@@ -80,7 +78,5 @@ List.propTypes = {
     hover: PropTypes.number,
     onClick: PropTypes.func
 };
-
-List.Helper = Helper;
 
 export default List;

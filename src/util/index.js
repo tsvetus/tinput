@@ -12,10 +12,14 @@ import {
     getFile,
     compare,
     replace,
-    isMS,
-    parseField,
-    parseItem
+    isMS
 } from './misc.js';
+
+import {
+    parseField,
+    parseItem,
+    Helper
+} from './helper.js';
 
 import Format from './format.js';
 import Pager from './pager.js';
@@ -77,8 +81,10 @@ export {
     compare,
     replace,
     isMS,
+
     parseField,
     parseItem,
+    Helper,
 
     Format,
     Pager,

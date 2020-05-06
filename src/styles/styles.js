@@ -898,6 +898,33 @@ export default function defaultStyles(templates) {
                 }
             }
 
+        },
+
+        TTree: {
+            container: {
+            },
+            node: {
+                container: {
+                },
+                frame: {
+                },
+                icon: {
+                    width: "12px",
+                    height: "12px",
+                    margin: "0 4px 2px 0"
+                },
+                caption: {
+                    cursor: "pointer"
+                },
+                content: {
+                    margin: "0 0 0 16px"
+                },
+                selected: {
+                    caption: {
+                        fontWeight: "bold"
+                    }
+                }
+            }
         }
 
     }

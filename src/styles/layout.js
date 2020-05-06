@@ -569,6 +569,20 @@ export default {
                 zIndex: "3"
             }
         }
+    },
+
+    TTree: {
+        node: {
+            container: {
+            },
+            frame: {
+                display: "flex",
+                alignItems: "center"
+            },
+            icon: {
+
+            }
+        }
     }
 
 }

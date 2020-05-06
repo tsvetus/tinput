@@ -2,21 +2,34 @@ import React from 'react';
 
 import {TTree, TGroup, TMemo} from 'tinput';
 
+const ITEMS = [
+  {id: 1, name: 'item 1'},
+  {id: 2, name: 'item 3', items: [
+    {id: 4, name: 'item 4', items: [
+      {id: 5, name: 'item 5'},
+      {id: 6, name: 'item 6', items: [
+        {id: 9, name: 'item 9'},
+        {id: 10, name: 'item 10'}
+      ]},
+      {id: 7, name: 'item 7'},
+    ]},
+  ]},
+  {id: 8, name: 'item 8'}
+];
+
 class TTreeExample extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      value: null,
       event: ''
     };
-    this.change = this.change.bind(this);
+    this.click = this.click.bind(this);
     this.clear = this.clear.bind(this);
   }
 
-  change(event) {
+  click(event) {
     this.setState({
-      text: event.text,
       event: this.state.event + ' ' +
         JSON.stringify(event)
     });
@@ -37,10 +50,14 @@ class TTreeExample extends React.Component {
         }}>
 
           <TTree
-            value={this.state.text}
-            content={'text'}
-            wrap={true}
-            onChange={this.change}/>
+            name={'tree'}
+            listMode={'value'}
+            keyField={'id'}
+            valueField={'name'}
+            items={ITEMS}
+            showSelected={true}
+            expand={1}
+            onClick={this.click}/>
 
         </TGroup>
 

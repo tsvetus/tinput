@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, clone, contain} from '../../util';
+import {merge, clone, contain, Helper} from '../../util';
 
 import TGroupButton from '../TGroupButton';
 import ListForm from './ListForm';
 
 import {styles} from '../../styles';
-import List from "../../lib/List";
 
 /**
  * Combobox with select list
@@ -24,7 +23,7 @@ class TSelectBox extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.updateItems = this.updateItems.bind(this);
-        this.helper = new List.Helper();
+        this.helper = new Helper();
         this.updateItems(this.props.items);
     }
 
