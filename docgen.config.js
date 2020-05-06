@@ -68,6 +68,11 @@ module.exports = {
             name: "TSelectBoxExample"
         }
     }, {
+        name: "TTree",
+        example: {
+            name: "TTreeExample"
+        }
+    }, {
         name: 'separator'
     }, {
         name: "TCheck",

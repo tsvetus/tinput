@@ -27,6 +27,7 @@ import TFormExample from './components/TForm/TFormExample.jsx';
 import TEditExample from './components/TEdit/TEditExample.jsx';
 import TPopupExample from './components/TPopup/TPopupExample.jsx';
 import TCalendarExample from './components/TCalendar/TCalendarExample.jsx';
+import TTreeExample from './components/TTree/TTreeExample.jsx';
 
 export {
     TDateExample,
@@ -57,5 +58,6 @@ export {
     TFormExample,
     TEditExample,
     TPopupExample,
-    TCalendarExample
+    TCalendarExample,
+    TTreeExample
 }

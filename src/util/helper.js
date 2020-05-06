@@ -1,12 +1,39 @@
-import {clone, merge, parseField} from '../../util';
+import {clone, merge} from './misc.js';
 
-class Helper {
+export function parseField(item, field, def) {
+    if (field) {
+        if (field instanceof Array) {
+            for (let i=0; i<field.length; i++) {
+                if (item.hasOwnProperty(field[i])) {
+                    return field[i];
+                }
+            }
+        } else if (typeof field === 'string') {
+            if (item.hasOwnProperty(field)) {
+                return field;
+            }
+        }
+    }
+    return def;
+}
 
-    constructor () {
+export function parseItem(item, field, def) {
+    let key = parseField(item, field);
+    if (key) {
+        return item[key];
+    } else {
+        return def;
+    }
+}
+
+export class Helper {
+
+    constructor (params) {
         this.original = [];
         this.items = [];
         this.struct = null;
         this.count = 0;
+        this.tree = params ? params.tree : false;
         this.getStruct = this.getStruct.bind(this);
         this.getValue = this.getValue.bind(this);
         this.getKey = this.getKey.bind(this);
@@ -106,7 +133,12 @@ class Helper {
 
     load(items, empty, listMode, showMode, keyField, valueField) {
 
-        this.original = clone(items);
+        if (this.tree) {
+            this.original = clone(items, 'items');
+        } else {
+            this.original = clone(items);
+        }
+
         this.items = [];
         this.listMode = this.getMode(listMode);
         this.showMode = this.getMode(showMode);
@@ -126,11 +158,17 @@ class Helper {
 
             if (items) {
                 items.forEach((v, i) => {
+                    let helper = undefined;
+                    if (v.items && this.tree) {
+                        helper = new Helper({tree: this.tree});
+                        helper.load(v.items, empty, this.listMode, this.showMode, keyField, valueField);
+                    }
                     this.items.push({
                         index: i,
                         key: v[this.struct.key],
                         listValue: this.getValue(v, this.listMode),
-                        showValue: this.getValue(v, this.showMode)
+                        showValue: this.getValue(v, this.showMode),
+                        helper: helper
                     });
                 });
             }
@@ -156,7 +194,8 @@ class Helper {
             return {
                 index: v.index,
                 key: v.key,
-                value: v.listValue
+                value: v.listValue,
+                helper: v.helper
             }
         });
     }
@@ -245,5 +284,3 @@ class Helper {
     }
 
 }
-
-export default Helper;

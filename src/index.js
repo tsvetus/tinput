@@ -33,7 +33,8 @@ import {
     TMenu,
     TEdit,
     TPopup,
-    TCalendar
+    TCalendar,
+    TTree
 } from './components';
 
 import {
@@ -115,6 +116,7 @@ export {
     TEdit,
     TPopup,
     TCalendar,
+    TTree,
 
     download,
     clone,

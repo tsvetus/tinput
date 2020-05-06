@@ -61,24 +61,27 @@ export function nvl(source, def) {
     }
 }
 
-export function clone(source) {
+export function clone(source, exclude) {
     let dest = null;
     if (typeof source === 'function') {
         dest = source;
     } else if (source instanceof Array) {
         dest = source.slice();
         for (let i=0; i<dest.length; i++) {
-            dest[i] = clone(dest[i]);
+            dest[i] = clone(dest[i], exclude);
         }
     } else if (React.isValidElement(source)) {
         dest = source;
     } else if (source instanceof Date) {
         dest = new Date(source.getTime());
     } else if (source instanceof Object) {
-        dest = Object.assign({}, source);
-        let keys = Object.keys(dest);
+        dest = {};
+        let keys = Object.keys(source);
         for (let i=0; i<keys.length; i++) {
-            dest[keys[i]] = clone(dest[keys[i]]);
+            if (exclude && exclude.indexOf(keys[i]) >= 0) {
+                continue
+            }
+            dest[keys[i]] = clone(source[keys[i]], exclude);
         }
     } else {
         dest = source;
@@ -229,31 +232,5 @@ export function replace(source, name, value) {
 export function isMS() {
     let ua = window.navigator.userAgent;
     return /MSIE|Trident|Edge/.test(ua);
-}
-
-export function parseField(item, field, def) {
-    if (field) {
-        if (field instanceof Array) {
-            for (let i=0; i<field.length; i++) {
-                if (item.hasOwnProperty(field[i])) {
-                    return field[i];
-                }
-            }
-        } else if (typeof field === 'string') {
-            if (item.hasOwnProperty(field)) {
-                return field;
-            }
-        }
-    }
-    return def;
-}
-
-export function parseItem(item, field, def) {
-    let key = parseField(item, field);
-    if (key) {
-        return item[key];
-    } else {
-        return def;
-    }
 }
 

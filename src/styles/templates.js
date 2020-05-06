@@ -49,7 +49,9 @@ export default {
         monthUp: "&#10095;&#10095;&#10095;",
         monthDown: "&#10094;&#10094;&#10094;",
         left: "&#10094;",
-        right: "&#10095;"
+        right: "&#10095;",
+        expand: "+",
+        collapse: "-"
     }
 
 }

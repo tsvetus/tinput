@@ -5,7 +5,7 @@ import Text from '../Text';
 import List from '../List';
 import Modal from '../Modal';
 
-import {merge, find, compare} from '../../util';
+import {merge, find, compare, Helper} from '../../util';
 
 import {styles} from '../../styles';
 
@@ -40,7 +40,7 @@ class ListBox extends React.PureComponent {
         this.isModal = this.isModal.bind(this);
         this.getContainerStyle = this.getContainerStyle.bind(this);
         this.list = React.createRef();
-        this.helper = new List.Helper();
+        this.helper = new Helper();
         this.item = null;
     }
 

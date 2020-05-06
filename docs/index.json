@@ -2283,6 +2283,180 @@
         }
       }
     },
+    "TTree": {
+      "description": "Component representing simple tree view",
+      "displayName": "TTree",
+      "methods": [
+        {
+          "name": "updateItems",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "items",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleClick",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TTreeExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "node": {
+              "type": "shape",
+              "description": "Style for tree node. Contains fields:",
+              "structure": {
+                "container": {
+                  "type": "object",
+                  "description": "Style for node container"
+                },
+                "icon": {
+                  "type": "object",
+                  "description": "Style for node icon"
+                },
+                "caption": {
+                  "type": "object",
+                  "description": "Style for node caption"
+                },
+                "content": {
+                  "type": "object",
+                  "description": "Style for node nested items container"
+                },
+                "selected": {
+                  "type": "shape",
+                  "description": "Style for node selected node",
+                  "structure": {
+                    "container": {
+                      "type": "object"
+                    },
+                    "icon": {
+                      "type": "object"
+                    },
+                    "caption": {
+                      "type": "object"
+                    },
+                    "content": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Component initial selected item key value",
+          "required": false
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "items": {
+          "type": "array",
+          "description": "Items object tree. Contains array of key/value pairs and nested items array in optional field\r\nnamed \"items\". The key values must be unique through out entire items set!",
+          "required": false
+        },
+        "showSelected": {
+          "type": "any",
+          "description": "Indicates whether to emphasize selected item or not",
+          "required": false
+        },
+        "keyField": {
+          "type": "union",
+          "description": "Specifies key field name if it is other than \"key\"",
+          "required": false,
+          "defaultValue": "['id', 'key', 'code']",
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
+        "valueField": {
+          "type": "union",
+          "description": "Specifies value field name if it is other than \"value\"",
+          "required": false,
+          "defaultValue": "['name', 'value', 'caption']",
+          "structure": {
+            "string": {},
+            "array": {}
+          }
+        },
+        "listMode": {
+          "type": "string",
+          "description": "Determines what part of \"item\" should be shown in dropdown list",
+          "required": false,
+          "defaultValue": "'val'"
+        },
+        "expand": {
+          "type": "number",
+          "description": "Indicates level to expand on create. First level is 0",
+          "required": false,
+          "defaultValue": "-1"
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On text change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "string",
+              "description": "Entered text."
+            }
+          },
+          "required": false
+        },
+        "showMode": {
+          "required": false,
+          "defaultValue": "'val'"
+        }
+      }
+    },
     "separator2": {
       "displayName": "separator"
     },
