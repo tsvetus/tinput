@@ -89,6 +89,7 @@ class TTop extends React.PureComponent {
                                 name={v.icon}
                                 onClick={this.iconClick}
                                 style={st}
+                                wait={v.wait}
                                 rotateTime={rotateTime} />);
                     } else if (React.isValidElement(v.icon)) {
                         tools.push(v.icon);

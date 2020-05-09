@@ -17,12 +17,12 @@ function parseStyle(props) {
     let v = props.style ? clone(props.style) : {};
     let n = v.nested;
     let i = merge(v, v.invalid);
-    if (props.icon && props.nestedIcon) {
-        v.icon = merge(v.icon, {container: copyStyle(v.edit)}, n.icon);
-        v.edit = merge(v.edit, n.edit);
-        i.icon = merge(i.icon, {container: copyStyle(i.edit)}, n.icon);
-        i.edit = merge(i.edit, n.edit);
-    }
+    // if (props.icon && props.nestedIcon) {
+    //     v.icon = merge(v.icon, {container: copyStyle(v.edit)}, n.icon);
+    //     v.edit = merge(v.edit, n.edit);
+    //     i.icon = merge(i.icon, {container: copyStyle(i.edit)}, n.icon);
+    //     i.edit = merge(i.edit, n.edit);
+    // }
     return {
         v: v,
         i: i
@@ -52,6 +52,7 @@ class Text extends React.PureComponent {
         this.handleBlur = this.handleBlur.bind(this);
         this.getContainerStyle = this.getContainerStyle.bind(this);
         this.saveStyle = this.saveStyle.bind(this);
+        this.getNested = this.getNested.bind(this);
     }
 
     componentDidMount() {
@@ -176,7 +177,13 @@ class Text extends React.PureComponent {
         }
     }
 
+    getNested() {
+        return this.props.showEdit && this.props.icon && this.props.nestedIcon;
+    }
+
     render () {
+
+        let nested = this.getNested();
 
         let style = this.state.valid ? this.style.v : this.style.i;
 
@@ -193,10 +200,9 @@ class Text extends React.PureComponent {
 
         let icon = null;
         if (this.props.icon) {
-            let nested = this.props.showEdit && this.props.nestedIcon;
             icon = (
                 <Icon
-                    style={style.icon}
+                    style={nested ? merge(style.icon, style.nested.icon) : style.icon}
                     name={this.props.icon}
                     nested={nested}
                     onClick={this.handleIcon} />
@@ -208,34 +214,46 @@ class Text extends React.PureComponent {
 
         let containerStyle = merge(style.container, this.getContainerStyle());
 
+        let edit = this.props.showEdit ? <Mask
+            simple={this.props.simple}
+            tabIndex={this.props.tabIndex}
+            style={nested ? style.nested.edit : style.edit}
+            data={this.props.data}
+            name={this.props.name}
+            value={this.state.value}
+            timeout={this.props.timeout}
+            placeholder={this.props.placeholder}
+            wrap={false}
+            format={this.props.format}
+            empty={this.props.empty}
+            readOnly={this.props.readOnly}
+            required={this.props.required}
+            onKeyDown={this.props.onKeyDown}
+            onMask={this.props.onMask}
+            onClick={this.props.onClick}
+            onValidate={validate}
+            onValidChange={this.handleValidChange}
+            onChange={this.handleChange}
+            onMounted={this.handleMounted} /> : null;
+
+        let frame = nested ?
+            <div style={style.frame}>
+                {!top ? label : null}
+                <div style={merge(style.edit, style.nested.container)}>
+                    {edit}
+                    {icon}
+                </div>
+            </div> :
+            <div style={style.frame}>
+                {!top ? label : null}
+                {edit}
+                {icon}
+            </div>;
+
         return (
             <div ref={this.container} style={containerStyle} onBlur={this.handleBlur} tabIndex={-1}>
                 {top ? label : null}
-                <div style={style.frame}>
-                    {!top ? label : null}
-                    {this.props.showEdit ? <Mask
-                        simple={this.props.simple}
-                        tabIndex={this.props.tabIndex}
-                        style={style.edit}
-                        data={this.props.data}
-                        name={this.props.name}
-                        value={this.state.value}
-                        timeout={this.props.timeout}
-                        placeholder={this.props.placeholder}
-                        wrap={false}
-                        format={this.props.format}
-                        empty={this.props.empty}
-                        readOnly={this.props.readOnly}
-                        required={this.props.required}
-                        onKeyDown={this.props.onKeyDown}
-                        onMask={this.props.onMask}
-                        onClick={this.props.onClick}
-                        onValidate={validate}
-                        onValidChange={this.handleValidChange}
-                        onChange={this.handleChange}
-                        onMounted={this.handleMounted} /> : null}
-                    {icon}
-                </div>
+                {frame}
                 {this.props.children}
             </div>
         );

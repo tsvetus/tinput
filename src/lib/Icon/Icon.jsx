@@ -102,6 +102,9 @@ class Icon extends React.Component {
     render () {
 
         let icon = this.props.icon ? this.props.icon : icons[this.props.name];
+        if (!icon) {
+            icon = icons['empty'];
+        }
 
         let content = null;
         let w = "0 0 384 384";

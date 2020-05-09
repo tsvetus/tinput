@@ -68,8 +68,25 @@ export default {
         edit: {
             boxSizing: "border-box",
             flex: "1 0",
+            outline: "none",
             whiteSpace: "nowrap",
             overflow: "hidden"
+        },
+
+        nested: {
+            container: {
+                display: "flex",
+                alignItems: "stretch",
+                width: "100%",
+                justifyContent: "space-between"
+            },
+            edit: {
+                boxSizing: "border-box",
+                flex: "1 0",
+                outline: "none",
+                whiteSpace: "nowrap",
+                overflow: "hidden"
+            }
         },
 
         icon: {
@@ -473,6 +490,7 @@ export default {
 
     TPopup: {
         frame: {
+            position: "relative",
             display: "flex",
             flexDirection: "row",
             flexWrap: "nowrap",
@@ -480,10 +498,14 @@ export default {
             justifyContent: "space-between"
         },
         label: {
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "flex-start"
+        },
+        icon: {
+            container: {
+                position: "absolute",
+                right: "12px",
+                top: "calc(50% - 12px)",
+                zIndex: "2"
+            }
         }
     },
 
