@@ -502,8 +502,8 @@ export default {
         icon: {
             container: {
                 position: "absolute",
-                right: "12px",
-                top: "calc(50% - 12px)",
+                right: "6px",
+                top: "calc(50% - 10px)",
                 zIndex: "2"
             }
         }
