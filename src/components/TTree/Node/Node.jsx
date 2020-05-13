@@ -49,7 +49,7 @@ class Node extends React.PureComponent {
         let item = this.props.item;
 
         let icon = <Icon style={ls.node.icon} name={'empty'} />;
-        if (item.helper) {
+        if (item.helper && item.helper.getCount() > 0) {
             icon = this.state.expanded ?
                 <Icon style={ls.node.icon} name={'minus'} onClick={this.handleIconClick} /> :
                 <Icon style={ls.node.icon} name={'plus'} onClick={this.handleIconClick} />;

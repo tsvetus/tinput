@@ -2368,7 +2368,7 @@
           }
         },
         "value": {
-          "type": "string",
+          "type": "any",
           "description": "Component initial selected item key value",
           "required": false
         },
@@ -2383,9 +2383,13 @@
           "required": false
         },
         "items": {
-          "type": "array",
+          "type": "union",
           "description": "Items object tree. Contains array of key/value pairs and nested items array in optional field\r\nnamed \"items\". The key values must be unique through out entire items set!",
-          "required": false
+          "required": false,
+          "structure": {
+            "array": {},
+            "object": {}
+          }
         },
         "showSelected": {
           "type": "any",
@@ -3780,7 +3784,7 @@
             },
             "button": {
               "type": "object",
-              "description": "Style for main menu button"
+              "description": "Style for main menu button appeared in the left corner of component"
             },
             "caption": {
               "type": "object",
@@ -3806,7 +3810,7 @@
           "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
           "required": false
         },
-        "icon": {
+        "button": {
           "type": "union",
           "description": "Name of the main menu icon appeared in the left corner of component",
           "required": false,
@@ -3838,9 +3842,17 @@
               "type": "object",
               "description": "Tool icon custom style"
             },
+            "wait": {
+              "type": "any",
+              "description": "When \"true\" icon appears in grey color"
+            },
             "rotateTime": {
               "type": "number",
               "description": "If above zero \"rotateTime\" denotes icon rotation speed in milliseconds"
+            },
+            "rotate": {
+              "type": "any",
+              "description": "When \"true\" icon rotates and changes it's color to red"
             },
             "active": {
               "type": "any",

@@ -51,15 +51,17 @@ class TTop extends React.PureComponent {
         );
 
         let icon = null;
-        if (this.props.icon) {
-            if (typeof this.props.icon === 'string') {
+        let propsIcon = this.props.icon ? this.props.icon :
+            this.props.button ? this.props.button : null;
+        if (propsIcon) {
+            if (typeof propsIcon === 'string') {
                 icon = <Icon
-                    name={this.props.icon}
+                    name={propsIcon}
                     style={style.button}
                     onClick={this.handleClick} />;
-            } else if (typeof this.props.icon === 'object') {
+            } else if (typeof propsIcon === 'object') {
                 icon = <Icon
-                    icon={this.props.icon}
+                    icon={propsIcon}
                     style={style.button}
                     onClick={this.handleClick} />;
             }
@@ -117,7 +119,7 @@ TTop.propTypes = {
     style: PropTypes.shape({
         /** Style for outer component container */
         container: PropTypes.object,
-        /** Style for main menu button */
+        /** Style for main menu button appeared in the left corner of component */
         button: PropTypes.object,
         /** Style for caption */
         caption: PropTypes.object,
@@ -135,7 +137,7 @@ TTop.propTypes = {
     /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
     /** Name of the main menu icon appeared in the left corner of component */
-    icon: PropTypes.oneOfType([
+    button: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object
     ]),
@@ -149,8 +151,12 @@ TTop.propTypes = {
         onClick: PropTypes.func,
         /** Tool icon custom style */
         style: PropTypes.object,
+        /** When "true" icon appears in grey color */
+        wait: PropTypes.any,
         /** If above zero "rotateTime" denotes icon rotation speed in milliseconds */
         rotateTime: PropTypes.number,
+        /** When "true" icon rotates and changes it's color to red */
+        rotate: PropTypes.any,
         /** Set "active" to false to temporary hide icon */
         active: PropTypes.any
     })),
@@ -165,7 +171,7 @@ TTop.propTypes = {
 };
 
 TTop.defaultProps = {
-    icon: 'menu'
+    button: 'menu'
 };
 
 export default TTop;

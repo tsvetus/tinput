@@ -21,6 +21,14 @@ class TTree extends React.PureComponent {
         this.updateItems(props.items);
     }
 
+    componentDidMount() {
+        this.mounted = true;
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.items !== this.props.items) {
             this.updateItems(this.props.items);
@@ -31,20 +39,31 @@ class TTree extends React.PureComponent {
     }
 
     updateItems(items) {
+        let nodes = [];
+        if (items) {
+            if (items instanceof Array) {
+                nodes = items;
+            } else {
+                nodes = [items];
+            }
+        }
         this.helper.load(
-            items,
+            nodes,
             this.props.empty,
             this.props.listMode,
             this.props.listMode,
             this.props.keyField,
             this.props.valueField
         );
+        if (this.mounted) {
+            this.forceUpdate();
+        }
     }
 
     handleClick(event) {
         this.setState({selected: event.value});
-        if (this.props.onClick) {
-            this.props.onClick({
+        if (this.props.onChange) {
+            this.props.onChange({
                 name: this.props.name,
                 data: this.props.data,
                 item: event.item,
@@ -100,7 +119,7 @@ TTree.propTypes = {
         })
     }),
     /** Component initial selected item key value */
-    value: PropTypes.string,
+    value: PropTypes.any,
     /**
      * Any component name that associated with component and returned in "onChange" event in "event.name" field.
      * In addition component name can be used in global styles registered by "registerStyles" function to
@@ -113,7 +132,10 @@ TTree.propTypes = {
      * Items object tree. Contains array of key/value pairs and nested items array in optional field
      * named "items". The key values must be unique through out entire items set!
      */
-    items: PropTypes.array,
+    items: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.object
+    ]),
     /** Indicates whether to emphasize selected item or not */
     showSelected: PropTypes.any,
     /** Specifies key field name if it is other than "key" */
