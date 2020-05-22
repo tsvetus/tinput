@@ -98,6 +98,8 @@ class TListBox extends React.Component {
                 keyField={this.state.keyField}
                 valueField={this.state.valueField}
                 modal={this.props.modal}
+                tree={this.props.tree}
+                expand={this.props.expand}
                 caption={this.props.caption}
                 fitHeight={this.props.fitHeight}
                 nestedIcon={this.props.nestedIcon}
@@ -133,7 +135,12 @@ TListBox.propTypes = {
          * Style for modal list view. See "TModal"component description for detail style
          * structure
          */
-        modal: PropTypes.object
+        modal: PropTypes.object,
+        /**
+         * Style for tree list view. See "TTree"component description for detail style
+         * structure
+         */
+        tree: PropTypes.object
     }),
     /** Component initial value. Contains "key" value of default list item */
     value: PropTypes.any,
@@ -195,6 +202,14 @@ TListBox.propTypes = {
      * minimum number of list items necessary to show list in modal view
      */
     modal: PropTypes.any,
+    /**
+     * If true then items list represented as tree view
+     */
+    tree: PropTypes.any,
+    /**
+     * Tree view expand level. First level is 0
+     */
+    expand: PropTypes.number,
     /** Modal list view caption */
     caption: PropTypes.any,
     /** Indicates whether to fit modal list view height into the screen height */

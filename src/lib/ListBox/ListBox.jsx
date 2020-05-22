@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Text from '../Text';
 import List from '../List';
+import Tree from '../Tree';
 import Modal from '../Modal';
 
 import {merge, find, compare, Helper} from '../../util';
@@ -40,7 +41,7 @@ class ListBox extends React.PureComponent {
         this.isModal = this.isModal.bind(this);
         this.getContainerStyle = this.getContainerStyle.bind(this);
         this.list = React.createRef();
-        this.helper = new Helper();
+        this.helper = new Helper({tree: props.tree});
         this.item = null;
     }
 
@@ -153,7 +154,7 @@ class ListBox extends React.PureComponent {
                 break;
             case 13:
                 event.preventDefault();
-                if (this.state.showList) {
+                if (this.state.showList && this.list.current && this.list.current.handleUse) {
                     this.list.current.handleUse(this.state.hover);
                     this.editor.blur();
                 } else {
@@ -217,7 +218,7 @@ class ListBox extends React.PureComponent {
                         data: this.props.data,
                         value: event.key,
                         virtualItem: this.item,
-                        item: this.helper.getOriginal(this.item.index),
+                        item: this.helper.getOriginalItem(event.key),
                         index: this.item.index
                     });
                 }
@@ -314,14 +315,30 @@ class ListBox extends React.PureComponent {
 
         let list = null;
         if (this.state.showList && this.helper.hasItems()) {
-            let comp =
-                <List
-                    ref={this.list}
-                    style={style.list}
-                    selected={this.state.value}
-                    hover={this.state.hover}
-                    items={this.helper.getListItems()}
-                    onClick={this.handleItemClick} />;
+            let comp = null;
+            if (this.props.tree) {
+                comp =
+                    <Tree
+                        ref={this.list}
+                        style={style.tree}
+                        value={this.state.value}
+                        listMode={this.props.listMode}
+                        keyField={this.props.keyField}
+                        valueField={this.props.valueField}
+                        showSelected={true}
+                        expand={this.props.expand}
+                        helper={this.helper}
+                        onChange={this.handleItemClick} />;
+            } else {
+                comp =
+                    <List
+                        ref={this.list}
+                        style={style.list}
+                        selected={this.state.value}
+                        hover={this.state.hover}
+                        items={this.helper.getListItems()}
+                        onClick={this.handleItemClick} />;
+            }
             if (this.isModal()) {
                 let ms = merge(style.modal, this.getContainerStyle());
                 list =
@@ -401,6 +418,8 @@ ListBox.propTypes = {
     readOnly: PropTypes.any,
     layout: PropTypes.string,
     modal: PropTypes.any,
+    tree: PropTypes.any,
+    expand: PropTypes.number,
     caption: PropTypes.any,
     fitHeight: PropTypes.any,
     onChange: PropTypes.func,

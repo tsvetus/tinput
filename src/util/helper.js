@@ -161,7 +161,7 @@ export class Helper {
                     let helper = undefined;
                     if (v.items && this.tree) {
                         helper = new Helper({tree: this.tree});
-                        helper.load(v.items, empty, this.listMode, this.showMode, keyField, valueField);
+                        helper.load(v.items, null, this.listMode, this.showMode, keyField, valueField);
                     }
                     this.items.push({
                         index: i,
@@ -219,12 +219,17 @@ export class Helper {
     }
 
     getItem(value) {
-        let index = this.getIndex(value);
-        if (index < 0) {
-            return null;
-        } else {
-            return this.items[index];
+        for (let i=0; i<this.items.length; i++) {
+            if (this.items[i].key === value) {
+                return this.items[i];
+            } else if (this.items[i].helper) {
+                let item = this.items[i].helper.getItem(value);
+                if (item) {
+                    return item;
+                }
+            }
         }
+        return null;
     }
 
     getShowItem(value) {
@@ -266,10 +271,17 @@ export class Helper {
     }
 
     getOriginalItem(value) {
-        let index = this.getListItems().findIndex( v => {
-            return v.key == value;
-        });
-        return this.getOriginal(index);
+        for (let i=0; i<this.items.length; i++) {
+            if (this.items[i].key === value) {
+                return this.original[i];
+            } else if (this.items[i].helper) {
+                let item = this.items[i].helper.getOriginalItem(value);
+                if (item) {
+                    return item;
+                }
+            }
+        }
+        return null;
     }
 
     getQuery(query, key, value) {

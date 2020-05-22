@@ -7,7 +7,10 @@ export const INITIAL_STATE = {
     message: null
 };
 
-let ENDPOINT = '';
+const SERVER = {
+    endpoint: window && window.SERVER && window.SERVER.endpoint ? window.SERVER.endpoint : '',
+    division: window && window.SERVER && window.SERVER.division ? window.SERVER.division : null
+};
 
 let STORE = null;
 
@@ -71,9 +74,14 @@ export function check(store) {
 }
 
 export function login(username, password) {
+    let division = SERVER.division ?
+        '&division=' + encodeURIComponent(SERVER.division)
+         : '';
     return request ({
-        url: '/api/login?username=' + encodeURIComponent(username) +
-            '&password=' + encodeURIComponent(password),
+        url: '/api/login' +
+            '?username=' + encodeURIComponent(username) +
+            '&password=' + encodeURIComponent(password) +
+            division,
         data: {},
         success: (dispatch, data) => {
             dispatch(userAction(data));
@@ -141,7 +149,7 @@ function setState(params, state) {
 export function post(params) {
 
     if (params.endpoint) {
-        ENDPOINT = params.endpoint;
+        SERVER.endpoint = params.endpoint;
     }
 
     if (!params.url) {
@@ -165,7 +173,7 @@ export function post(params) {
 
     xhr.open(
         params.method ? params.method : 'POST',
-        ENDPOINT + params.url
+        SERVER.endpoint + params.url
     );
 
     xhr.withCredentials = true;
@@ -283,32 +291,10 @@ export function request(params) {
     };
 }
 
-// export function get(params) {
-// 	let xhr = new XMLHttpRequest();
-// 	xhr.open('GET', params.url, true);
-// 	xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
-//     xhr.withCredentials = true;
-// 	xhr.send(JSON.stringify(params.data));
-// 	xhr.onreadystatechange = function() {
-// 	    if (xhr.readyState !== 4) {
-// 		    return;
-// 	    }
-// 	    if (xhr.status !== 200) {
-// 	        if (params.fail) {
-// 	            params.fail(xhr.status, {message: xhr.statusText});
-// 	        }
-// 	    } else {
-// 	        if (params.success) {
-// 	            params.success(xhr.responseText);
-// 	        }
-// 	    }
-// 	};
-// }
-
 export function get(params) {
 
     if (params.endpoint) {
-        ENDPOINT = params.endpoint;
+        SERVER.endpoint = params.endpoint;
     }
 
     if (!params.url) {
@@ -330,7 +316,7 @@ export function get(params) {
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET',ENDPOINT + params.url);
+    xhr.open('GET', SERVER.endpoint + params.url);
 
     xhr.withCredentials = true;
 

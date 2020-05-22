@@ -7,6 +7,7 @@ import Input from './Input';
 import Text from './Text';
 import Grid from './Grid';
 import Modal from './Modal';
+import Tree from './Tree';
 
 export {
     Icon,
@@ -17,5 +18,6 @@ export {
     Input,
     Text,
     Grid,
-    Modal
+    Modal,
+    Tree
 }

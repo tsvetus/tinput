@@ -97,7 +97,6 @@ class Modal extends React.PureComponent {
             let winHeight = window.innerHeight - margin*2;
             let conHeight = rect.height;
             let top = margin;
-            // console.log(margin);
             if (conHeight < winHeight) {
                 top = margin + Math.ceil((winHeight - conHeight)/2);
                 this.containerRef.current.style.height = this.style.container.height;

@@ -20,6 +20,24 @@ Provider.get = function(name) {
     return providers[name] ? providers[name] : {};
 };
 
+Provider.props = function(name) {
+    let provider = Provider.get(name);
+    if (provider) {
+        return provider.getProps();
+    } else {
+        return null;
+    }
+};
+
+Provider.item = function(name, key) {
+    let props = Provider.props(name);
+    if (props && props.items) {
+        return props.items.find(v => {return v[props.keyField] == key});
+    } else {
+        return null;
+    }
+};
+
 Provider.create = function(params, props) {
     let name = params.name ? params.name : params.url;
     if (providers[name] === undefined) {

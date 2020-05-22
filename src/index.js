@@ -54,6 +54,7 @@ import {
     firstDate,
     lastDate,
     params,
+    scriptParams,
     getFile,
 
     getCookie,
@@ -133,6 +134,7 @@ export {
     firstDate,
     lastDate,
     params,
+    scriptParams,
     getFile,
 
     getCookie,

@@ -159,6 +159,16 @@ export function params(source) {
     return res;
 }
 
+export function scriptParams(scriptName) {
+    let scripts = document.getElementsByTagName("script");
+    for (let i=0; i<scripts.length; i++) {
+        if (scripts[i].src.indexOf("/" + scriptName) >= 0) {
+            return params(scripts[i].src);
+        }
+    }
+    return {};
+}
+
 export function contain(source) {
     if (source) {
         let res = clone(source);

@@ -1,93 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge, Helper} from '../../util';
-
-import Nodes from './Nodes';
-
-import {styles} from '../../styles';
+import {Tree} from '../../lib';
 
 /**
  * Component representing simple tree view
  */
 class TTree extends React.PureComponent {
 
-    constructor (props) {
-        super(props);
-        this.state = {selected: props.value};
-        this.handleClick = this.handleClick.bind(this);
-        this.updateItems = this.updateItems.bind(this);
-        this.helper = new Helper({tree: true});
-        this.updateItems(props.items);
-    }
-
-    componentDidMount() {
-        this.mounted = true;
-    }
-
-    componentWillUnmount() {
-        this.mounted = false;
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.items !== this.props.items) {
-            this.updateItems(this.props.items);
-        }
-        if (prevProps.value !== this.props.value) {
-            this.setState({selected: this.props.value});
-        }
-    }
-
-    updateItems(items) {
-        let nodes = [];
-        if (items) {
-            if (items instanceof Array) {
-                nodes = items;
-            } else {
-                nodes = [items];
-            }
-        }
-        this.helper.load(
-            nodes,
-            this.props.empty,
-            this.props.listMode,
-            this.props.listMode,
-            this.props.keyField,
-            this.props.valueField
-        );
-        if (this.mounted) {
-            this.forceUpdate();
-        }
-    }
-
-    handleClick(event) {
-        this.setState({selected: event.value});
-        if (this.props.onChange) {
-            this.props.onChange({
-                name: this.props.name,
-                data: this.props.data,
-                item: event.item,
-                value: event.value
-            })
-        }
-    }
-
     render () {
 
-        let style = merge(
-            styles.TTree,
-            styles[this.props.name],
-            this.props.style
-        );
-
         return (
-            <Nodes
-                style={style}
-                helper={this.helper}
-                selected={this.state.selected}
-                showSelected={this.props.showSelected}
+            <Tree
+                style={this.props.style}
+                data={this.props.data}
+                value={this.props.value}
                 expand={this.props.expand}
-                onClick={this.handleClick} />
+                showSelected={this.props.showSelected}
+                onChange={this.props.onChange}
+                valueField={this.props.valueField}
+                keyField={this.props.keyField}
+                items={this.props.items}
+                name={this.props.name}
+                listMode={this.props.listMode} />
         );
 
     }
@@ -162,13 +97,6 @@ TTree.propTypes = {
     onChange: PropTypes.func
 };
 
-TTree.defaultProps = {
-    listMode: 'val',
-    showMode: 'val',
-    keyField: ['id', 'key', 'code'],
-    valueField: ['name', 'value', 'caption'],
-    expand: -1
-};
-
+TTree.defaultProps = Tree.defaultProps;
 
 export default TTree;

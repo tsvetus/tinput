@@ -241,6 +241,19 @@ export default function defaultStyles(templates) {
                     padding: "0"
                 }
 
+            },
+
+            tree: {
+                container: {
+                    position: "relative",
+                    top: "-1px",
+                    left: "0",
+                    zIndex: "2",
+                    boxSizing: "border-box",
+                    border: "1px solid " + templates.colors.frame,
+                    backgroundColor: templates.colors.window,
+                    padding: "8px"
+                }
             }
 
         },
