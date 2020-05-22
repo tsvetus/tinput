@@ -835,7 +835,7 @@
           "required": false
         },
         "value": {
-          "type": "string",
+          "type": "any",
           "description": "Component initial value",
           "required": false
         },
@@ -3667,7 +3667,7 @@
           "required": false
         },
         "label": {
-          "type": "string",
+          "type": "any",
           "description": "Component caption",
           "required": false
         },
