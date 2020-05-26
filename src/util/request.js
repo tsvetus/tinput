@@ -1,15 +1,17 @@
 import {clone} from './misc.js';
 
+let initial_state = window && window.INITIAL_STATE ? window.INITIAL_STATE : {};
+
 export const INITIAL_STATE = {
     wait: false,
     user: null,
     error: null,
-    message: null
-};
-
-const SERVER = {
-    endpoint: window && window.SERVER && window.SERVER.endpoint ? window.SERVER.endpoint : '',
-    division: window && window.SERVER && window.SERVER.division ? window.SERVER.division : null
+    message: null,
+    division: null,
+    endpoint: '',
+    language: 'en',
+    dictionary: {},
+    ...initial_state
 };
 
 let STORE = null;
@@ -46,6 +48,22 @@ function messageAction(data) {
     };
 }
 
+const LANGUAGE_ACTION = 'LANGUAGE_ACTION';
+function languageAction(wait) {
+    return {
+        type: LANGUAGE_ACTION,
+        wait: wait
+    };
+}
+
+const DICTIONARY_ACTION = 'DICTIONARY_ACTION';
+function dictionaryAction(data) {
+    return {
+        type: DICTIONARY_ACTION,
+        data: data
+    };
+}
+
 export function clearError() {
     return errorAction(null);
 }
@@ -74,8 +92,8 @@ export function check(store) {
 }
 
 export function login(username, password) {
-    let division = SERVER.division ?
-        '&division=' + encodeURIComponent(SERVER.division)
+    let division = INITIAL_STATE.division ?
+        '&division=' + encodeURIComponent(INITIAL_STATE.division)
          : '';
     return request ({
         url: '/api/login' +
@@ -95,6 +113,17 @@ export function logout() {
         data: {},
         success: (dispatch, data) => {
             dispatch(userAction(data));
+        }
+    });
+}
+
+export function translate(language) {
+    return request ({
+        url: '/api/message/dictionary',
+        data: {language: language},
+        success: (dispatch, data) => {
+            dispatch(languageAction(language));
+            dispatch(dictionaryAction(data));
         }
     });
 }
@@ -139,6 +168,16 @@ export function messageReducer(state = null, action = null) {
     }
 }
 
+export function dictionaryReducer(state = null, action = null) {
+    if (action === null) {
+        return state;
+    } else if (action.type === DICTIONARY_ACTION) {
+        return action.data;
+    } else {
+        return state;
+    }
+}
+
 function setState(params, state) {
     if (params.sender && params.sender.state &&
         (params.sender.mounted || params.sender.mounted === undefined)) {
@@ -147,10 +186,6 @@ function setState(params, state) {
 }
 
 export function post(params) {
-
-    if (params.endpoint) {
-        SERVER.endpoint = params.endpoint;
-    }
 
     if (!params.url) {
         return;
@@ -173,7 +208,7 @@ export function post(params) {
 
     xhr.open(
         params.method ? params.method : 'POST',
-        SERVER.endpoint + params.url
+        INITIAL_STATE.endpoint + params.url
     );
 
     xhr.withCredentials = true;
@@ -293,10 +328,6 @@ export function request(params) {
 
 export function get(params) {
 
-    if (params.endpoint) {
-        SERVER.endpoint = params.endpoint;
-    }
-
     if (!params.url) {
         return;
     }
@@ -316,7 +347,7 @@ export function get(params) {
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', SERVER.endpoint + params.url);
+    xhr.open('GET', INITIAL_STATE.endpoint + params.url);
 
     xhr.withCredentials = true;
 
@@ -385,6 +416,7 @@ export function reducer(state = null, action = null) {
     newState.user = userReducer(state.user, action);
     newState.error = errorReducer(state.error, action);
     newState.message = messageReducer(state.message, action);
+    newState.dictionary = dictionaryReducer(state.dictionary, action);
     return newState;
 }
 

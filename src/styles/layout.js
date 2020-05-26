@@ -293,6 +293,11 @@ export default {
 
         button: {
             cursor: "pointer"
+        },
+
+        tools: {
+            display: "flex",
+            alignItems: "center"
         }
 
     },

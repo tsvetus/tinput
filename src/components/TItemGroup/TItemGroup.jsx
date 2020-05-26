@@ -13,32 +13,44 @@ function getGroups(buttons, indexes, grouped, groupField) {
     let groups = {};
     if (buttons) {
         buttons.forEach((v, i) => {
-            if (grouped) {
-                let group = parseItem(v, groupField);
-                if (indexes && indexes.indexOf(i) >= 0) {
-                    if (groups[group] === undefined) {
-                        groups[group] = i;
-                    }
+            let group = grouped ? parseItem(v, groupField) : i;
+            if (indexes && indexes.indexOf(i) >= 0) {
+                if (groups[group] === undefined) {
+                    groups[group] = i;
                 }
-            } else {
-                groups[i] = i;
             }
         });
     }
     return groups;
 }
 
+function findIndex(props, value) {
+    let index = props.items.findIndex(v => {
+        return parseItem(v, props.keyField) == value;
+    });
+    return index;
+}
+
 function getIndexes(props) {
-    let indexes = props.indexes ? props.indexes : [];
+    let indexes = [];
     if (props.value !== undefined && props.items) {
-        let index = props.items.findIndex(v => {
-            return parseItem(v, props.keyField) == props.value;
-        });
-        if (index >= 0) {
-            indexes = [index];
+        if (props.value instanceof Array) {
+            props.value.forEach((v) =>{
+                let index = findIndex(props, parseItem(v, props.keyField));
+                if (index >= 0) {
+                    indexes.push(index);
+                }
+            })
+        } else {
+            let index = findIndex(props, props.value);
+            if (index >= 0) {
+                indexes = [index];
+            }
         }
     } else if (props.index >= 0) {
         indexes = [props.index];
+    } else {
+        indexes = props.indexes ? props.indexes : [];
     }
     return indexes;
 }
@@ -101,7 +113,12 @@ class TItemGroup extends React.PureComponent {
                 } else if (event.value) {
                     state = event.value;
                 }
-                let value = parseItem(event.data.item, this.props.keyField);
+                let value = null;
+                if (this.props.value instanceof Array) {
+                    value = items;
+                } else {
+                    value = parseItem(event.data.item, this.props.keyField);
+                }
                 this.props.onChange({
                     name: this.props.name,
                     data: this.props.data,
@@ -133,7 +150,7 @@ class TItemGroup extends React.PureComponent {
                 let res = {
                     key: parseItem(v, this.props.keyField),
                     value: parseItem(v, this.props.valueField),
-                    group: parseItem(v, this.props.groupField)
+                    group: this.props.grouped ? parseItem(v, this.props.groupField) : i
                 };
                 if (this.props.control.indexOf('check') >= 0 || this.props.control.indexOf('radio') >= 0) {
                     let radio = this.props.control.indexOf('radio') >= 0;
@@ -199,21 +216,21 @@ TItemGroup.propTypes = {
     label: PropTypes.string,
     /** If true only one button in group may have down state */
     grouped: PropTypes.any,
-    /** List of indexes of controls in "down/checked" state */
+    /** List of indexes of selected controls (in "down/checked" state) */
     indexes: PropTypes.arrayOf(PropTypes.number),
     /**
      * Index of control in "down/checked" state. Use "index" property instead of
-     * "indexes" when control has only single group
+     * "indexes" when control has only single group. Don't mix "indexes" with "index" or "value" props!
      */
     index: PropTypes.number,
     /**
-     * Item key value of control in "down/checked" state. Use "value" property if you prefer to work with
-     * key values instead of item indexes
+     * If "value" is Array then it contains array of selected items in form of "items" structure. Otherwise it
+     * contains key value of single selected item. Don't mix "index" with "indexes" or "value" props!
      */
-    value: PropTypes.number,
+    value: PropTypes.any,
     /**
-     * Button list. It is possible to use another names instead of "key", "value" and "group". In that case
-     * key, value and group will be first, second and third items respectively
+     * Array of buttons list. If not specified in "keyField", "valueField" ang "groupField" default array item form is:
+     * {key: ..., value: ..., group: ...}. Don't mix "value" with "indexes" or "index" props!
      */
     items: PropTypes.arrayOf(PropTypes.shape({
         /** Item key. May have any value and used as a control "name" */

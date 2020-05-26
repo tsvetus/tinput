@@ -50,18 +50,18 @@ class TTop extends React.PureComponent {
             contain(this.props.style)
         );
 
-        let icon = null;
-        let propsIcon = this.props.icon ? this.props.icon :
+        let button = null;
+        let propsButton = this.props.icon ? this.props.icon :
             this.props.button ? this.props.button : null;
-        if (propsIcon) {
-            if (typeof propsIcon === 'string') {
-                icon = <Icon
-                    name={propsIcon}
+        if (propsButton) {
+            if (typeof propsButton === 'string') {
+                button = <Icon
+                    name={propsButton}
                     style={style.button}
                     onClick={this.handleClick} />;
-            } else if (typeof propsIcon === 'object') {
-                icon = <Icon
-                    icon={propsIcon}
+            } else if (typeof propsButton === 'object') {
+                button = <Icon
+                    icon={propsButton}
                     style={style.button}
                     onClick={this.handleClick} />;
             }
@@ -100,11 +100,17 @@ class TTop extends React.PureComponent {
             });
         }
 
+        if (this.props.controls) {
+            this.props.controls.forEach((v) => {
+                tools.push(v)
+            });
+        }
+
         let caption = this.props.caption ? this.props.caption : null;
 
         return (
             <div style={style.container}>
-                {icon}
+                {button}
                 <div style={style.caption}>{caption}</div>
                 <div style={style.tools}>{tools}</div>
             </div>

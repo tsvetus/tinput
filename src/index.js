@@ -1,4 +1,5 @@
 import {
+    TComponent,
     TIcon,
     TText,
     TMask,
@@ -71,6 +72,7 @@ import {
     login,
     logout,
     check,
+    translate,
     clear,
     reducer,
     hasAuth,
@@ -82,6 +84,7 @@ import {styles, templates, registerStyles} from './styles';
 
 export {
 
+    TComponent,
     TIcon,
     TText,
     TMask,
@@ -151,6 +154,7 @@ export {
     login,
     logout,
     check,
+    translate,
     clear,
     reducer,
     hasAuth,

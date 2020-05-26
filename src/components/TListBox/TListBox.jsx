@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {ListBox, Text} from '../../lib';
+import {ListBox} from '../../lib';
 
-import {merge, contain, Provider} from '../../util';
+import {merge, contain} from '../../util';
 
 import {styles} from '../../styles';
 
@@ -11,60 +11,6 @@ import {styles} from '../../styles';
  * Represents list box
  */
 class TListBox extends React.Component {
-
-    constructor(props) {
-        super(props);
-        if (props.provider) {
-            let p = Provider.get(props.provider).getProps();
-            this.state = {
-                items: p.items ? p.items : props.items,
-                keyField: p.keyField ? p.keyField : props.keyField,
-                valueField: p.valueField ? p.valueField : props.valueField,
-                empty: p.empty ? p.empty : props.empty
-            }
-        } else {
-            this.state = {
-                items: props.items,
-                keyField: props.keyField,
-                valueField: props.valueField,
-                empty: props.empty
-            }
-        }
-    }
-
-    componentDidUpdate(old) {
-        if (old.items !== this.props.items) {
-            this.setState({items: this.props.items});
-        }
-        if (old.keyField !== this.props.keyField) {
-            this.setState({keyField: this.props.keyField});
-        }
-        if (old.valueField !== this.props.valueField) {
-            this.setState({valueField: this.props.valueField});
-        }
-        if (old.empty !== this.props.empty) {
-            this.setState({empty: this.props.empty});
-        }
-        if (old.provider !== this.props.provider && this.props.provider) {
-            let p = Provider.get(this.props.provider).getProps();
-            this.setState({
-                items: p.items ? p.items : this.state.items,
-                keyField: p.keyField ? p.keyField : this.state.keyField,
-                valueField: p.valueField ? p.valueField : this.state.valueField,
-                empty: p.empty ? p.empty : this.state.empty
-            });
-        }
-    }
-
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (nextProps.items !== this.props.items) {
-            this.setState({items: nextProps.items});
-        }
-        return (
-            (nextState.items !== this.state.items) ||
-            (nextProps.value !== this.props.value)
-        );
-    }
 
     render() {
 
@@ -86,8 +32,8 @@ class TListBox extends React.Component {
                 showEdit={this.props.showEdit}
                 timeout={this.props.timeout}
                 placeholder={this.props.placeholder}
-                empty={this.state.empty}
-                items={this.state.items}
+                empty={this.props.empty}
+                items={this.props.items}
                 provider={this.props.provider}
                 listMode={this.props.listMode}
                 showMode={this.props.showMode}
@@ -95,8 +41,8 @@ class TListBox extends React.Component {
                 readOnly={this.props.readOnly}
                 icon={this.props.icon}
                 layout={this.props.layout}
-                keyField={this.state.keyField}
-                valueField={this.state.valueField}
+                keyField={this.props.keyField}
+                valueField={this.props.valueField}
                 modal={this.props.modal}
                 tree={this.props.tree}
                 expand={this.props.expand}

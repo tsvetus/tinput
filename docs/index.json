@@ -3274,7 +3274,7 @@
         },
         "indexes": {
           "type": "arrayOf",
-          "description": "List of indexes of controls in \"down/checked\" state",
+          "description": "List of indexes of selected controls (in \"down/checked\" state)",
           "required": false,
           "defaultValue": "[]",
           "structure": {
@@ -3283,18 +3283,18 @@
         },
         "index": {
           "type": "number",
-          "description": "Index of control in \"down/checked\" state. Use \"index\" property instead of\r\n\"indexes\" when control has only single group",
+          "description": "Index of control in \"down/checked\" state. Use \"index\" property instead of\r\n\"indexes\" when control has only single group. Don't mix \"indexes\" with \"index\" or \"value\" props!",
           "required": false,
           "defaultValue": "-1"
         },
         "value": {
           "type": "number",
-          "description": "Item key value of control in \"down/checked\" state. Use \"value\" property if you prefer to work with\r\nkey values instead of item indexes",
+          "description": "If \"value\" is Array then it contains array of selected items in form of \"items\" structure. Otherwise it\r\ncontains key value of single selected item. Don't mix \"index\" with \"indexes\" or \"value\" props!",
           "required": false
         },
         "items": {
           "type": "arrayOf",
-          "description": "Button list. It is possible to use another names instead of \"key\", \"value\" and \"group\". In that case\r\nkey, value and group will be first, second and third items respectively",
+          "description": "Array of buttons list. If not specified in \"keyField\", \"valueField\" ang \"groupField\" default array item form is:\r\n{key: ..., value: ..., group: ...}. Don't mix \"value\" with \"indexes\" or \"index\" props!",
           "required": false,
           "structure": {
             "key": {
