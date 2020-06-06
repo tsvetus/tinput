@@ -28,6 +28,7 @@ import TEditExample from './components/TEdit/TEditExample.jsx';
 import TPopupExample from './components/TPopup/TPopupExample.jsx';
 import TCalendarExample from './components/TCalendar/TCalendarExample.jsx';
 import TTreeExample from './components/TTree/TTreeExample.jsx';
+import TFileExample from './components/TFile/TFileExample.jsx';
 
 export {
     TDateExample,
@@ -59,5 +60,6 @@ export {
     TEditExample,
     TPopupExample,
     TCalendarExample,
-    TTreeExample
+    TTreeExample,
+    TFileExample
 }

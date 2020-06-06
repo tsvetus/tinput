@@ -35,6 +35,7 @@ import TEdit from './TEdit';
 import TPopup from './TPopup';
 import TCalendar from './TCalendar';
 import TTree from './TTree';
+import TFile from './TFile';
 
 export {
     TComponent,
@@ -73,5 +74,6 @@ export {
     TEdit,
     TPopup,
     TCalendar,
-    TTree
+    TTree,
+    TFile
 }

@@ -35,7 +35,7 @@ class TResponse extends React.Component {
         );
 
         let content = null;
-        if (this.props.children) {
+//        if (this.props.children) {
             if (this.props.error || this.props.message) {
                 content =
                     <TButton
@@ -48,7 +48,7 @@ class TResponse extends React.Component {
             } else {
                 content = this.props.children;
             }
-        }
+//        }
 
         let error = this.props.error ?
             <div style={style.error}

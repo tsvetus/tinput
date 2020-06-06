@@ -916,6 +916,261 @@
         }
       }
     },
+    "TFile": {
+      "description": "Component representing File picker",
+      "displayName": "TFile",
+      "methods": [
+        {
+          "name": "change",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleIcon",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "upload",
+          "docblock": null,
+          "modifiers": [
+            "static"
+          ],
+          "params": [
+            {
+              "name": "params",
+              "optional": false,
+              "type": null
+            },
+            {
+              "name": "vars",
+              "optional": false,
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TFileExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label"
+            },
+            "edit": {
+              "type": "object",
+              "description": "Style for component editor"
+            },
+            "icon": {
+              "type": "object",
+              "description": "Style for component icon"
+            },
+            "invalid": {
+              "type": "shape",
+              "description": "Style for invalid component state. Contains all listed above fields:",
+              "structure": {
+                "container": {
+                  "type": "object"
+                },
+                "label": {
+                  "type": "object"
+                },
+                "edit": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "value": {
+          "type": "objectOf",
+          "description": "File object",
+          "required": false,
+          "structure": {
+            "name": {},
+            "raw": {}
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "label": {
+          "type": "string",
+          "description": "Label caption. Default is undefined and label is hidden",
+          "required": false
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon name to show. Default is undefined and icon is hidden",
+          "required": false,
+          "defaultValue": "'open'"
+        },
+        "nestedIcon": {
+          "type": "any",
+          "description": "Determines icon location in or out of the editor box",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
+          "required": false,
+          "defaultValue": "300"
+        },
+        "placeholder": {
+          "type": "string",
+          "description": "Text to show when editor is empty",
+          "required": false
+        },
+        "layout": {
+          "type": "enum",
+          "description": "Label position towards text editor. Can be one of:",
+          "required": false,
+          "defaultValue": "'left'",
+          "structure": {
+            "'top'": {},
+            "'left'": {}
+          }
+        },
+        "empty": {
+          "type": "any",
+          "description": "Value appeared in onChange event when editor is empty. Default is \"null\"",
+          "required": false,
+          "defaultValue": "null"
+        },
+        "readOnly": {
+          "type": "any",
+          "description": "Prevents from changing component value from user input, Default is \"false\"",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On text change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "string",
+              "description": "Entered text."
+            }
+          },
+          "required": false
+        },
+        "onIcon": {
+          "type": "func",
+          "description": "On icon click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.icon": {
+              "name": "event.icon",
+              "type": "string",
+              "description": "Clicked icon name"
+            }
+          },
+          "required": false
+        },
+        "onValidate": {
+          "type": "func",
+          "description": "On text validate event. Fires if text validation is needed. Must return \"true\" if text is valid or \"false\" in other cases ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "string",
+              "description": "Text to validate"
+            }
+          },
+          "required": false
+        },
+        "onKeyDown": {
+          "type": "func",
+          "description": "",
+          "required": false
+        },
+        "required": {
+          "required": false,
+          "defaultValue": "'always'"
+        }
+      }
+    },
     "TTime": {
       "description": "Time editor with time value validation",
       "displayName": "TTime",
@@ -3288,7 +3543,7 @@
           "defaultValue": "-1"
         },
         "value": {
-          "type": "number",
+          "type": "any",
           "description": "If \"value\" is Array then it contains array of selected items in form of \"items\" structure. Otherwise it\r\ncontains key value of single selected item. Don't mix \"index\" with \"indexes\" or \"value\" props!",
           "required": false
         },

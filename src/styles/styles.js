@@ -928,6 +928,10 @@ export default function defaultStyles(templates) {
                     }
                 }
             }
+        },
+
+        TFile: {
+
         }
 
     }

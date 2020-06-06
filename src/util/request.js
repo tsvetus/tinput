@@ -204,26 +204,16 @@ export function post(params) {
         }
     }
 
+    let contentType = params.contentType ? params.contentType : 'application/json; charset=UTF-8';
+
     let xhr = new XMLHttpRequest();
+
+    xhr.withCredentials = true;
 
     xhr.open(
         params.method ? params.method : 'POST',
         INITIAL_STATE.endpoint + params.url
     );
-
-    xhr.withCredentials = true;
-
-    let contentType = params.contentType ? params.contentType : 'application/json; charset=UTF-8';
-
-    if (contentType.indexOf('application/json') >= 0) {
-        xhr.setRequestHeader(
-            'Content-Type',
-            contentType
-        );
-        xhr.send(JSON.stringify(params.data));
-    } else {
-        xhr.send(params.data);
-    }
 
     xhr.onreadystatechange = function() {
 
@@ -292,6 +282,16 @@ export function post(params) {
             params.default();
         }
 
+    };
+
+    if (contentType.indexOf('application/json') >= 0) {
+        xhr.setRequestHeader(
+            'Content-Type',
+            contentType
+        );
+        xhr.send(JSON.stringify(params.data));
+    } else {
+        xhr.send(params.data);
     }
 
 }
@@ -347,12 +347,11 @@ export function get(params) {
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', INITIAL_STATE.endpoint + params.url);
-
     xhr.withCredentials = true;
 
     xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
-    xhr.send(params.data);
+
+    xhr.open('GET', INITIAL_STATE.endpoint + params.url);
 
     xhr.onreadystatechange = function() {
 
@@ -399,7 +398,9 @@ export function get(params) {
             params.default();
         }
 
-    }
+    };
+
+    xhr.send(params.data);
 
 }
 

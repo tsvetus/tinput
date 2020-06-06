@@ -45,7 +45,7 @@ class TComponent extends React.Component {
         if (this.props.dict && this.props.dict[key]) {
             return this.props.dict[key];
         } else {
-            return key;
+            return '';
         }
     }
 

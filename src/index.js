@@ -35,7 +35,8 @@ import {
     TEdit,
     TPopup,
     TCalendar,
-    TTree
+    TTree,
+    TFile
 } from './components';
 
 import {
@@ -121,6 +122,7 @@ export {
     TPopup,
     TCalendar,
     TTree,
+    TFile,
 
     download,
     clone,
