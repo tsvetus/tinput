@@ -12,11 +12,22 @@ const ITEMS = [
   {code: 7, name: 'Item7', group: 1}
 ];
 
+const ARRAY = [
+    {code: 1, name: 'Item1'},
+    {code: 2, name: 'Item2'},
+    {code: 3, name: 'Item3'},
+    {code: 4, name: 'Item4'},
+    {code: 5, name: 'Item5'},
+    {code: 6, name: 'Item6'},
+    {code: 7, name: 'Item7'}
+];
+
 class TItemGroupExample extends React.Component {
 
     constructor(props) {
       super(props);
       this.state = {
+        array: [{code: 3, name: 'Item3'}, {code: 5, name: 'Item5'}],
         items: [],
         event: ''
       };
@@ -26,6 +37,7 @@ class TItemGroupExample extends React.Component {
 
     change(event) {
       this.setState({
+        [event.name]: event.value,
         event: this.state.event + ' ' +
           JSON.stringify(event)
       });
@@ -119,6 +131,31 @@ class TItemGroupExample extends React.Component {
               valueField={'name'}
               checked={1}
               unchecked={0}
+              onChange={this.change} />
+
+          <TItemGroup
+              label={'Array value without groups'}
+              name={'array'}
+              style={{
+                  container: {margin: "0 0 16px 0"},
+                  content: {
+                      justifyContent: "space-around",
+                      padding: "16px 0 16px 0"
+                  },
+                  control: {
+                      container: {
+                          width: "72px",
+                          margin: "8px"
+                      }
+                  }
+              }}
+              layout={'right'}
+              control={'check'}
+              grouped={false}
+              value={this.state.array}
+              items={ARRAY}
+              keyField={'code'}
+              valueField={'name'}
               onChange={this.change} />
 
         <TMemo

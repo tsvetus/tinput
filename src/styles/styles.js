@@ -148,7 +148,6 @@ export default function defaultStyles(templates) {
                 padding: "4px 4px 2px 4px",
                 border: "1px solid " + templates.colors.frame,
                 color: templates.colors.text,
-                outline: "none",
                 textAlign: "left",
                 ...templates.fonts.common
             },
@@ -178,23 +177,12 @@ export default function defaultStyles(templates) {
             },
 
             nested: {
-
-                edit: {
-                    borderRight: "none",
-                    borderTopRightRadius: "0",
-                    borderBottomRightRadius: "0"
-                },
-
                 icon: {
                     container: {
-                        borderLeft: "none",
-                        borderTopLeftRadius: "0",
-                        borderBottomLeftRadius: "0",
                         margin: "0",
-                        padding: "4px"
+                        padding: "0 0 2px 0"
                     }
                 }
-
             }
 
         },
@@ -253,6 +241,19 @@ export default function defaultStyles(templates) {
                     padding: "0"
                 }
 
+            },
+
+            tree: {
+                container: {
+                    position: "relative",
+                    top: "-1px",
+                    left: "0",
+                    zIndex: "2",
+                    boxSizing: "border-box",
+                    border: "1px solid " + templates.colors.frame,
+                    backgroundColor: templates.colors.window,
+                    padding: "8px"
+                }
             }
 
         },
@@ -362,9 +363,11 @@ export default function defaultStyles(templates) {
             },
 
             button: {
-                ...templates.fonts.common,
-                margin: "4px",
-                textAlign: "center"
+                container: {
+                    ...templates.fonts.common,
+                    margin: "4px",
+                    textAlign: "center"
+                }
             },
 
             buttons: {
@@ -476,7 +479,8 @@ export default function defaultStyles(templates) {
             icon: {
                 color: templates.colors.border,
                 height: "32px",
-                width: "32px"
+                width: "32px",
+                margin: "0 0 0 8px"
             },
 
             clickable: {
@@ -800,7 +804,8 @@ export default function defaultStyles(templates) {
 
         TPopup: {
             frame: {
-                cursor: "pointer"
+                cursor: "pointer",
+                width: "100%"
             },
             label: {
                 cursor: "pointer",
@@ -809,7 +814,7 @@ export default function defaultStyles(templates) {
             },
             icon: {
                 container: {
-                    cursor: "pointer",
+                    cursor: "pointer"
                 }
             }
         },
@@ -925,6 +930,10 @@ export default function defaultStyles(templates) {
                     }
                 }
             }
+        },
+
+        TFile: {
+
         }
 
     }

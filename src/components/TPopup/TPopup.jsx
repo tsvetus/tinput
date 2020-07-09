@@ -99,7 +99,7 @@ TPopup.propTypes = {
     /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
     /** Component caption */
-    label: PropTypes.string,
+    label: PropTypes.any,
     /** Shows/Hides content tab */
     show: PropTypes.any,
     /** Show/Hide content tab state indicator */

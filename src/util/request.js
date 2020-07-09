@@ -1,13 +1,18 @@
 import {clone} from './misc.js';
 
+let initial_state = window && window.INITIAL_STATE ? window.INITIAL_STATE : {};
+
 export const INITIAL_STATE = {
     wait: false,
     user: null,
     error: null,
-    message: null
+    message: null,
+    division: null,
+    endpoint: '',
+    language: 'en',
+    dictionary: {},
+    ...initial_state
 };
-
-let ENDPOINT = '';
 
 let STORE = null;
 
@@ -43,6 +48,22 @@ function messageAction(data) {
     };
 }
 
+const LANGUAGE_ACTION = 'LANGUAGE_ACTION';
+function languageAction(wait) {
+    return {
+        type: LANGUAGE_ACTION,
+        wait: wait
+    };
+}
+
+const DICTIONARY_ACTION = 'DICTIONARY_ACTION';
+function dictionaryAction(data) {
+    return {
+        type: DICTIONARY_ACTION,
+        data: data
+    };
+}
+
 export function clearError() {
     return errorAction(null);
 }
@@ -71,9 +92,14 @@ export function check(store) {
 }
 
 export function login(username, password) {
+    let division = INITIAL_STATE.division ?
+        '&division=' + encodeURIComponent(INITIAL_STATE.division)
+         : '';
     return request ({
-        url: '/api/login?username=' + encodeURIComponent(username) +
-            '&password=' + encodeURIComponent(password),
+        url: '/api/login' +
+            '?username=' + encodeURIComponent(username) +
+            '&password=' + encodeURIComponent(password) +
+            division,
         data: {},
         success: (dispatch, data) => {
             dispatch(userAction(data));
@@ -87,6 +113,17 @@ export function logout() {
         data: {},
         success: (dispatch, data) => {
             dispatch(userAction(data));
+        }
+    });
+}
+
+export function translate(language) {
+    return request ({
+        url: '/api/message/dictionary',
+        data: {language: language},
+        success: (dispatch, data) => {
+            dispatch(languageAction(language));
+            dispatch(dictionaryAction(data));
         }
     });
 }
@@ -131,6 +168,16 @@ export function messageReducer(state = null, action = null) {
     }
 }
 
+export function dictionaryReducer(state = null, action = null) {
+    if (action === null) {
+        return state;
+    } else if (action.type === DICTIONARY_ACTION) {
+        return action.data;
+    } else {
+        return state;
+    }
+}
+
 function setState(params, state) {
     if (params.sender && params.sender.state &&
         (params.sender.mounted || params.sender.mounted === undefined)) {
@@ -139,10 +186,6 @@ function setState(params, state) {
 }
 
 export function post(params) {
-
-    if (params.endpoint) {
-        ENDPOINT = params.endpoint;
-    }
 
     if (!params.url) {
         return;
@@ -161,26 +204,16 @@ export function post(params) {
         }
     }
 
-    let xhr = new XMLHttpRequest();
+    let contentType = params.contentType ? params.contentType : 'application/json; charset=UTF-8';
 
-    xhr.open(
-        params.method ? params.method : 'POST',
-        ENDPOINT + params.url
-    );
+    let xhr = new XMLHttpRequest();
 
     xhr.withCredentials = true;
 
-    let contentType = params.contentType ? params.contentType : 'application/json; charset=UTF-8';
-
-    if (contentType.indexOf('application/json') >= 0) {
-        xhr.setRequestHeader(
-            'Content-Type',
-            contentType
-        );
-        xhr.send(JSON.stringify(params.data));
-    } else {
-        xhr.send(params.data);
-    }
+    xhr.open(
+        params.method ? params.method : 'POST',
+        INITIAL_STATE.endpoint + params.url
+    );
 
     xhr.onreadystatechange = function() {
 
@@ -249,6 +282,16 @@ export function post(params) {
             params.default();
         }
 
+    };
+
+    if (contentType.indexOf('application/json') >= 0) {
+        xhr.setRequestHeader(
+            'Content-Type',
+            contentType
+        );
+        xhr.send(JSON.stringify(params.data));
+    } else {
+        xhr.send(params.data);
     }
 
 }
@@ -283,33 +326,7 @@ export function request(params) {
     };
 }
 
-// export function get(params) {
-// 	let xhr = new XMLHttpRequest();
-// 	xhr.open('GET', params.url, true);
-// 	xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
-//     xhr.withCredentials = true;
-// 	xhr.send(JSON.stringify(params.data));
-// 	xhr.onreadystatechange = function() {
-// 	    if (xhr.readyState !== 4) {
-// 		    return;
-// 	    }
-// 	    if (xhr.status !== 200) {
-// 	        if (params.fail) {
-// 	            params.fail(xhr.status, {message: xhr.statusText});
-// 	        }
-// 	    } else {
-// 	        if (params.success) {
-// 	            params.success(xhr.responseText);
-// 	        }
-// 	    }
-// 	};
-// }
-
 export function get(params) {
-
-    if (params.endpoint) {
-        ENDPOINT = params.endpoint;
-    }
 
     if (!params.url) {
         return;
@@ -330,12 +347,11 @@ export function get(params) {
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET',ENDPOINT + params.url);
-
     xhr.withCredentials = true;
 
     xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
-    xhr.send(params.data);
+
+    xhr.open('GET', INITIAL_STATE.endpoint + params.url);
 
     xhr.onreadystatechange = function() {
 
@@ -382,7 +398,9 @@ export function get(params) {
             params.default();
         }
 
-    }
+    };
+
+    xhr.send(params.data);
 
 }
 
@@ -399,6 +417,7 @@ export function reducer(state = null, action = null) {
     newState.user = userReducer(state.user, action);
     newState.error = errorReducer(state.error, action);
     newState.message = messageReducer(state.message, action);
+    newState.dictionary = dictionaryReducer(state.dictionary, action);
     return newState;
 }
 

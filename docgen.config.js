@@ -43,6 +43,11 @@ module.exports = {
             name: "TEditExample"
         }
     }, {
+        name: "TFile",
+        example: {
+            name: "TFileExample"
+        }
+    }, {
         name: "TTime",
         example: {
             name: "TTimeExample"

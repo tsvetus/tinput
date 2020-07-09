@@ -835,7 +835,7 @@
           "required": false
         },
         "value": {
-          "type": "string",
+          "type": "any",
           "description": "Component initial value",
           "required": false
         },
@@ -913,6 +913,261 @@
             }
           },
           "required": false
+        }
+      }
+    },
+    "TFile": {
+      "description": "Component representing File picker",
+      "displayName": "TFile",
+      "methods": [
+        {
+          "name": "change",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "handleIcon",
+          "docblock": null,
+          "modifiers": [],
+          "params": [
+            {
+              "name": "event",
+              "type": null
+            }
+          ],
+          "returns": null
+        },
+        {
+          "name": "upload",
+          "docblock": null,
+          "modifiers": [
+            "static"
+          ],
+          "params": [
+            {
+              "name": "params",
+              "optional": false,
+              "type": null
+            },
+            {
+              "name": "vars",
+              "optional": false,
+              "type": null
+            }
+          ],
+          "returns": null
+        }
+      ],
+      "example": {
+        "name": "TFileExample"
+      },
+      "props": {
+        "style": {
+          "type": "shape",
+          "description": "Component style:",
+          "required": false,
+          "structure": {
+            "container": {
+              "type": "object",
+              "description": "Style for outer component container"
+            },
+            "label": {
+              "type": "object",
+              "description": "Style for component label"
+            },
+            "edit": {
+              "type": "object",
+              "description": "Style for component editor"
+            },
+            "icon": {
+              "type": "object",
+              "description": "Style for component icon"
+            },
+            "invalid": {
+              "type": "shape",
+              "description": "Style for invalid component state. Contains all listed above fields:",
+              "structure": {
+                "container": {
+                  "type": "object"
+                },
+                "label": {
+                  "type": "object"
+                },
+                "edit": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "value": {
+          "type": "objectOf",
+          "description": "File object",
+          "required": false,
+          "structure": {
+            "name": {},
+            "raw": {}
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Any component name that associated with component and returned in \"onChange\" event in \"event.name\" field.\r\nIn addition component name can be used in global styles registered by \"registerStyles\" function to\r\nassociate particular style with this component",
+          "required": false
+        },
+        "data": {
+          "type": "any",
+          "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
+          "required": false
+        },
+        "label": {
+          "type": "string",
+          "description": "Label caption. Default is undefined and label is hidden",
+          "required": false
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon name to show. Default is undefined and icon is hidden",
+          "required": false,
+          "defaultValue": "'open'"
+        },
+        "nestedIcon": {
+          "type": "any",
+          "description": "Determines icon location in or out of the editor box",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Represents timeout for \"onChange\" event in milliseconds. Default is \"700\"",
+          "required": false,
+          "defaultValue": "300"
+        },
+        "placeholder": {
+          "type": "string",
+          "description": "Text to show when editor is empty",
+          "required": false
+        },
+        "layout": {
+          "type": "enum",
+          "description": "Label position towards text editor. Can be one of:",
+          "required": false,
+          "defaultValue": "'left'",
+          "structure": {
+            "'top'": {},
+            "'left'": {}
+          }
+        },
+        "empty": {
+          "type": "any",
+          "description": "Value appeared in onChange event when editor is empty. Default is \"null\"",
+          "required": false,
+          "defaultValue": "null"
+        },
+        "readOnly": {
+          "type": "any",
+          "description": "Prevents from changing component value from user input, Default is \"false\"",
+          "required": false,
+          "defaultValue": "true"
+        },
+        "onChange": {
+          "type": "func",
+          "description": "On text change event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "string",
+              "description": "Entered text."
+            }
+          },
+          "required": false
+        },
+        "onIcon": {
+          "type": "func",
+          "description": "On icon click event ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.icon": {
+              "name": "event.icon",
+              "type": "string",
+              "description": "Clicked icon name"
+            }
+          },
+          "required": false
+        },
+        "onValidate": {
+          "type": "func",
+          "description": "On text validate event. Fires if text validation is needed. Must return \"true\" if text is valid or \"false\" in other cases ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "string",
+              "description": "Text to validate"
+            }
+          },
+          "required": false
+        },
+        "onKeyDown": {
+          "type": "func",
+          "description": "",
+          "required": false
+        },
+        "required": {
+          "required": false,
+          "defaultValue": "'always'"
         }
       }
     },
@@ -1522,6 +1777,10 @@
             "modal": {
               "type": "object",
               "description": "Style for modal list view. See \"TModal\"component description for detail style\r\nstructure"
+            },
+            "tree": {
+              "type": "object",
+              "description": "Style for tree list view. See \"TTree\"component description for detail style\r\nstructure"
             }
           }
         },
@@ -1649,6 +1908,16 @@
           "description": "If true then items list appears in modal window. If \"modal\" is number it indicates\r\nminimum number of list items necessary to show list in modal view",
           "required": false,
           "defaultValue": "false"
+        },
+        "tree": {
+          "type": "any",
+          "description": "If true then items list represented as tree view",
+          "required": false
+        },
+        "expand": {
+          "type": "number",
+          "description": "Tree view expand level. First level is 0",
+          "required": false
         },
         "caption": {
           "type": "any",
@@ -2286,32 +2555,7 @@
     "TTree": {
       "description": "Component representing simple tree view",
       "displayName": "TTree",
-      "methods": [
-        {
-          "name": "updateItems",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "items",
-              "type": null
-            }
-          ],
-          "returns": null
-        },
-        {
-          "name": "handleClick",
-          "docblock": null,
-          "modifiers": [],
-          "params": [
-            {
-              "name": "event",
-              "type": null
-            }
-          ],
-          "returns": null
-        }
-      ],
+      "methods": [],
       "example": {
         "name": "TTreeExample"
       },
@@ -2368,7 +2612,7 @@
           }
         },
         "value": {
-          "type": "string",
+          "type": "any",
           "description": "Component initial selected item key value",
           "required": false
         },
@@ -2383,9 +2627,13 @@
           "required": false
         },
         "items": {
-          "type": "array",
+          "type": "union",
           "description": "Items object tree. Contains array of key/value pairs and nested items array in optional field\r\nnamed \"items\". The key values must be unique through out entire items set!",
-          "required": false
+          "required": false,
+          "structure": {
+            "array": {},
+            "object": {}
+          }
         },
         "showSelected": {
           "type": "any",
@@ -2396,7 +2644,6 @@
           "type": "union",
           "description": "Specifies key field name if it is other than \"key\"",
           "required": false,
-          "defaultValue": "['id', 'key', 'code']",
           "structure": {
             "string": {},
             "array": {}
@@ -2406,7 +2653,6 @@
           "type": "union",
           "description": "Specifies value field name if it is other than \"value\"",
           "required": false,
-          "defaultValue": "['name', 'value', 'caption']",
           "structure": {
             "string": {},
             "array": {}
@@ -2415,14 +2661,12 @@
         "listMode": {
           "type": "string",
           "description": "Determines what part of \"item\" should be shown in dropdown list",
-          "required": false,
-          "defaultValue": "'val'"
+          "required": false
         },
         "expand": {
           "type": "number",
           "description": "Indicates level to expand on create. First level is 0",
-          "required": false,
-          "defaultValue": "-1"
+          "required": false
         },
         "onChange": {
           "type": "func",
@@ -2450,10 +2694,6 @@
             }
           },
           "required": false
-        },
-        "showMode": {
-          "required": false,
-          "defaultValue": "'val'"
         }
       }
     },
@@ -3289,7 +3529,7 @@
         },
         "indexes": {
           "type": "arrayOf",
-          "description": "List of indexes of controls in \"down/checked\" state",
+          "description": "List of indexes of selected controls (in \"down/checked\" state)",
           "required": false,
           "defaultValue": "[]",
           "structure": {
@@ -3298,18 +3538,18 @@
         },
         "index": {
           "type": "number",
-          "description": "Index of control in \"down/checked\" state. Use \"index\" property instead of\r\n\"indexes\" when control has only single group",
+          "description": "Index of control in \"down/checked\" state. Use \"index\" property instead of\r\n\"indexes\" when control has only single group. Don't mix \"indexes\" with \"index\" or \"value\" props!",
           "required": false,
           "defaultValue": "-1"
         },
         "value": {
-          "type": "number",
-          "description": "Item key value of control in \"down/checked\" state. Use \"value\" property if you prefer to work with\r\nkey values instead of item indexes",
+          "type": "any",
+          "description": "If \"value\" is Array then it contains array of selected items in form of \"items\" structure. Otherwise it\r\ncontains key value of single selected item. Don't mix \"index\" with \"indexes\" or \"value\" props!",
           "required": false
         },
         "items": {
           "type": "arrayOf",
-          "description": "Button list. It is possible to use another names instead of \"key\", \"value\" and \"group\". In that case\r\nkey, value and group will be first, second and third items respectively",
+          "description": "Array of buttons list. If not specified in \"keyField\", \"valueField\" ang \"groupField\" default array item form is:\r\n{key: ..., value: ..., group: ...}. Don't mix \"value\" with \"indexes\" or \"index\" props!",
           "required": false,
           "structure": {
             "key": {
@@ -3682,7 +3922,7 @@
           "required": false
         },
         "label": {
-          "type": "string",
+          "type": "any",
           "description": "Component caption",
           "required": false
         },
@@ -3780,7 +4020,7 @@
             },
             "button": {
               "type": "object",
-              "description": "Style for main menu button"
+              "description": "Style for main menu button appeared in the left corner of component"
             },
             "caption": {
               "type": "object",
@@ -3806,7 +4046,7 @@
           "description": "Any data that associated with component and returned in \"onChange\" event in \"event.data\" field",
           "required": false
         },
-        "icon": {
+        "button": {
           "type": "union",
           "description": "Name of the main menu icon appeared in the left corner of component",
           "required": false,
@@ -3838,9 +4078,17 @@
               "type": "object",
               "description": "Tool icon custom style"
             },
+            "wait": {
+              "type": "any",
+              "description": "When \"true\" icon appears in grey color"
+            },
             "rotateTime": {
               "type": "number",
               "description": "If above zero \"rotateTime\" denotes icon rotation speed in milliseconds"
+            },
+            "rotate": {
+              "type": "any",
+              "description": "When \"true\" icon rotates and changes it's color to red"
             },
             "active": {
               "type": "any",

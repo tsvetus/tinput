@@ -4,7 +4,8 @@ import {TTree, TGroup, TMemo} from 'tinput';
 
 const ITEMS = [
   {id: 1, name: 'item 1'},
-  {id: 2, name: 'item 3', items: [
+  {id: 2, name: 'item 2'},
+  {id: 3, name: 'item 3', items: [
     {id: 4, name: 'item 4', items: [
       {id: 5, name: 'item 5'},
       {id: 6, name: 'item 6', items: [
@@ -24,11 +25,11 @@ class TTreeExample extends React.Component {
     this.state = {
       event: ''
     };
-    this.click = this.click.bind(this);
+    this.change = this.change.bind(this);
     this.clear = this.clear.bind(this);
   }
 
-  click(event) {
+  change(event) {
     this.setState({
       event: this.state.event + ' ' +
         JSON.stringify(event)
@@ -57,7 +58,7 @@ class TTreeExample extends React.Component {
             items={ITEMS}
             showSelected={true}
             expand={1}
-            onClick={this.click}/&gt;
+            onChange={this.change}/&gt;
 
         &lt;/TGroup&gt;
 

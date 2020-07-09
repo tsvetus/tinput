@@ -1,6 +1,6 @@
 {
   "name": "tinput",
-  "version": "2.3.35",
+  "version": "2.3.42",
   "description": "Set of visual React components",
   "main": "./index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
     "path": "^0.12.7",
-    "react-docgen": "^5.2.0",
+    "react-docgen": "^5.3.0",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"

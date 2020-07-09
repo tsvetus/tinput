@@ -1,3 +1,4 @@
+import TComponent from './TComponent';
 import TIcon from './TIcon';
 import TText from './TText';
 import TMask from './TMask';
@@ -34,8 +35,10 @@ import TEdit from './TEdit';
 import TPopup from './TPopup';
 import TCalendar from './TCalendar';
 import TTree from './TTree';
+import TFile from './TFile';
 
 export {
+    TComponent,
     TIcon,
     TText,
     TMask,
@@ -71,5 +74,6 @@ export {
     TEdit,
     TPopup,
     TCalendar,
-    TTree
+    TTree,
+    TFile
 }

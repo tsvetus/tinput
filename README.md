@@ -19,6 +19,7 @@ Buttons and icons:
 * `TIcon`
 
 Grids and lists:
+* `TTree`
 * `TGrid`
 * `TTable`
 * `TRibbon`

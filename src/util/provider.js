@@ -1,47 +1,38 @@
-import {post} from './request.js';
-import {clone} from './misc.js';
+import {post} from "./request";
 
-const providers = {};
+const list = {};
 
-class Provider {
+export default class Provider {
 
-    constructor (props) {
-        this.getProps = this.getProps.bind(this);
-        this.props = clone(props);
+    constructor (params) {
+        this.name = params.name;
+        this.sender = params.sender;
+        this.target = params.target ? params.target : 'items';
+        this.url = params.url;
+        this.data = params.data ? params.data : {};
+        this.request = this.request.bind(this);
+        this.refresh = this.refresh.bind(this);
     }
 
-    getProps() {
-        return this.props;
+    request() {
+        post({
+            url: this.url,
+            data: this.data,
+            sender: this.sender,
+            target: this.target,
+            success: (items) => {
+                list[this.name] = items;
+            }
+        });
+    }
+
+    refresh() {
+        let items = list[this.name];
+        if (items) {
+            this.sender.setState({[this.target]: items});
+        } else {
+            this.request();
+        }
     }
 
 }
-
-Provider.get = function(name) {
-    return providers[name] ? providers[name] : {};
-};
-
-Provider.create = function(params, props) {
-    let name = params.name ? params.name : params.url;
-    if (providers[name] === undefined) {
-        providers[name] = null;
-        if (props && props.items) {
-            providers[name] = new Provider({
-                ...props,
-                items: items
-            });
-        } else {
-            post({
-                url: params.url,
-                data: params.data ? params.data : {},
-                success: (items) => {
-                    providers[name] = new Provider({
-                        ...props,
-                        items: items
-                    });
-                }
-            });
-        }
-    }
-};
-
-export default Provider;

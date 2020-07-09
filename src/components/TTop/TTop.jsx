@@ -50,16 +50,18 @@ class TTop extends React.PureComponent {
             contain(this.props.style)
         );
 
-        let icon = null;
-        if (this.props.icon) {
-            if (typeof this.props.icon === 'string') {
-                icon = <Icon
-                    name={this.props.icon}
+        let button = null;
+        let propsButton = this.props.icon ? this.props.icon :
+            this.props.button ? this.props.button : null;
+        if (propsButton) {
+            if (typeof propsButton === 'string') {
+                button = <Icon
+                    name={propsButton}
                     style={style.button}
                     onClick={this.handleClick} />;
-            } else if (typeof this.props.icon === 'object') {
-                icon = <Icon
-                    icon={this.props.icon}
+            } else if (typeof propsButton === 'object') {
+                button = <Icon
+                    icon={propsButton}
                     style={style.button}
                     onClick={this.handleClick} />;
             }
@@ -89,6 +91,7 @@ class TTop extends React.PureComponent {
                                 name={v.icon}
                                 onClick={this.iconClick}
                                 style={st}
+                                wait={v.wait}
                                 rotateTime={rotateTime} />);
                     } else if (React.isValidElement(v.icon)) {
                         tools.push(v.icon);
@@ -97,11 +100,17 @@ class TTop extends React.PureComponent {
             });
         }
 
+        if (this.props.controls) {
+            this.props.controls.forEach((v) => {
+                tools.push(v)
+            });
+        }
+
         let caption = this.props.caption ? this.props.caption : null;
 
         return (
             <div style={style.container}>
-                {icon}
+                {button}
                 <div style={style.caption}>{caption}</div>
                 <div style={style.tools}>{tools}</div>
             </div>
@@ -116,7 +125,7 @@ TTop.propTypes = {
     style: PropTypes.shape({
         /** Style for outer component container */
         container: PropTypes.object,
-        /** Style for main menu button */
+        /** Style for main menu button appeared in the left corner of component */
         button: PropTypes.object,
         /** Style for caption */
         caption: PropTypes.object,
@@ -134,7 +143,7 @@ TTop.propTypes = {
     /** Any data that associated with component and returned in "onChange" event in "event.data" field */
     data: PropTypes.any,
     /** Name of the main menu icon appeared in the left corner of component */
-    icon: PropTypes.oneOfType([
+    button: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object
     ]),
@@ -148,8 +157,12 @@ TTop.propTypes = {
         onClick: PropTypes.func,
         /** Tool icon custom style */
         style: PropTypes.object,
+        /** When "true" icon appears in grey color */
+        wait: PropTypes.any,
         /** If above zero "rotateTime" denotes icon rotation speed in milliseconds */
         rotateTime: PropTypes.number,
+        /** When "true" icon rotates and changes it's color to red */
+        rotate: PropTypes.any,
         /** Set "active" to false to temporary hide icon */
         active: PropTypes.any
     })),
@@ -164,7 +177,7 @@ TTop.propTypes = {
 };
 
 TTop.defaultProps = {
-    icon: 'menu'
+    button: 'menu'
 };
 
 export default TTop;
