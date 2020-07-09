@@ -363,9 +363,11 @@ export default function defaultStyles(templates) {
             },
 
             button: {
-                ...templates.fonts.common,
-                margin: "4px",
-                textAlign: "center"
+                container: {
+                    ...templates.fonts.common,
+                    margin: "4px",
+                    textAlign: "center"
+                }
             },
 
             buttons: {

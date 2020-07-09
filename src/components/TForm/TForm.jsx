@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {merge} from '../../util';
+import {merge, contain} from '../../util';
 
 import Modal from '../../lib/Modal';
 
@@ -61,9 +61,15 @@ class TForm extends React.PureComponent {
         let buttons = [];
         if (propButtons) {
             for (let key in propButtons) {
-                let buttonStyle = merge(style.button, style.buttons[key]);
+                let buttonStyle = merge(
+                    contain(style.button),
+                    contain(style.buttons[key])
+                );
                 if (this.props.wait) {
-                    buttonStyle = style.buttons.wait;
+                    buttonStyle = merge(
+                        buttonStyle,
+                        contain(style.buttons.wait)
+                    );
                 }
                 buttons.push(
                     <TButton
