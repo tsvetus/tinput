@@ -347,11 +347,15 @@ export function get(params) {
 
     let xhr = new XMLHttpRequest();
 
+    //xhr.withCredentials = true;
+
+    //xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
+
+    xhr.open('GET', INITIAL_STATE.endpoint + params.url);
+
     xhr.withCredentials = true;
 
     xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
-
-    xhr.open('GET', INITIAL_STATE.endpoint + params.url);
 
     xhr.onreadystatechange = function() {
 
