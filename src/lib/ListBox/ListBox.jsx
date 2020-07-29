@@ -314,8 +314,11 @@ class ListBox extends React.PureComponent {
         }
 
         let list = null;
+
         if (this.state.showList && this.helper.hasItems()) {
+
             let comp = null;
+
             if (this.props.tree) {
                 comp =
                     <Tree
@@ -339,6 +342,7 @@ class ListBox extends React.PureComponent {
                         items={this.helper.getListItems()}
                         onClick={this.handleItemClick} />;
             }
+
             if (this.isModal()) {
                 let ms = merge(style.modal, this.getContainerStyle());
                 list =
@@ -354,6 +358,7 @@ class ListBox extends React.PureComponent {
             } else {
                 list = comp;
             }
+
         }
 
         return (

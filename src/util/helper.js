@@ -271,8 +271,8 @@ export class Helper {
     }
 
     getOriginalItem(value) {
-        for (let i=0; i<this.items.length; i++) {
-            if (this.items[i].key === value) {
+        for (let i=0; i<this.original.length; i++) {
+            if (this.original[i][this.struct.key] === value) {
                 return this.original[i];
             } else if (this.items[i].helper) {
                 let item = this.items[i].helper.getOriginalItem(value);
