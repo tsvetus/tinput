@@ -5,34 +5,15 @@ import {Mask, Icon} from '../../lib';
 
 import {merge, compare, clone} from '../../util';
 
-function copyStyle(style) {
-    return {
-        border: style.border,
-        borderRadius: style.borderRadius,
-        backgroundColor: style.backgroundColor
-    }
-}
-
 function parseStyle(props) {
     let v = props.style ? clone(props.style) : {};
-    let n = v.nested;
     let i = merge(v, v.invalid);
-    // if (props.icon && props.nestedIcon) {
-    //     v.icon = merge(v.icon, {container: copyStyle(v.edit)}, n.icon);
-    //     v.edit = merge(v.edit, n.edit);
-    //     i.icon = merge(i.icon, {container: copyStyle(i.edit)}, n.icon);
-    //     i.edit = merge(i.edit, n.edit);
-    // }
     return {
         v: v,
         i: i
     }
 }
 
-/**
- * Component representing icons.
- * @extends React
- */
 class Text extends React.PureComponent {
 
     constructor(props, context) {
