@@ -126,7 +126,7 @@ class Mask extends React.PureComponent {
 Mask.propTypes = {
     simple: PropTypes.any,
     style: PropTypes.object,
-    value: PropTypes.string,
+    value: PropTypes.any,
     name: PropTypes.string,
     data: PropTypes.any,
     wrap: PropTypes.any,

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {ListBox, Text} from '../../lib';
+import {ListBox} from '../../lib';
 
 import {merge, contain} from '../../util';
 
@@ -169,7 +169,7 @@ TSearch.propTypes = {
      * and calls "onSearch" event
      * @param {string} event.key Component fills "event.key" with current item key value and calls "onSearch" event
      * when search by key is needed. For example when "value" component property is assigned
-     * @param {string} callback Callback function. Call "callback" to return items list back to component
+     * @param {func} callback Callback function. Call "callback" to return items list back to component
      * in form of "[{key: ..., value: ...}, ...]" as function argument
      */
     onSearch: PropTypes.func

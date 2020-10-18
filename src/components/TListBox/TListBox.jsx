@@ -49,6 +49,8 @@ class TListBox extends React.Component {
                 caption={this.props.caption}
                 fitHeight={this.props.fitHeight}
                 nestedIcon={this.props.nestedIcon}
+                chars={this.props.chars}
+                onSearch={this.props.onSearch}
                 onChange={this.props.onChange}
                 onValidate={this.props.onValidate} />
         );
@@ -164,6 +166,8 @@ TListBox.propTypes = {
     clickable: PropTypes.string,
     /** Icon name */
     icon: PropTypes.string,
+    /** Minimal number of characters entered in editor required for "onSearch" event to be called */
+    chars: PropTypes.number,
     /**
      * On text change event
      * @param {object} event Event object with following structure:
@@ -182,7 +186,22 @@ TListBox.propTypes = {
      * @param {object} event.data Component data from "data" property
      * @param {string} event.value Text to validate
      */
-    onValidate: PropTypes.func
+    onValidate: PropTypes.func,
+    /**
+     * On search event. Component calls "onSearch" event whenever component text is changed and count of
+     * characters entered more than value determined by "chars" property. User defined "onSearch" event must
+     * call "callback" function with array of items like "[{key: ..., value: ...}, ...]" as parameter
+     * @param {object} event Event object with following structure:
+     * @param {string} event.name Component name from "name" property
+     * @param {object} event.data Component data from "data" property
+     * @param {string} event.value Component text. Component fills "event.value" with editor text when text is changed
+     * and calls "onSearch" event
+     * @param {string} event.key Component fills "event.key" with current item key value and calls "onSearch" event
+     * when search by key is needed. For example when "value" component property is assigned
+     * @param {func} callback Callback function. Call "callback" to return items list back to component
+     * in form of "[{key: ..., value: ...}, ...]" as function argument
+     */
+    onSearch: PropTypes.func
 };
 
 TListBox.defaultProps = {
