@@ -187,7 +187,7 @@ function setState(params, state) {
 
 export function post(params) {
 
-    if (!params.url) {
+    if (!params || !params.url) {
         return;
     }
 
@@ -328,7 +328,7 @@ export function request(params) {
 
 export function get(params) {
 
-    if (!params.url) {
+    if (!params || !params.url) {
         return;
     }
 

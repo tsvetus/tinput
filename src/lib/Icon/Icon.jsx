@@ -80,13 +80,20 @@ class Icon extends React.Component {
 
     handleClick(event) {
         event.stopPropagation();
+        event.preventDefault();
         if (this.state.wait) {
             return;
         }
+        let rect = this.svg.current.getBoundingClientRect();
         if (this.props.onClick) {
             this.props.onClick({
                 name: this.props.name,
-                data: this.props.data
+                data: this.props.data,
+                rect: rect,
+                top: event.clientY,
+                left: event.clientX,
+                bottom: window.innerHeight - event.clientY,
+                right: window.innerWidth - event.clientX
             });
         }
         if (this.props.timeout) {
