@@ -60,7 +60,7 @@
           }
         },
         "value": {
-          "type": "string",
+          "type": "any",
           "description": "Component initial value",
           "required": false
         },
@@ -301,7 +301,7 @@
           }
         },
         "value": {
-          "type": "string",
+          "type": "any",
           "description": "Component initial value",
           "required": false
         },
@@ -1941,6 +1941,11 @@
           "description": "Icon name",
           "required": false
         },
+        "chars": {
+          "type": "number",
+          "description": "Minimal number of characters entered in editor required for \"onSearch\" event to be called",
+          "required": false
+        },
         "onChange": {
           "type": "func",
           "description": "On text change event ",
@@ -2001,6 +2006,43 @@
               "name": "event.value",
               "type": "string",
               "description": "Text to validate"
+            }
+          },
+          "required": false
+        },
+        "onSearch": {
+          "type": "func",
+          "description": "On search event. Component calls \"onSearch\" event whenever component text is changed and count of characters entered more than value determined by \"chars\" property. User defined \"onSearch\" event must call \"callback\" function with array of items like \"[{key: ..., value: ...}, ...]\" as parameter ",
+          "arguments": {
+            "event": {
+              "name": "event",
+              "type": "object",
+              "description": "Event object with following structure:"
+            },
+            "event.name": {
+              "name": "event.name",
+              "type": "string",
+              "description": "Component name from \"name\" property"
+            },
+            "event.data": {
+              "name": "event.data",
+              "type": "object",
+              "description": "Component data from \"data\" property"
+            },
+            "event.value": {
+              "name": "event.value",
+              "type": "string",
+              "description": "Component text. Component fills \"event.value\" with editor text when text is changed and calls \"onSearch\" event"
+            },
+            "event.key": {
+              "name": "event.key",
+              "type": "string",
+              "description": "Component fills \"event.key\" with current item key value and calls \"onSearch\" event when search by key is needed. For example when \"value\" component property is assigned"
+            },
+            "callback": {
+              "name": "callback",
+              "type": "func",
+              "description": "Callback function. Call \"callback\" to return items list back to component in form of \"[{key: ..., value: ...}, ...]\" as function argument"
             }
           },
           "required": false
@@ -2289,7 +2331,7 @@
             },
             "callback": {
               "name": "callback",
-              "type": "string",
+              "type": "func",
               "description": "Callback function. Call \"callback\" to return items list back to component in form of \"[{key: ..., value: ...}, ...]\" as function argument"
             }
           },
