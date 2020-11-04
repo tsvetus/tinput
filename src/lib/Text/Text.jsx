@@ -245,7 +245,7 @@ class Text extends React.PureComponent {
 
 Text.propTypes = {
     style: PropTypes.object,
-    value: PropTypes.string,
+    value: PropTypes.any,
     name: PropTypes.string,
     data: PropTypes.any,
     label: PropTypes.string,

@@ -364,7 +364,7 @@ class ListBox extends React.PureComponent {
         return (
 
             <Text
-                simple={true}
+                simple={!this.props.onSearch}
                 style={style}
                 data={this.props.data}
                 name={this.props.name}
