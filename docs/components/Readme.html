@@ -109,10 +109,10 @@ export default MyComponent;
     as <code>container</code> style fields. It means that <code>style={{width: "100px"}}</code>
     equals to <code>style={{container: {width: "100px"}}}</code></p>
 
-<p>In addition one can register global project styles using <code>registerStyles</code> function as follows: </p>
+<p>In addition one can register global project styles using <code>register</code> function as follows: </p>
 
 <pre><code class="javascript language-javascript">
-import {registerStyles} from 'tinput';
+import {register} from 'tinput';
 
 const styles = {
   TComponent: {
@@ -209,13 +209,27 @@ const templates = {
 
 };
 
-registerStyles(styles, templates);
+const icons = {
+    myMenuIcon: {
+        w: "0 0 384 384",
+        d: `m 0,336 h 384 v 48 H 0 Z M 0,168 h 384 v 48 H 0 Z M 0,0 H 384 V 48 H 0 Z`
+    }
+};
+
+register({
+    styles: styles,
+    templates: templates,
+    icons: icons
+});
+
 </code></pre>
 
 <p>New <code>styles</code> and <code>templates</code> make all controls appeared on grey background then all editable
     controls have <code>red</code> border except <code>green</code>
     border for <code>TMemo</code> and with yellow list items in <code>TListBox</code> component
-    with <code>name="MyListBox"</code>. </p>
+    with <code>name="MyListBox"</code>. In addition, it changes default date and time
+    formats for <code>TDate</code> and <code>TTime</code> and calendar representation and adds a new icon
+    named "myMenuIcon" for <code>TIcon</code> component.</p>
 
 <p>All default and registered <code>styles</code> and <code>templates</code> are merged into
     global <code>style</code> and <code>templates</code> objects accessible in code as follows:</p>

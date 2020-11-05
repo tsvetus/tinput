@@ -76,10 +76,10 @@ Each component has it's own style structure described in [Project page](https://
 component style has `container` field represents outer component box. Any `string` fields on zero level of style treated 
 as `container` style fields. It means that `style={{width: "100px"}}` equals to `style={{container: {width: "100px"}}}`
     
-In addition one can register global project styles using `registerStyles` function as follows: 
+In addition one can register global project styles using `register` function as follows: 
 
 ```javascript
-import {registerStyles} from 'tinput';
+import {register} from 'tinput';
 
 const styles = {    
   TComponent: {
@@ -176,11 +176,24 @@ const templates = {
   
 };
 
-registerStyles(styles, templates);
+const icons = {
+    myMenuIcon: {
+        w: "0 0 384 384",
+        d: `m 0,336 h 384 v 48 H 0 Z M 0,168 h 384 v 48 H 0 Z M 0,0 H 384 V 48 H 0 Z`
+    }
+};
+
+register({
+    styles: styles, 
+    templates: templates,
+    icons: icons
+});
 ```
 New `styles` and `templates` make all controls appeared on grey background then all editable 
 controls have `red` border except `green` border for `TMemo` and with yellow list items 
-in `TListBox` component with `name="MyListBox"`.
+in `TListBox` component with `name="MyListBox"`. In addition, it changes default date and time 
+formats for TDate and TTime and calendar representation and adds a new icon named "myMenuIcon"
+for TIcon component.
 
 All default and registered styles are merged into global `style` and `templates` objects accessible in 
 code as follows:

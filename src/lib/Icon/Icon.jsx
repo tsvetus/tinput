@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import {merge, contain, apply, compare} from '../../util';
 
-import icons from './icons.js';
-
-import {styles} from '../../styles';
+import {styles, icons} from '../../styles';
 
 function parseStyle(props, state) {
     let icon = props.icon ? props.icon : icons[props.name];

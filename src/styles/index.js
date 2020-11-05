@@ -1,11 +1,15 @@
 import {
     styles,
     templates,
-    registerStyles
+    icons,
+    registerStyles,
+    register
 } from './const.js';
 
 export {
     styles,
     templates,
-    registerStyles
+    icons,
+    registerStyles,
+    register
 };
