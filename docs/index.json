@@ -5963,6 +5963,11 @@
           "description": "Custom footer content",
           "required": false
         },
+        "titleContent": {
+          "type": "any",
+          "description": "Custom title content",
+          "required": false
+        },
         "transition": {
           "type": "number",
           "description": "Transition time in milliseconds",
