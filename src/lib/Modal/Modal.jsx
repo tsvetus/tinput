@@ -66,6 +66,7 @@ class Modal extends React.PureComponent {
         if (prevProps.show !== this.props.show) {
             this.showModal(this.props.show);
         }
+        this.position();
     }
 
     componentWillUnmount() {

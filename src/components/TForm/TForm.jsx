@@ -114,6 +114,7 @@ class TForm extends React.PureComponent {
                     transition={this.props.transition}
                     fitHeight={this.props.fitHeight}
                     footerContent={footer}
+                    titleContent={this.props.titleContent}
                     onClose={this.handleCancel}>
                 {message}
                 {content}
@@ -202,6 +203,8 @@ TForm.propTypes = {
     fitHeight: PropTypes.any,
     /** Custom footer content */
     footerContent: PropTypes.any,
+    /** Custom title content */
+    titleContent: PropTypes.any,
     /** Transition time in milliseconds */
     transition: PropTypes.number,
     /**
