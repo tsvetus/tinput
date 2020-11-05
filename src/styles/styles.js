@@ -638,6 +638,7 @@ export default function defaultStyles(templates) {
             },
 
             label: {
+                ...templates.fonts.common
             },
 
             page: {
@@ -646,7 +647,8 @@ export default function defaultStyles(templates) {
                 alignItems: "center",
                 margin: "0 0 2px 2px",
                 padding: "0 6px 0 5px",
-                border: "1px solid " + templates.colors.frame
+                border: "1px solid " + templates.colors.frame,
+                ...templates.fonts.small
             },
 
             current: {

@@ -105,8 +105,14 @@ export function strTime(source, mask, empty) {
     let str = null;
     if (source instanceof Date) {
         let offset = source.getTimezoneOffset();
-        let d = new Date(source.getTime() - offset*60*1000);
+        let d = new Date(source.getTime() - offset * 60 * 1000);
         str = d.toISOString().substr(11, 8);
+    } else if (typeof source === 'string' || source instanceof String) {
+        if (REGEXP.isoDate.test(source)) {
+            str = source.substr(11, 8);
+        } else {
+            str = source;
+        }
     } else {
         str = source;
     }
@@ -145,7 +151,7 @@ export function cutTime(source) {
     if (!source) {
         return source;
     }
-    return source.substring(0, 5);
+    return strTime(source, 'hh:mm');
 }
 
 export function firstDate(year, month) {
