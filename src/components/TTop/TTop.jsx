@@ -152,7 +152,7 @@ TTop.propTypes = {
     /** Array of component tools */
     tools: PropTypes.arrayOf(PropTypes.shape({
         /** Tool icon name to show */
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         /** Tool icon click event */
         onClick: PropTypes.func,
         /** Tool icon custom style */
