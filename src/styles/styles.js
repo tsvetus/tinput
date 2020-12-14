@@ -770,6 +770,8 @@ export default function defaultStyles(templates) {
                 border: "${width}px solid " + templates.colors.frame,
                 padding: "4px",
                 cursor: "pointer",
+                whiteSpace: "pre-wrap",
+                wordWrap: "break-word"
             },
 
             row: {
