@@ -92,14 +92,10 @@ export function check(store) {
 }
 
 export function login(username, password) {
-    let division = INITIAL_STATE.division ?
-        '&division=' + encodeURIComponent(INITIAL_STATE.division)
-         : '';
     return request ({
         url: '/api/login' +
             '?username=' + encodeURIComponent(username) +
-            '&password=' + encodeURIComponent(password) +
-            division,
+            '&password=' + encodeURIComponent(password),
         data: {},
         success: (dispatch, data) => {
             dispatch(userAction(data));
@@ -346,10 +342,6 @@ export function get(params) {
     }
 
     let xhr = new XMLHttpRequest();
-
-    //xhr.withCredentials = true;
-
-    //xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
 
     xhr.open('GET', INITIAL_STATE.endpoint + params.url);
 

@@ -61,11 +61,6 @@ class Icon extends React.Component {
     updateStyle(style) {
         if (this.svg.current && this.path.current) {
             let size = null;
-            if (this.props.nested) {
-                let prev = this.svg.current.previousElementSibling;
-                let rect = prev.getBoundingClientRect();
-                size = rect.height;
-            }
             apply(this.style.container, style.container, this.svg.current.style);
             apply(this.style.path, style.path, this.path.current.style);
             if (size) {
@@ -150,7 +145,6 @@ Icon.propTypes = {
     name: PropTypes.string,
     icon: PropTypes.object,
     data: PropTypes.any,
-    nested: PropTypes.any,
     wait: PropTypes.any,
     rotateTime: PropTypes.number,
     timeout: PropTypes.number,

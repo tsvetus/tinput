@@ -185,7 +185,6 @@ class Text extends React.PureComponent {
                 <Icon
                     style={nested ? merge(style.icon, style.nested.icon) : style.icon}
                     name={this.props.icon}
-                    nested={nested}
                     onClick={this.handleIcon} />
             )
         }

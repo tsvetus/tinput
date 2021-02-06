@@ -23,7 +23,7 @@ class Component extends React.Component {
         let data = this.props.data;
         let name = data ? data.displayName : null;
         if (name) {
-            getFile(window.location.pathname + 'components/' + name + '.html', (html) => {
+            getFile('components/' + name + '.html', (html) => {
                 if (this.mounted && html) {
                     this.setState({html: html});
                 }

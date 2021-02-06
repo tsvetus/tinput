@@ -4109,7 +4109,7 @@
           "required": false,
           "structure": {
             "icon": {
-              "type": "string",
+              "type": "any",
               "description": "Tool icon name to show"
             },
             "onClick": {
