@@ -24,6 +24,7 @@ class Mask extends React.PureComponent {
         super(props, context);
         this.formatter = createFormatter(props);
         this.editor = React.createRef();
+        this.getEditor = this.getEditor.bind(this);
         this.handleValidate = this.handleValidate.bind(this);
         this.validate = this.validate.bind(this);
     }
@@ -47,6 +48,10 @@ class Mask extends React.PureComponent {
         if (this.formatter) {
             delete this.formatter;
         }
+    }
+
+    getEditor() {
+        return this.editor.current.getEditor();
     }
 
     validate(event) {

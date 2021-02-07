@@ -29,6 +29,7 @@ class Edit extends React.PureComponent {
         this.setText = this.setText.bind(this);
         this.getCaret = this.getCaret.bind(this);
         this.setCaret = this.setCaret.bind(this);
+        this.getEditor = this.getEditor.bind(this);
         this.showPlaceholder = this.showPlaceholder.bind(this);
         this.hidePlaceholder = this.hidePlaceholder.bind(this);
         this.sendValue = this.sendValue.bind(this);
@@ -77,6 +78,10 @@ class Edit extends React.PureComponent {
 
     blur() {
         this.ref.current.blur();
+    }
+
+    getEditor() {
+        return this.ref.current;
     }
 
     setValue(value) {

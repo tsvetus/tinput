@@ -179,7 +179,7 @@ export default function defaultStyles(templates) {
             nested: {
                 icon: {
                     container: {
-                        margin: "0",
+                        margin: "0 0 0 4px",
                         padding: "0 0 2px 0"
                     }
                 }

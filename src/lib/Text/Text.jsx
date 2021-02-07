@@ -24,6 +24,8 @@ class Text extends React.PureComponent {
         };
         this.style = parseStyle(props);
         this.container = React.createRef();
+        this.edit = React.createRef();
+        this.icon = React.createRef();
         this.handleIcon = this.handleIcon.bind(this);
         this.handleLabel = this.handleLabel.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -34,6 +36,7 @@ class Text extends React.PureComponent {
         this.getContainerStyle = this.getContainerStyle.bind(this);
         this.saveStyle = this.saveStyle.bind(this);
         this.getNested = this.getNested.bind(this);
+        this.resizeIcon = this.resizeIcon.bind(this);
     }
 
     componentDidMount() {
@@ -60,6 +63,16 @@ class Text extends React.PureComponent {
         }
         if (!this.props.children) {
             this.saveStyle();
+        }
+        if (this.props.nestedIcon) {
+            this.resizeIcon();
+        }
+    }
+
+    resizeIcon() {
+        if (this.icon.current && this.edit.current) {
+            let rect = this.edit.current.getEditor().getBoundingClientRect();
+            this.icon.current.resize(rect.height);
         }
     }
 
@@ -183,8 +196,10 @@ class Text extends React.PureComponent {
         if (this.props.icon) {
             icon = (
                 <Icon
+                    ref={this.icon}
                     style={nested ? merge(style.icon, style.nested.icon) : style.icon}
                     name={this.props.icon}
+                    autoHeight={nested}
                     onClick={this.handleIcon} />
             )
         }
@@ -195,6 +210,7 @@ class Text extends React.PureComponent {
         let containerStyle = merge(style.container, this.getContainerStyle());
 
         let edit = this.props.showEdit ? <Mask
+            ref={this.edit}
             simple={this.props.simple}
             tabIndex={this.props.tabIndex}
             style={nested ? style.nested.edit : style.edit}

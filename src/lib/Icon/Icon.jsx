@@ -34,6 +34,7 @@ class Icon extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.updateStyle = this.updateStyle.bind(this);
         this.handleShow = this.handleShow.bind(this);
+        this.resize = this.resize.bind(this);
     }
 
     componentDidMount() {
@@ -60,14 +61,16 @@ class Icon extends React.Component {
 
     updateStyle(style) {
         if (this.svg.current && this.path.current) {
-            let size = null;
             apply(this.style.container, style.container, this.svg.current.style);
             apply(this.style.path, style.path, this.path.current.style);
-            if (size) {
-                this.svg.current.style.width = size + "px";
-                this.svg.current.style.height = size + "px";
-            }
             this.style = style;
+        }
+    }
+
+    resize(size) {
+        if (this.svg.current && size) {
+            this.svg.current.style.width = size + "px";
+            this.svg.current.style.height = size + "px";
         }
     }
 

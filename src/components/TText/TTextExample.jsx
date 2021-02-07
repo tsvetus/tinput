@@ -108,7 +108,7 @@ class TTextExample extends React.Component {
                         maxWidth: "440px",
                         margin: "8px"
                     },
-                    label: {width: "180px"},
+                    label: {width: "180px"}
                 }}
                 value={this.state.icon}
                 label={'TText with nested icon:'}
