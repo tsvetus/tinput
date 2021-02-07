@@ -44,7 +44,6 @@ class TModalExample extends React.Component {
             name={'myModal'}
             show={this.state.show}
             escape={true}
-            transition={1000}
             onClose={this.click}>
 
           <div
