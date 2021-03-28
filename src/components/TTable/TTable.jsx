@@ -147,17 +147,19 @@ class TTable extends React.Component {
 
                     let value = null;
 
-                    if (v[key] === undefined) {
-                        if (this.props.columns[key].value === undefined) {
-                            value = null;
+                    if (v) {
+                        if (v[key] === undefined) {
+                            if (this.props.columns[key].value === undefined) {
+                                value = null;
+                            } else {
+                                value = this.props.columns[key].value(undefined, key, v);
+                            }
                         } else {
-                            value = this.props.columns[key].value(undefined, key, v);
-                        }
-                    } else {
-                        if (this.props.columns[key].value === undefined) {
-                            value = v[key];
-                        } else {
-                            value = this.props.columns[key].value(v[key], key, v);
+                            if (this.props.columns[key].value === undefined) {
+                                value = v[key];
+                            } else {
+                                value = this.props.columns[key].value(v[key], key, v);
+                            }
                         }
                     }
 
