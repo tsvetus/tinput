@@ -13,6 +13,7 @@ class Node extends React.PureComponent {
         this.state = {expanded: props.expand >= props.level};
         this.handleIconClick = this.handleIconClick.bind(this);
         this.handleCaptionClick = this.handleCaptionClick.bind(this);
+        this.handleCaptionDblClick = this.handleCaptionDblClick.bind(this);
         this.toggle =this.toggle.bind(this);
     }
 
@@ -29,6 +30,10 @@ class Node extends React.PureComponent {
                 index: this.props.item.index
             })
         }
+    }
+
+    handleCaptionDblClick(event) {
+        this.toggle()
     }
 
     toggle() {
@@ -72,7 +77,8 @@ class Node extends React.PureComponent {
                     {icon}
                     <div
                         style={ls.node.caption}
-                        onClick={this.handleCaptionClick}>
+                        onClick={this.handleCaptionClick}
+                        onDoubleClick={this.handleCaptionDblClick}>
                         {this.props.item.value}
                     </div>
                 </div>
