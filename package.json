@@ -1,6 +1,6 @@
 {
   "name": "tinput",
-  "version": "2.3.51",
+  "version": "2.3.52",
   "description": "Set of visual React components",
   "main": "./index.js",
   "scripts": {
